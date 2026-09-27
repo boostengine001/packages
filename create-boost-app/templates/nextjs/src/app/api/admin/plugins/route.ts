@@ -3,6 +3,15 @@ import { db } from '@/data/db';
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  'CDN-Cache-Control': 'no-store',
+  'Surrogate-Control': 'no-store',
+};
+
 export async function GET() {
   try {
     const plugins = db.getPlugins();

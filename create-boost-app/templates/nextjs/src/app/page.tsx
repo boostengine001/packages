@@ -32,9 +32,9 @@ export default function HomePage() {
     async function fetchHomeData() {
       try {
         const [bannersRes, catRes, prodRes] = await Promise.all([
-          fetch('/api/banners'),
-          fetch('/api/categories'),
-          fetch('/api/products'),
+          fetch('/api/banners', { cache: 'no-store' }),
+          fetch('/api/categories', { cache: 'no-store' }),
+          fetch('/api/products', { cache: 'no-store' }),
         ]);
         const bannersData = await bannersRes.json();
         const catData = await catRes.json();
@@ -493,6 +493,7 @@ export default function HomePage() {
                 title={product.title}
                 price={product.price}
                 compareAtPrice={product.compareAtPrice}
+                currencySymbol={settings.currencySymbol}
                 images={product.images || []}
                 brand={product.brand}
                 isWishlisted={isWishlisted}
@@ -532,7 +533,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {PRODUCTS.flatMap((p) =>
+          {liveProducts.flatMap((p) =>
             (p.reviews || []).map((r) => ({
               quote: r.body || '',
               authorName: r.author,

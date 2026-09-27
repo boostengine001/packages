@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import { RazorpayAdapter } from '@boostengine/payments';
 import dbConnect from '@/lib/db';
 import Order from '@/models/Order';
 import { db } from '@/data/db';
 import { sendOrderConfirmationEmail } from '@/lib/mail';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function POST(request: Request) {
   try {
@@ -51,8 +55,12 @@ export async function POST(request: Request) {
     try {
       await dbConnect();
       if (Order) {
+        const orderQuery: any = { $or: [{ id: boostOrderId }, { orderNumber: boostOrderId }, { razorpayOrderId: razorpay_order_id }] };
+        if (boostOrderId && mongoose.isValidObjectId(boostOrderId)) {
+          orderQuery.$or.push({ _id: boostOrderId });
+        }
         await Order.findOneAndUpdate(
-          { $or: [{ id: boostOrderId }, { orderNumber: boostOrderId }, { razorpayOrderId: razorpay_order_id }] },
+          orderQuery,
           {
             paymentStatus: 'paid',
             orderStatus: 'processing',

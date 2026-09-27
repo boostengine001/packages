@@ -32,7 +32,7 @@ export default function CategoryPage() {
   const slug = (params?.slug as string) || '';
   const categoryName = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const { addToCart, toggleWishlist, wishlistItems, inventory } = useStore();
+  const { addToCart, toggleWishlist, wishlistItems, inventory, settings } = useStore();
   const [query, setQuery] = useState('');
   const [sortValue, setSortValue] = useState('relevance');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -46,7 +46,7 @@ export default function CategoryPage() {
   const [liveProducts, setLiveProducts] = useState<StoreProduct[]>(PRODUCTS);
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch('/api/products', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
@@ -57,7 +57,12 @@ export default function CategoryPage() {
   }, []);
 
   const categoryProducts = useMemo(
-    () => liveProducts.filter((p) => p.category.toLowerCase().replace(/\s+/g, '-') === slug),
+    () =>
+      liveProducts.filter((p) => {
+        const cat = (p.category || '').toLowerCase().replace(/\s+/g, '-');
+        const cleanSlug = slug.toLowerCase();
+        return cat === cleanSlug || (p.category || '').toLowerCase() === cleanSlug.replace(/-/g, ' ');
+      }),
     [liveProducts, slug]
   );
 
@@ -227,6 +232,7 @@ export default function CategoryPage() {
                       title={product.title}
                       price={product.price}
                       compareAtPrice={product.compareAtPrice}
+                      currencySymbol={settings.currencySymbol}
                       images={product.images || []}
                       brand={product.brand}
                       isWishlisted={isWishlisted}

@@ -2,15 +2,16 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useStore } from '../context/StoreContext';
 import { LoyaltyEngine } from '@boostengine/loyalty';
 import { CouponInput, ProgressBar } from '@boostengine/ui';
-import { getProductById, getProductUrl } from '../data/products';
+import { getProductUrl } from '../data/products';
 import { X, Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export const GlobalCartDrawer: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const {
     cart,
     cartSummary,
@@ -23,11 +24,16 @@ export const GlobalCartDrawer: React.FC = () => {
     superCoins,
     customerTier,
     settings,
+    products,
   } = useStore();
 
   const [useCoins, setUseCoins] = useState(true);
   const [couponError, setCouponError] = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   useEffect(() => {
     if (!isCartOpen) return;
@@ -108,7 +114,7 @@ export const GlobalCartDrawer: React.FC = () => {
 
               <div className="space-y-3">
                 {items.map((item) => {
-                  const matched = getProductById(item.productId);
+                  const matched = products.find((p) => p.id === item.productId);
                   const itemUrl = matched ? getProductUrl(matched) : `/products/${item.productId}`;
                   return (
                     <div key={item.id} className="flex gap-3 p-2 bg-gray-50 rounded-xl">

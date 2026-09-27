@@ -1,0 +1,229 @@
+- generic [active] [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - navigation [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - link "Club.Hachi" [ref=f4e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f4e8]:
+          - generic [ref=f4e9]: Boost
+          - generic [ref=f4e10]: Assured
+      - button "Deliver to Mumbai 400050" [ref=f4e13] [cursor=pointer]:
+        - generic [ref=f4e17]:
+          - generic [ref=f4e18]: Deliver to
+          - generic [ref=f4e19]: Mumbai 400050
+      - textbox "Search 10,000+ products, electronics, sneakers..." [ref=f4e22]
+      - generic [ref=f4e23]:
+        - link "All Products" [ref=f4e24] [cursor=pointer]:
+          - /url: /products
+        - link "🪙 Gold" [ref=f4e25] [cursor=pointer]:
+          - /url: /account
+          - generic [ref=f4e26]: 🪙
+          - generic [ref=f4e27]: Gold
+        - link "Wishlist" [ref=f4e28] [cursor=pointer]:
+          - /url: /wishlist
+        - button "Bag 0" [ref=f4e31] [cursor=pointer]:
+          - generic [ref=f4e35]: Bag
+          - generic [ref=f4e36]: "0"
+  - main [ref=f4e37]:
+    - generic [ref=f4e38]:
+      - generic [ref=f4e39]:
+        - generic [ref=f4e40]:
+          - generic [ref=f4e41]: Curated Catalog
+          - heading "All Products" [level=1] [ref=f4e45]
+          - paragraph [ref=f4e46]: Showing 6 premium marketplace items.
+        - generic [ref=f4e47]:
+          - generic [ref=f4e48]:
+            - button "All" [ref=f4e49] [cursor=pointer]
+            - button "Hoodies" [ref=f4e50] [cursor=pointer]
+            - button "T-Shirts" [ref=f4e51] [cursor=pointer]
+            - button "Footwear" [ref=f4e52] [cursor=pointer]
+            - button "Electronics" [ref=f4e53] [cursor=pointer]
+            - button "Accessories" [ref=f4e54] [cursor=pointer]
+          - combobox [ref=f4e57] [cursor=pointer]:
+            - option "Featured" [selected]
+            - 'option "Price: Low to High"'
+            - 'option "Price: High to Low"'
+            - option "Highest Rated"
+      - generic [ref=f4e58]:
+        - generic [ref=f4e59]:
+          - generic [ref=f4e60] [cursor=pointer]:
+            - img "Cyberpunk Heavyweight 450 GSM Hoodie" [ref=f4e61]
+            - generic [ref=f4e62]: 38% OFF
+            - button "Wishlist" [ref=f4e63]
+          - generic [ref=f4e66]:
+            - generic [ref=f4e67]:
+              - generic [ref=f4e68]: Boost Aesthetic
+              - heading "Cyberpunk Heavyweight 450 GSM Hoodie" [level=3] [ref=f4e69] [cursor=pointer]
+              - generic [ref=f4e83]:
+                - text: "4.9"
+                - generic [ref=f4e84]: (64)
+            - generic [ref=f4e85]:
+              - generic [ref=f4e86]:
+                - generic [ref=f4e87]: $2499
+                - generic [ref=f4e88]: $3999
+              - button "+ Add to Bag" [ref=f4e89] [cursor=pointer]
+        - generic [ref=f4e90]:
+          - generic [ref=f4e91] [cursor=pointer]:
+            - img "Vintage Acid-Wash Streetwear Tee" [ref=f4e92]
+            - generic [ref=f4e93]: 44% OFF
+            - button "Wishlist" [ref=f4e94]
+          - generic [ref=f4e97]:
+            - generic [ref=f4e98]:
+              - generic [ref=f4e99]: Boost Aesthetic
+              - heading "Vintage Acid-Wash Streetwear Tee" [level=3] [ref=f4e100] [cursor=pointer]
+              - generic [ref=f4e114]:
+                - text: "4.7"
+                - generic [ref=f4e115]: (48)
+            - generic [ref=f4e116]:
+              - generic [ref=f4e117]:
+                - generic [ref=f4e118]: $999
+                - generic [ref=f4e119]: $1799
+              - button "+ Add to Bag" [ref=f4e120] [cursor=pointer]
+        - generic [ref=f4e121]:
+          - generic [ref=f4e122] [cursor=pointer]:
+            - img "Retro High-Top Street Sneakers" [ref=f4e123]
+            - generic [ref=f4e124]: 36% OFF
+            - generic [ref=f4e125]: Only 3 left!
+            - button "Wishlist" [ref=f4e126]
+          - generic [ref=f4e129]:
+            - generic [ref=f4e130]:
+              - generic [ref=f4e131]: Boost Kicks
+              - heading "Retro High-Top Street Sneakers" [level=3] [ref=f4e132] [cursor=pointer]
+              - generic [ref=f4e146]:
+                - text: "4.8"
+                - generic [ref=f4e147]: (32)
+            - generic [ref=f4e148]:
+              - generic [ref=f4e149]:
+                - generic [ref=f4e150]: $3499
+                - generic [ref=f4e151]: $5499
+              - button "+ Add to Bag" [ref=f4e152] [cursor=pointer]
+        - generic [ref=f4e153]:
+          - generic [ref=f4e154] [cursor=pointer]:
+            - img "BoostPods Pro Active Noise Cancelling Earbuds" [ref=f4e155]
+            - generic [ref=f4e156]: 60% OFF
+            - button "Wishlist" [ref=f4e157]
+          - generic [ref=f4e160]:
+            - generic [ref=f4e161]:
+              - generic [ref=f4e162]: Boost Audio
+              - heading "BoostPods Pro Active Noise Cancelling Earbuds" [level=3] [ref=f4e163] [cursor=pointer]
+              - generic [ref=f4e177]:
+                - text: "4.8"
+                - generic [ref=f4e178]: (128)
+            - generic [ref=f4e179]:
+              - generic [ref=f4e180]:
+                - generic [ref=f4e181]: $1999
+                - generic [ref=f4e182]: $4999
+              - button "+ Add to Bag" [ref=f4e183] [cursor=pointer]
+        - generic [ref=f4e184]:
+          - generic [ref=f4e185] [cursor=pointer]:
+            - img "Titanium Ultra AMOLED Smartwatch (Bluetooth Calling)" [ref=f4e186]
+            - generic [ref=f4e187]: 57% OFF
+            - button "Wishlist" [ref=f4e188]
+          - generic [ref=f4e191]:
+            - generic [ref=f4e192]:
+              - generic [ref=f4e193]: Boost Tech
+              - heading "Titanium Ultra AMOLED Smartwatch (Bluetooth Calling)" [level=3] [ref=f4e194] [cursor=pointer]
+              - generic [ref=f4e208]:
+                - text: "4.9"
+                - generic [ref=f4e209]: (96)
+            - generic [ref=f4e210]:
+              - generic [ref=f4e211]:
+                - generic [ref=f4e212]: $2999
+                - generic [ref=f4e213]: $6999
+              - button "+ Add to Bag" [ref=f4e214] [cursor=pointer]
+        - generic [ref=f4e215]:
+          - generic [ref=f4e216] [cursor=pointer]:
+            - img "Urban Armor Waterproof Laptop Backpack (28L)" [ref=f4e217]
+            - generic [ref=f4e218]: 57% OFF
+            - button "Wishlist" [ref=f4e219]
+          - generic [ref=f4e222]:
+            - generic [ref=f4e223]:
+              - generic [ref=f4e224]: Boost Gear
+              - heading "Urban Armor Waterproof Laptop Backpack (28L)" [level=3] [ref=f4e225] [cursor=pointer]
+              - generic [ref=f4e239]:
+                - text: "4.6"
+                - generic [ref=f4e240]: (54)
+            - generic [ref=f4e241]:
+              - generic [ref=f4e242]:
+                - generic [ref=f4e243]: $1299
+                - generic [ref=f4e244]: $2999
+              - button "+ Add to Bag" [ref=f4e245] [cursor=pointer]
+      - generic [ref=f4e247]:
+        - generic [ref=f4e248]: 100% Genuine
+        - generic [ref=f4e253]: 7-Day Easy Returns
+        - generic [ref=f4e261]: COD Available
+        - generic [ref=f4e266]: 256-Bit SSL Secure
+  - button "Open AI Shopping Assistant" [ref=f4e272] [cursor=pointer]:
+    - generic [ref=f4e278]: Ask AI Assistant
+  - contentinfo [ref=f4e279]:
+    - generic [ref=f4e280]:
+      - generic [ref=f4e281]:
+        - text: Club Hachi
+        - paragraph [ref=f4e282]: India's favorite next-generation eCommerce store with instant checkout, live order tracking, and COD available.
+        - generic [ref=f4e283]:
+          - generic [ref=f4e284]:
+            - text: "Email:"
+            - link "support@clubhachi.com" [ref=f4e285] [cursor=pointer]:
+              - /url: mailto:support@clubhachi.com
+          - generic [ref=f4e286]: "Phone: +91 98765 43210"
+      - generic [ref=f4e287]:
+        - heading "Shop Categories" [level=4] [ref=f4e288]
+        - list [ref=f4e289]:
+          - listitem [ref=f4e290]:
+            - link "All Collections" [ref=f4e291] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f4e292]:
+            - link "Hoodies" [ref=f4e293] [cursor=pointer]:
+              - /url: /?category=Hoodies
+          - listitem [ref=f4e294]:
+            - link "T-Shirts" [ref=f4e295] [cursor=pointer]:
+              - /url: /?category=T-Shirts
+          - listitem [ref=f4e296]:
+            - link "Footwear" [ref=f4e297] [cursor=pointer]:
+              - /url: /?category=Footwear
+      - generic [ref=f4e298]:
+        - heading "Customer Support" [level=4] [ref=f4e299]
+        - list [ref=f4e300]:
+          - listitem [ref=f4e301]:
+            - link "About Us" [ref=f4e302] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f4e303]:
+            - link "Contact Us" [ref=f4e304] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=f4e305]:
+            - link "Warranty Registration" [ref=f4e306] [cursor=pointer]:
+              - /url: /warranty-registration
+          - listitem [ref=f4e307]:
+            - link "File Warranty Claim" [ref=f4e308] [cursor=pointer]:
+              - /url: /warranty-claim
+          - listitem [ref=f4e309]:
+            - link "Track Order" [ref=f4e310] [cursor=pointer]:
+              - /url: /orders
+      - generic [ref=f4e311]:
+        - heading "Policies & Legal" [level=4] [ref=f4e312]
+        - list [ref=f4e313]:
+          - listitem [ref=f4e314]:
+            - link "Privacy Policy" [ref=f4e315] [cursor=pointer]:
+              - /url: /privacy-policy
+          - listitem [ref=f4e316]:
+            - link "Terms & Conditions" [ref=f4e317] [cursor=pointer]:
+              - /url: /terms-conditions
+          - listitem [ref=f4e318]:
+            - link "Shipping Policy" [ref=f4e319] [cursor=pointer]:
+              - /url: /shipping-policy
+          - listitem [ref=f4e320]:
+            - link "Return & Refund Policy" [ref=f4e321] [cursor=pointer]:
+              - /url: /refund-policy
+      - generic [ref=f4e322]:
+        - heading "Store Guarantees" [level=4] [ref=f4e323]
+        - list [ref=f4e324]:
+          - listitem [ref=f4e325]:
+            - generic [ref=f4e326]: Free Express Delivery above ₹999
+          - listitem [ref=f4e327]: COD Available Across India
+          - listitem [ref=f4e328]: 7-Day No-Questions Return
+          - listitem [ref=f4e329]:
+            - link "Staff / Admin Portal →" [ref=f4e330] [cursor=pointer]:
+              - /url: /admin
+    - generic [ref=f4e331]:
+      - paragraph [ref=f4e332]: © 2026 Club Hachi. All rights reserved.
+      - paragraph [ref=f4e333]: Powered by BoostEngine Enterprise D2C Architecture

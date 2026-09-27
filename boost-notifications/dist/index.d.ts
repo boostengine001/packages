@@ -320,4 +320,22 @@ declare class NotificationManager {
 }
 declare function createNotificationManager(options: NotificationManagerOptions): NotificationManager;
 
-export { BoostNotificationsManager, DEFAULT_NOTIFICATIONS_CONFIG, type NotificationChannel$1 as NotificationChannel, NotificationManager, type NotificationRecipient, type NotificationRecord, type NotificationStatus, type NotificationTemplate, type NotificationsAgentToolName, type NotificationsConfig, type NotificationsEvents, type WebhookPayload, type WebhookRegistration, createNotificationManager, notificationsAgentTools };
+declare class WhatsAppAdapter {
+    private readonly config;
+    constructor(config: WhatsAppConfig);
+    send(options: SendMessageOptions): Promise<SendMessageResult>;
+}
+
+declare class EmailAdapter {
+    private readonly config;
+    constructor(config: EmailConfig);
+    send(options: SendMessageOptions): Promise<SendMessageResult>;
+}
+
+declare class SMSAdapter {
+    private readonly config;
+    constructor(config: SMSConfig);
+    send(options: SendMessageOptions): Promise<SendMessageResult>;
+}
+
+export { BoostNotificationsManager, DEFAULT_NOTIFICATIONS_CONFIG, EmailAdapter, type NotificationChannel$1 as NotificationChannel, NotificationManager, type NotificationRecipient, type NotificationRecord, type NotificationStatus, type NotificationTemplate, type NotificationsAgentToolName, type NotificationsConfig, type NotificationsEvents, SMSAdapter, type WebhookPayload, type WebhookRegistration, WhatsAppAdapter, createNotificationManager, notificationsAgentTools };

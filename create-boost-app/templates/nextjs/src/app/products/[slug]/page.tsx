@@ -12,8 +12,7 @@ import {
 } from '../../../data/products';
 import { useStore, getCityFromPincode } from '../../../context/StoreContext';
 import { RecommendationsEngine } from '@boostengine/recommendations';
-import { generateProductJsonLd, generateBreadcrumbJsonLd } from '@boostengine/seo';
-import { JsonLdScript } from '@boostengine/seo/react';
+import { JsonLdGenerator } from '@boostengine/seo';
 import {
   PincodeChecker,
   StarRating,
@@ -29,6 +28,16 @@ import {
   ProgressBar,
 } from '@boostengine/ui';
 import { Heart, ShoppingBag, ArrowLeft, Zap, CheckCircle2 } from 'lucide-react';
+
+function JsonLdScript({ schema, id }: { schema: Record<string, any>; id: string }) {
+  return (
+    <script
+      type="application/ld+json"
+      id={id}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -60,8 +69,8 @@ export default function ProductDetailPage() {
       const resolved = getProductBySlug(slug) || getProductById(slug);
       try {
         const [prodRes, catalogRes] = await Promise.all([
-          fetch(`/api/products?id=${encodeURIComponent(slug)}`),
-          fetch('/api/products'),
+          fetch(`/api/products?id=${encodeURIComponent(slug)}`, { cache: 'no-store' }),
+          fetch('/api/products', { cache: 'no-store' }),
         ]);
         const prodData = await prodRes.json();
         const catData = await catalogRes.json();
@@ -150,7 +159,7 @@ export default function ProductDetailPage() {
   const productUrl = `${settings.storeUrl}${getProductUrl(product)}`;
   const productSchema = useMemo(
     () =>
-      generateProductJsonLd({
+      JsonLdGenerator.product({
         id: product.id,
         title: product.title,
         description: product.description,
@@ -170,23 +179,13 @@ export default function ProductDetailPage() {
             body: r.body || r.comment,
             datePublished: r.createdAt,
           })) || [],
-        returnPolicy: {
-          applicableCountry: 'IN',
-          merchantReturnDays: 7,
-          returnFees: 'https://schema.org/FreeReturn',
-        },
-        shippingDetails: {
-          shippingRate: { price: 0, currency: 'INR', free: true, freeOver: settings.freeShippingThreshold },
-          shippingDestination: ['IN'],
-          deliveryTime: { minDays: 2, maxDays: 5 },
-        },
       }),
     [product, currentPrice, currentSku, galleryImages, ratingVal, ratingCount, productUrl, settings.freeShippingThreshold]
   );
 
   const breadcrumbSchema = useMemo(
     () =>
-      generateBreadcrumbJsonLd([
+      JsonLdGenerator.breadcrumbs([
         { name: 'Home', url: settings.storeUrl || '/' },
         { name: product.category, url: `${settings.storeUrl}/category/${product.category.toLowerCase().replace(/\s+/g, '-')}` },
         { name: product.title, url: productUrl },

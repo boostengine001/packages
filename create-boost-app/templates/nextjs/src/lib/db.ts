@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 interface MongooseCache {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose | null> | null;
+  failedAt: number;
 }
 
 declare global {
@@ -10,17 +11,29 @@ declare global {
   var mongoose: MongooseCache | undefined;
 }
 
-let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+let cached: MongooseCache = global.mongoose || { conn: null, promise: null, failedAt: 0 };
 
 if (!global.mongoose) {
   global.mongoose = cached;
 }
+
+// ponytail: a dead Mongo must cost one timeout, not one per request. Without
+// this the .env.local default (localhost:27017) adds serverSelectionTimeoutMS to
+// every API call on the ~95% of installs that never start Mongo.
+const RETRY_AFTER_MS = 60_000;
 
 export async function dbConnect(): Promise<typeof mongoose | null> {
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
     console.warn('⚠️ MONGODB_URI not defined. Operating with fallback in-memory database.');
+    // Fail fast instead of letting mongoose buffer every query for 10s and throw.
+    // Routes must check the null return from connectDB() before querying.
+    mongoose.set('bufferCommands', false);
+    return null;
+  }
+
+  if (cached.failedAt && Date.now() - cached.failedAt < RETRY_AFTER_MS) {
     return null;
   }
 
@@ -70,6 +83,7 @@ export async function dbConnect(): Promise<typeof mongoose | null> {
       .catch((err) => {
         console.error('❌ MongoDB Connection Error:', err.message);
         cached.promise = null;
+        cached.failedAt = Date.now();
         return null;
       });
   }
@@ -78,7 +92,12 @@ export async function dbConnect(): Promise<typeof mongoose | null> {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
+    cached.failedAt = Date.now();
     return null;
+  }
+
+  if (!cached.conn) {
+    cached.failedAt = Date.now();
   }
 
   return cached.conn;

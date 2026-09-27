@@ -25,7 +25,7 @@ export default function AdminProductsPage() {
   async function loadProducts() {
     try {
       setLoading(true);
-      const res = await fetch('/api/admin/products');
+      const res = await fetch('/api/admin/products', { cache: 'no-store' });
       const data = await res.json();
       if (data.success) {
         setProducts(data.data);
@@ -47,7 +47,7 @@ export default function AdminProductsPage() {
       const res = await fetch(`/api/admin/products/${id}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
-        setProducts((prev) => prev.filter((p) => p.id !== id));
+        setProducts((prev) => prev.filter((p) => p.id !== id && (p as any)._id !== id));
       } else {
         alert(data.error || 'Failed to delete product');
       }

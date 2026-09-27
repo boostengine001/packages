@@ -1,0 +1,146 @@
+- generic [active] [ref=f13e1]:
+  - main [ref=f13e2]:
+    - generic [ref=f13e3]:
+      - complementary [ref=f13e4]:
+        - link "⚡ BoostMerchant OS Enterprise Commerce" [ref=f13e6] [cursor=pointer]:
+          - /url: /admin
+          - generic [ref=f13e7]: ⚡
+          - generic [ref=f13e9]:
+            - generic [ref=f13e10]:
+              - generic [ref=f13e11]: BoostMerchant
+              - generic [ref=f13e12]: OS
+            - paragraph [ref=f13e13]: Enterprise Commerce
+        - generic [ref=f13e14]: Store Engine Active
+        - navigation [ref=f13e25]:
+          - generic [ref=f13e26]:
+            - text: OVERVIEW
+            - generic [ref=f13e27]:
+              - link "Dashboard" [ref=f13e28] [cursor=pointer]:
+                - /url: /admin
+              - link "Analytics & Reports Metrics" [ref=f13e36] [cursor=pointer]:
+                - /url: /admin/reports
+                - generic [ref=f13e37]: Analytics & Reports
+                - generic [ref=f13e41]: Metrics
+          - generic [ref=f13e42]:
+            - text: COMMERCE & CATALOG
+            - generic [ref=f13e43]:
+              - link "Products Catalog" [ref=f13e44] [cursor=pointer]:
+                - /url: /admin/products
+              - link "Bundles & Combos New" [ref=f13e51] [cursor=pointer]:
+                - /url: /admin/bundles
+                - generic [ref=f13e52]: Bundles & Combos
+                - generic [ref=f13e64]: New
+              - link "Stock & Warehouses Multi-Hub" [ref=f13e65] [cursor=pointer]:
+                - /url: /admin/inventory
+                - generic [ref=f13e66]: Stock & Warehouses
+                - generic [ref=f13e71]: Multi-Hub
+              - link "Categories & Taxonomy" [ref=f13e72] [cursor=pointer]:
+                - /url: /admin/categories
+              - link "Orders & Dispatch" [ref=f13e80] [cursor=pointer]:
+                - /url: /admin/orders
+              - link "Subscribe & Save MRR" [ref=f13e87] [cursor=pointer]:
+                - /url: /admin/subscriptions
+                - generic [ref=f13e88]: Subscribe & Save
+                - generic [ref=f13e95]: MRR
+              - link "Returns & Doorstep QC Reverse" [ref=f13e96] [cursor=pointer]:
+                - /url: /admin/returns
+                - generic [ref=f13e97]: Returns & Doorstep QC
+                - generic [ref=f13e102]: Reverse
+          - generic [ref=f13e103]:
+            - text: GROWTH & MARKETING
+            - generic [ref=f13e104]:
+              - link "Shoppable Reels 9:16 Feed" [ref=f13e105] [cursor=pointer]:
+                - /url: /admin/reels
+                - generic [ref=f13e106]: Shoppable Reels
+                - generic [ref=f13e111]: 9:16 Feed
+              - link "Spin Wheel & Leads Viral" [ref=f13e112] [cursor=pointer]:
+                - /url: /admin/gamification
+                - generic [ref=f13e113]: Spin Wheel & Leads
+                - generic [ref=f13e117]: Viral
+              - link "Coupons & Discounts" [ref=f13e118] [cursor=pointer]:
+                - /url: /admin/coupons
+              - link "Flash Deals Scheduler Urgency" [ref=f13e124] [cursor=pointer]:
+                - /url: /admin/deals
+                - generic [ref=f13e125]: Flash Deals Scheduler
+                - generic [ref=f13e129]: Urgency
+              - link "SuperCoins & VIP Tiers Rewards" [ref=f13e130] [cursor=pointer]:
+                - /url: /admin/loyalty
+                - generic [ref=f13e131]: SuperCoins & VIP Tiers
+                - generic [ref=f13e138]: Rewards
+              - link "Referrals & Viral Loop Growth" [ref=f13e139] [cursor=pointer]:
+                - /url: /admin/referrals
+                - generic [ref=f13e140]: Referrals & Viral Loop
+                - generic [ref=f13e148]: Growth
+              - link "Omnichannel Comms WhatsApp" [ref=f13e149] [cursor=pointer]:
+                - /url: /admin/communications
+                - generic [ref=f13e150]: Omnichannel Comms
+                - generic [ref=f13e154]: WhatsApp
+              - link "Banners & Ads Live" [ref=f13e155] [cursor=pointer]:
+                - /url: /admin/banners
+                - generic [ref=f13e156]: Banners & Ads
+                - generic [ref=f13e161]: Live
+              - link "Reviews Moderation" [ref=f13e162] [cursor=pointer]:
+                - /url: /admin/reviews
+              - link "Customer Accounts" [ref=f13e167] [cursor=pointer]:
+                - /url: /admin/customers
+          - generic [ref=f13e175]:
+            - text: MARKETS & EXTENSIONS
+            - generic [ref=f13e176]:
+              - link "Multi-Currency & FX Global" [ref=f13e177] [cursor=pointer]:
+                - /url: /admin/currency
+                - generic [ref=f13e178]: Multi-Currency & FX
+                - generic [ref=f13e182]: Global
+              - link "Bulk Catalog Importer Shopify/Woo" [ref=f13e183] [cursor=pointer]:
+                - /url: /admin/importer
+                - generic [ref=f13e184]: Bulk Catalog Importer
+                - generic [ref=f13e189]: Shopify/Woo
+              - link "Plugins Hub Modular" [ref=f13e190] [cursor=pointer]:
+                - /url: /admin/plugins
+                - generic [ref=f13e191]: Plugins Hub
+                - generic [ref=f13e196]: Modular
+              - link "SEO & Feeds G-Merchant" [ref=f13e197] [cursor=pointer]:
+                - /url: /admin/seo
+                - generic [ref=f13e198]: SEO & Feeds
+                - generic [ref=f13e203]: G-Merchant
+          - generic [ref=f13e204]:
+            - text: SYSTEM
+            - link "Store Settings" [ref=f13e206] [cursor=pointer]:
+              - /url: /admin/settings
+        - generic [ref=f13e212]:
+          - link "🌐 View Live Storefront" [ref=f13e213] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f13e214]: 🌐
+            - generic [ref=f13e215]: View Live Storefront
+          - generic [ref=f13e221]:
+            - generic [ref=f13e222]: RG
+            - generic [ref=f13e223]:
+              - paragraph [ref=f13e224]: Rishabh Gehlot
+              - paragraph [ref=f13e225]: Store Owner • Admin
+      - generic [ref=f13e229]:
+        - generic [ref=f13e230]:
+          - generic [ref=f13e232]:
+            - link "Admin" [ref=f13e233] [cursor=pointer]:
+              - /url: /admin
+            - generic [ref=f13e236]: Product Catalog
+          - generic [ref=f13e237]:
+            - link "Live Store" [ref=f13e238] [cursor=pointer]:
+              - /url: /
+            - generic [ref=f13e244]:
+              - generic [ref=f13e245]: RG
+              - generic [ref=f13e246]:
+                - generic [ref=f13e247]: Rishabh Gehlot
+                - generic [ref=f13e248]: Online • SuperAdmin
+        - main [ref=f13e249]:
+          - generic [ref=f13e250]:
+            - generic [ref=f13e251]:
+              - generic [ref=f13e252]:
+                - heading "Product Inventory & Catalog" [level=1] [ref=f13e253]
+                - paragraph [ref=f13e254]: Manage SKUs, dynamic pricing tiers, HSN tax classifications, and product variants.
+              - link "Add New Product" [ref=f13e255] [cursor=pointer]:
+                - /url: /admin/products/new
+            - generic [ref=f13e258]:
+              - textbox "Search title, SKU, or brand..." [ref=f13e263]
+              - button "All" [ref=f13e265] [cursor=pointer]
+            - generic [ref=f13e266]: Loading live products from MongoDB...
+  - button "Open AI Shopping Assistant" [ref=f13e269] [cursor=pointer]:
+    - generic [ref=f13e275]: Ask AI Assistant

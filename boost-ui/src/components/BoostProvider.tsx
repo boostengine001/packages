@@ -288,25 +288,28 @@ export const BoostProvider: React.FC<BoostProviderProps> = ({
   React.useEffect(() => {
     injectBoostGlobalStyles();
   }, []);
-  const [internalMode, setInternalMode] = React.useState<ThemeMode>(() => {
-    if (typeof window !== 'undefined' && storageKey) {
-      try {
-        const stored = localStorage.getItem(storageKey);
-        if (stored === 'light' || stored === 'dark' || stored === 'system') {
-          return stored as ThemeMode;
-        }
-      } catch {
-        // Safe fallback on localStorage access error
+  // ponytail: read localStorage in an effect, not a useState initializer — reading
+  // during render makes the first client render differ from SSR and throws a
+  // hydration mismatch. Costs one extra paint, saves a broken console on every page.
+  const [internalMode, setInternalMode] = React.useState<ThemeMode>(defaultMode);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined' || !storageKey) return;
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark' || stored === 'system') {
+        setInternalMode(stored as ThemeMode);
       }
+    } catch {
+      // Safe fallback on localStorage access error
     }
-    return defaultMode;
-  });
+  }, [storageKey]);
 
 const mode = controlledMode !== undefined ? controlledMode : internalMode;
-  const [systemIsDark, setSystemIsDark] = React.useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+  // ponytail: start false and let the effect below set the real value — reading
+  // matchMedia during render makes dark-mode users' first client render differ
+  // from SSR. The mount effect already assigns it, so the initializer is redundant.
+  const [systemIsDark, setSystemIsDark] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -355,28 +358,28 @@ const toggleMode = () => {
   };
 
   const [internalStylePreset, setInternalStylePreset] = React.useState<UIStylePreset>(
-    () => {
-      if (typeof window !== 'undefined' && storageKey) {
-        try {
-          const stored = localStorage.getItem(`${storageKey}-preset`);
-          if (
-            stored === 'minimal' ||
-            stored === 'glassmorphism' ||
-            stored === 'neumorphism' ||
-            stored === 'neo-brutalism' ||
-            stored === 'dark-first' ||
-            stored === 'gradient-glow' ||
-            stored === 'material-you'
-          ) {
-            return stored as UIStylePreset;
-          }
-        } catch {
-          // Safe fallback on localStorage access error
-        }
-      }
-      return defaultStylePreset;
-    }
+    defaultStylePreset
   );
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined' || !storageKey) return;
+    try {
+      const stored = localStorage.getItem(`${storageKey}-preset`);
+      if (
+        stored === 'minimal' ||
+        stored === 'glassmorphism' ||
+        stored === 'neumorphism' ||
+        stored === 'neo-brutalism' ||
+        stored === 'dark-first' ||
+        stored === 'gradient-glow' ||
+        stored === 'material-you'
+      ) {
+        setInternalStylePreset(stored as UIStylePreset);
+      }
+    } catch {
+      // Safe fallback on localStorage access error
+    }
+  }, [storageKey]);
 
   const stylePreset =
     controlledStylePreset !== undefined ? controlledStylePreset : internalStylePreset;

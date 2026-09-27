@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import dbConnect from '@/lib/db';
 import Review from '@/models/Review';
 import Product from '@/models/Product';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  'CDN-Cache-Control': 'no-store',
+  'Surrogate-Control': 'no-store',
+};
 
 export async function GET(request: Request) {
   try {
@@ -11,7 +21,7 @@ export async function GET(request: Request) {
     if (!productId) {
       return NextResponse.json(
         { success: false, error: 'Product ID is required.' },
-        { status: 400 }
+        { status: 400, headers: NO_CACHE_HEADERS }
       );
     }
 
@@ -19,17 +29,23 @@ export async function GET(request: Request) {
       const conn = await dbConnect();
       if (conn && Review) {
         const reviews = await Review.find({ productId }).sort({ createdAt: -1 }).lean();
-        return NextResponse.json({ success: true, count: reviews.length, data: reviews });
+        return NextResponse.json(
+          { success: true, count: reviews.length, data: reviews },
+          { headers: NO_CACHE_HEADERS }
+        );
       }
     } catch (dbErr) {
       console.warn('MongoDB review fetch failed:', dbErr);
     }
 
-    return NextResponse.json({ success: true, count: 0, data: [] });
+    return NextResponse.json(
+      { success: true, count: 0, data: [] },
+      { headers: NO_CACHE_HEADERS }
+    );
   } catch (error: any) {
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to fetch reviews' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }
@@ -42,7 +58,7 @@ export async function POST(request: Request) {
     if (!productId || !author || !rating || !comment) {
       return NextResponse.json(
         { success: false, error: 'Product ID, author, rating, and comment are required.' },
-        { status: 400 }
+        { status: 400, headers: NO_CACHE_HEADERS }
       );
     }
 
@@ -62,14 +78,22 @@ export async function POST(request: Request) {
         if (Product) {
           const allReviews = await Review.find({ productId });
           const count = allReviews.length;
-          const avg = allReviews.reduce((sum, r) => sum + r.rating, 0) / count;
+          const avg = allReviews.reduce((sum: number, r: any) => sum + r.rating, 0) / count;
+          
+          const productQuery = mongoose.isValidObjectId(productId)
+            ? { $or: [{ _id: productId }, { id: productId }, { slug: productId }] }
+            : { $or: [{ id: productId }, { slug: productId }] };
+
           await Product.findOneAndUpdate(
-            { $or: [{ id: productId }, { _id: productId }] },
+            productQuery,
             { $set: { 'rating.value': Number(avg.toFixed(1)), 'rating.count': count } }
           );
         }
 
-        return NextResponse.json({ success: true, data: newReview }, { status: 201 });
+        return NextResponse.json(
+          { success: true, data: newReview },
+          { status: 201, headers: NO_CACHE_HEADERS }
+        );
       }
     } catch (dbErr: any) {
       console.warn('MongoDB review save failed:', dbErr.message);
@@ -77,12 +101,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { success: true, data: { id: `rev_${Date.now()}`, ...body } },
-      { status: 201 }
+      { status: 201, headers: NO_CACHE_HEADERS }
     );
   } catch (error: any) {
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to post review' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }
+

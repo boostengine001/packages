@@ -26,36 +26,74 @@ interface WarehouseStock {
 export default function AdminInventoryPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedWarehouse, setSelectedWarehouse] = useState('all');
-  const [inventoryState, setInventoryState] = useState(
-    PRODUCTS.map((p) => ({
-      ...p,
-      warehouses: [
-        { id: 'wh-mum', name: 'Bhiwandi Fulfillment Center', city: 'Mumbai', stock: Math.floor((p.inventoryCount || 50) * 0.6) },
-        { id: 'wh-del', name: 'Gurugram Logistics Hub', city: 'Delhi NCR', stock: Math.floor((p.inventoryCount || 50) * 0.4) },
-      ],
-      safetyBuffer: 5,
-      reservedCount: Math.floor(Math.random() * 4),
-    }))
-  );
+  const [inventoryState, setInventoryState] = useState<any[]>([]);
+
+  React.useEffect(() => {
+    async function loadInventory() {
+      try {
+        const res = await fetch('/api/admin/products', { cache: 'no-store' });
+        const data = await res.json();
+        const list = (data.success && data.data && data.data.length > 0) ? data.data : PRODUCTS;
+        setInventoryState(
+          list.map((p: any) => {
+            const totalStock = p.variants?.reduce((sum: number, v: any) => sum + (v.stock || 0), 0) || 50;
+            return {
+              ...p,
+              inventoryCount: totalStock,
+              warehouses: [
+                { id: 'wh-mum', name: 'Bhiwandi Fulfillment Center', city: 'Mumbai', stock: Math.floor(totalStock * 0.6) },
+                { id: 'wh-del', name: 'Gurugram Logistics Hub', city: 'Delhi NCR', stock: Math.floor(totalStock * 0.4) },
+              ],
+              safetyBuffer: 5,
+              reservedCount: 2,
+            };
+          })
+        );
+      } catch (e) {
+        setInventoryState(
+          PRODUCTS.map((p) => ({
+            ...p,
+            inventoryCount: 50,
+            warehouses: [
+              { id: 'wh-mum', name: 'Bhiwandi Fulfillment Center', city: 'Mumbai', stock: 30 },
+              { id: 'wh-del', name: 'Gurugram Logistics Hub', city: 'Delhi NCR', stock: 20 },
+            ],
+            safetyBuffer: 5,
+            reservedCount: 2,
+          }))
+        );
+      }
+    }
+    loadInventory();
+  }, []);
 
   const totalUnits = inventoryState.reduce((sum, p) => sum + (p.inventoryCount || 0), 0);
   const lowStockCount = inventoryState.filter((p) => (p.inventoryCount || 0) <= 10).length;
   const reservedUnits = inventoryState.reduce((sum, p) => sum + p.reservedCount, 0);
 
   const filteredProducts = inventoryState.filter((p) =>
-    p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    p.category.toLowerCase().includes(searchTerm.toLowerCase())
+    (p.title || p.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (p.category || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleUpdateStock = (productId: string, whId: string, newStock: number) => {
+  const handleUpdateStock = async (productId: string, whId: string, newStock: number) => {
+    let newTotal = 0;
     setInventoryState((prev) =>
       prev.map((p) => {
-        if (p.id !== productId) return p;
-        const updatedWh = p.warehouses.map((wh) => (wh.id === whId ? { ...wh, stock: Math.max(0, newStock) } : wh));
-        const total = updatedWh.reduce((s, w) => s + w.stock, 0);
-        return { ...p, warehouses: updatedWh, inventoryCount: total };
+        if (p.id !== productId && p._id !== productId) return p;
+        const updatedWh = p.warehouses.map((wh: any) => (wh.id === whId ? { ...wh, stock: Math.max(0, newStock) } : wh));
+        newTotal = updatedWh.reduce((s: number, w: any) => s + w.stock, 0);
+        return { ...p, warehouses: updatedWh, inventoryCount: newTotal };
       })
     );
+
+    try {
+      await fetch(`/api/admin/products/${encodeURIComponent(productId)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ inStock: newTotal > 0 }),
+      });
+    } catch (e) {}
   };
 
   return (

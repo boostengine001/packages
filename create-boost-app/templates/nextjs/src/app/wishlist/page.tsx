@@ -3,12 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { useStore } from '../../context/StoreContext';
-import { getProductById, getProductUrl } from '../../data/products';
+import { getProductUrl } from '../../data/products';
 import { Heart, ShoppingBag, Trash2, ArrowLeft, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 import { AssuredBadge } from '@boostengine/ui';
 
 export default function WishlistPage() {
-  const { wishlistItems, removeFromWishlist, moveToCartFromWishlist } = useStore();
+  const { wishlistItems, removeFromWishlist, moveToCartFromWishlist, products } = useStore();
 
   if (wishlistItems.length === 0) {
     return (
@@ -60,7 +60,7 @@ export default function WishlistPage() {
       {/* Wishlist 2-col Mobile / 4-col Desktop Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {wishlistItems.map((item) => {
-          const matched = getProductById(item.productId);
+          const matched = products.find((p) => p.id === item.productId);
           const itemUrl = matched ? getProductUrl(matched) : `/products/${item.productId}`;
           return (
             <div

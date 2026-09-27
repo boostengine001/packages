@@ -92,14 +92,38 @@ export default function AdminCouponsPage() {
     expiresAt: '2026-12-31',
   });
 
+  React.useEffect(() => {
+    async function loadCoupons() {
+      try {
+        const res = await fetch('/api/admin/coupons', { cache: 'no-store' });
+        const data = await res.json();
+        if (data.success && data.data && data.data.length > 0) {
+          setCoupons(data.data);
+        }
+      } catch (e) {
+        console.error('Error fetching admin coupons:', e);
+      }
+    }
+    loadCoupons();
+  }, []);
+
   const filteredCoupons = coupons.filter((c) =>
     c.code.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleToggle = (id: string) => {
+  const handleToggle = async (id: string) => {
+    const current = coupons.find((c) => c.id === id);
+    const updatedStatus = current ? !current.isActive : true;
     setCoupons((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, isActive: !c.isActive } : c))
+      prev.map((c) => (c.id === id ? { ...c, isActive: updatedStatus } : c))
     );
+    try {
+      await fetch('/api/admin/coupons', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, isActive: updatedStatus }),
+      });
+    } catch (e) {}
   };
 
   const handleCopy = (code: string) => {
@@ -108,7 +132,7 @@ export default function AdminCouponsPage() {
     setTimeout(() => setCopiedCode(null), 1500);
   };
 
-  const handleCreateCoupon = (e: React.FormEvent) => {
+  const handleCreateCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     const newCoupon: AdminCoupon = {
       id: `c_${Date.now()}`,
@@ -122,7 +146,23 @@ export default function AdminCouponsPage() {
       expiresAt: formData.expiresAt,
       isActive: true,
     };
-    setCoupons([newCoupon, ...coupons]);
+
+    try {
+      const res = await fetch('/api/admin/coupons', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newCoupon),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setCoupons([data.data, ...coupons.filter((c) => c.id !== data.data.id)]);
+      } else {
+        setCoupons([newCoupon, ...coupons]);
+      }
+    } catch (e) {
+      setCoupons([newCoupon, ...coupons]);
+    }
+
     setShowModal(false);
     setFormData({
       code: '',

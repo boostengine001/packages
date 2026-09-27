@@ -13,7 +13,7 @@ function ProductsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || 'All';
 
-  const { addToCart, toggleWishlist, wishlistItems, inventory } = useStore();
+  const { addToCart, toggleWishlist, wishlistItems, inventory, settings } = useStore();
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [sortBy, setSortBy] = useState<SearchSortOption>('relevance');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -24,8 +24,8 @@ function ProductsContent() {
     async function loadCatalog() {
       try {
         const [prodRes, catRes] = await Promise.all([
-          fetch('/api/products'),
-          fetch('/api/categories'),
+          fetch('/api/products', { cache: 'no-store' }),
+          fetch('/api/categories', { cache: 'no-store' }),
         ]);
         const prodData = await prodRes.json();
         const catData = await catRes.json();
@@ -137,6 +137,7 @@ function ProductsContent() {
                 title={product.title}
                 price={product.price}
                 compareAtPrice={product.compareAtPrice}
+                currencySymbol={settings.currencySymbol}
                 images={product.images || []}
                 brand={product.brand}
                 isWishlisted={isWishlisted}

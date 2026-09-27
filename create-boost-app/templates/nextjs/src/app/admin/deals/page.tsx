@@ -80,6 +80,7 @@ const INITIAL_DEALS: DealItem[] = [
 
 export default function AdminDealsPage() {
   const [deals, setDeals] = useState<DealItem[]>(INITIAL_DEALS);
+  const [availableProducts, setAvailableProducts] = useState<StoreProduct[]>(PRODUCTS);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newDeal, setNewDeal] = useState({
     productId: PRODUCTS[0]?.id || '',
@@ -88,31 +89,73 @@ export default function AdminDealsPage() {
     durationHours: 24,
   });
 
-  const handleCreateDeal = (e: React.FormEvent) => {
+  useEffect(() => {
+    async function loadDealsData() {
+      try {
+        const [dealsRes, prodRes] = await Promise.all([
+          fetch('/api/admin/deals', { cache: 'no-store' }),
+          fetch('/api/admin/products', { cache: 'no-store' }),
+        ]);
+        const dealsData = await dealsRes.json();
+        const prodData = await prodRes.json();
+
+        if (dealsData.success && dealsData.data && dealsData.data.length > 0) {
+          setDeals(dealsData.data);
+        }
+        if (prodData.success && prodData.data && prodData.data.length > 0) {
+          setAvailableProducts(prodData.data);
+          if (!newDeal.productId) {
+            setNewDeal((prev) => ({ ...prev, productId: prodData.data[0].id }));
+          }
+        }
+      } catch (e) {
+        console.error('Failed to load deals data:', e);
+      }
+    }
+    loadDealsData();
+  }, []);
+
+  const handleCreateDeal = async (e: React.FormEvent) => {
     e.preventDefault();
-    const product = PRODUCTS.find((p) => p.id === newDeal.productId) || PRODUCTS[0];
+    const product = availableProducts.find((p) => p.id === newDeal.productId) || availableProducts[0];
     const discount = Math.round(((product.price - newDeal.dealPrice) / product.price) * 100);
 
-    const deal: DealItem = {
-      id: `DEAL-${Date.now().toString().slice(-4)}`,
+    const dealPayload = {
       productId: product.id,
-      productTitle: product.title,
+      productTitle: product.title || product.name,
       productImage: product.image || product.images?.[0] || '',
       originalPrice: product.price,
       dealPrice: Number(newDeal.dealPrice),
       discountPercentage: discount,
       quotaUnits: Number(newDeal.quotaUnits),
-      claimedUnits: 0,
+      durationHours: Number(newDeal.durationHours),
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + newDeal.durationHours * 3600 * 1000).toISOString(),
       status: 'ACTIVE',
     };
 
-    setDeals([deal, ...deals]);
+    try {
+      const res = await fetch('/api/admin/deals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dealPayload),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setDeals([data.data, ...deals.filter((d) => d.id !== data.data.id)]);
+      } else {
+        setDeals([dealPayload as any, ...deals]);
+      }
+    } catch (e) {
+      setDeals([dealPayload as any, ...deals]);
+    }
     setShowCreateModal(false);
   };
 
-  const handleDeleteDeal = (id: string) => {
+  const handleDeleteDeal = async (id: string) => {
+    try {
+      await fetch(`/api/admin/deals?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+    } catch (e) {}
     setDeals(deals.filter((d) => d.id !== id));
   };
 

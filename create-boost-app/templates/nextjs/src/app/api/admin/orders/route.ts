@@ -5,6 +5,9 @@ import { db } from '@/data/db';
 import { sendOrderConfirmationEmail } from '@/lib/mail';
 import { sendOrderSMS } from '@/lib/sms';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);

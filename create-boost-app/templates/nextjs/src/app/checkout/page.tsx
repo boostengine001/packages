@@ -79,10 +79,6 @@ export default function CheckoutPage() {
   const [resendTimer, setResendTimer] = useState(30);
   const [codVerified, setCodVerified] = useState(false);
 
-  const autofillSavedProfile = (patch: Partial<typeof form>) => {
-    setForm((prev) => ({ ...prev, ...patch }));
-  };
-
   // Countdown timer for OTP resend
   useEffect(() => {
     let timer: any;

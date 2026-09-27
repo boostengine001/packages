@@ -31,7 +31,7 @@ export default function OrderTrackPage() {
   useEffect(() => {
     if (!orderId) return;
 
-    fetch(`/api/admin/orders/${orderId}`)
+    fetch(`/api/admin/orders/${orderId}`, { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {

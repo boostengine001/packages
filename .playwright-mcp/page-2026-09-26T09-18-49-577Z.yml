@@ -1,0 +1,429 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "Club.Hachi" [ref=e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e9]:
+          - generic [ref=e10]: Boost
+          - generic [ref=e11]: Assured
+      - button "Deliver to Mumbai 400050" [ref=e14] [cursor=pointer]:
+        - generic [ref=e18]:
+          - generic [ref=e19]: Deliver to
+          - generic [ref=e20]: Mumbai 400050
+      - textbox "Search 10,000+ products, electronics, sneakers..." [ref=e23]
+      - generic [ref=e24]:
+        - link "All Products" [ref=e25] [cursor=pointer]:
+          - /url: /products
+        - link "🪙 Gold" [ref=e26] [cursor=pointer]:
+          - /url: /account
+          - generic [ref=e27]: 🪙
+          - generic [ref=e28]: Gold
+        - generic [ref=e29]:
+          - button "Minimal" [ref=e32] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e33]: ◻
+          - button "Switch to dark mode" [ref=e37] [cursor=pointer]
+        - link "Wishlist" [ref=e45] [cursor=pointer]:
+          - /url: /wishlist
+        - button "Bag 0" [ref=e48] [cursor=pointer]:
+          - generic [ref=e52]: Bag
+          - generic [ref=e53]: "0"
+  - main [ref=e54]:
+    - generic [ref=e55]:
+      - generic [ref=e58]:
+        - button "🛍️ All" [ref=e59] [cursor=pointer]:
+          - generic [ref=e60]: 🛍️
+          - generic [ref=e61]: All
+        - button "🧥 Hoodies" [ref=e62] [cursor=pointer]:
+          - generic [ref=e63]: 🧥
+          - generic [ref=e64]: Hoodies
+        - button "👕 T-Shirts" [ref=e65] [cursor=pointer]:
+          - generic [ref=e66]: 👕
+          - generic [ref=e67]: T-Shirts
+        - button "👟 Footwear" [ref=e68] [cursor=pointer]:
+          - generic [ref=e69]: 👟
+          - generic [ref=e70]: Footwear
+        - button "🎧 Electronics" [ref=e71] [cursor=pointer]:
+          - generic [ref=e72]: 🎧
+          - generic [ref=e73]: Electronics
+        - button "🎒 Accessories" [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]: 🎒
+          - generic [ref=e76]: Accessories
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]: BIG SAVINGS DAY
+          - generic [ref=e84]:
+            - generic [ref=e85]: Boost
+            - generic [ref=e86]: Assured
+        - heading "India's Favorite Premium Marketplace" [level=1] [ref=e89]
+        - paragraph [ref=e90]: 100% genuine fashion & electronics. Same-day dispatch, No-Cost EMI & SuperCoins cashback!
+        - generic [ref=e91]:
+          - link "Shop Deals" [ref=e92] [cursor=pointer]:
+            - /url: "#lightning-deals"
+          - link "All Products" [ref=e96] [cursor=pointer]:
+            - /url: /products
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]: ⚡
+          - generic [ref=e101]:
+            - generic [ref=e102]: Fast Express Delivery
+            - generic [ref=e103]: Free Above ₹999
+        - generic [ref=e104]:
+          - generic [ref=e105]: 🛡️
+          - generic [ref=e106]:
+            - generic [ref=e107]: 100% Genuine
+            - generic [ref=e108]: Direct from Brands
+        - generic [ref=e109]:
+          - generic [ref=e110]: 🔄
+          - generic [ref=e111]:
+            - generic [ref=e112]: 7-Day Easy Returns
+            - generic [ref=e113]: No Questions Asked
+        - generic [ref=e114]:
+          - generic [ref=e115]: 💵
+          - generic [ref=e116]:
+            - generic [ref=e117]: Pay on Delivery
+            - generic [ref=e118]: Cash & UPI at Doorstep
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - generic [ref=e122]: ⚡ DEALS OF THE DAY
+            - generic [ref=e126]:
+              - generic [ref=e127]: "Ends in:"
+              - generic [ref=e128]:
+                - generic [ref=e129]: 02h
+                - generic [ref=e130]: ":"
+                - generic [ref=e131]: 00m
+                - generic [ref=e132]: ":"
+                - generic [ref=e133]: 00s
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - text: 🔥
+              - strong [ref=e139]: 84%
+              - text: Claimed
+            - generic [ref=e140]: Hurry, limited stock!
+        - generic [ref=e141]:
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - generic [ref=e144]:
+                - generic [ref=e145]: 60% OFF
+                - generic [ref=e146]:
+                  - generic [ref=e147]: Assured
+                  - button "Wishlist" [ref=e148] [cursor=pointer]
+              - generic [ref=e151] [cursor=pointer]:
+                - img "BoostPods Pro Active Noise Cancelling Earbuds" [ref=e153]
+                - generic [ref=e154]:
+                  - text: Boost Audio
+                  - heading "BoostPods Pro Active Noise Cancelling Earbuds" [level=3] [ref=e155]
+                  - generic [ref=e156]:
+                    - generic [ref=e157]: "4.8"
+                    - generic [ref=e170]: (128)
+                - generic [ref=e171]:
+                  - generic [ref=e172]: ₹1999
+                  - generic [ref=e173]: ₹4999
+            - generic [ref=e174]:
+              - button "+ Cart" [ref=e175] [cursor=pointer]
+              - button "Buy" [ref=e176] [cursor=pointer]
+          - generic [ref=e177]:
+            - generic [ref=e178]:
+              - generic [ref=e179]:
+                - generic [ref=e180]: 57% OFF
+                - generic [ref=e181]:
+                  - generic [ref=e182]: Assured
+                  - button "Wishlist" [ref=e183] [cursor=pointer]
+              - generic [ref=e186] [cursor=pointer]:
+                - img "Titanium Ultra AMOLED Smartwatch (Bluetooth Calling)" [ref=e188]
+                - generic [ref=e189]:
+                  - text: Boost Tech
+                  - heading "Titanium Ultra AMOLED Smartwatch (Bluetooth Calling)" [level=3] [ref=e190]
+                  - generic [ref=e191]:
+                    - generic [ref=e192]: "4.9"
+                    - generic [ref=e205]: (96)
+                - generic [ref=e206]:
+                  - generic [ref=e207]: ₹2999
+                  - generic [ref=e208]: ₹6999
+            - generic [ref=e209]:
+              - button "+ Cart" [ref=e210] [cursor=pointer]
+              - button "Buy" [ref=e211] [cursor=pointer]
+          - generic [ref=e212]:
+            - generic [ref=e213]:
+              - generic [ref=e214]:
+                - generic [ref=e215]: 57% OFF
+                - generic [ref=e216]:
+                  - generic [ref=e217]: Assured
+                  - button "Wishlist" [ref=e218] [cursor=pointer]
+              - generic [ref=e221] [cursor=pointer]:
+                - img "Urban Armor Waterproof Laptop Backpack (28L)" [ref=e223]
+                - generic [ref=e224]:
+                  - text: Boost Gear
+                  - heading "Urban Armor Waterproof Laptop Backpack (28L)" [level=3] [ref=e225]
+                  - generic [ref=e226]:
+                    - generic [ref=e227]: "4.6"
+                    - generic [ref=e240]: (54)
+                - generic [ref=e241]:
+                  - generic [ref=e242]: ₹1299
+                  - generic [ref=e243]: ₹2999
+            - generic [ref=e244]:
+              - button "+ Cart" [ref=e245] [cursor=pointer]
+              - button "Buy" [ref=e246] [cursor=pointer]
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - generic [ref=e249]:
+                - generic [ref=e250]: 44% OFF
+                - generic [ref=e251]:
+                  - generic [ref=e252]: Assured
+                  - button "Wishlist" [ref=e253] [cursor=pointer]
+              - generic [ref=e256] [cursor=pointer]:
+                - img "Vintage Acid-Wash Streetwear Tee" [ref=e258]
+                - generic [ref=e259]:
+                  - text: Boost Aesthetic
+                  - heading "Vintage Acid-Wash Streetwear Tee" [level=3] [ref=e260]
+                  - generic [ref=e261]:
+                    - generic [ref=e262]: "4.7"
+                    - generic [ref=e275]: (48)
+                - generic [ref=e276]:
+                  - generic [ref=e277]: ₹999
+                  - generic [ref=e278]: ₹1799
+            - generic [ref=e279]:
+              - button "+ Cart" [ref=e280] [cursor=pointer]
+              - button "Buy" [ref=e281] [cursor=pointer]
+      - generic [ref=e283]:
+        - generic [ref=e284]:
+          - generic [ref=e285]:
+            - text: 🪙 SuperCoins Club
+            - 'heading "Balance: 250 Coins" [level=3] [ref=e286]'
+            - paragraph [ref=e287]: 1 Coin = ₹1 discount at checkout. Earn 4 coins per ₹100!
+          - generic [ref=e288]: 🪙
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - generic [ref=e291]: Bank Offers
+            - heading "10% Instant Card Discount" [level=3] [ref=e295]
+            - paragraph [ref=e296]: Up to ₹1,500 off on HDFC & SBI cards + No Cost EMI above ₹3,000.
+          - generic [ref=e297]: 💳
+      - generic [ref=e298]:
+        - generic [ref=e299]:
+          - generic [ref=e300]:
+            - heading "Trending Catalog" [level=2] [ref=e301]
+            - generic [ref=e305]: (6 items)
+          - button "All" [ref=e307] [cursor=pointer]
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - generic [ref=e310] [cursor=pointer]:
+              - img "Cyberpunk Heavyweight 450 GSM Hoodie" [ref=e311]
+              - generic [ref=e312]: 38% OFF
+              - button "Wishlist" [ref=e313]
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - generic [ref=e318]: Boost Aesthetic
+                - heading "Cyberpunk Heavyweight 450 GSM Hoodie" [level=3] [ref=e319] [cursor=pointer]
+                - generic [ref=e333]:
+                  - text: "4.9"
+                  - generic [ref=e334]: (64)
+              - generic [ref=e335]:
+                - generic [ref=e336]:
+                  - generic [ref=e337]: ₹2499
+                  - generic [ref=e338]: ₹3999
+                - button "+ Add to Bag" [ref=e339] [cursor=pointer]
+          - generic [ref=e340]:
+            - generic [ref=e341] [cursor=pointer]:
+              - img "Vintage Acid-Wash Streetwear Tee" [ref=e342]
+              - generic [ref=e343]: 44% OFF
+              - button "Wishlist" [ref=e344]
+            - generic [ref=e347]:
+              - generic [ref=e348]:
+                - generic [ref=e349]: Boost Aesthetic
+                - heading "Vintage Acid-Wash Streetwear Tee" [level=3] [ref=e350] [cursor=pointer]
+                - generic [ref=e364]:
+                  - text: "4.7"
+                  - generic [ref=e365]: (48)
+              - generic [ref=e366]:
+                - generic [ref=e367]:
+                  - generic [ref=e368]: ₹999
+                  - generic [ref=e369]: ₹1799
+                - button "+ Add to Bag" [ref=e370] [cursor=pointer]
+          - generic [ref=e371]:
+            - generic [ref=e372] [cursor=pointer]:
+              - img "Retro High-Top Street Sneakers" [ref=e373]
+              - generic [ref=e374]: 36% OFF
+              - generic [ref=e375]: Only 3 left!
+              - button "Wishlist" [ref=e376]
+            - generic [ref=e379]:
+              - generic [ref=e380]:
+                - generic [ref=e381]: Boost Kicks
+                - heading "Retro High-Top Street Sneakers" [level=3] [ref=e382] [cursor=pointer]
+                - generic [ref=e396]:
+                  - text: "4.8"
+                  - generic [ref=e397]: (32)
+              - generic [ref=e398]:
+                - generic [ref=e399]:
+                  - generic [ref=e400]: ₹3499
+                  - generic [ref=e401]: ₹5499
+                - button "+ Add to Bag" [ref=e402] [cursor=pointer]
+          - generic [ref=e403]:
+            - generic [ref=e404] [cursor=pointer]:
+              - img "BoostPods Pro Active Noise Cancelling Earbuds" [ref=e405]
+              - generic [ref=e406]: 60% OFF
+              - button "Wishlist" [ref=e407]
+            - generic [ref=e410]:
+              - generic [ref=e411]:
+                - generic [ref=e412]: Boost Audio
+                - heading "BoostPods Pro Active Noise Cancelling Earbuds" [level=3] [ref=e413] [cursor=pointer]
+                - generic [ref=e427]:
+                  - text: "4.8"
+                  - generic [ref=e428]: (128)
+              - generic [ref=e429]:
+                - generic [ref=e430]:
+                  - generic [ref=e431]: ₹1999
+                  - generic [ref=e432]: ₹4999
+                - button "+ Add to Bag" [ref=e433] [cursor=pointer]
+          - generic [ref=e434]:
+            - generic [ref=e435] [cursor=pointer]:
+              - img "Titanium Ultra AMOLED Smartwatch (Bluetooth Calling)" [ref=e436]
+              - generic [ref=e437]: 57% OFF
+              - button "Wishlist" [ref=e438]
+            - generic [ref=e441]:
+              - generic [ref=e442]:
+                - generic [ref=e443]: Boost Tech
+                - heading "Titanium Ultra AMOLED Smartwatch (Bluetooth Calling)" [level=3] [ref=e444] [cursor=pointer]
+                - generic [ref=e458]:
+                  - text: "4.9"
+                  - generic [ref=e459]: (96)
+              - generic [ref=e460]:
+                - generic [ref=e461]:
+                  - generic [ref=e462]: ₹2999
+                  - generic [ref=e463]: ₹6999
+                - button "+ Add to Bag" [ref=e464] [cursor=pointer]
+          - generic [ref=e465]:
+            - generic [ref=e466] [cursor=pointer]:
+              - img "Urban Armor Waterproof Laptop Backpack (28L)" [ref=e467]
+              - generic [ref=e468]: 57% OFF
+              - button "Wishlist" [ref=e469]
+            - generic [ref=e472]:
+              - generic [ref=e473]:
+                - generic [ref=e474]: Boost Gear
+                - heading "Urban Armor Waterproof Laptop Backpack (28L)" [level=3] [ref=e475] [cursor=pointer]
+                - generic [ref=e489]:
+                  - text: "4.6"
+                  - generic [ref=e490]: (54)
+              - generic [ref=e491]:
+                - generic [ref=e492]:
+                  - generic [ref=e493]: ₹1299
+                  - generic [ref=e494]: ₹2999
+                - button "+ Add to Bag" [ref=e495] [cursor=pointer]
+      - generic [ref=e497]:
+        - generic [ref=e498]: 100% Genuine
+        - generic [ref=e503]: 7-Day Easy Returns
+        - generic [ref=e511]: COD Available
+        - generic [ref=e516]: 256-Bit SSL Secure
+      - generic [ref=e522]:
+        - generic [ref=e523]:
+          - heading "Verified Buyer Reviews" [level=2] [ref=e524]
+          - link "View all" [ref=e528] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e531]:
+          - generic [ref=e532]:
+            - paragraph [ref=e546]: "\"Fabric is insanely thick and warm. Print quality is 10/10!\""
+            - generic [ref=e547]:
+              - img "Aarav M." [ref=e548]
+              - generic [ref=e549]: Aarav M.
+          - generic [ref=e554]:
+            - paragraph [ref=e568]: "\"Loved the oversized drop shoulder cut. Perfect for winters.\""
+            - generic [ref=e569]:
+              - img "Sneha P." [ref=e570]
+              - generic [ref=e571]: Sneha P.
+          - generic [ref=e576]:
+            - paragraph [ref=e590]: "\"Super soft feel and fits great on chest and shoulders.\""
+            - generic [ref=e591]:
+              - img "Rohan K." [ref=e592]
+              - generic [ref=e593]: Rohan K.
+          - generic [ref=e598]:
+            - paragraph [ref=e612]: "\"Comfortable right out of the box. Cushioning is awesome.\""
+            - generic [ref=e613]:
+              - img "Vikram S." [ref=e614]
+              - generic [ref=e615]: Vikram S.
+          - generic [ref=e620]:
+            - paragraph [ref=e634]: "\"Noise cancellation is surprisingly good for the price. Bass is punchy!\""
+            - generic [ref=e635]:
+              - img "Sameer R." [ref=e636]
+              - generic [ref=e637]: Sameer R.
+          - generic [ref=e642]:
+            - paragraph [ref=e656]: "\"Very lightweight case and fast charging works as advertised.\""
+            - generic [ref=e657]:
+              - img "Neha J." [ref=e658]
+              - generic [ref=e659]: Neha J.
+      - link "Chat on WhatsApp" [ref=e664] [cursor=pointer]:
+        - /url: https://wa.me/919876543210?text=Hi%20Boost%20Store%2C%20I%20have%20a%20pre-order%20question
+        - generic [ref=e667]: Support
+  - button "Open AI Shopping Assistant" [ref=e668] [cursor=pointer]:
+    - generic [ref=e674]: Ask AI Assistant
+  - contentinfo [ref=e675]:
+    - generic [ref=e676]:
+      - generic [ref=e677]:
+        - text: Club Hachi
+        - paragraph [ref=e678]: India's favorite next-generation eCommerce store with instant checkout, live order tracking, and COD available.
+        - generic [ref=e679]:
+          - generic [ref=e680]:
+            - text: "Email:"
+            - link "support@clubhachi.com" [ref=e681] [cursor=pointer]:
+              - /url: mailto:support@clubhachi.com
+          - generic [ref=e682]: "Phone: +91 98765 43210"
+      - generic [ref=e683]:
+        - heading "Shop Categories" [level=4] [ref=e684]
+        - list [ref=e685]:
+          - listitem [ref=e686]:
+            - link "All Collections" [ref=e687] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e688]:
+            - link "Hoodies" [ref=e689] [cursor=pointer]:
+              - /url: /?category=Hoodies
+          - listitem [ref=e690]:
+            - link "T-Shirts" [ref=e691] [cursor=pointer]:
+              - /url: /?category=T-Shirts
+          - listitem [ref=e692]:
+            - link "Footwear" [ref=e693] [cursor=pointer]:
+              - /url: /?category=Footwear
+      - generic [ref=e694]:
+        - heading "Customer Support" [level=4] [ref=e695]
+        - list [ref=e696]:
+          - listitem [ref=e697]:
+            - link "About Us" [ref=e698] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e699]:
+            - link "Contact Us" [ref=e700] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e701]:
+            - link "Warranty Registration" [ref=e702] [cursor=pointer]:
+              - /url: /warranty-registration
+          - listitem [ref=e703]:
+            - link "File Warranty Claim" [ref=e704] [cursor=pointer]:
+              - /url: /warranty-claim
+          - listitem [ref=e705]:
+            - link "Track Order" [ref=e706] [cursor=pointer]:
+              - /url: /orders
+      - generic [ref=e707]:
+        - heading "Policies & Legal" [level=4] [ref=e708]
+        - list [ref=e709]:
+          - listitem [ref=e710]:
+            - link "Privacy Policy" [ref=e711] [cursor=pointer]:
+              - /url: /privacy-policy
+          - listitem [ref=e712]:
+            - link "Terms & Conditions" [ref=e713] [cursor=pointer]:
+              - /url: /terms-conditions
+          - listitem [ref=e714]:
+            - link "Shipping Policy" [ref=e715] [cursor=pointer]:
+              - /url: /shipping-policy
+          - listitem [ref=e716]:
+            - link "Return & Refund Policy" [ref=e717] [cursor=pointer]:
+              - /url: /refund-policy
+      - generic [ref=e718]:
+        - heading "Store Guarantees" [level=4] [ref=e719]
+        - list [ref=e720]:
+          - listitem [ref=e721]:
+            - generic [ref=e722]: Free Express Delivery above ₹999
+          - listitem [ref=e723]: COD Available Across India
+          - listitem [ref=e724]: 7-Day No-Questions Return
+          - listitem [ref=e725]:
+            - link "Staff / Admin Portal →" [ref=e726] [cursor=pointer]:
+              - /url: /admin
+    - generic [ref=e727]:
+      - paragraph [ref=e728]: © 2026 Club Hachi. All rights reserved.
+      - paragraph [ref=e729]: Powered by BoostEngine Enterprise D2C Architecture

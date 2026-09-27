@@ -1,14 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Banner from '@/models/Banner';
+import { db } from '@/data/db';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // GET all banners for admin console
 export async function GET() {
   try {
-    await connectDB();
-    const banners = await Banner.find({ isDeleted: { $ne: true } })
-      .sort({ desktopOrder: 1, createdAt: -1 })
-      .lean();
+    let banners: any[] = [];
+    try {
+      const conn = await connectDB();
+      if (conn && Banner) {
+        banners = await Banner.find({ isDeleted: { $ne: true } })
+          .sort({ desktopOrder: 1, createdAt: -1 })
+          .lean();
+      }
+    } catch (dbErr) {
+      console.warn('MongoDB admin banners fetch error:', dbErr);
+    }
+
+    if (banners.length === 0) {
+      const fallback = db.getBanners();
+      return NextResponse.json({
+        success: true,
+        data: fallback,
+        total: fallback.length,
+      });
+    }
 
     return NextResponse.json({
       success: true,
@@ -32,10 +52,10 @@ export async function GET() {
 // POST: Create a new banner
 export async function POST(req: NextRequest) {
   try {
-    await connectDB();
     const body = await req.json();
 
-    const newBanner = await Banner.create({
+    const bannerData = {
+      id: `banner_${Date.now()}`,
       title: body.title || '',
       desktopImage: body.desktopImage || '',
       mobileImage: body.mobileImage || body.desktopImage || '',
@@ -49,15 +69,24 @@ export async function POST(req: NextRequest) {
       titleColor: body.titleColor || '#ffffff',
       isHeroBanner: !!body.isHeroBanner,
       isNewArrival: !!body.isNewArrival,
-    });
+    };
 
-    return NextResponse.json(
-      {
-        success: true,
-        data: { ...newBanner.toObject(), id: newBanner._id.toString() },
-      },
-      { status: 201 }
-    );
+    let createdMongo: any = null;
+    try {
+      const conn = await connectDB();
+      if (conn && Banner) {
+        createdMongo = await Banner.create(bannerData);
+      }
+    } catch (dbErr) {
+      console.warn('Could not save banner to MongoDB:', dbErr);
+    }
+
+    const saved = db.addBanner(bannerData as any);
+    const finalData = createdMongo
+      ? { ...createdMongo.toObject(), id: createdMongo._id.toString() }
+      : saved;
+
+    return NextResponse.json({ success: true, data: finalData }, { status: 201 });
   } catch (error: any) {
     console.error('Error creating banner:', error);
     return NextResponse.json(
@@ -70,7 +99,6 @@ export async function POST(req: NextRequest) {
 // PATCH: Update banner status or fields
 export async function PATCH(req: NextRequest) {
   try {
-    await connectDB();
     const body = await req.json();
     const { id, ...updates } = body;
 
@@ -81,18 +109,22 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const updated = await Banner.findByIdAndUpdate(id, updates, { new: true });
-    if (!updated) {
-      return NextResponse.json(
-        { success: false, error: 'Banner not found' },
-        { status: 404 }
-      );
+    let updatedMongo: any = null;
+    try {
+      const conn = await connectDB();
+      if (conn && Banner) {
+        updatedMongo = await Banner.findByIdAndUpdate(id, updates, { new: true }).lean();
+      }
+    } catch (dbErr) {
+      console.warn('MongoDB banner update error:', dbErr);
     }
 
-    return NextResponse.json({
-      success: true,
-      data: { ...updated.toObject(), id: updated._id.toString() },
-    });
+    const updated = db.updateBanner(id, updates);
+    const finalData = updatedMongo
+      ? { ...updatedMongo, id: updatedMongo._id.toString() }
+      : updated || { id, ...updates };
+
+    return NextResponse.json({ success: true, data: finalData });
   } catch (error: any) {
     console.error('Error updating banner:', error);
     return NextResponse.json(
@@ -105,7 +137,6 @@ export async function PATCH(req: NextRequest) {
 // DELETE: Soft delete banner
 export async function DELETE(req: NextRequest) {
   try {
-    await connectDB();
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
 
@@ -116,7 +147,16 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    await Banner.findByIdAndUpdate(id, { isDeleted: true, isActive: false });
+    try {
+      const conn = await connectDB();
+      if (conn && Banner) {
+        await Banner.findByIdAndUpdate(id, { isDeleted: true, isActive: false });
+      }
+    } catch (dbErr) {
+      console.warn('MongoDB banner delete error:', dbErr);
+    }
+
+    db.deleteBanner(id);
 
     return NextResponse.json({
       success: true,

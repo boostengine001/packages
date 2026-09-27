@@ -22,7 +22,7 @@ export function AdBanner() {
   useEffect(() => {
     async function fetchAdBanner() {
       try {
-        const res = await fetch('/api/ad-banner');
+        const res = await fetch('/api/ad-banner', { cache: 'no-store' });
         const data = await res.json();
         if (data.success && data.data) {
           setAd(data.data);

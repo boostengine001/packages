@@ -1,7 +1,19 @@
 import { NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import dbConnect from '@/lib/db';
 import Order from '@/models/Order';
 import { db } from '@/data/db';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+function buildOrderQuery(id: string) {
+  const orConditions: any[] = [{ id: id }, { orderNumber: id }, { orderId: id }];
+  if (mongoose.Types.ObjectId.isValid(id) && id.length === 24) {
+    orConditions.unshift({ _id: new mongoose.Types.ObjectId(id) });
+  }
+  return { $or: orConditions };
+}
 
 export async function GET(
   request: Request,
@@ -9,14 +21,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+    const query = buildOrderQuery(id);
 
     // Check MongoDB first
     try {
       const conn = await dbConnect();
       if (conn && Order) {
-        const mongoOrder = await Order.findOne({
-          $or: [{ id }, { orderNumber: id }],
-        }).lean();
+        const mongoOrder = await Order.findOne(query).lean();
         if (mongoOrder) {
           return NextResponse.json({ success: true, source: 'mongodb', data: mongoOrder });
         }
@@ -47,18 +58,22 @@ export async function PATCH(
     const { id } = await params;
     const body = await request.json();
     const { status, courier, trackingNumber } = body;
+    const query = buildOrderQuery(id);
 
     // Update in MongoDB
     try {
       const conn = await dbConnect();
       if (conn && Order) {
         await Order.findOneAndUpdate(
-          { $or: [{ id }, { orderNumber: id }] },
+          query,
           {
-            ...(status && { orderStatus: status }),
-            ...(courier && { courier }),
-            ...(trackingNumber && { trackingNumber }),
-          }
+            $set: {
+              ...(status && { orderStatus: status }),
+              ...(courier && { courier }),
+              ...(trackingNumber && { trackingNumber }),
+            },
+          },
+          { new: true }
         );
       }
     } catch (dbErr) {

@@ -4,7 +4,7 @@
 var chunkPJGKASIM_cjs = require('./chunk-PJGKASIM.cjs');
 var chunkVCDD3JBU_cjs = require('./chunk-VCDD3JBU.cjs');
 var chunkPYKLJKJQ_cjs = require('./chunk-PYKLJKJQ.cjs');
-var chunkVO7EWBLQ_cjs = require('./chunk-VO7EWBLQ.cjs');
+var chunk7NJGFXJG_cjs = require('./chunk-7NJGFXJG.cjs');
 var chunkV2LZHVQD_cjs = require('./chunk-V2LZHVQD.cjs');
 var chunk73FI57TW_cjs = require('./chunk-73FI57TW.cjs');
 var React47 = require('react');
@@ -108,7 +108,7 @@ var ThemeToggle = ({
   className = "",
   style
 }) => {
-  const { mode, resolvedMode, toggleMode, setMode } = chunkVO7EWBLQ_cjs.useTheme();
+  const { mode, resolvedMode, toggleMode, setMode } = chunk7NJGFXJG_cjs.useTheme();
   const [standaloneMode, setStandaloneMode] = React47__namespace.useState(() => {
     if (typeof document !== "undefined") {
       const current = document.documentElement.getAttribute("data-theme");
@@ -400,7 +400,7 @@ var PresetSwitcher = ({
   className = "",
   style
 }) => {
-  const { stylePreset: contextPreset, setStylePreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: contextPreset, setStylePreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const activePreset = value ?? contextPreset;
   const [isOpen, setIsOpen] = React47__namespace.useState(false);
   const containerRef = React47__namespace.useRef(null);
@@ -875,7 +875,7 @@ var Button = /* @__PURE__ */ React47__namespace.forwardRef(
     stylePreset: stylePresetProp,
     ...props
   }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const getVariantStyles = () => {
       switch (variant) {
@@ -1492,7 +1492,7 @@ var Input = /* @__PURE__ */ React47__namespace.forwardRef(
     stylePreset: stylePresetProp,
     ...props
   }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const inputId = id || (label ? `input-${label.toLowerCase().replace(/\s+/g, "-")}` : void 0);
     const getPresetStyles = () => {
@@ -1675,7 +1675,7 @@ var Textarea = /* @__PURE__ */ React47__namespace.forwardRef(
     stylePreset: stylePresetProp,
     ...props
   }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const textareaId = id || (label ? `textarea-${label.toLowerCase().replace(/\s+/g, "-")}` : void 0);
     const limit = maxLength || maxChars;
@@ -1846,7 +1846,7 @@ var Select = /* @__PURE__ */ React47__namespace.forwardRef(
     stylePreset: stylePresetProp,
     ...props
   }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const selectId = id || (label ? `select-${label.toLowerCase().replace(/\s+/g, "-")}` : void 0);
     const getPresetStyles = () => {
@@ -2239,7 +2239,7 @@ var MultiSelect = ({
 MultiSelect.displayName = "MultiSelect";
 var Checkbox = /* @__PURE__ */ React47__namespace.forwardRef(
   ({ label, description, indeterminate, checked, disabled, className = "", style, stylePreset: stylePresetProp, ...props }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const inputRef = React47__namespace.useRef(null);
     React47__namespace.useImperativeHandle(ref, () => inputRef.current);
@@ -2290,7 +2290,7 @@ var Checkbox = /* @__PURE__ */ React47__namespace.forwardRef(
 Checkbox.displayName = "Checkbox";
 var Radio = /* @__PURE__ */ React47__namespace.forwardRef(
   ({ label, description, className = "", style, disabled, stylePreset: stylePresetProp, ...props }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     return /* @__PURE__ */ jsxRuntime.jsxs(
       "label",
@@ -2390,7 +2390,7 @@ var Switch = /* @__PURE__ */ React47__namespace.forwardRef(
     style,
     stylePreset: stylePresetProp
   }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const getPresetStyles = () => {
       switch (preset) {
@@ -3811,7 +3811,7 @@ var Alert = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const activeVariant = type || variant || "info";
   const content = description || children;
@@ -3905,7 +3905,7 @@ var Snackbar = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const btnLabel = actionLabel || actionText;
   React47__namespace.useEffect(() => {
@@ -4276,7 +4276,7 @@ var Card = /* @__PURE__ */ React47__namespace.forwardRef(
     children,
     ...props
   }, ref) => {
-    const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+    const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const isGlass = variant === "glass" || preset === "glassmorphism";
     const isOutlined = variant === "outlined";
@@ -4790,7 +4790,7 @@ var Badge = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const getPresetStyles = () => {
     const isNeutral = variant === "default" || variant === "secondary" || variant === "outline";
@@ -5153,7 +5153,7 @@ var Chip = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const content = children !== void 0 ? children : label;
   const getPresetStyles = () => {
@@ -5399,7 +5399,7 @@ var Accordion = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [expanded, setExpanded] = React47__namespace.useState(defaultExpanded);
   const toggleItem = (id) => {
@@ -5805,7 +5805,7 @@ var Modal = ({
   showCloseButton = true,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const modalRef = React47__namespace.useRef(null);
   chunkPJGKASIM_cjs.useFocusTrap(modalRef, isOpen);
@@ -6081,7 +6081,7 @@ var Drawer = ({
   closeOnOverlayClick = true,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const effectivePlacement = position || placement || "right";
   const drawerRef = React47__namespace.useRef(null);
@@ -6371,7 +6371,7 @@ var BottomSheet = ({
   closeOnOverlayClick = true,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   React47__namespace.useEffect(() => {
     if (!isOpen) return;
@@ -6632,7 +6632,7 @@ var Popover = ({
   showArrow = true,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [internalOpen, setInternalOpen] = React47__namespace.useState(false);
   const popoverRef = React47__namespace.useRef(null);
@@ -6973,7 +6973,7 @@ var CommandPalette = ({
   stylePreset: stylePresetProp,
   className = ""
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [query, setQuery] = React47__namespace.useState("");
   const [selectedIndex, setSelectedIndex] = React47__namespace.useState(0);
@@ -7856,7 +7856,7 @@ var Header = ({
   stylePreset: stylePresetProp,
   renderMobileMenu
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [mobileMenuOpen, setMobileMenuOpen] = React47__namespace.useState(false);
   const effectiveLinks = navLinks || links || [];
@@ -8271,7 +8271,7 @@ var Navbar = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [mobileMenuOpen, setMobileMenuOpen] = React47__namespace.useState(false);
   const [localSearch, setLocalSearch] = React47__namespace.useState(searchValue || "");
@@ -9150,7 +9150,7 @@ var Sidebar = ({
   stylePreset: stylePresetProp,
   className = ""
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const getSidebarStyles = () => {
     const base = { width: collapsed ? "68px" : "260px", height: "100%", display: "flex", flexDirection: "column", fontFamily: "inherit", transition: "width 0.2s ease", boxSizing: "border-box" };
@@ -9315,7 +9315,7 @@ var Footer = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [email, setEmail] = React47__namespace.useState("");
   const [subscribed, setSubscribed] = React47__namespace.useState(false);
@@ -9757,7 +9757,7 @@ var MobileBottomBar = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [internalActiveTab, setInternalActiveTab] = React47__namespace.useState(activeTab || defaultActiveTab);
   React47__namespace.useEffect(() => {
@@ -9995,7 +9995,7 @@ var MobileBottomNav = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [internalActiveId, setInternalActiveId] = React47__namespace.useState(activeId || defaultActiveId || items[0]?.id);
   React47__namespace.useEffect(() => {
@@ -10433,7 +10433,7 @@ var DropdownMenu = ({
   className = "",
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [isOpen, setIsOpen] = React47__namespace.useState(false);
   const [focusedIndex, setFocusedIndex] = React47__namespace.useState(-1);
@@ -10711,7 +10711,7 @@ var MegaMenu = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [internalIsOpen, setInternalIsOpen] = React47__namespace.useState(false);
   const isControlled = controlledIsOpen !== void 0;
@@ -11099,7 +11099,7 @@ var Pagination = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const getPages = () => {
     const pages = [];
@@ -11187,7 +11187,7 @@ var Tabs = (({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const tabList = items || tabs || [];
   const currentActive = controlledValue !== void 0 ? controlledValue : controlledId !== void 0 ? controlledId : controlledTab;
@@ -11400,7 +11400,7 @@ var Stepper = ({
   stylePreset: stylePresetProp,
   className = ""
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const activeIdx = currentStep !== void 0 ? currentStep - 1 : activeStep ?? 0;
   const getCircleStyles = (isCompleted, isCurrent) => {
@@ -11659,7 +11659,7 @@ function Table({
   className = "",
   keyExtractor = (_, idx) => idx
 }) {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const getTableWrapperStyles = () => {
     const base = {
@@ -11882,7 +11882,7 @@ function DataTable({
   className = "",
   style
 }) {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [searchQuery, setSearchQuery] = React47__namespace.useState("");
   const [internalPage, setInternalPage] = React47__namespace.useState(1);
@@ -12363,7 +12363,7 @@ var StatsCard = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const computedChange = change !== void 0 ? change : typeof trend === "object" && trend !== null ? `${trend.value > 0 && !String(trend.value).includes("+") ? "+" : ""}${trend.value}%` : trend !== void 0 ? trend : void 0;
   const computedIsPositive = typeof trend === "object" && trend !== null && trend.isPositive !== void 0 ? trend.isPositive : isPositive;
@@ -12440,7 +12440,7 @@ var KPIWidget = ({
   style,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const numericChange = typeof change === "string" ? parseFloat(change.replace("%", "").replace("+", "")) : change;
   const isPositive = numericChange !== void 0 && !isNaN(numericChange) ? numericChange >= 0 : void 0;
@@ -13614,7 +13614,7 @@ var NotificationCenter = ({
   stylePreset: stylePresetProp,
   className = ""
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [isOpen, setIsOpen] = React47__namespace.useState(false);
   const [filter, setFilter] = React47__namespace.useState("all");
@@ -14657,7 +14657,7 @@ var LoginForm = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [identifier, setIdentifier] = React47.useState("");
   const [password, setPassword] = React47.useState("");
@@ -15129,7 +15129,7 @@ var RegisterForm = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [fullName, setFullName] = React47.useState("");
   const [email, setEmail] = React47.useState("");
@@ -15678,7 +15678,7 @@ var ForgotPassword = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [email, setEmail] = React47.useState("");
   const handleSubmit = (e) => {
@@ -16072,7 +16072,7 @@ var ResetPassword = ({
   style,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [password, setPassword] = React47.useState("");
   const [confirmPassword, setConfirmPassword] = React47.useState("");
@@ -16495,7 +16495,7 @@ var CartDrawer = ({
   onTabSync,
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [isCheckingOut, setIsCheckingOut] = React47__namespace.useState(false);
   React47__namespace.useEffect(() => {
@@ -17288,7 +17288,7 @@ var StickyAddToCart = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const finalComparePrice = compareAtPrice ?? originalPrice;
   const [quantity, setQuantity] = React47__namespace.useState(1);
@@ -17909,7 +17909,7 @@ var OrderTimeline = ({
   stylePreset: stylePresetProp,
   className = ""
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const currentIndex = STAGES.findIndex((s) => s.id === currentStage);
   const progressPercent = currentIndex >= 0 ? currentIndex / (STAGES.length - 1) * 100 : 0;
@@ -18189,7 +18189,7 @@ var ProductGallery = ({
   className = "",
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [selectedIndex, setSelectedIndex] = React47__namespace.useState(0);
   const [isHovered, setIsHovered] = React47__namespace.useState(false);
@@ -18570,7 +18570,7 @@ var VariantSelector = ({
   className = "",
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const values = selectedValues || props.selectedVariants || {};
   const getChipStyles = (isSelected, isOutOfStock) => {
@@ -18837,7 +18837,7 @@ var ProductCard = ({
   className = "",
   stylePreset: stylePresetProp
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [isHovered, setIsHovered] = React47__namespace.useState(false);
   const effectiveOriginalPrice = compareAtPrice ?? originalPrice;
@@ -19403,7 +19403,7 @@ var ReviewBreakdownBars = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const rows = [5, 4, 3, 2, 1].map((star) => {
     let count = 0;
@@ -19667,7 +19667,7 @@ var AnnouncementBar = ({
   className = "",
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const [isVisible, setIsVisible] = React47__namespace.useState(true);
   const [copied, setCopied] = React47__namespace.useState(false);
   const [currentIdx, setCurrentIdx] = React47__namespace.useState(0);
@@ -19829,7 +19829,7 @@ var LightningDealsBar = ({
   hideOnExpire = true,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [timeLeft, setTimeLeft] = React47__namespace.useState({
     hours: 2,
@@ -20241,7 +20241,7 @@ var FrequentlyBoughtTogether = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const allItems = React47__namespace.useMemo(() => {
     const list = [];
@@ -20842,7 +20842,7 @@ var BankOffersAccordion = ({
   className = "",
   style
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [expanded, setExpanded] = React47__namespace.useState(false);
   const [copiedCode, setCopiedCode] = React47__namespace.useState(null);
@@ -21330,7 +21330,7 @@ var DualMobileActionBar = ({
   style,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const isRelative = position === "relative" || props.position === "relative";
   const effectiveOriginalPrice = compareAtPrice ?? originalPrice ?? props.originalPrice;
@@ -22609,7 +22609,7 @@ var HeroSection = ({
   stylePreset: stylePresetProp,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const isCenter = align === "center";
   const isRight = align === "right";
@@ -23231,7 +23231,7 @@ var PricingTable = ({
   stylePreset: stylePresetProp,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [internalCycle, setInternalCycle] = React47__namespace.useState(billingCycle);
   const activeCycle = onBillingCycleChange ? billingCycle : internalCycle;
@@ -23940,7 +23940,7 @@ var TestimonialCard = ({
   style,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const finalAuthor = authorName || author || props.author || "Verified Buyer";
   const finalRole = authorRole || role || props.role;
@@ -24129,7 +24129,7 @@ var FAQSection = ({
   stylePreset: stylePresetProp,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [openIds, setOpenIds] = React47__namespace.useState([]);
   const [searchQuery, setSearchQuery] = React47__namespace.useState("");
@@ -24615,7 +24615,7 @@ var CTASection = ({
   stylePreset: stylePresetProp,
   ...props
 }) => {
-  const { stylePreset: inheritedPreset } = chunkVO7EWBLQ_cjs.useBoostPreset();
+  const { stylePreset: inheritedPreset } = chunk7NJGFXJG_cjs.useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [email, setEmail] = React47__namespace.useState("");
   const [submitted, setSubmitted] = React47__namespace.useState(false);
@@ -25257,27 +25257,27 @@ Object.defineProperty(exports, "tokensToCssVars", {
 });
 Object.defineProperty(exports, "BoostProvider", {
   enumerable: true,
-  get: function () { return chunkVO7EWBLQ_cjs.BoostProvider; }
+  get: function () { return chunk7NJGFXJG_cjs.BoostProvider; }
 });
 Object.defineProperty(exports, "injectBoostGlobalStyles", {
   enumerable: true,
-  get: function () { return chunkVO7EWBLQ_cjs.injectBoostGlobalStyles; }
+  get: function () { return chunk7NJGFXJG_cjs.injectBoostGlobalStyles; }
 });
 Object.defineProperty(exports, "useBoostPreset", {
   enumerable: true,
-  get: function () { return chunkVO7EWBLQ_cjs.useBoostPreset; }
+  get: function () { return chunk7NJGFXJG_cjs.useBoostPreset; }
 });
 Object.defineProperty(exports, "useCurrency", {
   enumerable: true,
-  get: function () { return chunkVO7EWBLQ_cjs.useCurrency; }
+  get: function () { return chunk7NJGFXJG_cjs.useCurrency; }
 });
 Object.defineProperty(exports, "useDesignTokens", {
   enumerable: true,
-  get: function () { return chunkVO7EWBLQ_cjs.useDesignTokens; }
+  get: function () { return chunk7NJGFXJG_cjs.useDesignTokens; }
 });
 Object.defineProperty(exports, "useTheme", {
   enumerable: true,
-  get: function () { return chunkVO7EWBLQ_cjs.useTheme; }
+  get: function () { return chunk7NJGFXJG_cjs.useTheme; }
 });
 Object.defineProperty(exports, "presetTokens", {
   enumerable: true,

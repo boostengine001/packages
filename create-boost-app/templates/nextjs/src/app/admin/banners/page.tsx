@@ -80,8 +80,8 @@ export default function AdminBannersPage() {
     try {
       setLoading(true);
       const [bannersRes, adRes] = await Promise.all([
-        fetch('/api/admin/banners'),
-        fetch('/api/admin/ad-banner'),
+        fetch('/api/admin/banners', { cache: 'no-store' }),
+        fetch('/api/admin/ad-banner', { cache: 'no-store' }),
       ]);
       const bannersData = await bannersRes.json();
       const adData = await adRes.json();

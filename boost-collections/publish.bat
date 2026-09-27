@@ -1,53 +1,34 @@
 @echo off
-echo ========================================================
-echo  Boost Engine Collections - 1-Click NPM Publish
-echo ========================================================
-echo.
-
 cd /d "%~dp0"
+for /f "delims=" %%i in ('node -p "require('./package.json').name + ' v' + require('./package.json').version"') do set PKG=%%i
+echo ==============================================
+echo Building and Publishing %PKG%
+echo ==============================================
 
-echo [1/3] Building and validating collections...
+REM Bump patch version first — npm forbids publishing an already-published
+REM version, and re-publishing the same number is the most common failure here.
+call npm version patch --no-git-tag-version
+if %errorlevel% neq 0 (
+  echo Version bump failed! Exiting...
+  exit /b %errorlevel%
+)
+
 call npm run build
 if %errorlevel% neq 0 (
-    echo.
-    echo [!] Build failed. Please fix compilation errors before publishing.
-    echo.
-    pause
-    exit /b 1
+  echo Build failed! Exiting...
+  exit /b %errorlevel%
 )
 
 call npm test
 if %errorlevel% neq 0 (
-    echo.
-    echo [!] Tests failed. Postman schema validation did not pass.
-    echo.
-    pause
-    exit /b 1
+  echo Tests failed! Exiting...
+  exit /b %errorlevel%
 )
 
-echo.
-echo [2/3] Checking npm login status...
-call npm whoami
-if %errorlevel% neq 0 (
-    echo.
-    echo [!] You are not logged into npm. Please run: npm login
-    echo.
-    pause
-    exit /b 1
-)
-
-echo.
-echo [3/3] Publishing @boostengine/collections to npm publicly...
+echo Publishing %PKG% to npm...
 call npm publish --access public
-if %errorlevel% equ 0 (
-    echo.
-    echo ========================================================
-    echo  SUCCESS! Package published to npm publicly!
-    echo ========================================================
-) else (
-    echo.
-    echo [!] Publish failed. Please check error message above.
+if %errorlevel% neq 0 (
+  echo Publish failed! Exiting...
+  exit /b %errorlevel%
 )
-
-echo.
-pause
+echo Finished! %PKG%

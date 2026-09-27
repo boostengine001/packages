@@ -7,15 +7,12 @@ import { useStore, getCityFromPincode } from '../context/StoreContext';
 import { BoostSearchEngine } from '@boostengine/search';
 import { PRODUCTS } from '../data/products';
 import { Search, ShoppingBag, Heart, MapPin, Sparkles, X, ChevronDown, ChevronRight, FolderTree } from 'lucide-react';
-import { AnnouncementBar, AssuredBadge } from '@boostengine/ui';
+import { AnnouncementBar, AssuredBadge, PresetSwitcher, ThemeToggle } from '@boostengine/ui';
 
 export const Navbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  if (pathname?.startsWith('/admin')) {
-    return null;
-  }
   const {
     cartSummary,
     setIsCartOpen,
@@ -44,8 +41,8 @@ export const Navbar: React.FC = () => {
     async function loadData() {
       try {
         const [catRes, prodRes] = await Promise.all([
-          fetch('/api/categories'),
-          fetch('/api/products')
+          fetch('/api/categories', { cache: 'no-store' }),
+          fetch('/api/products', { cache: 'no-store' })
         ]);
         const catData = await catRes.json();
         const prodData = await prodRes.json();
@@ -97,35 +94,47 @@ export const Navbar: React.FC = () => {
     }
   };
 
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-100 shadow-2xs">
       {/* Main Bar */}
       <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-12 sm:h-14 flex items-center justify-between gap-2.5 sm:gap-4">
         {/* Logo & Assured Badge */}
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-1.5">
-            <span className="text-xl sm:text-2xl font-black tracking-tighter text-black uppercase">
-              {settings.storeName ? (
-                <>
-                  {settings.storeName.includes(' ') ? (
-                    <>
-                      {settings.storeName.split(' ')[0]}
-                      <span className="text-blue-600">.</span>
-                      {settings.storeName.split(' ').slice(1).join(' ')}
-                    </>
-                  ) : (
-                    <>
-                      {settings.storeName}
-                      <span className="text-blue-600">.</span>STORE
-                    </>
-                  )}
-                </>
-              ) : (
-                <>
-                  BOOST<span className="text-blue-600">.</span>MARKET
-                </>
-              )}
-            </span>
+        <div className="flex items-center gap-2 shrink min-w-[6.5rem]">
+          <Link href="/" className="flex items-center gap-1.5 min-w-0">
+            {settings.logo ? (
+              <img
+                src={settings.logo}
+                alt={settings.storeName || 'Store Logo'}
+                className="h-8 sm:h-9 max-w-[160px] sm:max-w-[200px] object-contain"
+              />
+            ) : (
+              <span className="text-xl sm:text-2xl font-black tracking-tighter text-black uppercase truncate">
+                {settings.storeName ? (
+                  <>
+                    {settings.storeName.includes(' ') ? (
+                      <>
+                        {settings.storeName.split(' ')[0]}
+                        <span className="text-blue-600">.</span>
+                        {settings.storeName.split(' ').slice(1).join(' ')}
+                      </>
+                    ) : (
+                      <>
+                        {settings.storeName}
+                        <span className="text-blue-600">.</span>STORE
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    BOOST<span className="text-blue-600">.</span>MARKET
+                  </>
+                )}
+              </span>
+            )}
           </Link>
           <div className="hidden lg:block">
             <AssuredBadge type="assured" />
@@ -190,7 +199,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Categories Mega-Menu Trigger */}
           {categoriesTree.length > 0 && (
             <div
@@ -283,7 +292,7 @@ export const Navbar: React.FC = () => {
           {/* Catalog Link */}
           <Link
             href="/products"
-            className="hidden sm:inline-flex text-xs font-bold text-gray-700 hover:text-blue-600 px-2 py-1 transition"
+            className="hidden lg:inline-flex text-xs font-bold text-gray-700 hover:text-blue-600 px-2 py-1 transition"
           >
             All Products
           </Link>
@@ -291,7 +300,7 @@ export const Navbar: React.FC = () => {
           {/* SuperCoins & Customer Account Hub Link */}
           <Link
             href="/account"
-            className="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 text-xs font-bold px-2.5 py-1.5 rounded-full transition shadow-xs"
+            className="hidden lg:flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 text-xs font-bold px-2.5 py-1.5 rounded-full transition shadow-xs"
             title={`Account: ${superCoins} SuperCoins (${customerTier} Tier)`}
           >
             <span className="text-sm">🪙</span>
@@ -300,6 +309,14 @@ export const Navbar: React.FC = () => {
               {customerTier}
             </span>
           </Link>
+
+          {/* Style Preset (desktop only — the dropdown is 195px wide) + Theme Mode */}
+          <div className="flex items-center gap-1">
+            <div className="hidden lg:block">
+              <PresetSwitcher mode="dropdown" />
+            </div>
+            <ThemeToggle variant="icon" size="sm" />
+          </div>
 
           {/* Wishlist Button */}
           <Link

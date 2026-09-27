@@ -396,7 +396,10 @@ function createNotificationManager(options) {
 export {
   BoostNotificationsManager,
   DEFAULT_NOTIFICATIONS_CONFIG,
+  EmailAdapter,
   NotificationManager,
+  SMSAdapter,
+  WhatsAppAdapter,
   createNotificationManager,
   notificationsAgentTools
 };

@@ -1,0 +1,193 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - complementary [ref=e4]:
+        - link "⚡ BoostMerchant OS Enterprise Commerce" [ref=e6] [cursor=pointer]:
+          - /url: /admin
+          - generic [ref=e7]: ⚡
+          - generic [ref=e9]:
+            - generic [ref=e10]:
+              - generic [ref=e11]: BoostMerchant
+              - generic [ref=e12]: OS
+            - paragraph [ref=e13]: Enterprise Commerce
+        - generic [ref=e14]: Store Engine Active
+        - navigation [ref=e25]:
+          - generic [ref=e26]:
+            - text: OVERVIEW
+            - generic [ref=e27]:
+              - link "Dashboard" [ref=e28] [cursor=pointer]:
+                - /url: /admin
+              - link "Analytics & Reports Metrics" [ref=e36] [cursor=pointer]:
+                - /url: /admin/reports
+                - generic [ref=e37]: Analytics & Reports
+                - generic [ref=e41]: Metrics
+          - generic [ref=e42]:
+            - text: COMMERCE & CATALOG
+            - generic [ref=e43]:
+              - link "Products Catalog" [ref=e44] [cursor=pointer]:
+                - /url: /admin/products
+              - link "Bundles & Combos New" [ref=e51] [cursor=pointer]:
+                - /url: /admin/bundles
+                - generic [ref=e52]: Bundles & Combos
+                - generic [ref=e64]: New
+              - link "Stock & Warehouses Multi-Hub" [ref=e65] [cursor=pointer]:
+                - /url: /admin/inventory
+                - generic [ref=e66]: Stock & Warehouses
+                - generic [ref=e71]: Multi-Hub
+              - link "Categories & Taxonomy" [ref=e72] [cursor=pointer]:
+                - /url: /admin/categories
+              - link "Orders & Dispatch" [ref=e80] [cursor=pointer]:
+                - /url: /admin/orders
+              - link "Subscribe & Save MRR" [ref=e87] [cursor=pointer]:
+                - /url: /admin/subscriptions
+                - generic [ref=e88]: Subscribe & Save
+                - generic [ref=e95]: MRR
+              - link "Returns & Doorstep QC Reverse" [ref=e96] [cursor=pointer]:
+                - /url: /admin/returns
+                - generic [ref=e97]: Returns & Doorstep QC
+                - generic [ref=e102]: Reverse
+          - generic [ref=e103]:
+            - text: GROWTH & MARKETING
+            - generic [ref=e104]:
+              - link "Shoppable Reels 9:16 Feed" [ref=e105] [cursor=pointer]:
+                - /url: /admin/reels
+                - generic [ref=e106]: Shoppable Reels
+                - generic [ref=e111]: 9:16 Feed
+              - link "Spin Wheel & Leads Viral" [ref=e112] [cursor=pointer]:
+                - /url: /admin/gamification
+                - generic [ref=e113]: Spin Wheel & Leads
+                - generic [ref=e117]: Viral
+              - link "Coupons & Discounts" [ref=e118] [cursor=pointer]:
+                - /url: /admin/coupons
+              - link "Flash Deals Scheduler Urgency" [ref=e124] [cursor=pointer]:
+                - /url: /admin/deals
+                - generic [ref=e125]: Flash Deals Scheduler
+                - generic [ref=e129]: Urgency
+              - link "SuperCoins & VIP Tiers Rewards" [ref=e130] [cursor=pointer]:
+                - /url: /admin/loyalty
+                - generic [ref=e131]: SuperCoins & VIP Tiers
+                - generic [ref=e138]: Rewards
+              - link "Referrals & Viral Loop Growth" [ref=e139] [cursor=pointer]:
+                - /url: /admin/referrals
+                - generic [ref=e140]: Referrals & Viral Loop
+                - generic [ref=e148]: Growth
+              - link "Omnichannel Comms WhatsApp" [ref=e149] [cursor=pointer]:
+                - /url: /admin/communications
+                - generic [ref=e150]: Omnichannel Comms
+                - generic [ref=e154]: WhatsApp
+              - link "Banners & Ads Live" [ref=e155] [cursor=pointer]:
+                - /url: /admin/banners
+                - generic [ref=e156]: Banners & Ads
+                - generic [ref=e161]: Live
+              - link "Reviews Moderation" [ref=e162] [cursor=pointer]:
+                - /url: /admin/reviews
+              - link "Customer Accounts" [ref=e167] [cursor=pointer]:
+                - /url: /admin/customers
+          - generic [ref=e175]:
+            - text: MARKETS & EXTENSIONS
+            - generic [ref=e176]:
+              - link "Multi-Currency & FX Global" [ref=e177] [cursor=pointer]:
+                - /url: /admin/currency
+                - generic [ref=e178]: Multi-Currency & FX
+                - generic [ref=e182]: Global
+              - link "Bulk Catalog Importer Shopify/Woo" [ref=e183] [cursor=pointer]:
+                - /url: /admin/importer
+                - generic [ref=e184]: Bulk Catalog Importer
+                - generic [ref=e189]: Shopify/Woo
+              - link "Plugins Hub Modular" [ref=e190] [cursor=pointer]:
+                - /url: /admin/plugins
+                - generic [ref=e191]: Plugins Hub
+                - generic [ref=e196]: Modular
+              - link "SEO & Feeds G-Merchant" [ref=e197] [cursor=pointer]:
+                - /url: /admin/seo
+                - generic [ref=e198]: SEO & Feeds
+                - generic [ref=e203]: G-Merchant
+          - generic [ref=e204]:
+            - text: SYSTEM
+            - link "Store Settings" [ref=e206] [cursor=pointer]:
+              - /url: /admin/settings
+        - generic [ref=e212]:
+          - link "🌐 View Live Storefront" [ref=e213] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e214]: 🌐
+            - generic [ref=e215]: View Live Storefront
+          - generic [ref=e221]:
+            - generic [ref=e222]: RG
+            - generic [ref=e223]:
+              - paragraph [ref=e224]: Rishabh Gehlot
+              - paragraph [ref=e225]: Store Owner • Admin
+      - generic [ref=e229]:
+        - generic [ref=e230]:
+          - generic [ref=e232]:
+            - link "Admin" [ref=e233] [cursor=pointer]:
+              - /url: /admin
+            - generic [ref=e236]: Store Settings
+          - generic [ref=e237]:
+            - link "Live Store" [ref=e238] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e244]:
+              - generic [ref=e245]: RG
+              - generic [ref=e246]:
+                - generic [ref=e247]: Rishabh Gehlot
+                - generic [ref=e248]: Online • SuperAdmin
+        - main [ref=e249]:
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - generic [ref=e272]:
+                - generic [ref=e273]: Store Configuration
+                - heading "Store & Business Settings" [level=1] [ref=e275]
+                - paragraph [ref=e276]: Configure your brand identity, GST invoice details, and checkout shipping rules. All changes synchronize across the storefront and PDF generator in real-time.
+              - button "Save Changes" [ref=e278] [cursor=pointer]
+            - generic [ref=e366]: Store settings saved successfully to MongoDB! 🎉
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - generic [ref=e292]:
+                  - heading "Store Profile & Identity" [level=2] [ref=e293]
+                  - paragraph [ref=e294]: Public store name, storefront URL, and customer support contacts.
+                - generic [ref=e295]:
+                  - generic [ref=e296]:
+                    - generic [ref=e297]: Store Brand Name
+                    - textbox [ref=e298]: TEST DYNAMIC STORE 42
+                  - generic [ref=e299]:
+                    - generic [ref=e300]: Storefront Domain URL
+                    - textbox "https://yourstore.com" [ref=e305]: https://boost-store.local
+                - generic [ref=e306]:
+                  - generic [ref=e307]:
+                    - generic [ref=e308]: Customer Support Email
+                    - textbox "support@yourbrand.com" [ref=e313]: support@boostengine.dev
+                  - generic [ref=e314]:
+                    - generic [ref=e315]: Customer Support Helpline (WhatsApp/Call)
+                    - textbox "+91 98765 43210" [ref=e319]: +91 98765 00000
+              - generic [ref=e320]:
+                - generic [ref=e326]:
+                  - heading "GSTIN & Indian Tax Compliance" [level=2] [ref=e327]
+                  - paragraph [ref=e328]: Printed on official tax invoices and used for B2B IGST/CGST/SGST calculations.
+                - generic [ref=e329]:
+                  - generic [ref=e330]:
+                    - generic [ref=e331]: Company GSTIN Number
+                    - textbox "27ABCDE1234F1Z5" [ref=e332]: 27AABCU9603R1ZM
+                  - generic [ref=e333]:
+                    - generic [ref=e334]: Warehouse / Origin State
+                    - textbox "Maharashtra, Delhi, Karnataka..." [ref=e335]: Maharashtra
+              - generic [ref=e336]:
+                - generic [ref=e344]:
+                  - heading "Logistics & Payment Defaults" [level=2] [ref=e345]
+                  - paragraph [ref=e346]: Free shipping tier threshold and primary courier integration.
+                - generic [ref=e347]:
+                  - generic [ref=e348]:
+                    - generic [ref=e349]: Free Express Delivery Threshold (₹)
+                    - generic [ref=e350]:
+                      - generic [ref=e351]: ₹
+                      - spinbutton [ref=e352]: "999"
+                  - generic [ref=e353]:
+                    - generic [ref=e354]: Preferred 3PL Logistics Partner
+                    - textbox "Bluedart, Delhivery, Shiprocket..." [ref=e355]: Delhivery
+                - generic [ref=e357] [cursor=pointer]:
+                  - checkbox "Enable Cash on Delivery (COD) Allow shoppers to place orders without immediate online prepayment." [checked] [ref=e358]
+                  - generic [ref=e359]:
+                    - generic [ref=e360]: Enable Cash on Delivery (COD)
+                    - generic [ref=e361]: Allow shoppers to place orders without immediate online prepayment.
+  - button "Open AI Shopping Assistant" [ref=e254] [cursor=pointer]:
+    - generic [ref=e260]: Ask AI Assistant
+  - button "Open Next.js Dev Tools" [ref=e267] [cursor=pointer]
+  - alert [ref=e271]

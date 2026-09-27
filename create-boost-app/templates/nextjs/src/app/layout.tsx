@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import '@boostengine/ui/styles.css';
 import './globals.css';
+import { BoostProvider } from '@boostengine/ui';
 import { StoreProvider } from '../context/StoreContext';
 import { AdBanner } from '../components/AdBanner';
 import { Navbar } from '../components/Navbar';
@@ -19,17 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased selection:bg-black selection:text-white bg-white text-gray-900">
-        <StoreProvider>
-          <AdBanner />
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <GlobalCartDrawer />
-          <AiShoppingAssistant />
-          <Footer />
-          <MobileBottomNav />
-        </StoreProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased selection:bg-black selection:text-white bg-white text-gray-900 dark:bg-[#090d16] dark:text-gray-100">
+        <BoostProvider defaultMode="system" defaultStylePreset="minimal">
+          <StoreProvider>
+            <AdBanner />
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <GlobalCartDrawer />
+            <AiShoppingAssistant />
+            <Footer />
+            <MobileBottomNav />
+          </StoreProvider>
+        </BoostProvider>
       </body>
     </html>
   );

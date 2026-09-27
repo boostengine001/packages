@@ -1,0 +1,296 @@
+- generic [active] [ref=f12e1]:
+  - banner [ref=f12e2]:
+    - navigation [ref=f12e3]:
+      - generic [ref=f12e4]:
+        - link "Club.Hachi" [ref=f12e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f12e8]:
+          - generic [ref=f12e9]: Boost
+          - generic [ref=f12e10]: Assured
+      - button "Deliver to Mumbai 400050" [ref=f12e13] [cursor=pointer]:
+        - generic [ref=f12e17]:
+          - generic [ref=f12e18]: Deliver to
+          - generic [ref=f12e19]: Mumbai 400050
+      - textbox "Search 10,000+ products, electronics, sneakers..." [ref=f12e22]
+      - generic [ref=f12e23]:
+        - link "All Products" [ref=f12e24] [cursor=pointer]:
+          - /url: /products
+        - link "🪙 Gold" [ref=f12e25] [cursor=pointer]:
+          - /url: /account
+          - generic [ref=f12e26]: 🪙
+          - generic [ref=f12e27]: Gold
+        - link "Wishlist" [ref=f12e28] [cursor=pointer]:
+          - /url: /wishlist
+        - button "Bag 0" [ref=f12e31] [cursor=pointer]:
+          - generic [ref=f12e35]: Bag
+          - generic [ref=f12e36]: "0"
+  - main [ref=f12e37]:
+    - generic [ref=f12e38]:
+      - link "Home / Hoodies / Cyberpunk Heavyweight 450 GSM Hoodie" [ref=f12e40] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f12e44]:
+        - generic [ref=f12e46]:
+          - generic [ref=f12e47]:
+            - img "Product Image - view 1" [ref=f12e48]
+            - button "Previous image" [ref=f12e49] [cursor=pointer]
+            - button "Next image" [ref=f12e52] [cursor=pointer]
+            - generic: 1 / 2
+          - generic [ref=f12e55]:
+            - button [ref=f12e56] [cursor=pointer]:
+              - img "Thumb 1" [ref=f12e57]
+            - button [ref=f12e58] [cursor=pointer]:
+              - img "Thumb 2" [ref=f12e59]
+        - generic [ref=f12e60]:
+          - generic [ref=f12e61]:
+            - generic [ref=f12e62]:
+              - generic [ref=f12e63]: Boost Aesthetic
+              - generic [ref=f12e64]:
+                - generic [ref=f12e65]: Boost
+                - generic [ref=f12e66]: Assured
+            - heading "Cyberpunk Heavyweight 450 GSM Hoodie" [level=1] [ref=f12e69]
+            - generic [ref=f12e70]:
+              - generic [ref=f12e71]: "4.9"
+              - generic [ref=f12e84]: "4.9"
+              - generic [ref=f12e85]: (64 ratings)
+          - generic [ref=f12e86]:
+            - generic [ref=f12e87]:
+              - generic [ref=f12e88]: ₹2,499
+              - generic [ref=f12e89]: ₹3,999
+              - generic [ref=f12e90]: 38% OFF
+            - paragraph [ref=f12e91]: Inclusive of all taxes • Earn 74 SuperCoins
+          - generic [ref=f12e92]:
+            - generic [ref=f12e93]:
+              - generic [ref=f12e94]: ⚡ LIMITED TIME DEAL
+              - generic [ref=f12e98]:
+                - generic [ref=f12e99]: "Ends in:"
+                - generic [ref=f12e100]:
+                  - generic [ref=f12e101]: 02h
+                  - generic [ref=f12e102]: ":"
+                  - generic [ref=f12e103]: 00m
+                  - generic [ref=f12e104]: ":"
+                  - generic [ref=f12e105]: 00s
+            - generic [ref=f12e109]:
+              - generic [ref=f12e110]:
+                - text: 🔥
+                - strong [ref=f12e111]: 81%
+                - text: Claimed
+              - generic [ref=f12e112]: Hurry, limited stock!
+          - generic [ref=f12e113]:
+            - generic [ref=f12e117]: 🔥 48 people ordered in the last 24h
+            - generic [ref=f12e118]: •
+            - generic [ref=f12e119]: Only 5 left in Mumbai warehouse
+          - generic [ref=f12e120]:
+            - generic [ref=f12e121]:
+              - generic [ref=f12e122]: Hurry! Only 5 items left
+              - generic [ref=f12e125]: 4 people have this in their cart
+            - paragraph [ref=f12e129]: High demand — complete checkout within 15 minutes to reserve your selection.
+          - generic [ref=f12e130]:
+            - generic [ref=f12e131]: Tiered Volume Savings
+            - generic [ref=f12e134]:
+              - generic [ref=f12e135] [cursor=pointer]:
+                - generic [ref=f12e136]: Standard
+                - generic [ref=f12e137]: Qty 1
+                - generic [ref=f12e138]: ₹2499
+              - generic [ref=f12e139] [cursor=pointer]:
+                - generic [ref=f12e140]: Save 10%
+                - generic [ref=f12e141]: Qty 2
+                - generic [ref=f12e142]: ₹2249/pc
+              - generic [ref=f12e143] [cursor=pointer]:
+                - generic [ref=f12e144]: Save 15%
+                - generic [ref=f12e145]: Qty 3+
+                - generic [ref=f12e146]: ₹2124/pc
+          - paragraph [ref=f12e147]: Ultra-heavyweight 450 GSM French Terry pure cotton hoodie with cyberpunk backprint, double-layered hood, and ribbed cuffs. Handcrafted for maximum comfort and durability.
+          - generic [ref=f12e148]:
+            - text: Select Option / Color
+            - generic [ref=f12e149]:
+              - button "Small / Black" [ref=f12e150] [cursor=pointer]
+              - button "Medium / Black" [ref=f12e151] [cursor=pointer]
+              - button "Large / Black" [ref=f12e152] [cursor=pointer]
+          - generic [ref=f12e153]:
+            - generic [ref=f12e154]:
+              - generic [ref=f12e155]: Quantity
+              - generic [ref=f12e156]:
+                - button "Decrease quantity" [disabled] [ref=f12e157]
+                - generic [ref=f12e159]: "1"
+                - button "Increase quantity" [ref=f12e160] [cursor=pointer]
+            - generic [ref=f12e163]:
+              - button "Add to Cart" [ref=f12e164] [cursor=pointer]
+              - button "Buy Now" [ref=f12e169] [cursor=pointer]
+              - button "Wishlist" [ref=f12e173] [cursor=pointer]
+          - generic [ref=f12e176]:
+            - generic [ref=f12e177]:
+              - generic [ref=f12e178]: Bank Offers & Discounts
+              - generic [ref=f12e183]: 4 Offers
+            - generic [ref=f12e184]:
+              - generic [ref=f12e185]:
+                - generic [ref=f12e186]:
+                  - generic [ref=f12e187]: 10% Instant Discount on Premium Credit Cards
+                  - button "CARD10" [ref=f12e190] [cursor=pointer]
+                - paragraph [ref=f12e195]: Up to $50 on select credit cards on minimum purchase of $150.
+              - generic [ref=f12e196]:
+                - generic [ref=f12e197]:
+                  - generic [ref=f12e198]: Flat $25 Off on Partner Cards
+                  - button "PARTNER25" [ref=f12e201] [cursor=pointer]
+                - paragraph [ref=f12e206]: Applicable on online checkout for orders above $200.
+            - button "View All 4 Offers" [ref=f12e207] [cursor=pointer]
+          - generic [ref=f12e212]:
+            - generic [ref=f12e213]: Check Delivery & Serviceability
+            - generic [ref=f12e220]:
+              - textbox "Enter Postal / PIN Code" [ref=f12e221]: "400050"
+              - button "Check" [ref=f12e222] [cursor=pointer]
+          - generic [ref=f12e223]:
+            - generic [ref=f12e224]: 100% Genuine
+            - generic [ref=f12e229]: 7-Day Easy Returns
+            - generic [ref=f12e237]: COD Available
+            - generic [ref=f12e242]: 256-Bit SSL Secure
+      - generic [ref=f12e249]:
+        - generic [ref=f12e250]:
+          - heading "Frequently Bought Together" [level=3] [ref=f12e251]
+          - generic [ref=f12e252]: Save 10% on Combo
+        - generic [ref=f12e255]:
+          - generic "Cyberpunk Heavyweight 450 GSM Hoodie" [ref=f12e256] [cursor=pointer]:
+            - img "Cyberpunk Heavyweight 450 GSM Hoodie" [ref=f12e260]
+          - generic [ref=f12e261]: +
+          - generic "Vintage Acid-Wash Streetwear Tee" [ref=f12e262] [cursor=pointer]:
+            - img "Vintage Acid-Wash Streetwear Tee" [ref=f12e266]
+          - generic [ref=f12e267]: +
+          - generic "Retro High-Top Street Sneakers" [ref=f12e268] [cursor=pointer]:
+            - img "Retro High-Top Street Sneakers" [ref=f12e272]
+        - generic [ref=f12e273]:
+          - generic [ref=f12e274] [cursor=pointer]:
+            - 'checkbox "This item: Cyberpunk Heavyweight 450 GSM Hoodie$2,499" [checked] [ref=f12e275]'
+            - generic [ref=f12e276]:
+              - text: "This item: Cyberpunk Heavyweight 450 GSM Hoodie"
+              - generic [ref=f12e277]: $2,499
+          - generic [ref=f12e278] [cursor=pointer]:
+            - checkbox "Vintage Acid-Wash Streetwear Tee$999" [checked] [ref=f12e279]
+            - generic [ref=f12e280]:
+              - text: Vintage Acid-Wash Streetwear Tee
+              - generic [ref=f12e281]: $999
+          - generic [ref=f12e282] [cursor=pointer]:
+            - checkbox "Retro High-Top Street Sneakers$3,499" [checked] [ref=f12e283]
+            - generic [ref=f12e284]:
+              - text: Retro High-Top Street Sneakers
+              - generic [ref=f12e285]: $3,499
+        - generic [ref=f12e286]:
+          - generic [ref=f12e287]:
+            - generic [ref=f12e288]:
+              - generic [ref=f12e289]: "Total price:"
+              - generic [ref=f12e290]: $6,297
+              - generic [ref=f12e291]: $6,997
+            - generic [ref=f12e292]: 🎉 You save $700 (10% combo discount)
+          - button "Add 3 items to Cart" [ref=f12e293] [cursor=pointer]
+      - generic [ref=f12e298]:
+        - heading "Customer Ratings & Reviews" [level=2] [ref=f12e299]
+        - generic [ref=f12e300]:
+          - generic [ref=f12e301]:
+            - generic [ref=f12e302]: "4.9"
+            - generic [ref=f12e303]: "4.9"
+            - generic [ref=f12e317]: Based on 64 reviews
+          - generic [ref=f12e318]:
+            - generic [ref=f12e319]:
+              - generic [ref=f12e320]: "5"
+              - generic [ref=f12e326]: 70%
+            - generic [ref=f12e327]:
+              - generic [ref=f12e328]: "4"
+              - generic [ref=f12e334]: 20%
+            - generic [ref=f12e335]:
+              - generic [ref=f12e336]: "3"
+              - generic [ref=f12e342]: 6%
+            - generic [ref=f12e343]:
+              - generic [ref=f12e344]: "2"
+              - generic [ref=f12e350]: 2%
+            - generic [ref=f12e351]:
+              - generic [ref=f12e352]: "1"
+              - generic [ref=f12e358]: 2%
+        - generic [ref=f12e359]:
+          - generic [ref=f12e360]:
+            - generic [ref=f12e361]:
+              - generic [ref=f12e362]:
+                - generic [ref=f12e363]: Aarav M.
+                - generic [ref=f12e364]: Verified Purchase
+              - generic [ref=f12e368]: 2026-09-01
+            - generic [ref=f12e369]: "5.0"
+            - paragraph [ref=f12e382]: Fabric is insanely thick and warm. Print quality is 10/10!
+          - generic [ref=f12e383]:
+            - generic [ref=f12e384]:
+              - generic [ref=f12e385]:
+                - generic [ref=f12e386]: Sneha P.
+                - generic [ref=f12e387]: Verified Purchase
+              - generic [ref=f12e391]: 2026-09-03
+            - generic [ref=f12e392]: "5.0"
+            - paragraph [ref=f12e405]: Loved the oversized drop shoulder cut. Perfect for winters.
+  - button "Open AI Shopping Assistant" [ref=f12e406] [cursor=pointer]:
+    - generic [ref=f12e412]: Ask AI Assistant
+  - contentinfo [ref=f12e413]:
+    - generic [ref=f12e414]:
+      - generic [ref=f12e415]:
+        - text: Club Hachi
+        - paragraph [ref=f12e416]: India's favorite next-generation eCommerce store with instant checkout, live order tracking, and COD available.
+        - generic [ref=f12e417]:
+          - generic [ref=f12e418]:
+            - text: "Email:"
+            - link "support@clubhachi.com" [ref=f12e419] [cursor=pointer]:
+              - /url: mailto:support@clubhachi.com
+          - generic [ref=f12e420]: "Phone: +91 98765 43210"
+      - generic [ref=f12e421]:
+        - heading "Shop Categories" [level=4] [ref=f12e422]
+        - list [ref=f12e423]:
+          - listitem [ref=f12e424]:
+            - link "All Collections" [ref=f12e425] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f12e426]:
+            - link "Hoodies" [ref=f12e427] [cursor=pointer]:
+              - /url: /?category=Hoodies
+          - listitem [ref=f12e428]:
+            - link "T-Shirts" [ref=f12e429] [cursor=pointer]:
+              - /url: /?category=T-Shirts
+          - listitem [ref=f12e430]:
+            - link "Footwear" [ref=f12e431] [cursor=pointer]:
+              - /url: /?category=Footwear
+      - generic [ref=f12e432]:
+        - heading "Customer Support" [level=4] [ref=f12e433]
+        - list [ref=f12e434]:
+          - listitem [ref=f12e435]:
+            - link "About Us" [ref=f12e436] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f12e437]:
+            - link "Contact Us" [ref=f12e438] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=f12e439]:
+            - link "Warranty Registration" [ref=f12e440] [cursor=pointer]:
+              - /url: /warranty-registration
+          - listitem [ref=f12e441]:
+            - link "File Warranty Claim" [ref=f12e442] [cursor=pointer]:
+              - /url: /warranty-claim
+          - listitem [ref=f12e443]:
+            - link "Track Order" [ref=f12e444] [cursor=pointer]:
+              - /url: /orders
+      - generic [ref=f12e445]:
+        - heading "Policies & Legal" [level=4] [ref=f12e446]
+        - list [ref=f12e447]:
+          - listitem [ref=f12e448]:
+            - link "Privacy Policy" [ref=f12e449] [cursor=pointer]:
+              - /url: /privacy-policy
+          - listitem [ref=f12e450]:
+            - link "Terms & Conditions" [ref=f12e451] [cursor=pointer]:
+              - /url: /terms-conditions
+          - listitem [ref=f12e452]:
+            - link "Shipping Policy" [ref=f12e453] [cursor=pointer]:
+              - /url: /shipping-policy
+          - listitem [ref=f12e454]:
+            - link "Return & Refund Policy" [ref=f12e455] [cursor=pointer]:
+              - /url: /refund-policy
+      - generic [ref=f12e456]:
+        - heading "Store Guarantees" [level=4] [ref=f12e457]
+        - list [ref=f12e458]:
+          - listitem [ref=f12e459]:
+            - generic [ref=f12e460]: Free Express Delivery above ₹999
+          - listitem [ref=f12e461]: COD Available Across India
+          - listitem [ref=f12e462]: 7-Day No-Questions Return
+          - listitem [ref=f12e463]:
+            - link "Staff / Admin Portal →" [ref=f12e464] [cursor=pointer]:
+              - /url: /admin
+    - generic [ref=f12e465]:
+      - paragraph [ref=f12e466]: © 2026 Club Hachi. All rights reserved.
+      - paragraph [ref=f12e467]: Powered by BoostEngine Enterprise D2C Architecture

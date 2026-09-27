@@ -17,7 +17,7 @@ export default function OrderSuccessPage({
   useEffect(() => {
     async function loadOrder() {
       try {
-        const res = await fetch(`/api/admin/orders/${id}`);
+        const res = await fetch(`/api/admin/orders/${id}`, { cache: 'no-store' });
         const data = await res.json();
         if (data.success) {
           setOrder(data.data);

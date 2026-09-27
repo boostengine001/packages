@@ -51,6 +51,8 @@ export interface BoostPluginConfig {
 export interface StoreSettings {
   storeName: string;
   storeUrl: string;
+  logo?: string;
+  favicon?: string;
   supportEmail: string;
   supportPhone: string;
   currency: string;
@@ -63,12 +65,60 @@ export interface StoreSettings {
   whatsappNotifications: boolean;
 }
 
+export interface StoreBanner {
+  id: string;
+  title: string;
+  desktopImage: string;
+  mobileImage: string;
+  link: string;
+  buttonText: string;
+  desktopOrder?: number;
+  mobileOrder?: number;
+  isActive: boolean;
+  isHeroBanner?: boolean;
+  isNewArrival?: boolean;
+  orientation?: 'landscape' | 'portrait';
+  titleColor?: string;
+  createdAt?: string;
+}
+
+export interface AdminCoupon {
+  id: string;
+  code: string;
+  type: 'FLAT' | 'PERCENT' | 'TIERED' | 'BOGO';
+  value: number;
+  minOrderValue: number;
+  maxDiscountCap?: number;
+  usageCount: number;
+  maxUsageLimit: number;
+  expiresAt: string;
+  isActive: boolean;
+}
+
+export interface DealItem {
+  id: string;
+  productId: string;
+  productTitle: string;
+  productImage: string;
+  originalPrice: number;
+  dealPrice: number;
+  discountPercentage: number;
+  quotaUnits: number;
+  claimedUnits: number;
+  startTime: string;
+  endTime: string;
+  status: 'ACTIVE' | 'SCHEDULED' | 'EXPIRED';
+}
+
 declare global {
   var __boostStoreDb: {
     products: StoreProduct[];
     orders: AdminOrder[];
     plugins: BoostPluginConfig[];
     settings: StoreSettings;
+    banners: StoreBanner[];
+    coupons: AdminCoupon[];
+    deals: DealItem[];
   } | undefined;
 }
 
@@ -240,6 +290,8 @@ const INITIAL_ORDERS: AdminOrder[] = [
 const INITIAL_SETTINGS: StoreSettings = {
   storeName: 'Boost D2C Store',
   storeUrl: 'https://boost-store.local',
+  logo: '',
+  favicon: '',
   supportEmail: 'support@boostengine.dev',
   supportPhone: '+91 98765 00000',
   currency: 'INR',
@@ -252,12 +304,98 @@ const INITIAL_SETTINGS: StoreSettings = {
   whatsappNotifications: true,
 };
 
+const INITIAL_BANNERS: StoreBanner[] = [
+  {
+    id: 'banner_hero_1',
+    title: 'Drop 01 // Cyberpunk Heavyweight Collection',
+    desktopImage: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1600&q=80',
+    mobileImage: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+    link: '/products',
+    buttonText: 'Shop New Arrivals',
+    desktopOrder: 1,
+    mobileOrder: 1,
+    isActive: true,
+    isHeroBanner: true,
+    titleColor: '#ffffff',
+  },
+  {
+    id: 'banner_hero_2',
+    title: 'Mid-Season Clearance // Up to 50% Off',
+    desktopImage: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80',
+    mobileImage: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+    link: '/collections',
+    buttonText: 'Claim Your Deal',
+    desktopOrder: 2,
+    mobileOrder: 2,
+    isActive: true,
+    isHeroBanner: true,
+    titleColor: '#ffffff',
+  },
+];
+
+const INITIAL_COUPONS: AdminCoupon[] = [
+  {
+    id: 'c_1',
+    code: 'BOOST10',
+    type: 'PERCENT',
+    value: 10,
+    minOrderValue: 999,
+    maxDiscountCap: 500,
+    usageCount: 421,
+    maxUsageLimit: 1000,
+    expiresAt: '2026-12-31',
+    isActive: true,
+  },
+  {
+    id: 'c_2',
+    code: 'FLAT500',
+    type: 'FLAT',
+    value: 500,
+    minOrderValue: 2499,
+    usageCount: 182,
+    maxUsageLimit: 500,
+    expiresAt: '2026-10-31',
+    isActive: true,
+  },
+  {
+    id: 'c_3',
+    code: 'WELCOME10',
+    type: 'PERCENT',
+    value: 10,
+    minOrderValue: 499,
+    usageCount: 95,
+    maxUsageLimit: 5000,
+    expiresAt: '2026-12-31',
+    isActive: true,
+  },
+];
+
+const INITIAL_DEALS: DealItem[] = [
+  {
+    id: 'DEAL-1001',
+    productId: 'prod_cyberpunk_hoodie',
+    productTitle: 'Cyberpunk Heavyweight 450 GSM Hoodie',
+    productImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=400&q=80',
+    originalPrice: 2499,
+    dealPrice: 1999,
+    discountPercentage: 20,
+    quotaUnits: 100,
+    claimedUnits: 42,
+    startTime: new Date(Date.now() - 3600000).toISOString(),
+    endTime: new Date(Date.now() + 86400000).toISOString(),
+    status: 'ACTIVE',
+  },
+];
+
 if (!globalThis.__boostStoreDb) {
   globalThis.__boostStoreDb = {
     products: [...INITIAL_PRODUCTS],
     orders: [...INITIAL_ORDERS],
     plugins: [...INITIAL_PLUGINS],
     settings: { ...INITIAL_SETTINGS },
+    banners: [...INITIAL_BANNERS],
+    coupons: [...INITIAL_COUPONS],
+    deals: [...INITIAL_DEALS],
   };
 }
 
@@ -273,7 +411,7 @@ export const db = {
     return product;
   },
   updateProduct(id: string, updates: Partial<StoreProduct>): StoreProduct | null {
-    const idx = globalThis.__boostStoreDb!.products.findIndex((p) => p.id === id);
+    const idx = globalThis.__boostStoreDb!.products.findIndex((p) => p.id === id || p.sku === id);
     if (idx === -1) return null;
     const updated = { ...globalThis.__boostStoreDb!.products[idx], ...updates };
     globalThis.__boostStoreDb!.products[idx] = updated;
@@ -281,7 +419,7 @@ export const db = {
   },
   deleteProduct(id: string): boolean {
     const prevLen = globalThis.__boostStoreDb!.products.length;
-    globalThis.__boostStoreDb!.products = globalThis.__boostStoreDb!.products.filter((p) => p.id !== id);
+    globalThis.__boostStoreDb!.products = globalThis.__boostStoreDb!.products.filter((p) => p.id !== id && p.sku !== id);
     return globalThis.__boostStoreDb!.products.length < prevLen;
   },
   getOrders(): AdminOrder[] {
@@ -322,6 +460,69 @@ export const db = {
     if (tracking?.trackingNumber) order.trackingNumber = tracking.trackingNumber;
     return order;
   },
+  getBanners(): StoreBanner[] {
+    return globalThis.__boostStoreDb!.banners || [];
+  },
+  addBanner(banner: StoreBanner): StoreBanner {
+    if (!globalThis.__boostStoreDb!.banners) globalThis.__boostStoreDb!.banners = [];
+    globalThis.__boostStoreDb!.banners.unshift(banner);
+    return banner;
+  },
+  updateBanner(id: string, updates: Partial<StoreBanner>): StoreBanner | null {
+    if (!globalThis.__boostStoreDb!.banners) return null;
+    const idx = globalThis.__boostStoreDb!.banners.findIndex((b) => b.id === id);
+    if (idx === -1) return null;
+    const updated = { ...globalThis.__boostStoreDb!.banners[idx], ...updates };
+    globalThis.__boostStoreDb!.banners[idx] = updated;
+    return updated;
+  },
+  deleteBanner(id: string): boolean {
+    if (!globalThis.__boostStoreDb!.banners) return false;
+    const prevLen = globalThis.__boostStoreDb!.banners.length;
+    globalThis.__boostStoreDb!.banners = globalThis.__boostStoreDb!.banners.filter((b) => b.id !== id);
+    return globalThis.__boostStoreDb!.banners.length < prevLen;
+  },
+  getCoupons(): AdminCoupon[] {
+    return globalThis.__boostStoreDb!.coupons || [];
+  },
+  getCouponByCode(code: string): AdminCoupon | undefined {
+    return (globalThis.__boostStoreDb!.coupons || []).find(
+      (c) => c.code.toUpperCase() === code.toUpperCase() && c.isActive
+    );
+  },
+  addCoupon(coupon: AdminCoupon): AdminCoupon {
+    if (!globalThis.__boostStoreDb!.coupons) globalThis.__boostStoreDb!.coupons = [];
+    globalThis.__boostStoreDb!.coupons.unshift(coupon);
+    return coupon;
+  },
+  updateCoupon(id: string, updates: Partial<AdminCoupon>): AdminCoupon | null {
+    if (!globalThis.__boostStoreDb!.coupons) return null;
+    const idx = globalThis.__boostStoreDb!.coupons.findIndex((c) => c.id === id);
+    if (idx === -1) return null;
+    const updated = { ...globalThis.__boostStoreDb!.coupons[idx], ...updates };
+    globalThis.__boostStoreDb!.coupons[idx] = updated;
+    return updated;
+  },
+  deleteCoupon(id: string): boolean {
+    if (!globalThis.__boostStoreDb!.coupons) return false;
+    const prev = globalThis.__boostStoreDb!.coupons.length;
+    globalThis.__boostStoreDb!.coupons = globalThis.__boostStoreDb!.coupons.filter((c) => c.id !== id);
+    return globalThis.__boostStoreDb!.coupons.length < prev;
+  },
+  getDeals(): DealItem[] {
+    return globalThis.__boostStoreDb!.deals || [];
+  },
+  addDeal(deal: DealItem): DealItem {
+    if (!globalThis.__boostStoreDb!.deals) globalThis.__boostStoreDb!.deals = [];
+    globalThis.__boostStoreDb!.deals.unshift(deal);
+    return deal;
+  },
+  deleteDeal(id: string): boolean {
+    if (!globalThis.__boostStoreDb!.deals) return false;
+    const prev = globalThis.__boostStoreDb!.deals.length;
+    globalThis.__boostStoreDb!.deals = globalThis.__boostStoreDb!.deals.filter((d) => d.id !== id);
+    return globalThis.__boostStoreDb!.deals.length < prev;
+  },
   getPlugins(): BoostPluginConfig[] {
     return globalThis.__boostStoreDb!.plugins;
   },
@@ -348,8 +549,8 @@ export const db = {
     return globalThis.__boostStoreDb!.settings;
   },
   getStats() {
-    const orders = globalThis.__boostStoreDb!.orders;
-    const products = globalThis.__boostStoreDb!.products;
+    const orders = globalThis.__boostStoreDb!.orders || [];
+    const products = globalThis.__boostStoreDb!.products || [];
     const totalSales = orders
       .filter((o) => o.paymentStatus === 'paid')
       .reduce((sum, o) => sum + o.total, 0);
@@ -368,7 +569,7 @@ export const db = {
       pendingOrders,
       totalProducts: products.length,
       lowStockProducts,
-      activePlugins: globalThis.__boostStoreDb!.plugins.filter((p) => p.enabled).length,
+      activePlugins: (globalThis.__boostStoreDb!.plugins || []).filter((p) => p.enabled).length,
     };
   },
 };

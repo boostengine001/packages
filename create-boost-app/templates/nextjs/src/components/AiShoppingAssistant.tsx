@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Bot, X, Send, Sparkles, ShoppingBag, ArrowRight, MessageSquare } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
@@ -33,10 +34,15 @@ const QUICK_PROMPTS = [
 ];
 
 export function AiShoppingAssistant() {
+  const pathname = usePathname();
   const { addToCart, setIsCartDrawerOpen } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',

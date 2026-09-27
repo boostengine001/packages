@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { PRODUCTS, StoreProduct } from '../../data/products';
+import { StoreProduct } from '../../data/products';
 import { useStore } from '../../context/StoreContext';
 import { DealsEngine, FlashDeal } from '@boostengine/deals';
 import { LightningDealsBar, ProductCard, Price } from '@boostengine/ui';
 import { Zap, Flame, Clock, Tag, Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
 
 export default function DealsPage() {
-  const { addToCart, toggleWishlist, wishlistItems } = useStore();
+  const { addToCart, toggleWishlist, wishlistItems, products } = useStore();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number }>({
     hours: 2,
@@ -30,7 +30,7 @@ export default function DealsPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const dealProducts = PRODUCTS.filter((p) => p.compareAtPrice && p.compareAtPrice > p.price);
+  const dealProducts = products.filter((p) => p.compareAtPrice && p.compareAtPrice > p.price);
   const categories = ['All', ...Array.from(new Set(dealProducts.map((p) => p.category)))];
 
   const filteredDeals = selectedCategory === 'All'

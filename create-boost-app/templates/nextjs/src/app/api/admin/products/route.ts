@@ -5,6 +5,9 @@ import Category from '@/models/Category';
 import { db } from '@/data/db';
 import { StoreProduct, PRODUCTS as INITIAL_PRODUCTS } from '@/data/products';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -22,8 +25,12 @@ export async function GET(request: Request) {
           await Product.insertMany(
             INITIAL_PRODUCTS.map((p) => ({
               ...p,
+              id: p.id,
+              title: p.title || p.name,
+              name: p.title || p.name,
+              images: p.images || (p.image ? [p.image] : []),
+              image: p.image || (p.images && p.images[0]) || '',
               tags: p.tags || [],
-              images: p.images || [],
               variants: p.variants || [],
               reviews: p.reviews || [],
             }))
@@ -182,15 +189,16 @@ export async function POST(request: Request) {
     };
 
     // Save to MongoDB if available
+    let createdMongo: any = null;
     try {
       const conn = await dbConnect();
       if (conn && Product) {
         const slug =
           body.slug ||
           (title
-            ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+            ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
             : newProduct.id) + `-${Date.now().toString().slice(-4)}`;
-        await Product.create({
+        createdMongo = await Product.create({
           ...newProduct,
           slug,
         });
@@ -201,7 +209,16 @@ export async function POST(request: Request) {
     }
 
     const saved = db.addProduct(newProduct);
-    return NextResponse.json({ success: true, data: saved }, { status: 201 });
+    const finalProduct = createdMongo
+      ? {
+          ...newProduct,
+          id: newProduct.id,
+          _id: createdMongo._id?.toString(),
+          slug: createdMongo.slug,
+        }
+      : saved;
+
+    return NextResponse.json({ success: true, data: finalProduct }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to create product' },

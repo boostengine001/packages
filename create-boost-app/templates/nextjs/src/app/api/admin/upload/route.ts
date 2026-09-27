@@ -26,7 +26,14 @@ export async function POST(request: Request) {
     const fileName = file.name || `upload_${Date.now()}.png`;
     const contentType = file.type || 'image/jpeg';
 
-    const url = await uploadToS3(buffer, fileName, contentType);
+    let url = '';
+    try {
+      url = await uploadToS3(buffer, fileName, contentType);
+    } catch (s3Err: any) {
+      console.warn('S3 upload unavailable, falling back to base64 Data URL:', s3Err.message);
+      const base64 = buffer.toString('base64');
+      url = `data:${contentType};base64,${base64}`;
+    }
 
     return NextResponse.json({
       success: true,

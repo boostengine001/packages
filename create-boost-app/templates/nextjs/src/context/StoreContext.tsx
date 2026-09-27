@@ -12,16 +12,21 @@ export { getCityFromPincode } from '../lib/geo';
 export interface DynamicStoreSettings {
   storeName: string;
   storeUrl: string;
+  logo?: string;
+  favicon?: string;
   supportEmail: string;
   supportPhone: string;
   freeShippingThreshold: number;
   enableCod: boolean;
   gstin: string;
   state: string;
+  currency: string;
+  currencySymbol: string;
 }
 
 interface StoreContextType {
   settings: DynamicStoreSettings;
+  products: StoreProduct[];
   cart: BoostCart;
   cartSummary: CartSummary;
   isCartOpen: boolean;
@@ -66,6 +71,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     enableCod: true,
     gstin: '',
     state: 'Maharashtra',
+    currency: 'INR',
+    currencySymbol: '₹',
   });
 
   const [cart] = useState<BoostCart>(() =>
@@ -83,6 +90,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     city: 'Mumbai',
     pincode: '400050',
   });
+  const [products, setProducts] = useState<StoreProduct[]>(PRODUCTS);
 
   const [inventory] = useState<BoostInventory>(() => {
     const initialStock = PRODUCTS.flatMap((p) => {
@@ -111,8 +119,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     async function fetchDynamicStoreData() {
       try {
         const [settingsRes, productsRes] = await Promise.all([
-          fetch('/api/settings'),
-          fetch('/api/products')
+          fetch('/api/settings', { cache: 'no-store' }),
+          fetch('/api/products', { cache: 'no-store' })
         ]);
         const settingsData = await settingsRes.json();
         const productsData = await productsRes.json();
@@ -122,6 +130,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
 
         if (productsData.success && productsData.data && Array.isArray(productsData.data)) {
+          setProducts(productsData.data);
           productsData.data.forEach((p: any) => {
             if (p.variants && p.variants.length > 0) {
               p.variants.forEach((v: any) => {
@@ -152,7 +161,29 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     fetchDynamicStoreData();
   }, [inventory]);
 
-  const [activeCoupons] = useState<CouponRule[]>(DEFAULT_COUPONS);
+  const [activeCoupons, setActiveCoupons] = useState<CouponRule[]>(DEFAULT_COUPONS);
+
+  useEffect(() => {
+    fetch('/api/coupons', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          const mapped: CouponRule[] = data.data.map((c: any) => ({
+            id: c.id || c.code,
+            code: c.code,
+            name: `${c.code} Special`,
+            description: (c.type === 'percentage' || c.type === 'PERCENT') ? `${c.value}% off` : `₹${c.value} off`,
+            type: (c.type === 'percentage' || c.type === 'PERCENT') ? 'Percentage' : 'Flat',
+            value: Number(c.value),
+            minCartValue: Number(c.minSpend || c.minOrderValue || 0),
+            maxDiscount: c.maxDiscountCap ? Number(c.maxDiscountCap) : undefined,
+            isActive: c.isActive !== false,
+          }));
+          setActiveCoupons(mapped);
+        }
+      })
+      .catch(() => {});
+  }, []);
   const [cartSummary, setCartSummary] = useState<CartSummary>(() => cart.getSummary());
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [superCoins] = useState<number>(250);
@@ -325,7 +356,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const toggleWishlist = (productOrId: StoreProduct | string) => {
     const prod =
       typeof productOrId === 'string'
-        ? PRODUCTS.find((p) => p.id === productOrId)
+        ? products.find((p) => p.id === productOrId)
         : productOrId;
 
     if (!prod) return false;
@@ -357,7 +388,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const moveToCartFromWishlist = (item: WishlistItem) => {
-    const product = PRODUCTS.find((p) => p.id === item.productId);
+    const product = products.find((p) => p.id === item.productId);
     if (product) {
       addToCart(product);
     } else {
@@ -398,6 +429,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <StoreContext.Provider
       value={{
         settings,
+        products,
         cart,
         cartSummary,
         isCartOpen,

@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
   useEffect(() => {
     async function loadCategories() {
       try {
-        const res = await fetch('/api/categories');
+        const res = await fetch('/api/categories', { cache: 'no-store' });
         const data = await res.json();
         if (data.success && data.data) {
           setCategories(data.data.slice(0, 5));
@@ -37,7 +37,11 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 text-sm">
         {/* Brand Column */}
         <div className="sm:col-span-2 md:col-span-1">
-          <span className="text-xl font-black text-slate-900 tracking-tighter uppercase">{storeName}</span>
+          {settings.logo ? (
+            <img src={settings.logo} alt={storeName} className="h-8 max-w-[160px] object-contain mb-1" />
+          ) : (
+            <span className="text-xl font-black text-slate-900 tracking-tighter uppercase">{storeName}</span>
+          )}
           <p className="mt-2.5 text-xs text-slate-500 leading-relaxed">
             India's favorite next-generation eCommerce store with instant checkout, live order tracking, and COD available.
           </p>

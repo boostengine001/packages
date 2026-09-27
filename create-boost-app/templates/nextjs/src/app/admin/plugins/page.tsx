@@ -14,7 +14,7 @@ export default function AdminPluginsPage() {
   async function loadPlugins() {
     try {
       setLoading(true);
-      const res = await fetch('/api/admin/plugins');
+      const res = await fetch('/api/admin/plugins', { cache: 'no-store' });
       const data = await res.json();
       if (data.success) {
         setPlugins(data.data);

@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation';
 import { useStore } from '../../context/StoreContext';
 import { LoyaltyEngine } from '@boostengine/loyalty';
 import { ProgressBar, CouponInput, BankOffersAccordion, TrustBadges } from '@boostengine/ui';
-import { getProductById, getProductUrl } from '../../data/products';
+import { getProductUrl } from '../../data/products';
 import { Trash2, Minus, Plus, ArrowLeft, ArrowRight, ShoppingBag, Truck, Sparkles, ShieldCheck } from 'lucide-react';
 
 export default function CartPage() {
   const router = useRouter();
-  const { cart, cartSummary, updateQuantity, removeFromCart, applyCoupon, removeCoupon, superCoins, customerTier, settings } = useStore();
+  const { cart, cartSummary, updateQuantity, removeFromCart, applyCoupon, removeCoupon, superCoins, customerTier, settings, products } = useStore();
   const [useCoins, setUseCoins] = useState(true);
   const [couponError, setCouponError] = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
@@ -93,7 +93,7 @@ export default function CartPage() {
 
           <div className="divide-y divide-gray-100 border border-gray-100 rounded-2xl bg-white overflow-hidden">
             {items.map((item) => {
-              const matched = getProductById(item.productId);
+              const matched = products.find((p) => p.id === item.productId);
               const itemUrl = matched ? getProductUrl(matched) : `/products/${item.productId}`;
               return (
                 <div key={item.id} className="p-4 flex gap-4">

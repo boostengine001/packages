@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { Suspense, useState, useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { PRODUCTS, StoreProduct } from '../../data/products';
@@ -17,8 +17,6 @@ const SORT_OPTIONS = [
   { label: 'Rating', value: 'rating' },
 ];
 
-const CATEGORIES = Array.from(new Set(PRODUCTS.map((p) => p.category)));
-
 function formatSort(value: string, direction: 'asc' | 'desc'): SearchSortOption {
   if (value === 'relevance') return 'relevance';
   if (value === 'price_asc' || (value === 'price' && direction === 'asc')) return 'price_asc';
@@ -28,10 +26,10 @@ function formatSort(value: string, direction: 'asc' | 'desc'): SearchSortOption 
   return 'relevance';
 }
 
-export default function CollectionsPage() {
+function CollectionsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { addToCart, toggleWishlist, wishlistItems, inventory } = useStore();
+  const { addToCart, toggleWishlist, wishlistItems, inventory, settings } = useStore();
 
   const [query, setQuery] = useState(searchParams.get('q') || '');
   const [sortValue, setSortValue] = useState('relevance');
@@ -45,17 +43,29 @@ export default function CollectionsPage() {
   const [minRating, setMinRating] = useState(0);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [liveProducts, setLiveProducts] = useState<StoreProduct[]>(PRODUCTS);
+  const [liveCategories, setLiveCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('/api/products')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-          setLiveProducts(data.data);
+    Promise.all([
+      fetch('/api/products', { cache: 'no-store' }).then((r) => r.json()),
+      fetch('/api/categories', { cache: 'no-store' }).then((r) => r.json()),
+    ])
+      .then(([prodData, catData]) => {
+        if (prodData.success && Array.isArray(prodData.data) && prodData.data.length > 0) {
+          setLiveProducts(prodData.data);
+        }
+        if (catData.success && Array.isArray(catData.data) && catData.data.length > 0) {
+          setLiveCategories(catData.data.map((c: any) => c.name).filter(Boolean));
         }
       })
       .catch(() => {});
   }, []);
+
+  const dynamicCategories = useMemo(() => {
+    const fromProds = liveProducts.map((p) => p.category).filter(Boolean);
+    const combined = Array.from(new Set([...liveCategories, ...fromProds]));
+    return combined.length > 0 ? combined : ['Hoodies', 'T-Shirts', 'Footwear', 'Accessories'];
+  }, [liveCategories, liveProducts]);
 
   const allSizes = useMemo(() => Array.from(new Set(liveProducts.flatMap((p) => p.variants?.map((v) => v.attributes?.Size).filter(Boolean) as string[] || []))), [liveProducts]);
   const allColors = useMemo(() => Array.from(new Set(liveProducts.flatMap((p) => p.variants?.map((v) => v.attributes?.Color).filter(Boolean) as string[] || []))), [liveProducts]);
@@ -179,7 +189,7 @@ export default function CollectionsPage() {
             </div>
           </div>
 
-          <Filter label="Category" options={CATEGORIES.map((c) => ({ label: c, value: c }))} selectedValues={selectedCategories} onChange={setSelectedCategories} />
+          <Filter label="Category" options={dynamicCategories.map((c) => ({ label: c, value: c }))} selectedValues={selectedCategories} onChange={setSelectedCategories} />
           <Filter label="Size" options={allSizes.map((s) => ({ label: s, value: s }))} selectedValues={selectedSizes} onChange={setSelectedSizes} />
           <Filter label="Color" options={allColors.map((c) => ({ label: c, value: c }))} selectedValues={selectedColors} onChange={setSelectedColors} />
 
@@ -239,6 +249,7 @@ export default function CollectionsPage() {
                       title={product.title}
                       price={product.price}
                       compareAtPrice={product.compareAtPrice}
+                      currencySymbol={settings.currencySymbol}
                       images={product.images || []}
                       brand={product.brand}
                       isWishlisted={isWishlisted}
@@ -271,5 +282,20 @@ export default function CollectionsPage() {
         </section>
       </div>
     </div>
+  );
+}
+
+export default function CollectionsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-7xl mx-auto px-4 py-24 text-center">
+          <div className="animate-spin w-6 h-6 border-2 border-black border-t-transparent rounded-full mx-auto mb-3" />
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Loading collection...</p>
+        </div>
+      }
+    >
+      <CollectionsContent />
+    </Suspense>
   );
 }
