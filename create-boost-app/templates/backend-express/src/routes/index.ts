@@ -1,0 +1,46 @@
+import { Router } from 'express';
+import { productsRouter } from './products';
+import { categoriesRouter } from './categories';
+import { ordersRouter } from './orders';
+import { settingsRouter } from './settings';
+import { bannersRouter } from './banners';
+import { dealsRouter } from './deals';
+import { adBannerRouter } from './adBanner';
+import { couponsRouter } from './coupons';
+import { reviewsRouter } from './reviews';
+import { paymentsRouter } from './payments';
+import { shippingRouter } from './shipping';
+import { authRouter } from './auth';
+import { adminRouter } from './admin';
+import { abandonedCheckoutRouter } from './abandonedCheckout';
+import { notificationsRouter } from './notifications';
+import { aiRouter } from './ai';
+import { supportRouter } from './support';
+import * as adminController from '../controllers/adminController';
+import { requireAdmin } from '../middleware/auth';
+
+export const apiRouter = Router();
+
+apiRouter.use('/products', productsRouter);
+apiRouter.use('/categories', categoriesRouter);
+apiRouter.use('/orders', ordersRouter);
+apiRouter.use('/settings', settingsRouter);
+apiRouter.use('/banners', bannersRouter);
+apiRouter.use('/admin/banners', bannersRouter);
+apiRouter.use('/deals', dealsRouter);
+apiRouter.use('/admin/deals', dealsRouter);
+apiRouter.use('/ad-banner', adBannerRouter);
+apiRouter.use('/coupons', couponsRouter);
+apiRouter.use('/admin/coupons', couponsRouter);
+apiRouter.use('/reviews', reviewsRouter);
+apiRouter.use('/payments', paymentsRouter);
+apiRouter.use('/shipping', shippingRouter);
+apiRouter.use('/auth', authRouter);
+apiRouter.use('/admin', adminRouter);
+apiRouter.post('/upload', requireAdmin, adminController.uploadMedia);
+apiRouter.use('/abandoned-checkout', abandonedCheckoutRouter);
+apiRouter.use('/notifications', notificationsRouter);
+apiRouter.use('/ai', aiRouter);
+apiRouter.use('/', supportRouter);
+
+export default apiRouter;

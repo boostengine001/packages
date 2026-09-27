@@ -12,8 +12,6 @@ export { getCityFromPincode } from '../lib/geo';
 export interface DynamicStoreSettings {
   storeName: string;
   storeUrl: string;
-  logo?: string;
-  favicon?: string;
   supportEmail: string;
   supportPhone: string;
   freeShippingThreshold: number;

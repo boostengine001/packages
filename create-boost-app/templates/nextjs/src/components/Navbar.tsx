@@ -105,36 +105,28 @@ export const Navbar: React.FC = () => {
         {/* Logo & Assured Badge */}
         <div className="flex items-center gap-2 shrink min-w-[6.5rem]">
           <Link href="/" className="flex items-center gap-1.5 min-w-0">
-            {settings.logo ? (
-              <img
-                src={settings.logo}
-                alt={settings.storeName || 'Store Logo'}
-                className="h-8 sm:h-9 max-w-[160px] sm:max-w-[200px] object-contain"
-              />
-            ) : (
-              <span className="text-xl sm:text-2xl font-black tracking-tighter text-black uppercase truncate">
-                {settings.storeName ? (
-                  <>
-                    {settings.storeName.includes(' ') ? (
-                      <>
-                        {settings.storeName.split(' ')[0]}
-                        <span className="text-blue-600">.</span>
-                        {settings.storeName.split(' ').slice(1).join(' ')}
-                      </>
-                    ) : (
-                      <>
-                        {settings.storeName}
-                        <span className="text-blue-600">.</span>STORE
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    BOOST<span className="text-blue-600">.</span>MARKET
-                  </>
-                )}
-              </span>
-            )}
+            <span className="text-xl sm:text-2xl font-black tracking-tighter text-black uppercase truncate">
+              {settings.storeName ? (
+                <>
+                  {settings.storeName.includes(' ') ? (
+                    <>
+                      {settings.storeName.split(' ')[0]}
+                      <span className="text-blue-600">.</span>
+                      {settings.storeName.split(' ').slice(1).join(' ')}
+                    </>
+                  ) : (
+                    <>
+                      {settings.storeName}
+                      <span className="text-blue-600">.</span>STORE
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  BOOST<span className="text-blue-600">.</span>MARKET
+                </>
+              )}
+            </span>
           </Link>
           <div className="hidden lg:block">
             <AssuredBadge type="assured" />

@@ -51,8 +51,6 @@ export interface BoostPluginConfig {
 export interface StoreSettings {
   storeName: string;
   storeUrl: string;
-  logo?: string;
-  favicon?: string;
   supportEmail: string;
   supportPhone: string;
   currency: string;
@@ -290,8 +288,6 @@ const INITIAL_ORDERS: AdminOrder[] = [
 const INITIAL_SETTINGS: StoreSettings = {
   storeName: 'Boost D2C Store',
   storeUrl: 'https://boost-store.local',
-  logo: '',
-  favicon: '',
   supportEmail: 'support@boostengine.dev',
   supportPhone: '+91 98765 00000',
   currency: 'INR',

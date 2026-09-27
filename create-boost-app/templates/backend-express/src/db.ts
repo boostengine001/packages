@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 
+export function isDbConnected(): boolean {
+  return mongoose.connection.readyState === 1;
+}
+
 export async function connectDB(): Promise<typeof mongoose | null> {
   const uri = process.env.MONGODB_URI;
 

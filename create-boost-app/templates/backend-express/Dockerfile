@@ -21,6 +21,9 @@ RUN npm install --only=production --prefer-offline --no-audit
 
 COPY --from=builder /app/dist ./dist
 
+# Create uploads directory and set permissions for non-root node user
+RUN mkdir -p /app/uploads && chown -R node:node /app
+
 # Non-root secure user
 USER node
 

@@ -11,18 +11,13 @@ import {
   AlertCircle,
   Globe,
   Mail,
-  Phone,
-  UploadCloud,
-  Image as ImageIcon,
-  Trash2,
-  Sparkles
+  Phone
 } from 'lucide-react';
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<StoreSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [uploadingLogo, setUploadingLogo] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   async function loadSettings() {
@@ -67,40 +62,6 @@ export default function AdminSettingsPage() {
       setMessage({ type: 'error', text: 'Network error saving store settings' });
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function handleFileUpload(file: File) {
-    if (!settings) return;
-    try {
-      setUploadingLogo(true);
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const res = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await res.json();
-      if (data.success && data.url) {
-        setSettings({
-          ...settings,
-          logo: data.url,
-        });
-        setMessage({
-          type: 'success',
-          text: 'Logo uploaded successfully! Click "Save Changes" to apply across the store.',
-        });
-        setTimeout(() => setMessage(null), 4000);
-      } else {
-        setMessage({ type: 'error', text: data.error || 'Failed to upload logo' });
-      }
-    } catch (err: any) {
-      console.error(err);
-      setMessage({ type: 'error', text: 'Error uploading logo file' });
-    } finally {
-      setUploadingLogo(false);
     }
   }
 
@@ -174,134 +135,7 @@ export default function AdminSettingsPage() {
 
       {/* Main Settings Form */}
       <form id="settings-form" onSubmit={handleSubmit} className="space-y-6">
-        {/* Section 0: Brand Logo & Visual Assets */}
-        <div className="bg-white border border-slate-200/90 shadow-xs rounded-2xl p-6 md:p-7 space-y-6">
-          <div className="flex items-center space-x-3 border-b border-slate-100 pb-4">
-            <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
-              <ImageIcon className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
-                Store Logo & Brand Assets
-              </h2>
-              <p className="text-[11px] text-slate-500">
-                Upload your official brand logo for the storefront navbar, mobile drawer, and checkout header.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            {/* Live Preview Column */}
-            <div className="space-y-3">
-              <label className="block text-xs font-semibold text-slate-700">
-                Logo Live Preview
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {/* Light preview */}
-                <div className="p-3 rounded-xl border border-slate-200 bg-white flex flex-col items-center justify-center h-28 relative overflow-hidden group">
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider absolute top-2 left-2">
-                    Light Mode
-                  </span>
-                  {settings.logo ? (
-                    <img
-                      src={settings.logo}
-                      alt="Logo Light Preview"
-                      className="max-h-12 max-w-[90%] object-contain"
-                    />
-                  ) : (
-                    <span className="text-[11px] font-bold text-slate-400 text-center px-2">
-                      Text Fallback ({settings.storeName || 'Store'})
-                    </span>
-                  )}
-                </div>
-
-                {/* Dark preview */}
-                <div className="p-3 rounded-xl border border-slate-800 bg-slate-900 flex flex-col items-center justify-center h-28 relative overflow-hidden group">
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider absolute top-2 left-2">
-                    Dark Mode
-                  </span>
-                  {settings.logo ? (
-                    <img
-                      src={settings.logo}
-                      alt="Logo Dark Preview"
-                      className="max-h-12 max-w-[90%] object-contain brightness-105"
-                    />
-                  ) : (
-                    <span className="text-[11px] font-bold text-slate-500 text-center px-2">
-                      Text Fallback
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {settings.logo && (
-                <button
-                  type="button"
-                  onClick={() => setSettings({ ...settings, logo: '' })}
-                  className="flex items-center justify-center gap-1.5 w-full py-1.5 px-3 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 border border-rose-200 transition cursor-pointer"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  <span>Remove Custom Logo</span>
-                </button>
-              )}
-            </div>
-
-            {/* Upload Controls & URL input */}
-            <div className="lg:col-span-2 space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-2">
-                  Upload Logo File
-                </label>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                  <label className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/70 rounded-xl cursor-pointer transition text-xs font-bold text-indigo-700">
-                    {uploadingLogo ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-                        <span>Uploading Logo...</span>
-                      </>
-                    ) : (
-                      <>
-                        <UploadCloud className="w-4 h-4 text-indigo-600" />
-                        <span>Click to Upload Logo (PNG, SVG, JPG, WebP)</span>
-                      </>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      disabled={uploadingLogo}
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(file);
-                      }}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-                <p className="text-[10px] text-slate-400 mt-1.5">
-                  Recommended: Transparent PNG or SVG logo (approx. height 60px - 100px, width up to 300px).
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-2">
-                  Or Paste Logo Direct Image URL
-                </label>
-                <div className="relative">
-                  <Globe className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-                  <input
-                    type="text"
-                    value={settings.logo || ''}
-                    onChange={(e) => setSettings({ ...settings, logo: e.target.value })}
-                    placeholder="https://your-domain.com/assets/logo.png"
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 transition shadow-2xs font-mono"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Section 1: Store Profile & Identity */}
+        {/* Section 1: Store Profile & Branding */}
         <div className="bg-white border border-slate-200/90 shadow-xs rounded-2xl p-6 md:p-7 space-y-5">
           <div className="flex items-center space-x-3 border-b border-slate-100 pb-4">
             <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">

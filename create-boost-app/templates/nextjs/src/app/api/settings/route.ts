@@ -25,8 +25,6 @@ export async function GET() {
             data: {
               storeName: (mongoSetting as any).storeName || 'Boost Aesthetic',
               storeUrl: (mongoSetting as any).storeUrl || 'https://booststore.com',
-              logo: (mongoSetting as any).logo || (mongoSetting as any).logoUrl || '',
-              favicon: (mongoSetting as any).favicon || '',
               supportEmail: (mongoSetting as any).supportEmail || 'support@booststore.com',
               supportPhone: (mongoSetting as any).supportPhone || '+91 98765 43210',
               freeShippingThreshold: (mongoSetting as any).freeShippingThreshold ?? 999,
@@ -50,8 +48,6 @@ export async function GET() {
       data: {
         storeName: fallback.storeName || 'Boost Aesthetic',
         storeUrl: fallback.storeUrl || 'https://booststore.com',
-        logo: fallback.logo || '',
-        favicon: fallback.favicon || '',
         supportEmail: fallback.supportEmail || 'support@booststore.com',
         supportPhone: fallback.supportPhone || '+91 98765 43210',
         freeShippingThreshold: fallback.freeShippingThreshold ?? 999,

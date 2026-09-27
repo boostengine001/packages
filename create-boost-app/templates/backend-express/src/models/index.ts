@@ -1,2 +1,13 @@
-export { default as Product, type IProduct } from './Product';
-export { default as Order, type IOrder } from './Order';
+export { default as Product, type IProduct, type IVariant } from './Product';
+export { default as Order, type IOrder, type IOrderItem } from './Order';
+export { default as Category, type ICategory } from './Category';
+export { default as Banner, type IBanner } from './Banner';
+export { default as AdBanner, type IAdBanner } from './AdBanner';
+export { default as Deal, type IDeal } from './Deal';
+export { default as Coupon, type ICoupon } from './Coupon';
+export { default as Review, type IReview } from './Review';
+export { default as Setting, type ISettings, type IAppearanceConfig, type ISocials } from './Setting';
+export { default as User, type IUser, type IAddress } from './User';
+export { default as ContactQuery, type IContactQueryDocument } from './ContactQuery';
+export { default as Subscriber, type ISubscriberDocument } from './Subscriber';
+export { default as AbandonedCheckout, type IAbandonedCheckoutDocument } from './AbandonedCheckout';
