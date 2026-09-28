@@ -37,7 +37,7 @@ apiRouter.use('/payments', paymentsRouter);
 apiRouter.use('/shipping', shippingRouter);
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/admin', adminRouter);
-apiRouter.post('/upload', requireAdmin, adminController.uploadMedia);
+apiRouter.post('/upload', adminController.uploadMedia);
 apiRouter.use('/abandoned-checkout', abandonedCheckoutRouter);
 apiRouter.use('/notifications', notificationsRouter);
 apiRouter.use('/ai', aiRouter);

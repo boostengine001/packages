@@ -27,6 +27,7 @@ export default function OrderReturnPage() {
   const [refundMode, setRefundMode] = useState<'wallet' | 'original'>('wallet');
   const [submitting, setSubmitting] = useState(false);
   const [returnSuccess, setReturnSuccess] = useState<any>(null);
+  const [returnError, setReturnError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!orderId) return;
@@ -72,8 +73,9 @@ export default function OrderReturnPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setReturnError(null);
     if (chosenItems.length === 0) {
-      alert('Please select at least one item to return');
+      setReturnError('Please select at least one item to return');
       return;
     }
 
@@ -94,10 +96,10 @@ export default function OrderReturnPage() {
       if (data.success) {
         setReturnSuccess(data.data.returnDetails);
       } else {
-        alert(data.error || 'Return request failed');
+        setReturnError(data.error || 'Return request failed');
       }
     } catch (err) {
-      alert('Failed to submit return request');
+      setReturnError('Failed to submit return request');
     } finally {
       setSubmitting(false);
     }
@@ -292,6 +294,13 @@ export default function OrderReturnPage() {
                 </div>
               </div>
             </div>
+
+            {returnError && (
+              <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 rounded-xl text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-2">
+                <span>⚠️</span>
+                <span>{returnError}</span>
+              </div>
+            )}
 
             <button
               type="submit"

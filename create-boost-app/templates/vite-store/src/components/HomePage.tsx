@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DEMO_PRODUCTS, Product } from '../data/products';
+import { useStore } from '../context/StoreContext';
 import {
   ZapIcon,
   SearchIcon,
@@ -79,57 +80,57 @@ export interface CartItem {
 }
 
 export default function HomePage() {
-  const [products, setProducts] = useState<Product[]>(DEMO_PRODUCTS);
-  const [isLiveApi, setIsLiveApi] = useState<boolean>(false);
+  const {
+    products,
+    isLiveApi,
+    cart,
+    addToCart: storeAddToCart,
+    updateQuantity,
+    removeFromCart: storeRemoveFromCart,
+    cartCount: totalCartCount,
+    cartSubtotal: subtotal,
+    cartDiscount: discountAmount,
+    cartTotal: finalTotal,
+    isCartOpen,
+    setIsCartOpen,
+    wishlist,
+    toggleWishlist: storeToggleWishlist,
+    isInWishlist,
+    couponCode,
+    setCouponCode,
+    appliedCoupon,
+    discountPercent,
+    applyCoupon: storeApplyCoupon,
+    removeCoupon,
+    deliveryPincode: pincode,
+    setDeliveryPincode: setPincode,
+    pincodeInfo,
+    verifyPincode,
+    settings,
+    createOrder,
+  } = useStore();
+
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-
-  // ── 1. LocalStorage Persistence for Cart & Wishlist ──
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    try {
-      const saved = localStorage.getItem('boost_cart');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  const [wishlist, setWishlist] = useState<string[]>(() => {
-    try {
-      const saved = localStorage.getItem('boost_wishlist');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('boost_cart', JSON.stringify(cart));
-    } catch {
-      // Handle local storage quota / safari private mode gracefully
-    }
-  }, [cart]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('boost_wishlist', JSON.stringify(wishlist));
-    } catch {
-      // Graceful fallback
-    }
-  }, [wishlist]);
-
-  // UI States
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const [pincode, setPincode] = useState<string>('110001');
-  const [couponCode, setCouponCode] = useState<string>('');
-  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
-  const [discountPercent, setDiscountPercent] = useState<number>(0);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   // Policy, Contact & Warranty Modal
   const [policyModal, setPolicyModal] = useState<'privacy' | 'terms' | 'shipping' | 'refund' | 'warranty' | 'contact' | null>(null);
   const [supportSubmitted, setSupportSubmitted] = useState<boolean>(false);
+  const [supportTicketId, setSupportTicketId] = useState<string>('');
+  const [isSubmittingSupport, setIsSubmittingSupport] = useState<boolean>(false);
+
+  // Contact form fields
+  const [contactName, setContactName] = useState<string>('');
+  const [contactEmail, setContactEmail] = useState<string>('');
+  const [contactSubject, setContactSubject] = useState<string>('');
+  const [contactMessage, setContactMessage] = useState<string>('');
+
+  // Warranty form fields
+  const [warrantyName, setWarrantyName] = useState<string>('');
+  const [warrantyOrderNumber, setWarrantyOrderNumber] = useState<string>('');
+  const [warrantyProduct, setWarrantyProduct] = useState<string>('');
+  const [warrantyIssue, setWarrantyIssue] = useState<string>('');
 
   // Selected sizes per card in product grid
   const [selectedCardSizes, setSelectedCardSizes] = useState<Record<string, string>>({});
@@ -144,6 +145,7 @@ export default function HomePage() {
   const [customerName, setCustomerName] = useState<string>('');
   const [customerPhone, setCustomerPhone] = useState<string>('');
   const [customerAddress, setCustomerAddress] = useState<string>('');
+  const [isPlacingOrder, setIsPlacingOrder] = useState<boolean>(false);
   const [checkoutSuccess, setCheckoutSuccess] = useState<{
     orderId: string;
     paymentMethod: string;
@@ -152,24 +154,13 @@ export default function HomePage() {
     total: number;
   } | null>(null);
 
-  // Check live API
-  useEffect(() => {
-    const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
-    fetch(`${apiBase}/products`)
-      .then((res) => {
-        if (!res.ok) throw new Error('API offline');
-        return res.json();
-      })
-      .then((data) => {
-        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
-          setProducts(data.products);
-          setIsLiveApi(true);
-        }
-      })
-      .catch(() => {
-        // Silently fallback to built-in curated DEMO_PRODUCTS
-      });
-  }, []);
+  const [toastMessage, setToastMessage] = useState<{ text: string; isError?: boolean } | null>(null);
+  const [checkoutModalError, setCheckoutModalError] = useState<string | null>(null);
+
+  const showToast = (text: string, isError = false) => {
+    setToastMessage({ text, isError });
+    setTimeout(() => setToastMessage(null), 3000);
+  };
 
   const rawCategories = Array.from(new Set(products.map((p) => p.category)));
   const categories = ['All', ...(wishlist.length > 0 ? ['Wishlist'] : []), ...rawCategories];
@@ -177,7 +168,7 @@ export default function HomePage() {
   // Filtering
   const filteredProducts = products.filter((p) => {
     if (selectedCategory === 'Wishlist') {
-      return wishlist.includes(p.id);
+      return isInWishlist(p.id);
     }
     const matchesCat = selectedCategory === 'All' || p.category === selectedCategory;
     const matchesSearch =
@@ -188,99 +179,75 @@ export default function HomePage() {
   });
 
   const addToCart = (product: Product, sizeToUse?: string) => {
-    const chosenSize = sizeToUse || selectedCardSizes[product.id] || product.sizes?.[0] || undefined;
-    setCart((prev) => {
-      const existing = prev.find(
-        (item) => item.product.id === product.id && item.size === chosenSize
-      );
-      if (existing) {
-        return prev.map((item) =>
-          item.product.id === product.id && item.size === chosenSize
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prev, { product, quantity: 1, size: chosenSize }];
-    });
-    setIsCartOpen(true);
-  };
-
-  const updateQuantity = (id: string, size: string | undefined, delta: number) => {
-    setCart((prev) =>
-      prev
-        .map((item) => {
-          if (item.product.id === id && item.size === size) {
-            const next = item.quantity + delta;
-            return next > 0 ? { ...item, quantity: next } : null;
-          }
-          return item;
-        })
-        .filter(Boolean) as CartItem[]
-    );
+    const chosenSize = sizeToUse || selectedCardSizes[product.id] || product.sizes?.[0] || 'Free Size';
+    storeAddToCart(product, chosenSize);
   };
 
   const removeItem = (id: string, size: string | undefined) => {
-    setCart((prev) => prev.filter((item) => !(item.product.id === id && item.size === size)));
+    storeRemoveFromCart(id, size);
   };
 
   const toggleWishlist = (id: string, e?: React.MouseEvent) => {
     e?.stopPropagation();
-    setWishlist((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-  };
-
-  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const discountAmount = Math.round((subtotal * discountPercent) / 100);
-  const finalTotal = subtotal - discountAmount;
-  const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  const applyCouponCode = (code: string) => {
-    const normalized = code.trim().toUpperCase();
-    if (normalized === 'BOOST20') {
-      setDiscountPercent(20);
-      setAppliedCoupon('BOOST20');
-      setCouponCode('BOOST20');
-    } else if (normalized === 'WELCOME10') {
-      setDiscountPercent(10);
-      setAppliedCoupon('WELCOME10');
-      setCouponCode('WELCOME10');
-    } else {
-      alert('Invalid coupon! Use BOOST20 for 20% off or WELCOME10 for 10% off.');
+    const prod = products.find((p) => p.id === id);
+    if (prod) {
+      storeToggleWishlist(prod);
     }
   };
 
-  const removeCoupon = () => {
-    setDiscountPercent(0);
-    setAppliedCoupon(null);
-    setCouponCode('');
+  const applyCouponCode = async (code: string) => {
+    const res = await storeApplyCoupon(code);
+    showToast(res.message, !res.success);
   };
 
-  const pincodeInfo = PINCODE_MAP[pincode.slice(0, 2)] || {
-    city: 'Local Region',
-    state: 'India',
-    days: '2-3 Business Days',
+  const handlePincodeChange = async (val: string) => {
+    const clean = val.replace(/\D/g, '');
+    setPincode(clean);
+    if (clean.length === 6) {
+      await verifyPincode(clean);
+    }
   };
 
-  const handleCheckoutSubmit = (e: React.FormEvent) => {
+  const handleCheckoutSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setCheckoutModalError(null);
     if (!customerName.trim() || !customerPhone.trim() || !customerAddress.trim()) {
-      alert('Please fill in your Name, Phone Number, and Delivery Address.');
+      setCheckoutModalError('Please fill in your Name, Phone Number, and Delivery Address.');
       return;
     }
-    if (customerPhone.trim().length < 10) {
-      alert('Please enter a valid 10-digit mobile number.');
+    if (customerPhone.trim().replace(/\D/g, '').length < 10) {
+      setCheckoutModalError('Please enter a valid 10-digit mobile number.');
       return;
     }
-    const orderId = 'BST-' + Math.floor(100000 + Math.random() * 900000);
-    setCheckoutSuccess({
-      orderId,
-      paymentMethod: paymentMethod === 'online' ? 'Instant Online (Razorpay / UPI)' : 'Cash on Delivery (COD)',
-      name: customerName,
-      city: pincodeInfo.city,
-      total: finalTotal,
+
+    setIsPlacingOrder(true);
+    const orderRes = await createOrder({
+      customer: {
+        name: customerName.trim(),
+        phone: customerPhone.trim(),
+        address: customerAddress.trim(),
+        city: pincodeInfo.city,
+        state: pincodeInfo.state,
+        pincode,
+      },
+      paymentMethod,
+      paymentStatus: paymentMethod === 'online' ? 'paid' : 'cod_pending',
     });
-    setCart([]);
-    setIsCheckoutModalOpen(false);
-    setIsCartOpen(false);
+    setIsPlacingOrder(false);
+
+    if (orderRes.success) {
+      setCheckoutSuccess({
+        orderId: orderRes.orderId,
+        paymentMethod: paymentMethod === 'online' ? 'Instant Online (Razorpay / UPI)' : 'Cash on Delivery (COD)',
+        name: customerName,
+        city: pincodeInfo.city,
+        total: finalTotal,
+      });
+      setIsCheckoutModalOpen(false);
+      setIsCartOpen(false);
+    } else {
+      setCheckoutModalError(orderRes.error || 'Failed to place order. Please try again.');
+    }
   };
 
   return (
@@ -315,12 +282,13 @@ export default function HomePage() {
               gap: 4,
             }}
           >
-            <ZapIcon size={11} /> LIMITED DROP
+            <ZapIcon size={11} /> FREE SHIPPING
           </span>
           <span>
-            Use coupon <strong style={{ color: '#fbbf24', letterSpacing: '0.5px' }}>BOOST20</strong> for flat 20% OFF | Free Express Delivery Pan-India
+            {settings.freeShippingThreshold ? `Free Express Delivery on orders above ₹${settings.freeShippingThreshold}` : 'Free Express Delivery Pan-India'}
           </span>
         </div>
+
         {isLiveApi && (
           <span
             style={{
@@ -366,27 +334,41 @@ export default function HomePage() {
             }}
             style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}
           >
-            <div
-              style={{
-                width: 38,
-                height: 38,
-                borderRadius: 10,
-                background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-                color: '#fbbf24',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
-              }}
-            >
-              <ZapIcon size={20} />
-            </div>
+            {settings?.logoUrl ? (
+              <img
+                src={settings.logoUrl}
+                alt={settings.storeName || storeName}
+                style={{
+                  height: 38,
+                  maxHeight: 38,
+                  maxWidth: 150,
+                  objectFit: 'contain',
+                  borderRadius: 6,
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 10,
+                  background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+                  color: '#fbbf24',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+                }}
+              >
+                <ZapIcon size={20} />
+              </div>
+            )}
             <div>
               <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.5px', color: '#0f172a' }}>
-                {storeName}
+                {settings?.storeName || storeName}
               </span>
               <span style={{ display: 'block', fontSize: 10, fontWeight: 600, color: '#64748b', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                Streetwear & Essentials
+                {settings?.storeTagline || 'Streetwear & Essentials'}
               </span>
             </div>
           </div>
@@ -635,7 +617,7 @@ export default function HomePage() {
                   gap: 6,
                 }}
               >
-                <SparklesIcon size={14} /> DROP 04 • AUTUMN / WINTER 2026
+                <SparklesIcon size={14} /> NEW ARRIVALS
               </span>
             </div>
 
@@ -649,14 +631,14 @@ export default function HomePage() {
                 color: '#ffffff',
               }}
             >
-              High-Performance <br />
+              {settings.storeName || 'Online Store'} <br />
               <span style={{ background: 'linear-gradient(90deg, #93c5fd 0%, #c4b5fd 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Streetwear Essentials
+                {settings.storeTagline || settings.tagline || 'Curated Collection'}
               </span>
             </h1>
 
             <p style={{ fontSize: 16, color: '#94a3b8', lineHeight: 1.6, margin: 0, maxWidth: 520 }}>
-              Crafted with 450 GSM pure French Terry cotton, oversized tailored silhouettes, and artisanal solid fragrances engineered for daily wear.
+              {settings.footerDescription || 'Explore quality products backed by secure online payments, cash on delivery, and express doorstep delivery.'}
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 10, flexWrap: 'wrap' }}>
@@ -681,7 +663,7 @@ export default function HomePage() {
               </a>
               <button
                 onClick={() => {
-                  setSelectedCategory('Hoodies');
+                  setSelectedCategory('All');
                   const el = document.getElementById('products-section');
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
@@ -700,8 +682,8 @@ export default function HomePage() {
                   gap: 8,
                 }}
               >
-                <ShirtIcon size={16} />
-                <span>Explore Hoodies</span>
+                <LayersIcon size={16} />
+                <span>Browse All</span>
               </button>
             </div>
           </div>
@@ -748,8 +730,8 @@ export default function HomePage() {
                   <FeatherIcon size={20} />
                 </div>
                 <div>
-                  <h4 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#f8fafc' }}>450 GSM Heavy French Terry</h4>
-                  <p style={{ margin: 0, fontSize: 12, color: '#94a3b8' }}>Double pre-shrunk combed organic cotton</p>
+                  <h4 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#f8fafc' }}>Premium Verified Quality</h4>
+                  <p style={{ margin: 0, fontSize: 12, color: '#94a3b8' }}>Crafted to meet the highest industry standards</p>
                 </div>
               </div>
 
@@ -758,8 +740,8 @@ export default function HomePage() {
                   <StarIcon size={20} filled={true} />
                 </div>
                 <div>
-                  <h4 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#f8fafc' }}>4.9/5 D2C Customer Rating</h4>
-                  <p style={{ margin: 0, fontSize: 12, color: '#94a3b8' }}>Over 2,400+ verified customer reviews</p>
+                  <h4 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#f8fafc' }}>Customer First Experience</h4>
+                  <p style={{ margin: 0, fontSize: 12, color: '#94a3b8' }}>Dedicated support and easy order tracking</p>
                 </div>
               </div>
 
@@ -824,9 +806,10 @@ export default function HomePage() {
               <SparklesIcon size={20} />
             </div>
             <div>
-              <h5 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Premium Heavyweight</h5>
-              <p style={{ margin: 0, fontSize: 11, color: '#64748b' }}>Pre-shrunk 100% combed cotton</p>
+              <h5 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Guaranteed Authenticity</h5>
+              <p style={{ margin: 0, fontSize: 11, color: '#64748b' }}>100% verified genuine products</p>
             </div>
+
           </div>
         </div>
       </section>
@@ -840,8 +823,9 @@ export default function HomePage() {
             </h2>
             <p style={{ fontSize: 13, color: '#64748b', margin: '4px 0 0' }}>
               {selectedCategory === 'Wishlist'
-                ? 'Your favorite apparel and fragrances saved for later'
-                : 'Handpicked drop items engineered for durability, structure, and comfort'}
+                ? 'Your saved items ready for checkout'
+                : 'Handpicked products backed by quality and verified reviews'}
+
             </p>
           </div>
         </div>
@@ -945,7 +929,7 @@ export default function HomePage() {
             {filteredProducts.map((p) => {
               const discountPct = Math.round(((p.compareAtPrice - p.price) / p.compareAtPrice) * 100);
               const savingsAmount = p.compareAtPrice - p.price;
-              const isFav = wishlist.includes(p.id);
+              const isFav = isInWishlist(p.id);
               const isHovered = hoveredCard === p.id;
               const currentSelectedSize = selectedCardSizes[p.id] || p.sizes?.[0];
 
@@ -1428,7 +1412,7 @@ export default function HomePage() {
                         type="text"
                         value={pincode}
                         maxLength={6}
-                        onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
+                        onChange={(e) => handlePincodeChange(e.target.value)}
                         style={{
                           width: 68,
                           padding: '2px 6px',
@@ -1754,14 +1738,14 @@ export default function HomePage() {
                       borderRadius: 12,
                       border: '1px solid #e2e8f0',
                       backgroundColor: '#ffffff',
-                      color: wishlist.includes(quickViewProduct.id) ? '#ef4444' : '#64748b',
+                      color: isInWishlist(quickViewProduct.id) ? '#ef4444' : '#64748b',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
                   >
-                    <HeartIcon size={20} filled={wishlist.includes(quickViewProduct.id)} />
+                    <HeartIcon size={20} filled={isInWishlist(quickViewProduct.id)} />
                   </button>
                 </div>
               </div>
@@ -1994,6 +1978,24 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Error banner */}
+              {checkoutModalError && (
+                <div
+                  style={{
+                    padding: '10px 14px',
+                    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                    border: '1px solid #ef4444',
+                    borderRadius: '8px',
+                    color: '#fca5a5',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    marginTop: 4,
+                  }}
+                >
+                  ⚠️ {checkoutModalError}
+                </div>
+              )}
+
               {/* Final Submit Button */}
               <button
                 type="submit"
@@ -2158,13 +2160,15 @@ export default function HomePage() {
           <div>
             <h4 style={{ color: '#ffffff', fontSize: 14, fontWeight: 700, marginBottom: 14 }}>Customer Support</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13 }}>
-              <li 
-                onClick={() => { setPolicyModal('shipping'); setSupportSubmitted(false); }}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
-              >
-                <TruckIcon size={15} /> <span>Track Order & Shipping</span>
+              <li>
+                <Link 
+                  to="/orders"
+                  style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', transition: 'color 0.2s', textDecoration: 'none', color: '#94a3b8' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
+                >
+                  <TruckIcon size={15} /> <span>Track Live Orders</span>
+                </Link>
               </li>
               <li 
                 onClick={() => { setPolicyModal('refund'); setSupportSubmitted(false); }}
@@ -2416,29 +2420,54 @@ export default function HomePage() {
                     </div>
                   ) : (
                     <form 
-                      onSubmit={(e) => { e.preventDefault(); setSupportSubmitted(true); }}
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        setIsSubmittingSupport(true);
+                        const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+                        try {
+                          const endpoint = warrantyIssue.trim() ? `${apiBase}/warranty/claim` : `${apiBase}/warranty/register`;
+                          const res = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                              fullName: warrantyName,
+                              email: contactEmail || 'customer@example.com',
+                              orderNumber: warrantyOrderNumber,
+                              productPurchased: warrantyProduct,
+                              issueDescription: warrantyIssue,
+                            }),
+                          });
+                          const data = await res.json();
+                          if (data.registrationId || data.claimId) {
+                            setSupportTicketId(data.registrationId || data.claimId);
+                          }
+                        } catch {}
+                        setSupportSubmitted(true);
+                        setIsSubmittingSupport(false);
+                      }}
                       style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 16 }}
                     >
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                         <div>
                           <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Full Name</label>
-                          <input required placeholder="Your Name" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                          <input required value={warrantyName} onChange={(e) => setWarrantyName(e.target.value)} placeholder="Your Name" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Order / Invoice ID</label>
-                          <input required placeholder="e.g. ORD-98214" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                          <input required value={warrantyOrderNumber} onChange={(e) => setWarrantyOrderNumber(e.target.value)} placeholder="e.g. ORD-98214" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                         </div>
                       </div>
                       <div>
                         <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Product Purchased</label>
-                        <input required placeholder="e.g. Cyberpunk Heavyweight 450 GSM Hoodie" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                        <input required value={warrantyProduct} onChange={(e) => setWarrantyProduct(e.target.value)} placeholder="e.g. Cyberpunk Heavyweight 450 GSM Hoodie" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                       </div>
                       <div>
                         <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Issue Description (if claiming)</label>
-                        <textarea rows={3} placeholder="Describe the defect or reason for warranty claim..." style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                        <textarea rows={3} value={warrantyIssue} onChange={(e) => setWarrantyIssue(e.target.value)} placeholder="Describe the defect or reason for warranty claim..." style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                       </div>
                       <button 
                         type="submit"
+                        disabled={isSubmittingSupport}
                         style={{
                           backgroundColor: '#0284c7',
                           color: '#fff',
@@ -2452,9 +2481,10 @@ export default function HomePage() {
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: 8,
+                          opacity: isSubmittingSupport ? 0.7 : 1,
                         }}
                       >
-                        <ShieldCheckIcon size={16} /> Submit Warranty Request
+                        <ShieldCheckIcon size={16} /> {isSubmittingSupport ? 'Submitting...' : 'Submit Warranty Request'}
                       </button>
                     </form>
                   )}
@@ -2471,7 +2501,7 @@ export default function HomePage() {
                   {supportSubmitted ? (
                     <div style={{ backgroundColor: '#064e3b', color: '#a7f3d0', border: '1px solid #059669', padding: '16px 20px', borderRadius: 12, marginTop: 16 }}>
                       <p style={{ margin: 0, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <CheckCircleIcon size={18} /> Message Received!
+                        <CheckCircleIcon size={18} /> Message Received! {supportTicketId && `(Ticket: ${supportTicketId})`}
                       </p>
                       <p style={{ margin: '6px 0 0', fontSize: 13 }}>
                         Thank you for reaching out. A support specialist will respond within 24 hours.
@@ -2479,29 +2509,52 @@ export default function HomePage() {
                     </div>
                   ) : (
                     <form 
-                      onSubmit={(e) => { e.preventDefault(); setSupportSubmitted(true); }}
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        setIsSubmittingSupport(true);
+                        const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+                        try {
+                          const res = await fetch(`${apiBase}/contact`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                              name: contactName,
+                              email: contactEmail,
+                              subject: contactSubject,
+                              message: contactMessage,
+                            }),
+                          });
+                          const data = await res.json();
+                          if (data.ticketId) {
+                            setSupportTicketId(data.ticketId);
+                          }
+                        } catch {}
+                        setSupportSubmitted(true);
+                        setIsSubmittingSupport(false);
+                      }}
                       style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 16 }}
                     >
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                         <div>
                           <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Your Name</label>
-                          <input required placeholder="Rahul Sharma" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                          <input required value={contactName} onChange={(e) => setContactName(e.target.value)} placeholder="Rahul Sharma" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Email / Phone</label>
-                          <input required placeholder="rahul@example.com" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                          <input required value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} placeholder="rahul@example.com" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                         </div>
                       </div>
                       <div>
                         <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Subject</label>
-                        <input required placeholder="Query regarding shipping or exchange" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                        <input required value={contactSubject} onChange={(e) => setContactSubject(e.target.value)} placeholder="Query regarding shipping or exchange" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                       </div>
                       <div>
                         <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Message</label>
-                        <textarea required rows={3} placeholder="How can we help you?" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
+                        <textarea required rows={3} value={contactMessage} onChange={(e) => setContactMessage(e.target.value)} placeholder="How can we help you?" style={{ width: '100%', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '10px 12px', color: '#fff', boxSizing: 'border-box' }} />
                       </div>
                       <button 
                         type="submit"
+                        disabled={isSubmittingSupport}
                         style={{
                           backgroundColor: '#0284c7',
                           color: '#fff',
@@ -2515,9 +2568,10 @@ export default function HomePage() {
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: 8,
+                          opacity: isSubmittingSupport ? 0.7 : 1,
                         }}
                       >
-                        <MailIcon size={16} /> Send Message
+                        <MailIcon size={16} /> {isSubmittingSupport ? 'Sending...' : 'Send Message'}
                       </button>
                     </form>
                   )}
@@ -2525,6 +2579,34 @@ export default function HomePage() {
               )}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            backgroundColor: toastMessage.isError ? '#451a1a' : '#0f172a',
+            color: '#ffffff',
+            border: toastMessage.isError ? '1px solid #ef4444' : '1px solid #38bdf8',
+            padding: '12px 24px',
+            borderRadius: '9999px',
+            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '13px',
+            fontWeight: 600,
+            zIndex: 9999,
+          }}
+          className="animate-pop-in"
+        >
+          <span>{toastMessage.isError ? '⚠️' : '✔'}</span>
+          <span>{toastMessage.text}</span>
         </div>
       )}
     </div>

@@ -187,80 +187,19 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [superCoins] = useState<number>(250);
   const [customerTier] = useState<'Bronze' | 'Silver' | 'Gold' | 'SuperStar'>('Gold');
 
-  // Sync state & persist to LocalStorage
+  // Sync state in memory (No LocalStorage persistence)
   const syncCart = () => {
     setCartSummary({ ...cart.getSummary() });
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('boost_cart_items', JSON.stringify(cart.getItems()));
-      }
-    } catch (e) {
-      console.warn('Could not save cart to localStorage', e);
-    }
   };
 
   const syncWishlist = () => {
     const items = [...wishlist.getItems()];
     setWishlistItems(items);
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('boost_wishlist_items', JSON.stringify(items));
-      }
-    } catch (e) {
-      console.warn('Could not save wishlist to localStorage', e);
-    }
   };
 
   const setDeliveryLocation = (loc: { city: string; pincode: string }) => {
     setDeliveryLocationState(loc);
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('boost_delivery_location', JSON.stringify(loc));
-      }
-    } catch (e) {
-      console.warn('Could not save location to localStorage', e);
-    }
   };
-
-  // Restore state from LocalStorage on mount
-  useEffect(() => {
-    try {
-      if (typeof window === 'undefined') return;
-
-      // 1. Restore Location
-      const savedLoc = localStorage.getItem('boost_delivery_location');
-      if (savedLoc) {
-        const parsedLoc = JSON.parse(savedLoc);
-        if (parsedLoc?.pincode) {
-          setDeliveryLocationState(parsedLoc);
-        }
-      }
-
-      // 2. Restore Wishlist
-      const savedWishlist = localStorage.getItem('boost_wishlist_items');
-      if (savedWishlist) {
-        const parsedWishlist: WishlistItem[] = JSON.parse(savedWishlist);
-        if (Array.isArray(parsedWishlist)) {
-          wishlist.clear();
-          parsedWishlist.forEach((item) => wishlist.addItem(item));
-          setWishlistItems([...wishlist.getItems()]);
-        }
-      }
-
-      // 3. Restore Cart
-      const savedCart = localStorage.getItem('boost_cart_items');
-      if (savedCart) {
-        const parsedCart = JSON.parse(savedCart);
-        if (Array.isArray(parsedCart) && parsedCart.length > 0) {
-          cart.clear();
-          parsedCart.forEach((item) => cart.addItem(item));
-          setCartSummary({ ...cart.getSummary() });
-        }
-      }
-    } catch (err) {
-      console.warn('Error hydrating store state from localStorage:', err);
-    }
-  }, []);
 
   const addToCart = (product: StoreProduct, variantId?: string, quantity = 1) => {
     let sku = product.sku;

@@ -11,7 +11,10 @@ import {
   AlertCircle,
   Globe,
   Mail,
-  Phone
+  Phone,
+  Upload,
+  Trash2,
+  Image as ImageIcon
 } from 'lucide-react';
 
 export default function AdminSettingsPage() {
@@ -33,6 +36,26 @@ export default function AdminSettingsPage() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleLogoFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !settings) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage({ type: 'error', text: 'Logo image exceeds 5MB size limit.' });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64 = event.target?.result as string;
+      if (base64) {
+        setSettings({ ...settings, logoUrl: base64 });
+        setMessage({ type: 'success', text: 'Logo uploaded! Click "Save Changes" to persist.' });
+      }
+    };
+    reader.readAsDataURL(file);
   }
 
   useEffect(() => {
@@ -145,7 +168,82 @@ export default function AdminSettingsPage() {
               <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 Store Profile & Identity
               </h2>
-              <p className="text-[11px] text-slate-500">Public store name, storefront URL, and customer support contacts.</p>
+              <p className="text-[11px] text-slate-500">Public store brand logo, name, storefront URL, and customer support contacts.</p>
+            </div>
+          </div>
+
+          {/* Brand Logo Upload & Preview */}
+          <div className="p-4 bg-slate-50/80 border border-slate-200/80 rounded-2xl space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <label className="block text-xs font-bold text-slate-800">
+                  Store Brand Logo
+                </label>
+                <p className="text-[11px] text-slate-500">
+                  Displays on storefront header, mobile menu, order checkout, and PDF GST invoices.
+                </p>
+              </div>
+              {settings.logoUrl && (
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                  Custom Logo Active
+                </span>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 pt-1">
+              <div className="w-48 h-20 bg-white border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center p-2 relative overflow-hidden flex-shrink-0 shadow-2xs">
+                {settings.logoUrl ? (
+                  <img
+                    src={settings.logoUrl}
+                    alt="Store Logo"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                ) : (
+                  <div className="text-center text-slate-400">
+                    <ImageIcon className="w-6 h-6 mx-auto mb-1 opacity-50" />
+                    <span className="text-[10px] font-semibold block">No Logo Uploaded</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-1 w-full space-y-2">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <label className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-xs">
+                    <Upload className="w-3.5 h-3.5" />
+                    <span>Upload Image File</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+
+                  {settings.logoUrl && (
+                    <button
+                      type="button"
+                      onClick={() => setSettings({ ...settings, logoUrl: '' })}
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 rounded-xl text-xs font-semibold transition"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Remove</span>
+                    </button>
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    type="url"
+                    placeholder="Or paste direct image URL (https://cdn.example.com/logo.png)"
+                    value={settings.logoUrl || ''}
+                    onChange={(e) => setSettings({ ...settings, logoUrl: e.target.value })}
+                    className="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600 shadow-2xs"
+                  />
+                </div>
+                <p className="text-[10px] text-slate-400">
+                  Recommended: Transparent PNG, SVG, or WebP. 250×60px to 400×120px. Max 5MB.
+                </p>
+              </div>
             </div>
           </div>
 

@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { DEMO_PRODUCTS, Product } from '../data/products';
+import { useStore } from '../context/StoreContext';
+import { ProductReview } from '../types/store';
 import {
   ShoppingBagIcon,
   StarIcon,
@@ -11,219 +13,322 @@ import {
   ZapIcon,
   ArrowRightIcon,
   LockIcon,
+  HeartIcon,
+  SparklesIcon,
 } from './Icons';
-
-const storeName = import.meta.env.VITE_STORE_NAME || 'BOOST ENGINE';
-
-const PINCODE_MAP: Record<string, { city: string; state: string; days: string }> = {
-  '11': { city: 'New Delhi', state: 'Delhi', days: 'Tomorrow, by 2 PM' },
-  '40': { city: 'Mumbai', state: 'Maharashtra', days: '2-3 Business Days' },
-  '56': { city: 'Bengaluru', state: 'Karnataka', days: '2-3 Business Days' },
-  '60': { city: 'Chennai', state: 'Tamil Nadu', days: '3-4 Business Days' },
-};
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { addToCart, toggleWishlist, isInWishlist, cartCount, verifyPincode, pincodeInfo } = useStore();
 
-  // Find product by id or slug
-  const product: Product =
-    DEMO_PRODUCTS.find((p) => p.id === id || (p.slug && p.slug === id)) || DEMO_PRODUCTS[0];
-
-  const defaultSizes = product.sizes && product.sizes.length > 0 ? product.sizes : ['M'];
-  const defaultColors = product.colors && product.colors.length > 0 ? product.colors : ['Black'];
-  const defaultImages = product.images && product.images.length > 0 ? product.images : [product.image];
-
-  const [selectedImage, setSelectedImage] = useState<string>(product.image);
-  const [selectedSize, setSelectedSize] = useState<string>(defaultSizes[0]);
-  const [selectedColor, setSelectedColor] = useState<string>(defaultColors[0]);
-  const [pincode, setPincode] = useState<string>('110001');
-  const [isAdded, setIsAdded] = useState<boolean>(false);
-
-  const [cartCount, setCartCount] = useState<number>(() => {
-    try {
-      const saved = localStorage.getItem('boost_cart');
-      const parsed = saved ? JSON.parse(saved) : [];
-      return parsed.reduce((acc: number, item: any) => acc + (item.quantity || 1), 0);
-    } catch {
-      return 0;
-    }
+  const [product, setProduct] = useState<Product>(() => {
+    return DEMO_PRODUCTS.find((p) => p.id === id || (p.slug && p.slug === id)) || DEMO_PRODUCTS[0];
   });
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedImage, setSelectedImage] = useState<string>(product.image);
+  const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || 'M');
+  const [selectedColor, setSelectedColor] = useState<string>(product.colors?.[0] || 'Black');
+  const [pincodeInput, setPincodeInput] = useState<string>('110001');
+  const [isVerifyingPincode, setIsVerifyingPincode] = useState<boolean>(false);
+  const [isAdded, setIsAdded] = useState<boolean>(false);
+
+  // Reviews state
+  const [reviews, setReviews] = useState<ProductReview[]>([
+    {
+      id: 'rev_1',
+      productId: product.id,
+      customerName: 'Aarav Malhotra',
+      rating: 5,
+      title: 'Insane fabric quality!',
+      comment: 'The 450 GSM weight is real heavyweight luxury streetwear. Best purchase this winter.',
+      verifiedPurchase: true,
+      createdAt: '2 days ago',
+    },
+    {
+      id: 'rev_2',
+      productId: product.id,
+      customerName: 'Rohan Sharma',
+      rating: 5,
+      title: 'Perfect boxy fit',
+      comment: 'True to size with the exact dropped shoulder fit I was looking for. Express delivery took 2 days.',
+      verifiedPurchase: true,
+      createdAt: '1 week ago',
+    },
+  ]);
+
+  // Review Modal
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [newReviewAuthor, setNewReviewAuthor] = useState('');
+  const [newReviewRating, setNewReviewRating] = useState(5);
+  const [newReviewTitle, setNewReviewTitle] = useState('');
+  const [newReviewComment, setNewReviewComment] = useState('');
+
+  // Fetch live product from API
   useEffect(() => {
-    if (product) {
-      setSelectedImage(product.image);
-      setSelectedSize(defaultSizes[0]);
-      setSelectedColor(defaultColors[0]);
-    }
-  }, [product]);
+    setIsLoading(true);
+    const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+    fetch(`${apiBase}/products/${id}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((data) => {
+        if (data.product) {
+          setProduct(data.product);
+          setSelectedImage(data.product.image);
+          if (data.product.sizes?.length) setSelectedSize(data.product.sizes[0]);
+          if (data.product.colors?.length) setSelectedColor(data.product.colors[0]);
+        }
+      })
+      .catch(() => {
+        // Fallback to local DEMO_PRODUCTS
+        const fallback = DEMO_PRODUCTS.find((p) => p.id === id || (p.slug && p.slug === id)) || DEMO_PRODUCTS[0];
+        setProduct(fallback);
+        setSelectedImage(fallback.image);
+        if (fallback.sizes?.length) setSelectedSize(fallback.sizes[0]);
+        if (fallback.colors?.length) setSelectedColor(fallback.colors[0]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+    // Fetch Reviews
+    fetch(`${apiBase}/reviews?productId=${id}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((data) => {
+        if (data.reviews && Array.isArray(data.reviews) && data.reviews.length > 0) {
+          setReviews(data.reviews);
+        }
+      })
+      .catch(() => {});
+  }, [id]);
+
+  const defaultSizes = product.sizes && product.sizes.length > 0 ? product.sizes : ['S', 'M', 'L', 'XL'];
+  const defaultColors = product.colors && product.colors.length > 0 ? product.colors : ['Onyx Black'];
+  const defaultImages = product.images && product.images.length > 0 ? product.images : [product.image];
 
   const handleAddToCart = () => {
-    try {
-      const saved = localStorage.getItem('boost_cart');
-      const cart = saved ? JSON.parse(saved) : [];
-      const existing = cart.find(
-        (item: any) => item.product.id === product.id && item.size === selectedSize
-      );
-
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ product, quantity: 1, size: selectedSize, color: selectedColor });
-      }
-
-      localStorage.setItem('boost_cart', JSON.stringify(cart));
-      setCartCount(cart.reduce((acc: number, item: any) => acc + (item.quantity || 1), 0));
-      setIsAdded(true);
-      setTimeout(() => setIsAdded(false), 2500);
-    } catch (e) {
-      console.error(e);
-    }
+    addToCart(product, selectedSize, selectedColor);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
   };
 
   const handleBuyNow = () => {
-    handleAddToCart();
+    addToCart(product, selectedSize, selectedColor);
     navigate('/cart');
   };
 
-  const pincodeInfo = PINCODE_MAP[pincode.slice(0, 2)] || {
-    city: 'Your City',
-    state: 'India',
-    days: '2-4 Business Days',
+  const handleVerifyPincode = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pincodeInput.length !== 6) return;
+    setIsVerifyingPincode(true);
+    await verifyPincode(pincodeInput);
+    setIsVerifyingPincode(false);
   };
 
-  return (
-    <div style={{ backgroundColor: '#090d16', color: '#f8fafc', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Top Announcement Bar */}
-      <div style={{ backgroundColor: '#0284c7', color: '#ffffff', fontSize: 12, fontWeight: 700, textAlign: 'center', padding: '7px 16px' }}>
-        ⚡ Pan-India Express Delivery • Free Shipping on orders over ₹999 • Code BOOST20 for 20% OFF
+  const handleSubmitReview = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newReviewAuthor.trim() || !newReviewComment.trim()) return;
+
+    const newRev: ProductReview = {
+      id: 'rev_' + Date.now(),
+      productId: product.id,
+      customerName: newReviewAuthor.trim(),
+      rating: newReviewRating,
+      title: newReviewTitle.trim() || 'Great product!',
+      comment: newReviewComment.trim(),
+      verifiedPurchase: true,
+      createdAt: 'Just now',
+    };
+
+    const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+    try {
+      await fetch(`${apiBase}/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRev),
+      });
+    } catch {
+      // Local fallback
+    }
+
+    setReviews((prev) => [newRev, ...prev]);
+    setIsReviewModalOpen(false);
+    setNewReviewAuthor('');
+    setNewReviewTitle('');
+    setNewReviewComment('');
+  };
+
+  const inWish = isInWishlist(product.id);
+
+  if (isLoading && !product) {
+    return (
+      <div style={{ backgroundColor: '#09090b', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8' }}>
+        <span>Loading product details...</span>
       </div>
+    );
+  }
 
-      {/* Header */}
-      <header style={{ borderBottom: '1px solid #1e293b', backgroundColor: '#0f172a', padding: '14px 24px' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ color: '#fbbf24', display: 'flex' }}>
-              <ZapIcon size={24} />
-            </div>
-            <div>
-              <span style={{ fontSize: 19, fontWeight: 800, color: '#ffffff', letterSpacing: 0.5 }}>{storeName}</span>
-              <span style={{ display: 'block', fontSize: 10, color: '#38bdf8', fontWeight: 700, letterSpacing: 1 }}>STREETWEAR & ESSENTIALS</span>
-            </div>
-          </Link>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <Link to="/" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 13, fontWeight: 600 }}>Catalog</Link>
-            <Link to="/wishlist" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 13, fontWeight: 600 }}>Wishlist</Link>
-            <Link to="/orders" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 13, fontWeight: 600 }}>Orders</Link>
-            <Link to="/admin" style={{ color: '#f43f5e', textDecoration: 'none', fontSize: 13, fontWeight: 700 }}>Admin</Link>
-            <Link to="/cart" style={{ backgroundColor: '#0284c7', color: '#fff', textDecoration: 'none', padding: '8px 16px', borderRadius: 9999, fontSize: 13, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <ShoppingBagIcon size={16} />
-              <span>Bag ({cartCount})</span>
-            </Link>
+  return (
+    <div style={{ backgroundColor: '#09090b', color: '#f4f4f5', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+      {/* Top Header */}
+      <header style={{ borderBottom: '1px solid #27272a', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#18181b', position: 'sticky', top: 0, zIndex: 40 }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#fff' }}>
+          <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#0284c7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+            <ZapIcon size={18} />
           </div>
+          <span style={{ fontWeight: 800, fontSize: '18px', letterSpacing: '-0.02em' }}>BOOST STORE</span>
+        </Link>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <Link to="/wishlist" style={{ color: '#cbd5e1', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px' }}>
+            <HeartIcon size={18} />
+            <span className="hidden sm:inline">Wishlist</span>
+          </Link>
+          <Link to="/cart" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: '#cbd5e1', fontSize: '14px', fontWeight: 600 }}>
+            <ShoppingBagIcon size={18} />
+            <span>Bag</span>
+            {cartCount > 0 && (
+              <span style={{ backgroundColor: '#0284c7', color: '#fff', fontSize: '11px', fontWeight: 700, padding: '2px 6px', borderRadius: '9999px' }}>
+                {cartCount}
+              </span>
+            )}
+          </Link>
         </div>
       </header>
 
-      {/* Breadcrumbs */}
-      <div style={{ maxWidth: 1240, margin: '0 auto', width: '100%', padding: '16px 24px', fontSize: 12, color: '#64748b' }}>
-        <Link to="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>Home</Link>
+      {/* Breadcrumb */}
+      <nav aria-label="Breadcrumb" style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px 24px', fontSize: '12px', color: '#71717a' }}>
+        <Link to="/" style={{ color: '#71717a', textDecoration: 'none' }}>Home</Link>
         <span style={{ margin: '0 8px' }}>/</span>
-        <span style={{ color: '#94a3b8' }}>{product.category}</span>
+        <span style={{ color: '#a1a1aa' }}>{product.category}</span>
         <span style={{ margin: '0 8px' }}>/</span>
-        <span style={{ color: '#38bdf8' }}>{product.title}</span>
-      </div>
+        <span style={{ color: '#ffffff' }}>{product.title}</span>
+      </nav>
 
-      {/* Main PDP Grid */}
-      <main style={{ maxWidth: 1240, margin: '0 auto', width: '100%', padding: '0 24px 60px', flex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 48 }}>
-          
+      {/* Main Grid */}
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px 60px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'start' }}>
           {/* Left Column: Image Gallery */}
           <div>
-            <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', backgroundColor: '#131b2e', border: '1px solid #1e293b', aspectRatio: '1/1' }}>
-              <img src={selectedImage} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#ef4444', color: '#fff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 700 }}>
-                35% OFF
-              </div>
+            <div style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', backgroundColor: '#18181b', border: '1px solid #27272a' }}>
+              <img
+                src={selectedImage}
+                alt={product.title}
+                style={{ width: '100%', height: '520px', objectFit: 'cover' }}
+              />
+              <button
+                onClick={() => toggleWishlist(product)}
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(9, 9, 11, 0.85)',
+                  border: '1px solid #3f3f46',
+                  color: inWish ? '#ef4444' : '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                }}
+                title={inWish ? 'Remove from wishlist' : 'Add to wishlist'}
+              >
+                <HeartIcon size={20} filled={inWish} />
+              </button>
+
+              {product.compareAtPrice > product.price && (
+                <div style={{ position: 'absolute', bottom: '16px', left: '16px', backgroundColor: '#10b981', color: '#fff', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', fontWeight: 800 }}>
+                  SAVE ₹{product.compareAtPrice - product.price} (35% OFF)
+                </div>
+              )}
             </div>
 
-            {/* Thumbnail Row */}
-            <div style={{ display: 'flex', gap: 12, marginTop: 14 }}>
-              {defaultImages.map((img: string, idx: number) => (
-                <div
-                  key={idx}
-                  onClick={() => setSelectedImage(img)}
-                  style={{
-                    width: 72,
-                    height: 72,
-                    borderRadius: 10,
-                    overflow: 'hidden',
-                    border: selectedImage === img ? '2px solid #38bdf8' : '1px solid #334155',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <img src={img} alt="Thumbnail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-              ))}
-            </div>
+            {/* Thumbnails */}
+            {defaultImages.length > 1 && (
+              <div style={{ display: 'flex', gap: '12px', marginTop: '14px', overflowX: 'auto' }}>
+                {defaultImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedImage(img)}
+                    style={{
+                      border: selectedImage === img ? '2px solid #38bdf8' : '1px solid #27272a',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                      padding: 0,
+                      cursor: 'pointer',
+                      background: 'none',
+                    }}
+                  >
+                    <img src={img} alt={`Thumbnail ${i}`} style={{ width: '64px', height: '64px', objectFit: 'cover' }} />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Right Column: Product Details & Purchase */}
+          {/* Right Column: Product Info & Actions */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <span style={{ backgroundColor: '#1e293b', color: '#38bdf8', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4 }}>
-                {product.category.toUpperCase()}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+              <span style={{ backgroundColor: '#0369a1', color: '#e0f2fe', padding: '3px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase' }}>
+                {product.category}
               </span>
-              <span style={{ color: '#10b981', fontSize: 11, fontWeight: 700 }}>
-                ● IN STOCK • READY TO DISPATCH
+              <span style={{ color: '#10b981', fontSize: '12px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <CheckIcon size={14} /> In Stock • Ready for Dispatch
               </span>
             </div>
 
-            <h1 style={{ fontSize: 28, fontWeight: 800, margin: '0 0 12px', lineHeight: 1.3 }}>{product.title}</h1>
+            <h1 style={{ fontSize: '30px', fontWeight: 800, lineHeight: 1.2, margin: '0 0 12px 0' }}>
+              {product.title}
+            </h1>
 
-            {/* Ratings & HSN */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, fontSize: 13, color: '#94a3b8' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#f59e0b', fontWeight: 700 }}>
-                <StarIcon size={15} />
-                <span>{product.rating}</span>
-                <span style={{ color: '#64748b' }}>({product.reviewsCount} reviews)</span>
+            {/* Ratings Bar */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#27272a', padding: '4px 8px', borderRadius: '6px' }}>
+                <StarIcon size={14} filled={true} style={{ color: '#fbbf24' }} />
+                <span style={{ fontSize: '13px', fontWeight: 800 }}>{product.rating || 4.9}</span>
               </div>
-              <span>•</span>
-              <span>HSN: {product.hsn || '6109'}</span>
+              <span style={{ fontSize: '13px', color: '#a1a1aa' }}>
+                Based on {reviews.length} verified Indian customer reviews
+              </span>
             </div>
 
-            {/* Price Row */}
-            <div style={{ backgroundColor: '#0f172a', padding: '16px 20px', borderRadius: 12, border: '1px solid #1e293b', marginBottom: 24 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
-                <span style={{ fontSize: 32, fontWeight: 800, color: '#ffffff' }}>₹{product.price}</span>
-                <span style={{ fontSize: 18, color: '#64748b', textDecorationLine: 'line-through' }}>₹{product.compareAtPrice}</span>
-                <span style={{ color: '#10b981', fontSize: 13, fontWeight: 700 }}>Save ₹{product.compareAtPrice - product.price} (35% OFF)</span>
+            {/* Price Block */}
+            <div style={{ backgroundColor: '#18181b', padding: '16px 20px', borderRadius: '12px', border: '1px solid #27272a', marginBottom: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+                <span style={{ fontSize: '32px', fontWeight: 800, color: '#ffffff' }}>₹{product.price}</span>
+                {product.compareAtPrice > product.price && (
+                  <span style={{ fontSize: '18px', color: '#71717a', textDecoration: 'line-through' }}>
+                    ₹{product.compareAtPrice}
+                  </span>
+                )}
+                <span style={{ color: '#10b981', fontSize: '13px', fontWeight: 700 }}>
+                  Inclusive of 18% Indian GST (CGST + SGST)
+                </span>
               </div>
-              <p style={{ margin: '6px 0 0', fontSize: 11, color: '#94a3b8' }}>
-                Inclusive of 18% Indian GST (CGST + SGST or IGST automatically calculated at checkout)
-              </p>
             </div>
 
             {/* Size Selector */}
-            <div style={{ marginBottom: 22 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#ffffff' }}>SELECT SIZE</span>
-                <span style={{ fontSize: 11, color: '#38bdf8', cursor: 'pointer' }}>Size Guide (True to Size)</span>
+            <div style={{ marginBottom: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700 }}>SELECT SIZE</span>
+                <span style={{ fontSize: '12px', color: '#38bdf8' }}>True to Indian Streetwear Fit</span>
               </div>
-              <div style={{ display: 'flex', gap: 10 }}>
-                {defaultSizes.map((sz: string) => (
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {defaultSizes.map((sz) => (
                   <button
                     key={sz}
                     onClick={() => setSelectedSize(sz)}
                     style={{
                       padding: '10px 18px',
-                      borderRadius: 8,
-                      border: selectedSize === sz ? '2px solid #38bdf8' : '1px solid #334155',
-                      backgroundColor: selectedSize === sz ? '#0c4a6e' : '#1e293b',
-                      color: selectedSize === sz ? '#38bdf8' : '#cbd5e1',
-                      fontSize: 13,
+                      borderRadius: '8px',
+                      border: selectedSize === sz ? '2px solid #38bdf8' : '1px solid #3f3f46',
+                      backgroundColor: selectedSize === sz ? '#0c4a6e' : '#18181b',
+                      color: selectedSize === sz ? '#38bdf8' : '#ffffff',
                       fontWeight: 700,
                       cursor: 'pointer',
+                      fontSize: '13px',
                     }}
                   >
                     {sz}
@@ -232,8 +337,36 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
+            {/* Color Selector */}
+            <div style={{ marginBottom: '24px' }}>
+              <span style={{ fontSize: '13px', fontWeight: 700, display: 'block', marginBottom: '8px' }}>
+                COLOR: <span style={{ color: '#38bdf8' }}>{selectedColor}</span>
+              </span>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {defaultColors.map((col) => (
+                  <button
+                    key={col}
+                    type="button"
+                    onClick={() => setSelectedColor(col)}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      border: selectedColor === col ? '2px solid #38bdf8' : '1px solid #3f3f46',
+                      backgroundColor: selectedColor === col ? '#0c4a6e' : '#18181b',
+                      color: selectedColor === col ? '#38bdf8' : '#ffffff',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                    }}
+                  >
+                    {col}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: 14, marginBottom: 28 }}>
+            <div style={{ display: 'flex', gap: '12px', marginBottom: '28px' }}>
               <button
                 onClick={handleAddToCart}
                 style={{
@@ -241,16 +374,15 @@ export default function ProductDetailPage() {
                   backgroundColor: isAdded ? '#059669' : '#0284c7',
                   color: '#ffffff',
                   border: 'none',
-                  borderRadius: 10,
+                  borderRadius: '10px',
                   padding: '15px 24px',
-                  fontSize: 15,
+                  fontSize: '15px',
                   fontWeight: 700,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 8,
-                  transition: 'background-color 0.2s',
+                  gap: '8px',
                 }}
               >
                 {isAdded ? (
@@ -273,15 +405,15 @@ export default function ProductDetailPage() {
                   backgroundColor: '#10b981',
                   color: '#ffffff',
                   border: 'none',
-                  borderRadius: 10,
+                  borderRadius: '10px',
                   padding: '15px 24px',
-                  fontSize: 15,
+                  fontSize: '15px',
                   fontWeight: 700,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 8,
+                  gap: '8px',
                 }}
               >
                 <span>Buy Now (Express)</span>
@@ -289,55 +421,214 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            {/* Pincode Checker */}
-            <div style={{ backgroundColor: '#131b2e', padding: '16px 20px', borderRadius: 12, border: '1px solid #1e293b', marginBottom: 28 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#94a3b8', display: 'block', marginBottom: 8 }}>
-                CHECK DELIVERY & CASH ON DELIVERY AVAILABILITY
+            {/* Pincode & Delivery Checker */}
+            <div style={{ backgroundColor: '#18181b', padding: '16px 20px', borderRadius: '12px', border: '1px solid #27272a', marginBottom: '28px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 700, color: '#a1a1aa', display: 'block', marginBottom: '8px' }}>
+                DELIVERY SERVICEABILITY & ESTIMATE
               </span>
-              <div style={{ display: 'flex', gap: 8 }}>
+              <form onSubmit={handleVerifyPincode} style={{ display: 'flex', gap: '8px' }}>
                 <input
                   type="text"
                   maxLength={6}
-                  value={pincode}
-                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
+                  value={pincodeInput}
+                  onChange={(e) => setPincodeInput(e.target.value.replace(/\D/g, ''))}
                   placeholder="Enter 6-digit Pincode"
-                  style={{ flex: 1, backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '9px 12px', color: '#fff', fontSize: 13 }}
+                  style={{
+                    flex: 1,
+                    backgroundColor: '#09090b',
+                    border: '1px solid #3f3f46',
+                    borderRadius: '8px',
+                    padding: '8px 12px',
+                    color: '#fff',
+                    fontSize: '13px',
+                  }}
                 />
                 <button
-                  type="button"
-                  style={{ backgroundColor: '#1e293b', color: '#38bdf8', border: '1px solid #38bdf8', borderRadius: 8, padding: '9px 16px', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
+                  type="submit"
+                  disabled={isVerifyingPincode}
+                  style={{
+                    backgroundColor: '#27272a',
+                    color: '#38bdf8',
+                    border: '1px solid #38bdf8',
+                    borderRadius: '8px',
+                    padding: '8px 16px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
                 >
-                  Verify
+                  {isVerifyingPincode ? 'Checking...' : 'Check'}
                 </button>
+              </form>
+              <div style={{ marginTop: '10px', fontSize: '12px', color: pincodeInfo.serviceable ? '#10b981' : '#ef4444', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <TruckIcon size={14} />
+                <span>
+                  {pincodeInfo.serviceable
+                    ? `Eligible for delivery to ${pincodeInfo.city} (${pincodeInfo.days}) • COD Available`
+                    : 'Pincode not currently serviceable'}
+                </span>
               </div>
-              <p style={{ margin: '10px 0 0', fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <CheckIcon size={14} /> Deliver to {pincodeInfo.city} ({pincodeInfo.days}) • Free Shipping Eligible
-              </p>
             </div>
 
-            {/* Trust Points */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, borderTop: '1px solid #1e293b', paddingTop: 20 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#cbd5e1' }}>
+            {/* Description */}
+            <div style={{ borderTop: '1px solid #27272a', paddingTop: '20px', marginBottom: '24px' }}>
+              <h3 style={{ fontSize: '14px', fontWeight: 700, marginBottom: '8px' }}>Product Overview</h3>
+              <p style={{ color: '#a1a1aa', fontSize: '14px', lineHeight: 1.6 }}>{product.description}</p>
+            </div>
+
+            {/* Trust Badges */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', borderTop: '1px solid #27272a', paddingTop: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#cbd5e1' }}>
                 <TruckIcon size={16} style={{ color: '#38bdf8' }} />
-                <span>Pan-India 2-3 Day Express Dispatch</span>
+                <span>Pan-India 2-3 Day Dispatch</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#cbd5e1' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#cbd5e1' }}>
                 <ShieldCheckIcon size={16} style={{ color: '#38bdf8' }} />
-                <span>6-Month Stitching Warranty Cover</span>
+                <span>6-Month Stitching Warranty</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#cbd5e1' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#cbd5e1' }}>
                 <RotateCcwIcon size={16} style={{ color: '#38bdf8' }} />
-                <span>7-Day Doorstep Replacement</span>
+                <span>7-Day Doorstep Exchange</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#cbd5e1' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#cbd5e1' }}>
                 <LockIcon size={16} style={{ color: '#38bdf8' }} />
                 <span>100% Encrypted UPI & COD</span>
               </div>
             </div>
-
           </div>
         </div>
+
+        {/* Customer Reviews Section */}
+        <section style={{ marginTop: '64px', borderTop: '1px solid #27272a', paddingTop: '40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <div>
+              <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 6px 0' }}>Customer Reviews</h2>
+              <p style={{ color: '#a1a1aa', fontSize: '13px' }}>Verified feedback from buyers across India</p>
+            </div>
+            <button
+              onClick={() => setIsReviewModalOpen(true)}
+              style={{
+                backgroundColor: '#27272a',
+                color: '#38bdf8',
+                border: '1px solid #38bdf8',
+                borderRadius: '8px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <SparklesIcon size={14} />
+              <span>Write a Review</span>
+            </button>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            {reviews.map((rev) => (
+              <div key={rev.id} style={{ backgroundColor: '#18181b', borderRadius: '12px', border: '1px solid #27272a', padding: '18px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div style={{ display: 'flex', gap: '2px', color: '#fbbf24' }}>
+                    {Array.from({ length: rev.rating }).map((_, i) => (
+                      <StarIcon key={i} size={14} filled={true} />
+                    ))}
+                  </div>
+                  <span style={{ fontSize: '11px', color: '#71717a' }}>{rev.createdAt}</span>
+                </div>
+                <h4 style={{ fontSize: '14px', fontWeight: 700, margin: '0 0 6px 0', color: '#ffffff' }}>{rev.title}</h4>
+                <p style={{ fontSize: '13px', color: '#a1a1aa', lineHeight: 1.5, marginBottom: '12px' }}>{rev.comment}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#cbd5e1' }}>
+                  <span style={{ fontWeight: 600 }}>{rev.customerName}</span>
+                  {rev.verifiedPurchase && (
+                    <span style={{ color: '#10b981', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+                      <CheckIcon size={12} /> Verified Buyer
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
+
+      {/* Review Submission Modal */}
+      {isReviewModalOpen && (
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+          <div style={{ backgroundColor: '#18181b', borderRadius: '16px', border: '1px solid #27272a', width: '100%', maxWidth: '440px', padding: '24px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '16px' }}>Rate & Review</h3>
+            <form onSubmit={handleSubmitReview} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div>
+                <label style={{ fontSize: '12px', color: '#a1a1aa', display: 'block', marginBottom: '6px' }}>Rating</label>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      type="button"
+                      key={star}
+                      onClick={() => setNewReviewRating(star)}
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', color: star <= newReviewRating ? '#fbbf24' : '#3f3f46' }}
+                    >
+                      <StarIcon size={24} filled={star <= newReviewRating} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#a1a1aa', display: 'block', marginBottom: '6px' }}>Your Name</label>
+                <input
+                  type="text"
+                  required
+                  value={newReviewAuthor}
+                  onChange={(e) => setNewReviewAuthor(e.target.value)}
+                  placeholder="e.g. Aryan Khan"
+                  style={{ width: '100%', backgroundColor: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '8px 12px', color: '#fff', fontSize: '13px' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#a1a1aa', display: 'block', marginBottom: '6px' }}>Headline</label>
+                <input
+                  type="text"
+                  value={newReviewTitle}
+                  onChange={(e) => setNewReviewTitle(e.target.value)}
+                  placeholder="e.g. Superb Heavyweight Material"
+                  style={{ width: '100%', backgroundColor: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '8px 12px', color: '#fff', fontSize: '13px' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#a1a1aa', display: 'block', marginBottom: '6px' }}>Your Experience</label>
+                <textarea
+                  required
+                  rows={3}
+                  value={newReviewComment}
+                  onChange={(e) => setNewReviewComment(e.target.value)}
+                  placeholder="Share details about fit, comfort and delivery..."
+                  style={{ width: '100%', backgroundColor: '#09090b', border: '1px solid #3f3f46', borderRadius: '8px', padding: '8px 12px', color: '#fff', fontSize: '13px' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+                <button
+                  type="button"
+                  onClick={() => setIsReviewModalOpen(false)}
+                  style={{ flex: 1, backgroundColor: '#27272a', color: '#cbd5e1', border: 'none', borderRadius: '8px', padding: '10px', fontSize: '13px', cursor: 'pointer' }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  style={{ flex: 1, backgroundColor: '#0284c7', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}
+                >
+                  Submit Review
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

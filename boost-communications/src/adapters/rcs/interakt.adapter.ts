@@ -79,7 +79,7 @@ export class InteraktRCSAdapter implements IRCSAdapter {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${this.apiKey}`,
+        Authorization: this.apiKey.startsWith('Basic ') ? this.apiKey : `Basic ${this.apiKey}`,
       },
       body: JSON.stringify(options),
     });

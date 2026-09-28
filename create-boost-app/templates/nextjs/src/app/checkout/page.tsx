@@ -48,6 +48,8 @@ export default function CheckoutPage() {
     paymentMethod: 'razorpay' as 'razorpay' | 'cod' | 'upi',
   });
 
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
   // Phone OTP login state
   const [loginPhone, setLoginPhone] = useState(form.phone);
   const [showLoginOtp, setShowLoginOtp] = useState(false);
@@ -187,6 +189,7 @@ export default function CheckoutPage() {
 
   async function executeOrderPlacement(isCodVerified = false, overridePaymentMethod?: 'razorpay' | 'cod' | 'upi', discountOffset = 0) {
     try {
+      setCheckoutError(null);
       setSubmitting(true);
 
       const activeMethod = overridePaymentMethod || form.paymentMethod;
@@ -369,7 +372,7 @@ export default function CheckoutPage() {
       const razorpayInstance = new (window as any).Razorpay(options);
       razorpayInstance.open();
     } catch (err: any) {
-      alert(err.message || 'Error processing order');
+      setCheckoutError(err.message || 'Error processing order');
       setSubmitting(false);
     }
   }
@@ -1082,6 +1085,13 @@ export default function CheckoutPage() {
                 Send me order updates, delivery alerts & exclusive offers on WhatsApp.
               </span>
             </label>
+
+            {checkoutError && (
+              <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 rounded-xl text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-2">
+                <span>⚠️</span>
+                <span>{checkoutError}</span>
+              </div>
+            )}
 
             <button
               type="submit"

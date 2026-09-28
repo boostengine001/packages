@@ -6,6 +6,8 @@ import {
   VerifyOTPResult,
   OrderNotificationParams,
   CartRecoveryParams,
+  InteraktTrackUserOptions,
+  InteraktTrackEventOptions,
 } from '../types';
 
 /**
@@ -128,6 +130,40 @@ export function useCommunications(customEngine?: OmnichannelEngine) {
     [engine]
   );
 
+  const trackUser = useCallback(
+    async (options: InteraktTrackUserOptions): Promise<any> => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await engine.trackUser(options);
+        return res;
+      } catch (err: any) {
+        setError(err.message);
+        return { result: false, message: err.message };
+      } finally {
+        setLoading(false);
+      }
+    },
+    [engine]
+  );
+
+  const trackEvent = useCallback(
+    async (options: InteraktTrackEventOptions): Promise<any> => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await engine.trackEvent(options);
+        return res;
+      } catch (err: any) {
+        setError(err.message);
+        return { result: false, message: err.message };
+      } finally {
+        setLoading(false);
+      }
+    },
+    [engine]
+  );
+
   return {
     loading,
     error,
@@ -137,6 +173,8 @@ export function useCommunications(customEngine?: OmnichannelEngine) {
     sendEmail,
     sendOrderConfirmation,
     sendCartRecovery,
+    trackUser,
+    trackEvent,
     engine,
   };
 }

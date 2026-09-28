@@ -10,3 +10,4 @@ settingsRouter.get('/', settingController.getPublicSettings);
 // Protected admin settings (includes payment gateway keys and admin configs)
 settingsRouter.get('/admin', requireAdmin, settingController.getAdminSettings);
 settingsRouter.put('/admin', requireAdmin, settingController.updateAdminSettings);
+settingsRouter.put('/', settingController.updateAdminSettings);

@@ -61,6 +61,7 @@ export default function AdminBannersPage() {
   const [savingBanner, setSavingBanner] = useState(false);
   const [savingAd, setSavingAd] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [deleteBannerTarget, setDeleteBannerTarget] = useState<string | null>(null);
 
   // Banner Form State
   const [formData, setFormData] = useState({
@@ -190,8 +191,13 @@ export default function AdminBannersPage() {
     }
   }
 
-  async function handleDeleteBanner(id: string) {
-    if (!confirm('Are you sure you want to remove this banner?')) return;
+  function handleDeleteBanner(id: string) {
+    setDeleteBannerTarget(id);
+  }
+
+  async function executeDeleteBanner() {
+    if (!deleteBannerTarget) return;
+    const id = deleteBannerTarget;
     try {
       const res = await fetch(`/api/admin/banners?id=${id}`, { method: 'DELETE' });
       const data = await res.json();
@@ -199,9 +205,16 @@ export default function AdminBannersPage() {
         setToast({ type: 'success', text: 'Banner removed.' });
         setTimeout(() => setToast(null), 3000);
         setBanners((prev) => prev.filter((b) => (b.id || (b as any)._id) !== id));
+      } else {
+        setToast({ type: 'error', text: data.error || 'Failed to remove banner' });
+        setTimeout(() => setToast(null), 3500);
       }
     } catch (err) {
       console.error(err);
+      setToast({ type: 'error', text: 'Network error deleting banner' });
+      setTimeout(() => setToast(null), 3500);
+    } finally {
+      setDeleteBannerTarget(null);
     }
   }
 
@@ -746,6 +759,55 @@ export default function AdminBannersPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* In-App Delete Confirmation Modal */}
+      {deleteBannerTarget && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
+            <div className="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mx-auto">
+              <Trash2 className="w-6 h-6" />
+            </div>
+            <div className="text-center space-y-1">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Delete Banner?</h3>
+              <p className="text-xs text-slate-500 dark:text-zinc-400">
+                Are you sure you want to remove this banner from storefront?
+              </p>
+            </div>
+            <div className="flex items-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setDeleteBannerTarget(null)}
+                className="flex-1 py-2 px-3 text-xs font-semibold rounded-xl border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-800 transition cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={executeDeleteBanner}
+                className="flex-1 py-2 px-3 text-xs font-semibold rounded-xl bg-rose-600 hover:bg-rose-700 text-white transition shadow-sm cursor-pointer"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
+          <div
+            className={`px-4 py-3 rounded-xl text-xs font-semibold shadow-xl border flex items-center gap-2 ${
+              toast.type === 'success'
+                ? 'bg-emerald-900/90 border-emerald-700 text-emerald-100'
+                : 'bg-rose-900/90 border-rose-700 text-rose-100'
+            }`}
+          >
+            <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
+            <span>{toast.text}</span>
           </div>
         </div>
       )}

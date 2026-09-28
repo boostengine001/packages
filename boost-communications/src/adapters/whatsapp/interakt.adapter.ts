@@ -33,7 +33,7 @@ export class InteraktWhatsAppAdapter implements IWhatsAppAdapter {
       method,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${this.apiKey}`,
+        Authorization: this.apiKey.startsWith('Basic ') ? this.apiKey : `Basic ${this.apiKey}`,
       }
     };
 
@@ -96,13 +96,83 @@ export class InteraktWhatsAppAdapter implements IWhatsAppAdapter {
   }
 
   // --- Track APIs ---
+  /**
+   * Interakt User Track API
+   * POST https://api.interakt.ai/v1/public/track/users/
+   * Creates or updates user details, traits (attributes), and tags in Interakt.
+   */
   public async trackUser(options: InteraktTrackUserOptions): Promise<any> {
-    const res = await this.makeRequest('/track/users/', 'POST', options);
+    const payload: any = {};
+
+    const phoneInput = options.phone || options.fullPhoneNumber || options.phoneNumber;
+    if (phoneInput) {
+      const defaultCode = options.countryCode ? options.countryCode.replace('+', '') : '91';
+      const norm = normalizePhoneNumber(phoneInput, defaultCode);
+      payload.countryCode = options.countryCode || norm.countryCode;
+      payload.phoneNumber = norm.national;
+    } else {
+      if (options.countryCode) payload.countryCode = options.countryCode;
+      if (options.phoneNumber) payload.phoneNumber = options.phoneNumber;
+    }
+
+    if (options.userId) payload.userId = options.userId;
+    if (options.traits) payload.traits = options.traits;
+    if (options.tags && options.tags.length > 0) payload.tags = options.tags;
+    if (options.createdAt) payload.createdAt = options.createdAt;
+    if (options.add_to_sales_cycle !== undefined) payload.add_to_sales_cycle = options.add_to_sales_cycle;
+
+    const res = await this.makeRequest('/track/users/', 'POST', payload);
+    const isSuccess = res.ok && (res.data?.result === true || res.data?.id || res.status === 200 || res.status === 201);
+
+    if (!isSuccess) {
+      return {
+        result: false,
+        message: res.data?.message || res.rawText || 'Interakt User Track API failed',
+        status: res.status,
+        raw: res.data,
+      };
+    }
+
     return res.data;
   }
 
+  /**
+   * Interakt Event Track API
+   * POST https://api.interakt.ai/v1/public/track/events/
+   * Logs specific user actions/events with traits to trigger automated WhatsApp campaigns.
+   */
   public async trackEvent(options: InteraktTrackEventOptions): Promise<any> {
-    const res = await this.makeRequest('/track/events/', 'POST', options);
+    const payload: any = {
+      event: options.event,
+    };
+
+    const phoneInput = options.phone || options.fullPhoneNumber || options.phoneNumber;
+    if (phoneInput) {
+      const defaultCode = options.countryCode ? options.countryCode.replace('+', '') : '91';
+      const norm = normalizePhoneNumber(phoneInput, defaultCode);
+      payload.countryCode = options.countryCode || norm.countryCode;
+      payload.phoneNumber = norm.national;
+    } else {
+      if (options.countryCode) payload.countryCode = options.countryCode;
+      if (options.phoneNumber) payload.phoneNumber = options.phoneNumber;
+    }
+
+    if (options.userId) payload.userId = options.userId;
+    if (options.traits) payload.traits = options.traits;
+    if (options.createdAt) payload.createdAt = options.createdAt;
+
+    const res = await this.makeRequest('/track/events/', 'POST', payload);
+    const isSuccess = res.ok && (res.data?.result === true || res.data?.id || res.status === 200 || res.status === 201);
+
+    if (!isSuccess) {
+      return {
+        result: false,
+        message: res.data?.message || res.rawText || 'Interakt Event Track API failed',
+        status: res.status,
+        raw: res.data,
+      };
+    }
+
     return res.data;
   }
 

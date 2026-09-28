@@ -21,6 +21,15 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; title: string } | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   async function loadProducts() {
     try {
@@ -41,19 +50,27 @@ export default function AdminProductsPage() {
     loadProducts();
   }, []);
 
-  async function handleDelete(id: string, title: string) {
-    if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
+  function handleDelete(id: string, title: string) {
+    setDeleteTarget({ id, title });
+  }
+
+  async function executeDelete() {
+    if (!deleteTarget) return;
+    const { id, title } = deleteTarget;
     try {
       const res = await fetch(`/api/admin/products/${id}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
         setProducts((prev) => prev.filter((p) => p.id !== id && (p as any)._id !== id));
+        setToast({ message: `"${title}" has been deleted.`, type: 'success' });
       } else {
-        alert(data.error || 'Failed to delete product');
+        setToast({ message: data.error || 'Failed to delete product', type: 'error' });
       }
     } catch (err) {
       console.error(err);
-      alert('Error deleting product');
+      setToast({ message: 'Error deleting product', type: 'error' });
+    } finally {
+      setDeleteTarget(null);
     }
   }
 
@@ -325,6 +342,55 @@ export default function AdminProductsPage() {
           </>
         )}
       </div>
+
+      {/* In-App Delete Confirmation Modal */}
+      {deleteTarget && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
+            <div className="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mx-auto">
+              <Trash2 className="w-6 h-6" />
+            </div>
+            <div className="text-center space-y-1">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Delete Product?</h3>
+              <p className="text-xs text-slate-500 dark:text-zinc-400">
+                Are you sure you want to delete <span className="font-semibold text-slate-700 dark:text-zinc-300">"{deleteTarget.title}"</span>? This action cannot be undone.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setDeleteTarget(null)}
+                className="flex-1 py-2 px-3 text-xs font-semibold rounded-xl border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-800 transition"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={executeDelete}
+                className="flex-1 py-2 px-3 text-xs font-semibold rounded-xl bg-rose-600 hover:bg-rose-700 text-white transition shadow-sm"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <div
+            className={`px-4 py-3 rounded-xl text-xs font-semibold shadow-xl border flex items-center gap-2 ${
+              toast.type === 'success'
+                ? 'bg-emerald-900/90 border-emerald-700 text-emerald-100'
+                : 'bg-rose-900/90 border-rose-700 text-rose-100'
+            }`}
+          >
+            <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
+            <span>{toast.message}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

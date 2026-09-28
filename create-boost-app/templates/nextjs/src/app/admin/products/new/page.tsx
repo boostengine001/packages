@@ -22,6 +22,8 @@ export default function NewProductPage() {
     inStock: true,
   });
 
+  const [formError, setFormError] = useState<string | null>(null);
+
   const [variants, setVariants] = useState<
     Array<{ size: string; color: string; price: string; stock: string }>
   >([
@@ -45,8 +47,9 @@ export default function NewProductPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setFormError(null);
     if (!formData.title || !formData.price) {
-      alert('Please fill Title and Price.');
+      setFormError('Please fill in both Title and Price before submitting.');
       return;
     }
 
@@ -91,11 +94,11 @@ export default function NewProductPage() {
       if (data.success) {
         router.push('/admin/products');
       } else {
-        alert(data.error || 'Failed to save product');
+        setFormError(data.error || 'Failed to save product');
       }
     } catch (err) {
       console.error(err);
-      alert('Failed to save product');
+      setFormError('Failed to save product. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -133,6 +136,12 @@ export default function NewProductPage() {
       </div>
 
       <form id="product-form" onSubmit={handleSubmit} className="space-y-6">
+        {formError && (
+          <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold flex items-center gap-2">
+            <span>⚠️</span>
+            <span>{formError}</span>
+          </div>
+        )}
         <div className="p-6 bg-white border border-slate-200/90 rounded-2xl shadow-xs space-y-4">
           <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
             General Information

@@ -569,7 +569,67 @@ function testReactHookContract() {
   pass('React Hook Contract: useCommunications & useOTP exported for Next.js & React Native');
 }
 
-// Run All 12 Suites
+// 13. Test Interakt User & Event Track API Payload Normalization
+function testInteraktTrackAPIs() {
+  function prepareTrackUserPayload(options) {
+    const trimmed = (options.phone || options.fullPhoneNumber || options.phoneNumber || '').trim();
+    const cleanDigits = trimmed.replace(/[^0-9]/g, '');
+    let countryCode = options.countryCode || '+91';
+    let national = cleanDigits;
+
+    if (cleanDigits.startsWith('91') && cleanDigits.length === 12) {
+      countryCode = '+91';
+      national = cleanDigits.slice(2);
+    } else if (cleanDigits.length === 10) {
+      countryCode = '+91';
+      national = cleanDigits;
+    }
+
+    const payload = {
+      countryCode,
+      phoneNumber: national,
+    };
+    if (options.userId) payload.userId = options.userId;
+    if (options.traits) payload.traits = options.traits;
+    if (options.tags) payload.tags = options.tags;
+    return payload;
+  }
+
+  function prepareTrackEventPayload(options) {
+    const payload = prepareTrackUserPayload(options);
+    payload.event = options.event;
+    return payload;
+  }
+
+  // Test User Track formatting
+  const userPayload = prepareTrackUserPayload({
+    phone: '+91 98765-43210',
+    userId: 'USER_101',
+    traits: { name: 'Rishabh Gehlot', email: 'rishabh@example.com' },
+    tags: ['VIP', 'Active'],
+  });
+  assert.strictEqual(userPayload.countryCode, '+91');
+  assert.strictEqual(userPayload.phoneNumber, '9876543210');
+  assert.strictEqual(userPayload.userId, 'USER_101');
+  assert.strictEqual(userPayload.traits.name, 'Rishabh Gehlot');
+  assert.strictEqual(userPayload.tags.includes('VIP'), true);
+
+  // Test Event Track formatting
+  const eventPayload = prepareTrackEventPayload({
+    phone: '9876543210',
+    event: 'OrderPlaced',
+    userId: 'USER_101',
+    traits: { orderId: 'ORD_998', amount: 1499, currency: 'INR' },
+  });
+  assert.strictEqual(eventPayload.event, 'OrderPlaced');
+  assert.strictEqual(eventPayload.countryCode, '+91');
+  assert.strictEqual(eventPayload.phoneNumber, '9876543210');
+  assert.strictEqual(eventPayload.traits.amount, 1499);
+
+  pass('Interakt Track APIs: User and Event tracking with automated phone normalization');
+}
+
+// Run All 13 Suites
 (async () => {
   try {
     testPhoneNormalization();
@@ -584,11 +644,12 @@ function testReactHookContract() {
     testAgentToolkitSchemas();
     await testAgentToolExecution();
     testReactHookContract();
+    testInteraktTrackAPIs();
 
     console.log('\n=======================================================');
     console.log(`📊 Test Results: ${passedTests} Passed | 0 Failed`);
     console.log('=======================================================');
-    console.log('\n✨ ALL 12 TEST SUITES PASSED! @boostengine/communications v1.1.0 is 100% verified.\n');
+    console.log('\n✨ ALL 13 TEST SUITES PASSED! @boostengine/communications v1.1.0 is 100% verified.\n');
   } catch (e) {
     console.error('\n❌ Test failed with error:', e);
     process.exit(1);

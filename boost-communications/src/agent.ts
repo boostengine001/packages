@@ -140,6 +140,36 @@ export class CommunicationsAgentToolkit {
         },
       },
       {
+        name: 'track_user',
+        description:
+          'Create or update customer profile details, custom traits (name, email, city, etc.), and tags in Interakt WhatsApp CRM.',
+        parameters: {
+          type: 'object',
+          properties: {
+            phone: { type: 'string', description: 'Customer phone number in E.164 or national format (e.g. +919876543210).' },
+            userId: { type: 'string', description: 'Optional unique customer ID.' },
+            traits: { type: 'object', description: 'Key-value map of customer attributes (name, email, etc.).' },
+            tags: { type: 'array', items: { type: 'string' }, description: 'Optional tags to assign to the user.' },
+          },
+          required: ['phone'],
+        },
+      },
+      {
+        name: 'track_event',
+        description:
+          'Record a customer action/event (e.g. OrderPlaced, ItemAddedToCart, ProductViewed) with traits to trigger automated WhatsApp campaigns in Interakt.',
+        parameters: {
+          type: 'object',
+          properties: {
+            phone: { type: 'string', description: 'Customer phone number (e.g. +919876543210).' },
+            event: { type: 'string', description: 'Name of the event being logged.' },
+            userId: { type: 'string', description: 'Optional unique customer ID.' },
+            traits: { type: 'object', description: 'Key-value attributes relevant to the event.' },
+          },
+          required: ['phone', 'event'],
+        },
+      },
+      {
         name: 'check_channel_health',
         description:
           'Inspect the current configuration and availability of WhatsApp, SMS, Voice, RCS, and Email providers.',
@@ -297,6 +327,24 @@ export class CommunicationsAgentToolkit {
           customerName: args.customerName,
           orderId: args.orderId,
           amount: args.amount,
+        });
+      }
+
+      case 'track_user': {
+        return this.engine.trackUser({
+          phone: args.phone,
+          userId: args.userId,
+          traits: args.traits,
+          tags: args.tags,
+        });
+      }
+
+      case 'track_event': {
+        return this.engine.trackEvent({
+          phone: args.phone,
+          event: args.event,
+          userId: args.userId,
+          traits: args.traits,
         });
       }
 

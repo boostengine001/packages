@@ -22,6 +22,8 @@ import {
   ReviewRequestParams,
   WebhookVerifyOptions,
   SmartOTPResult,
+  InteraktTrackUserOptions,
+  InteraktTrackEventOptions,
 } from './types';
 import {
   IWhatsAppAdapter,
@@ -469,7 +471,23 @@ export class OmnichannelEngine extends EventEmitter {
         }
         return this.withRetry(() => this.whatsappAdapter!.send(options));
       },
+      trackUser: async (options: InteraktTrackUserOptions): Promise<any> => {
+        return this.trackUser(options);
+      },
+      trackEvent: async (options: InteraktTrackEventOptions): Promise<any> => {
+        return this.trackEvent(options);
+      },
     };
+  }
+
+  /**
+   * Direct typed access to Interakt WhatsApp Adapter when configured.
+   */
+  public get interakt(): InteraktWhatsAppAdapter {
+    if (this.whatsappAdapter instanceof InteraktWhatsAppAdapter) {
+      return this.whatsappAdapter;
+    }
+    throw new Error('Interakt WhatsApp adapter is not configured. Please set providers.whatsapp.provider to "interakt".');
   }
 
   public get sms() {
@@ -569,6 +587,30 @@ export class OmnichannelEngine extends EventEmitter {
     history.push(now);
     this.dedupeHistory.set(recipient, history);
     return { allowed: true };
+  }
+
+  // ----------------- Customer & Event Tracking (Interakt) -----------------
+
+  /**
+   * Track or update customer attributes, traits, and tags (Interakt User Track API).
+   * Ref: https://www.interakt.shop/resource-center/user-and-event-track-api/
+   */
+  public async trackUser(options: InteraktTrackUserOptions): Promise<any> {
+    if (this.whatsappAdapter && typeof (this.whatsappAdapter as any).trackUser === 'function') {
+      return (this.whatsappAdapter as any).trackUser(options);
+    }
+    throw new Error('User tracking is supported on the Interakt WhatsApp adapter. Please configure Interakt in providers.whatsapp.');
+  }
+
+  /**
+   * Track specific customer events with traits to trigger automated WhatsApp campaigns (Interakt Event Track API).
+   * Ref: https://www.interakt.shop/resource-center/user-and-event-track-api/
+   */
+  public async trackEvent(options: InteraktTrackEventOptions): Promise<any> {
+    if (this.whatsappAdapter && typeof (this.whatsappAdapter as any).trackEvent === 'function') {
+      return (this.whatsappAdapter as any).trackEvent(options);
+    }
+    throw new Error('Event tracking is supported on the Interakt WhatsApp adapter. Please configure Interakt in providers.whatsapp.');
   }
 
   // ----------------- Developer-Friendly Quick 1-Liners -----------------

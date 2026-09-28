@@ -26,6 +26,15 @@ export default function AdminOrdersPage() {
   const [newStatus, setNewStatus] = useState<string>('');
   const [courier, setCourier] = useState<string>('');
   const [trackingNumber, setTrackingNumber] = useState<string>('');
+  const [modalError, setModalError] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   async function loadOrders() {
     try {
@@ -51,12 +60,14 @@ export default function AdminOrdersPage() {
     setNewStatus(order.orderStatus);
     setCourier(order.courier || 'Delhivery Express');
     setTrackingNumber(order.trackingNumber || '');
+    setModalError(null);
   }
 
   async function handleUpdateStatus() {
     if (!selectedOrder) return;
     try {
       setUpdating(true);
+      setModalError(null);
       const res = await fetch(`/api/admin/orders/${selectedOrder.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -72,12 +83,13 @@ export default function AdminOrdersPage() {
           prev.map((o) => (o.id === selectedOrder.id ? data.data : o))
         );
         setSelectedOrder(null);
+        setToast({ message: 'Order status updated successfully', type: 'success' });
       } else {
-        alert(data.error || 'Failed to update order');
+        setModalError(data.error || 'Failed to update order');
       }
     } catch (err) {
       console.error(err);
-      alert('Error updating order status');
+      setModalError('Error updating order status');
     } finally {
       setUpdating(false);
     }
@@ -384,6 +396,13 @@ export default function AdminOrdersPage() {
               </button>
             </div>
 
+            {modalError && (
+              <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold flex items-center gap-2">
+                <span>⚠️</span>
+                <span>{modalError}</span>
+              </div>
+            )}
+
             <div className="space-y-3 text-xs">
               <div>
                 <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1">
@@ -455,6 +474,22 @@ export default function AdminOrdersPage() {
                 {updating ? 'Saving...' : 'Save Updates'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <div
+            className={`px-4 py-3 rounded-xl text-xs font-semibold shadow-xl border flex items-center gap-2 ${
+              toast.type === 'success'
+                ? 'bg-emerald-900/90 border-emerald-700 text-emerald-100'
+                : 'bg-rose-900/90 border-rose-700 text-rose-100'
+            }`}
+          >
+            <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
+            <span>{toast.message}</span>
           </div>
         </div>
       )}

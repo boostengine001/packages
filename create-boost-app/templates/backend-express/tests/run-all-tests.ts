@@ -1,10 +1,11 @@
+process.env.NODE_ENV = 'test';
+process.env.MOCK_MODE = 'true';
+
 import { runUtilsTests } from './utils.test';
 import { runMiddlewareTests } from './middleware.test';
 import { runApiTests } from './api.test';
 
 async function main() {
-  process.env.NODE_ENV = 'test';
-  process.env.MOCK_MODE = 'true';
 
   console.log('\n======================================================');
   console.log('⚡ BOOST ENGINE EXPRESS API — COMPLETE TEST SUITE');

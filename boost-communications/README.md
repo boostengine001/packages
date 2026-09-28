@@ -146,6 +146,69 @@ const engine = createOmnichannelEngine({
 
 ---
 
+## 🎯 Interakt WhatsApp CRM Integration (User & Event Track APIs)
+
+Integrate your eCommerce storefront, mobile app, or backend directly with **Interakt WhatsApp CRM** using official [User & Event Track APIs](https://www.interakt.shop/resource-center/user-and-event-track-api/).
+
+### 1. User Track API (`/track/users/`)
+Sync and update customer contact cards, custom traits (name, email, city, order count, total spent), and tags in Interakt.
+- **Auto-Normalization:** Phone numbers (`+91 98765-43210` or `9876543210`) are automatically parsed into `countryCode` and national `phoneNumber` without leading zeros as required by Interakt.
+- Replaces existing trait values with latest data.
+
+```typescript
+import { comms } from '@boostengine/communications';
+
+// Track or update customer profile
+await comms.trackUser({
+  phone: '+91 98765-43210',
+  userId: 'CUST-10492',
+  traits: {
+    name: 'Rishabh Gehlot',
+    email: 'rishabh@example.com',
+    city: 'Jaipur',
+    tier: 'Gold',
+    total_orders: 12,
+  },
+  tags: ['VIP', 'RepeatBuyer'],
+});
+```
+
+### 2. Event Track API (`/track/events/`)
+Log real-time user actions (e.g. `OrderPlaced`, `ItemAddedToCart`, `ProductViewed`, `CheckoutInitiated`) along with contextual traits.
+- Records occurrences on the customer's timeline.
+- Triggers **Interakt Ongoing Notification Campaigns** (e.g., Abandoned Cart recovery, post-purchase follow-ups).
+
+```typescript
+import { comms } from '@boostengine/communications';
+
+// Log event to trigger automated WhatsApp marketing or transactional campaigns
+await comms.trackEvent({
+  phone: '+919876543210',
+  userId: 'CUST-10492',
+  event: 'OrderPlaced',
+  traits: {
+    orderId: 'ORD-9921',
+    orderValue: 2499,
+    currency: 'INR',
+    itemsCount: 3,
+    category: 'Footwear',
+  },
+});
+```
+
+### 3. Direct Access via `comms.interakt`
+When `providers.whatsapp.provider` is `'interakt'`, access all native Interakt adapter methods fully typed:
+```typescript
+// Manage campaigns, templates, chat assignment, media messages
+const interakt = comms.interakt;
+await interakt.getUsersBulk(0, 50);
+await interakt.getUserByPhone('9876543210');
+await interakt.assignChat({ user_phone_number: '9876543210', agent_email: 'agent@brand.com' });
+```
+
+
+---
+
 ## 🔐 Webhook Verification & Next.js Route Handler
 
 Support for Meta WhatsApp Webhooks, MSG91 DLR, Twilio, Resend, and Gupshup:
@@ -211,6 +274,8 @@ const result = await toolkit.execute('send_order_update', {
 - `send_smart_otp` — Send cryptographic OTP with automatic WhatsApp ➔ SMS ➔ Voice failover.
 - `verify_smart_otp` — Cryptographically verify customer OTP token.
 - `send_cart_recovery` — High-conversion abandoned cart recovery notification with discount voucher.
+- `track_user` — Sync customer attributes, traits (email, city, etc.), and tags in Interakt WhatsApp CRM.
+- `track_event` — Log customer activities (OrderPlaced, CartUpdated, etc.) with traits in Interakt to trigger campaigns.
 - `send_customer_message` — Direct customer support message via WhatsApp/SMS/Email.
 - `trigger_ai_voice_call` — Dispatch Bolna AI / autonomous voice agent call.
 - `check_channel_health` — Query active communication channels and provider status.

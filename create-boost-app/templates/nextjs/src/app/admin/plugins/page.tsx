@@ -10,6 +10,15 @@ export default function AdminPluginsPage() {
   const [configuringPlugin, setConfiguringPlugin] = useState<BoostPluginConfig | null>(null);
   const [settingsDraft, setSettingsDraft] = useState<Record<string, any>>({});
   const [savingSettings, setSavingSettings] = useState(false);
+  const [settingsError, setSettingsError] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   async function loadPlugins() {
     try {
@@ -44,11 +53,14 @@ export default function AdminPluginsPage() {
       });
       const data = await res.json();
       if (!data.success) {
-        alert('Failed to toggle plugin: ' + data.error);
+        setToast({ message: 'Failed to toggle plugin: ' + data.error, type: 'error' });
         loadPlugins();
+      } else {
+        setToast({ message: `Plugin ${newStatus ? 'enabled' : 'disabled'} successfully.`, type: 'success' });
       }
     } catch (err) {
       console.error(err);
+      setToast({ message: 'Error updating plugin status', type: 'error' });
       loadPlugins();
     }
   }
@@ -56,12 +68,14 @@ export default function AdminPluginsPage() {
   function handleOpenSettings(plugin: BoostPluginConfig) {
     setConfiguringPlugin(plugin);
     setSettingsDraft({ ...plugin.settings });
+    setSettingsError(null);
   }
 
   async function handleSaveSettings() {
     if (!configuringPlugin) return;
     try {
       setSavingSettings(true);
+      setSettingsError(null);
       const res = await fetch('/api/admin/plugins', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -76,12 +90,13 @@ export default function AdminPluginsPage() {
           prev.map((p) => (p.id === configuringPlugin.id ? data.data : p))
         );
         setConfiguringPlugin(null);
+        setToast({ message: 'Plugin settings saved successfully', type: 'success' });
       } else {
-        alert(data.error || 'Failed to update plugin settings');
+        setSettingsError(data.error || 'Failed to update plugin settings');
       }
     } catch (err) {
       console.error(err);
-      alert('Error saving plugin settings');
+      setSettingsError('Error saving plugin settings');
     } finally {
       setSavingSettings(false);
     }
@@ -231,6 +246,13 @@ export default function AdminPluginsPage() {
               </button>
             </div>
 
+            {settingsError && (
+              <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-rose-700 text-xs font-semibold flex items-center gap-2">
+                <span>⚠️</span>
+                <span>{settingsError}</span>
+              </div>
+            )}
+
             <div className="space-y-3 text-xs max-h-[60vh] overflow-y-auto pr-1">
               {Object.keys(settingsDraft).map((key) => {
                 const val = settingsDraft[key];
@@ -285,6 +307,22 @@ export default function AdminPluginsPage() {
                 {savingSettings ? 'Saving...' : 'Save Configuration'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <div
+            className={`px-4 py-3 rounded-xl text-xs font-semibold shadow-xl border flex items-center gap-2 ${
+              toast.type === 'success'
+                ? 'bg-emerald-900/90 border-emerald-700 text-emerald-100'
+                : 'bg-rose-900/90 border-rose-700 text-rose-100'
+            }`}
+          >
+            <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
+            <span>{toast.message}</span>
           </div>
         </div>
       )}

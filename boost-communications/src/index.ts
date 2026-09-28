@@ -42,6 +42,9 @@ export type {
   RefundNotificationParams,
   ReviewRequestParams,
   WebhookVerifyOptions,
+  InteraktTrackUserOptions,
+  InteraktTrackEventOptions,
+  InteraktTrackResult,
 } from './types';
 
 // Export AI Agent Toolkit

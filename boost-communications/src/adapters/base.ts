@@ -109,6 +109,8 @@ export interface IWhatsAppAdapter {
   providerName: string;
   send(options: WhatsAppSendOptions): Promise<UniversalResult>;
   parseWebhook?(payload: any, headers?: Record<string, string>): any;
+  trackUser?(options: any): Promise<any>;
+  trackEvent?(options: any): Promise<any>;
 }
 
 export interface ISMSAdapter {

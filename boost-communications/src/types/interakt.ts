@@ -1,6 +1,11 @@
 export interface InteraktTrackUserOptions {
-  phoneNumber: string;
-  countryCode: string;
+  /**
+   * Phone number convenience field (e.g., '+919876543210' or '9876543210').
+   * Will be automatically parsed into countryCode and phoneNumber.
+   */
+  phone?: string;
+  phoneNumber?: string;
+  countryCode?: string;
   fullPhoneNumber?: string;
   userId?: string;
   traits?: Record<string, any>;
@@ -10,13 +15,27 @@ export interface InteraktTrackUserOptions {
 }
 
 export interface InteraktTrackEventOptions {
-  phoneNumber: string;
-  countryCode: string;
+  /**
+   * Phone number convenience field (e.g., '+919876543210' or '9876543210').
+   * Will be automatically parsed into countryCode and phoneNumber.
+   */
+  phone?: string;
+  phoneNumber?: string;
+  countryCode?: string;
   fullPhoneNumber?: string;
   userId?: string;
   event: string;
   traits?: Record<string, any>;
+  createdAt?: string;
 }
+
+export interface InteraktTrackResult {
+  result: boolean;
+  message?: string;
+  id?: string;
+  data?: any;
+}
+
 
 export interface InteraktCampaignOptions {
   campaign_name: string;
