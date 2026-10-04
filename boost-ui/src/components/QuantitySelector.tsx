@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * QuantitySelectorProps — Properties for the quantity increment/decrement control.
  */
@@ -88,9 +87,14 @@ export const QuantitySelector: React.FC<QuantitySelectorProps> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: value <= min ? 'transparent' : 'var(--boost-surface, rgba(255, 255, 255, 0.1))',
-          color: value <= min ? 'var(--boost-text-muted, #64748b)' : 'var(--boost-text-primary, #0f172a)',
-          border: value <= min ? 'none' : '1px solid var(--boost-border, rgba(255, 255, 255, 0.12))',
+          backgroundColor:
+            value <= min ? 'transparent' : 'var(--boost-surface, rgba(255, 255, 255, 0.1))',
+          color:
+            value <= min
+              ? 'var(--boost-text-muted, #64748b)'
+              : 'var(--boost-text-primary, #0f172a)',
+          border:
+            value <= min ? 'none' : '1px solid var(--boost-border, rgba(255, 255, 255, 0.12))',
           borderRadius: '7px',
           cursor: value <= min ? 'not-allowed' : 'pointer',
           fontWeight: 700,
@@ -128,9 +132,14 @@ export const QuantitySelector: React.FC<QuantitySelectorProps> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: value >= max ? 'transparent' : 'var(--boost-surface, rgba(255, 255, 255, 0.1))',
-          color: value >= max ? 'var(--boost-text-muted, #64748b)' : 'var(--boost-text-primary, #0f172a)',
-          border: value >= max ? 'none' : '1px solid var(--boost-border, rgba(255, 255, 255, 0.12))',
+          backgroundColor:
+            value >= max ? 'transparent' : 'var(--boost-surface, rgba(255, 255, 255, 0.1))',
+          color:
+            value >= max
+              ? 'var(--boost-text-muted, #64748b)'
+              : 'var(--boost-text-primary, #0f172a)',
+          border:
+            value >= max ? 'none' : '1px solid var(--boost-border, rgba(255, 255, 255, 0.12))',
           borderRadius: '7px',
           cursor: value >= max ? 'not-allowed' : 'pointer',
           fontWeight: 700,
@@ -146,6 +155,5 @@ export const QuantitySelector: React.FC<QuantitySelectorProps> = ({
     </div>
   );
 };
-
 
 QuantitySelector.displayName = 'QuantitySelector';

@@ -50,7 +50,16 @@ const resolveSocialIcon = (nameOrPlatform?: string): React.ReactNode => {
   const key = (nameOrPlatform || '').toLowerCase();
   if (key.includes('insta')) {
     return (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
         <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -59,7 +68,16 @@ const resolveSocialIcon = (nameOrPlatform?: string): React.ReactNode => {
   }
   if (key.includes('twitter') || key.includes('x')) {
     return (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
         <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
       </svg>
@@ -67,7 +85,16 @@ const resolveSocialIcon = (nameOrPlatform?: string): React.ReactNode => {
   }
   if (key.includes('youtube')) {
     return (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
         <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
       </svg>
@@ -75,13 +102,31 @@ const resolveSocialIcon = (nameOrPlatform?: string): React.ReactNode => {
   }
   if (key.includes('github')) {
     return (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
       </svg>
     );
   }
   return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="10" />
       <line x1="2" y1="12" x2="22" y2="12" />
       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
@@ -130,7 +175,6 @@ export const Footer: React.FC<FooterProps> = ({
     { label: 'Security', href: '/security' },
     { label: 'Sitemap', href: '/sitemap' },
   ],
-  newsletter = true,
   onNewsletterSubmit,
   showPaymentBadges = true,
   paymentMethods = ['VISA', 'Mastercard', 'AMEX', 'Apple Pay', 'Google Pay', 'PayPal'],
@@ -172,31 +216,52 @@ export const Footer: React.FC<FooterProps> = ({
   const isSurface = variant === 'surface';
 
   const footerBg = isLight ? '#f8fafc' : isSurface ? 'var(--boost-surface, #ffffff)' : '#07090e';
-  const footerText = isLight ? '#475569' : isSurface ? 'var(--boost-text-muted, #64748b)' : '#94a3b8';
+  const footerText = isLight
+    ? '#475569'
+    : isSurface
+      ? 'var(--boost-text-muted, #64748b)'
+      : '#94a3b8';
   const headingColor = isLight ? '#0f172a' : isSurface ? 'var(--boost-text, #0f172a)' : '#f8fafc';
-  const borderColor = isLight ? 'var(--boost-border, #e2e8f0)' : isSurface ? 'var(--boost-border, #e2e8f0)' : 'rgba(255, 255, 255, 0.08)';
+  const borderColor = isLight
+    ? 'var(--boost-border, #e2e8f0)'
+    : isSurface
+      ? 'var(--boost-border, #e2e8f0)'
+      : 'rgba(255, 255, 255, 0.08)';
   const inputBg = isLight || isSurface ? 'var(--boost-bg, #ffffff)' : 'rgba(255, 255, 255, 0.06)';
   const inputColor = isLight || isSurface ? 'var(--boost-text, #0f172a)' : '#f8fafc';
-  const inputBorder = isLight || isSurface ? 'var(--boost-border, #cbd5e1)' : 'rgba(255, 255, 255, 0.14)';
+  const inputBorder =
+    isLight || isSurface ? 'var(--boost-border, #cbd5e1)' : 'rgba(255, 255, 255, 0.14)';
 
   const getPresetFooterBg = (): string => {
     switch (preset) {
-      case 'neo-brutalism': return '#000000';
-      case 'glassmorphism': return 'rgba(15,23,42,0.85)';
-      case 'neumorphism': return '#e0e5ec';
-      case 'gradient-glow': return '#09090b';
-      case 'material-you': return '#1c1b1f';
-      case 'dark-first': return '#020617';
-      default: return footerBg;
+      case 'neo-brutalism':
+        return '#000000';
+      case 'glassmorphism':
+        return 'rgba(15,23,42,0.85)';
+      case 'neumorphism':
+        return '#e0e5ec';
+      case 'gradient-glow':
+        return '#09090b';
+      case 'material-you':
+        return '#1c1b1f';
+      case 'dark-first':
+        return '#020617';
+      default:
+        return footerBg;
     }
   };
   const getPresetFooterBorder = (): string => {
     switch (preset) {
-      case 'neo-brutalism': return '3px solid #000';
-      case 'glassmorphism': return '1px solid rgba(255,255,255,0.12)';
-      case 'neumorphism': return 'none';
-      case 'gradient-glow': return '1px solid rgba(99,102,241,0.2)';
-      default: return `1px solid ${borderColor}`;
+      case 'neo-brutalism':
+        return '3px solid #000';
+      case 'glassmorphism':
+        return '1px solid rgba(255,255,255,0.12)';
+      case 'neumorphism':
+        return 'none';
+      case 'gradient-glow':
+        return '1px solid rgba(99,102,241,0.2)';
+      default:
+        return `1px solid ${borderColor}`;
     }
   };
   const resolvedBg = getPresetFooterBg();
@@ -324,7 +389,8 @@ export const Footer: React.FC<FooterProps> = ({
                     letterSpacing: '0.06em',
                     padding: '2px 8px',
                     borderRadius: '9999px',
-                    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(59, 130, 246, 0.2))',
+                    background:
+                      'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(59, 130, 246, 0.2))',
                     color: 'var(--boost-primary, #6366f1)',
                     border: '1px solid rgba(99, 102, 241, 0.35)',
                     textTransform: 'uppercase',
@@ -352,7 +418,8 @@ export const Footer: React.FC<FooterProps> = ({
                       width: '34px',
                       height: '34px',
                       borderRadius: '8px',
-                      backgroundColor: isLight || isSurface ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.06)',
+                      backgroundColor:
+                        isLight || isSurface ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.06)',
                       border: `1px solid ${borderColor}`,
                       display: 'flex',
                       alignItems: 'center',
@@ -370,7 +437,15 @@ export const Footer: React.FC<FooterProps> = ({
 
             {/* Newsletter box */}
             <div style={{ marginTop: '10px' }}>
-              <span style={{ fontSize: '13px', fontWeight: 600, color: headingColor, display: 'block', marginBottom: '8px' }}>
+              <span
+                style={{
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: headingColor,
+                  display: 'block',
+                  marginBottom: '8px',
+                }}
+              >
                 Subscribe for exclusive drops & offers
               </span>
               {subscribed ? (
@@ -388,14 +463,26 @@ export const Footer: React.FC<FooterProps> = ({
                     gap: '8px',
                   }}
                 >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                   <span>You're on the VIP list! Check your inbox soon.</span>
                 </div>
               ) : (
                 <div>
-                  <form noValidate onSubmit={handleSubmit} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <form
+                    noValidate
+                    onSubmit={handleSubmit}
+                    style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}
+                  >
                     <input
                       type="email"
                       value={email}
@@ -436,8 +523,29 @@ export const Footer: React.FC<FooterProps> = ({
                     </button>
                   </form>
                   {emailError && (
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#ef4444', marginTop: '6px', fontWeight: 500 }}>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        fontSize: '11px',
+                        color: '#ef4444',
+                        marginTop: '6px',
+                        fontWeight: 500,
+                      }}
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                      </svg>
                       {emailError}
                     </span>
                   )}
@@ -451,10 +559,7 @@ export const Footer: React.FC<FooterProps> = ({
             const isOpen = !!openMobileColumns[idx];
             return (
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div
-                  className="boost-footer-col-header"
-                  onClick={() => toggleMobileColumn(idx)}
-                >
+                <div className="boost-footer-col-header" onClick={() => toggleMobileColumn(idx)}>
                   <h4
                     style={{
                       fontSize: '13px',
@@ -475,7 +580,14 @@ export const Footer: React.FC<FooterProps> = ({
                       transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                     }}
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </span>
@@ -530,9 +642,7 @@ export const Footer: React.FC<FooterProps> = ({
           }}
         >
           <div>
-            <span>
-              {copyrightText || `© ${copyrightYear} ${brandName}. All rights reserved.`}
-            </span>
+            <span>{copyrightText || `© ${copyrightYear} ${brandName}. All rights reserved.`}</span>
           </div>
 
           {bottomLinks && bottomLinks.length > 0 && (
@@ -556,7 +666,8 @@ export const Footer: React.FC<FooterProps> = ({
                 <span
                   key={method}
                   style={{
-                    backgroundColor: isLight || isSurface ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.06)',
+                    backgroundColor:
+                      isLight || isSurface ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.06)',
                     border: `1px solid ${borderColor}`,
                     color: headingColor,
                     padding: '3px 8px',

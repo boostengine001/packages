@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * BankOffer — A single bank/card offer with code and discount.
  */
@@ -15,7 +14,6 @@ export interface BankOffer {
   code?: string;
   termsUrl?: string;
 }
-
 
 /**
  * BankOffersAccordionProps — Properties for the bank offer accordion.
@@ -321,7 +319,15 @@ export const BankOffersAccordion: React.FC<BankOffersAccordionProps> = ({
       </style>
 
       {/* Card Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '8px',
+          width: '100%',
+        }}
+      >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
           <div
             style={{
@@ -337,18 +343,33 @@ export const BankOffersAccordion: React.FC<BankOffersAccordionProps> = ({
               boxShadow: '0 2px 6px rgba(79, 70, 229, 0.3)',
             }}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <rect x="2" y="5" width="20" height="14" rx="2" />
               <line x1="2" y1="10" x2="22" y2="10" />
             </svg>
           </div>
-          <span className="boost-bank-header-title" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0 }}>
+          <span
+            className="boost-bank-header-title"
+            style={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              minWidth: 0,
+            }}
+          >
             Bank Offers & Discounts
           </span>
         </div>
-        <span className="boost-bank-count-pill">
-          {offers.length} Offers
-        </span>
+        <span className="boost-bank-count-pill">{offers.length} Offers</span>
       </div>
 
       {/* Offers List */}
@@ -357,8 +378,24 @@ export const BankOffersAccordion: React.FC<BankOffersAccordionProps> = ({
           const offerDesc = offer.description || offer.terms || '';
           return (
             <div key={offer.id} className="boost-offer-row">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', flexWrap: 'wrap' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '1 1 180px', minWidth: 0 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    flex: '1 1 180px',
+                    minWidth: 0,
+                  }}
+                >
                   <span
                     style={{
                       width: '7px',
@@ -381,13 +418,24 @@ export const BankOffersAccordion: React.FC<BankOffersAccordionProps> = ({
                     title="Click to copy coupon code"
                   >
                     {copiedCode === offer.code ? (
-                      <span style={{ color: 'var(--boost-success, #10b981)', fontWeight: 800 }}>✓ COPIED</span>
+                      <span style={{ color: 'var(--boost-success, #10b981)', fontWeight: 800 }}>
+                        ✓ COPIED
+                      </span>
                     ) : (
                       <>
                         <span>{offer.code}</span>
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                         </svg>
                       </>
                     )}
@@ -407,11 +455,7 @@ export const BankOffersAccordion: React.FC<BankOffersAccordionProps> = ({
 
       {/* View More / Less Toggle */}
       {offers.length > 2 && (
-        <button
-          type="button"
-          onClick={() => setExpanded(!expanded)}
-          className="boost-expand-btn"
-        >
+        <button type="button" onClick={() => setExpanded(!expanded)} className="boost-expand-btn">
           <span>{expanded ? 'Show Less Offers' : `View All ${offers.length} Offers`}</span>
           <svg
             width="14"

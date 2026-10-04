@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * SectionProps — Properties for a page section with optional title and actions.
  */

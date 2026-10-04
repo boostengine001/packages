@@ -8,7 +8,6 @@ export interface ResponsiveBreakpoints<T> {
   xl?: T;
 }
 
-
 /**
  * GridProps — Properties for the CSS Grid layout primitive.
  */
@@ -42,7 +41,7 @@ export const Grid = /* @__PURE__ */ React.forwardRef<HTMLDivElement, GridProps>(
     },
     ref
   ) => {
-    const rawId = React.useId ? React.useId() : Math.random().toString(36).substring(2, 9);
+    const rawId = React.useId();
     const gridClassId = `bg-${rawId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
     const toColVal = (val?: number | string) => {
@@ -106,7 +105,9 @@ export const Grid = /* @__PURE__ */ React.forwardRef<HTMLDivElement, GridProps>(
           style={{
             width: '100%',
             boxSizing: 'border-box',
-            ...(rowGap !== undefined && { rowGap: typeof rowGap === 'number' ? `${rowGap}px` : rowGap }),
+            ...(rowGap !== undefined && {
+              rowGap: typeof rowGap === 'number' ? `${rowGap}px` : rowGap,
+            }),
             ...(columnGap !== undefined && {
               columnGap: typeof columnGap === 'number' ? `${columnGap}px` : columnGap,
             }),
@@ -125,7 +126,6 @@ export const Grid = /* @__PURE__ */ React.forwardRef<HTMLDivElement, GridProps>(
 
 Grid.displayName = 'Grid';
 
-
 /**
  * GridItemProps — Properties for a Grid child item.
  */
@@ -140,34 +140,22 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const GridItem = /* @__PURE__ */ React.forwardRef<HTMLDivElement, GridItemProps>(
-  (
-    {
-      children,
-      colSpan,
-      rowSpan,
-      colStart,
-      rowStart,
-      className = '',
-      style,
-      ...props
-    },
-    ref
-  ) => {
+  ({ children, colSpan, rowSpan, colStart, rowStart, className = '', style, ...props }, ref) => {
     const gridColumn =
       colSpan === 'full'
         ? '1 / -1'
         : colSpan !== undefined
-        ? `span ${colSpan} / span ${colSpan}`
-        : colStart
-        ? `${colStart}`
-        : undefined;
+          ? `span ${colSpan} / span ${colSpan}`
+          : colStart
+            ? `${colStart}`
+            : undefined;
 
     const gridRow =
       rowSpan !== undefined
         ? `span ${rowSpan} / span ${rowSpan}`
         : rowStart
-        ? `${rowStart}`
-        : undefined;
+          ? `${rowStart}`
+          : undefined;
 
     return (
       <div

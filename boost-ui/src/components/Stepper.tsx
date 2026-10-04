@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * StepItem — A single step in the stepper wizard.
  */
@@ -12,7 +11,6 @@ export interface StepItem {
   label?: string;
   description?: string;
 }
-
 
 /**
  * StepperProps — Properties for the step/stepper wizard component.
@@ -36,7 +34,7 @@ export const Stepper: React.FC<StepperProps> = ({
 }) => {
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
-  const activeIdx = currentStep !== undefined ? currentStep - 1 : activeStep ?? 0;
+  const activeIdx = currentStep !== undefined ? currentStep - 1 : (activeStep ?? 0);
 
   const getCircleStyles = (isCompleted: boolean, isCurrent: boolean): React.CSSProperties => {
     const base: React.CSSProperties = {
@@ -66,7 +64,11 @@ export const Stepper: React.FC<StepperProps> = ({
           ...base,
           borderRadius: '50%',
           border: '1px solid rgba(255, 255, 255, 0.5)',
-          backgroundColor: isCompleted ? 'rgba(16, 185, 129, 0.85)' : isCurrent ? 'rgba(99, 102, 241, 0.85)' : 'rgba(255, 255, 255, 0.4)',
+          backgroundColor: isCompleted
+            ? 'rgba(16, 185, 129, 0.85)'
+            : isCurrent
+              ? 'rgba(99, 102, 241, 0.85)'
+              : 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
           color: isCompleted || isCurrent ? '#ffffff' : '#64748b',
@@ -79,23 +81,37 @@ export const Stepper: React.FC<StepperProps> = ({
           border: 'none',
           backgroundColor: '#e0e5ec',
           color: isCompleted ? '#10b981' : isCurrent ? 'var(--boost-primary, #2563eb)' : '#94a3b8',
-          boxShadow: isCurrent ? 'inset 2px 2px 5px #c8cdd5, inset -2px -2px 5px #f8fdff' : '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff',
+          boxShadow: isCurrent
+            ? 'inset 2px 2px 5px #c8cdd5, inset -2px -2px 5px #f8fdff'
+            : '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff',
         };
       case 'gradient-glow':
         return {
           ...base,
           borderRadius: '50%',
-          background: isCompleted ? 'linear-gradient(135deg, #10b981, #059669)' : isCurrent ? 'linear-gradient(135deg, #6366f1, #4f46e5)' : 'var(--boost-surface, #ffffff)',
+          background: isCompleted
+            ? 'linear-gradient(135deg, #10b981, #059669)'
+            : isCurrent
+              ? 'linear-gradient(135deg, #6366f1, #4f46e5)'
+              : 'var(--boost-surface, #ffffff)',
           border: isCompleted || isCurrent ? 'none' : '1px solid rgba(99, 102, 241, 0.2)',
           color: isCompleted || isCurrent ? '#ffffff' : '#94a3b8',
-          boxShadow: isCompleted ? '0 0 12px rgba(16, 185, 129, 0.5)' : isCurrent ? '0 0 16px rgba(99, 102, 241, 0.6)' : 'none',
+          boxShadow: isCompleted
+            ? '0 0 12px rgba(16, 185, 129, 0.5)'
+            : isCurrent
+              ? '0 0 16px rgba(99, 102, 241, 0.6)'
+              : 'none',
         };
       case 'material-you':
         return {
           ...base,
           borderRadius: '50%',
           border: 'none',
-          backgroundColor: isCompleted ? '#386a20' : isCurrent ? 'var(--boost-primary, #6750a4)' : 'var(--boost-surface-secondary, #e8def8)',
+          backgroundColor: isCompleted
+            ? '#386a20'
+            : isCurrent
+              ? 'var(--boost-primary, #6750a4)'
+              : 'var(--boost-surface-secondary, #e8def8)',
           color: isCompleted || isCurrent ? '#ffffff' : '#49454f',
         };
       case 'dark-first':
@@ -110,7 +126,11 @@ export const Stepper: React.FC<StepperProps> = ({
         return {
           ...base,
           borderRadius: '50%',
-          backgroundColor: isCompleted ? '#10b981' : isCurrent ? 'var(--boost-primary, #2563eb)' : 'var(--boost-bg-subtle, #f1f5f9)',
+          backgroundColor: isCompleted
+            ? '#10b981'
+            : isCurrent
+              ? 'var(--boost-primary, #2563eb)'
+              : 'var(--boost-bg-subtle, #f1f5f9)',
           color: isCompleted || isCurrent ? '#ffffff' : 'var(--boost-muted, #64748b)',
           border: `2px solid ${isCompleted ? '#10b981' : isCurrent ? 'var(--boost-primary, #2563eb)' : 'var(--boost-border, #cbd5e1)'}`,
         };
@@ -185,7 +205,14 @@ export const Stepper: React.FC<StepperProps> = ({
                 style={getCircleStyles(isCompleted, isCurrent)}
               >
                 {isCompleted ? (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 ) : (
@@ -232,6 +259,5 @@ export const Stepper: React.FC<StepperProps> = ({
     </div>
   );
 };
-
 
 Stepper.displayName = 'Stepper';

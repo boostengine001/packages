@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * LoaderProps — Properties for the loading spinner component.
  */
@@ -22,10 +21,13 @@ export const Loader: React.FC<LoaderProps> = ({
   const getDimension = () => {
     if (typeof size === 'number') return size;
     switch (size) {
-      case 'sm': return 18;
-      case 'lg': return 36;
+      case 'sm':
+        return 18;
+      case 'lg':
+        return 36;
       case 'md':
-      default: return 24;
+      default:
+        return 24;
     }
   };
 

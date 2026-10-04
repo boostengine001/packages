@@ -26,9 +26,6 @@ export type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
 export type CardContentProps = React.HTMLAttributes<HTMLDivElement>;
 export type CardFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
-const NEURO_LIGHT = '8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff';
-const NEURO_DARK = '8px 8px 16px #090d15, -8px -8px 16px #151d2c';
-
 export const Card = /* @__PURE__ */ React.forwardRef<HTMLDivElement, CardProps>(
   (
     {
@@ -202,7 +199,12 @@ export const Card = /* @__PURE__ */ React.forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = 'Card';
 
-export const CardHeader: React.FC<CardHeaderProps> = ({ className = '', style, children, ...props }) => (
+export const CardHeader: React.FC<CardHeaderProps> = ({
+  className = '',
+  style,
+  children,
+  ...props
+}) => (
   <div
     style={{
       padding: 'clamp(14px, 2.5vw, 20px) clamp(16px, 3vw, 24px)',
@@ -217,7 +219,12 @@ export const CardHeader: React.FC<CardHeaderProps> = ({ className = '', style, c
   </div>
 );
 
-export const CardTitle: React.FC<CardTitleProps> = ({ className = '', style, children, ...props }) => (
+export const CardTitle: React.FC<CardTitleProps> = ({
+  className = '',
+  style,
+  children,
+  ...props
+}) => (
   <h3
     style={{
       margin: 0,
@@ -234,7 +241,12 @@ export const CardTitle: React.FC<CardTitleProps> = ({ className = '', style, chi
   </h3>
 );
 
-export const CardDescription: React.FC<CardDescriptionProps> = ({ className = '', style, children, ...props }) => (
+export const CardDescription: React.FC<CardDescriptionProps> = ({
+  className = '',
+  style,
+  children,
+  ...props
+}) => (
   <p
     style={{
       margin: '4px 0 0 0',
@@ -250,7 +262,12 @@ export const CardDescription: React.FC<CardDescriptionProps> = ({ className = ''
   </p>
 );
 
-export const CardContent: React.FC<CardContentProps> = ({ className = '', style, children, ...props }) => (
+export const CardContent: React.FC<CardContentProps> = ({
+  className = '',
+  style,
+  children,
+  ...props
+}) => (
   <div
     style={{
       padding: 'clamp(14px, 2.5vw, 24px) clamp(16px, 3vw, 24px)',
@@ -265,7 +282,12 @@ export const CardContent: React.FC<CardContentProps> = ({ className = '', style,
   </div>
 );
 
-export const CardFooter: React.FC<CardFooterProps> = ({ className = '', style, children, ...props }) => (
+export const CardFooter: React.FC<CardFooterProps> = ({
+  className = '',
+  style,
+  children,
+  ...props
+}) => (
   <div
     style={{
       padding: 'clamp(12px, 2vw, 16px) clamp(16px, 3vw, 24px)',

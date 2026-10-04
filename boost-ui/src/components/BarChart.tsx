@@ -6,7 +6,6 @@ export interface BarChartDataPoint {
   secondaryValue?: number;
 }
 
-
 /**
  * BarChartProps — Properties for the bar chart component.
  */
@@ -76,7 +75,9 @@ export const BarChart: React.FC<BarChartProps> = ({
   const chartHeight = height - paddingTop - paddingBottom;
 
   const barGroupWidth = chartWidth / data.length;
-  const barWidth = hasSecondary ? Math.min(22, barGroupWidth * 0.35) : Math.min(36, barGroupWidth * 0.55);
+  const barWidth = hasSecondary
+    ? Math.min(22, barGroupWidth * 0.35)
+    : Math.min(36, barGroupWidth * 0.55);
 
   const getY = (val: number) => paddingTop + chartHeight - (val / max) * chartHeight;
   const getBarHeight = (val: number) => (val / max) * chartHeight;
@@ -115,10 +116,27 @@ export const BarChart: React.FC<BarChartProps> = ({
         `}
       </style>
       {(title || subtitle) && (
-        <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px' }}>
+        <div
+          style={{
+            marginBottom: '16px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
+        >
           <div>
             {title && (
-              <h4 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: 'var(--boost-text, #0f172a)', letterSpacing: '-0.01em' }}>
+              <h4
+                style={{
+                  margin: '0 0 4px',
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  color: 'var(--boost-text, #0f172a)',
+                  letterSpacing: '-0.01em',
+                }}
+              >
                 {title}
               </h4>
             )}
@@ -129,14 +147,50 @@ export const BarChart: React.FC<BarChartProps> = ({
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '12px', fontWeight: 600 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--boost-text, #0f172a)' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '3px', backgroundColor: color }} />
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px',
+              fontSize: '12px',
+              fontWeight: 600,
+            }}
+          >
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: 'var(--boost-text, #0f172a)',
+              }}
+            >
+              <span
+                style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '3px',
+                  backgroundColor: color,
+                }}
+              />
               {primaryLabel}
             </span>
             {hasSecondary && (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--boost-text-muted, #64748b)' }}>
-                <span style={{ width: '10px', height: '10px', borderRadius: '3px', backgroundColor: secondaryColor }} />
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: 'var(--boost-text-muted, #64748b)',
+                }}
+              >
+                <span
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '3px',
+                    backgroundColor: secondaryColor,
+                  }}
+                />
                 {secondaryLabel}
               </span>
             )}
@@ -174,7 +228,8 @@ export const BarChart: React.FC<BarChartProps> = ({
                     fontSize="10"
                     fontWeight="500"
                   >
-                    {valuePrefix}{formatNumber(yVal)}
+                    {valuePrefix}
+                    {formatNumber(yVal)}
                   </text>
                 </g>
               );
@@ -227,7 +282,9 @@ export const BarChart: React.FC<BarChartProps> = ({
                   x={centerX}
                   y={height - 8}
                   textAnchor="middle"
-                  fill={isHovered ? 'var(--boost-primary, #3b82f6)' : 'var(--boost-text-muted, #64748b)'}
+                  fill={
+                    isHovered ? 'var(--boost-primary, #3b82f6)' : 'var(--boost-text-muted, #64748b)'
+                  }
                   fontSize="11"
                   fontWeight={isHovered ? '700' : '500'}
                 >
@@ -277,11 +334,15 @@ export const BarChart: React.FC<BarChartProps> = ({
               {data[hoverIndex].label}
             </span>
             <span style={{ fontSize: '13px', fontWeight: 700, color: '#60a5fa' }}>
-              {primaryLabel}: {valuePrefix}{data[hoverIndex].value.toLocaleString()}{valueSuffix}
+              {primaryLabel}: {valuePrefix}
+              {data[hoverIndex].value.toLocaleString()}
+              {valueSuffix}
             </span>
             {hasSecondary && data[hoverIndex].secondaryValue !== undefined && (
               <span style={{ fontSize: '11px', opacity: 0.8 }}>
-                {secondaryLabel}: {valuePrefix}{data[hoverIndex].secondaryValue?.toLocaleString()}{valueSuffix}
+                {secondaryLabel}: {valuePrefix}
+                {data[hoverIndex].secondaryValue?.toLocaleString()}
+                {valueSuffix}
               </span>
             )}
           </div>

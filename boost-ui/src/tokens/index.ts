@@ -342,4 +342,4 @@ export function createTailwindPreset(preset?: UIStylePreset) {
       },
     },
   };
-}
+}

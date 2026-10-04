@@ -157,8 +157,7 @@ export function useScrollPosition(): { scrollX: number; scrollY: number } {
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
-    const handler = () =>
-      setScroll({ scrollX: window.scrollX, scrollY: window.scrollY });
+    const handler = () => setScroll({ scrollX: window.scrollX, scrollY: window.scrollY });
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
@@ -211,7 +210,12 @@ export function useCopyToClipboard(resetMs: number = 2000): {
     [resetMs]
   );
 
-  React.useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+  React.useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    []
+  );
 
   return { copy, copied };
 }
@@ -273,10 +277,7 @@ export interface UseFormOptions<T extends Record<string, any>> {
       success: boolean;
       error?: { issues?: Array<{ path: (string | number)[]; message: string }> };
     };
-    validateSync?: (
-      data: unknown,
-      options?: any
-    ) => any;
+    validateSync?: (data: unknown, options?: any) => any;
   };
   onSubmit?: (values: T) => void | Promise<void>;
 }
@@ -366,10 +367,13 @@ export function useForm<T extends Record<string, any>>({
         e.preventDefault();
       }
 
-      const allTouched = Object.keys(values).reduce((acc, key) => {
-        acc[key as keyof T] = true;
-        return acc;
-      }, {} as Partial<Record<keyof T, boolean>>);
+      const allTouched = Object.keys(values).reduce(
+        (acc, key) => {
+          acc[key as keyof T] = true;
+          return acc;
+        },
+        {} as Partial<Record<keyof T, boolean>>
+      );
       setTouched(allTouched);
 
       const errs = runValidation(values);
@@ -393,9 +397,12 @@ export function useForm<T extends Record<string, any>>({
     [errors, touched]
   );
 
-  const setFieldValue = React.useCallback((field: keyof T, val: any) => {
-    handleChange(field, val);
-  }, [handleChange]);
+  const setFieldValue = React.useCallback(
+    (field: keyof T, val: any) => {
+      handleChange(field, val);
+    },
+    [handleChange]
+  );
 
   const setFieldError = React.useCallback((field: keyof T, err: string | undefined) => {
     setErrors((prev) => ({ ...prev, [field]: err }));
@@ -430,20 +437,28 @@ export function useForm<T extends Record<string, any>>({
  * useFocusTrap — Traps focus within a specified element when active.
  * Useful for modals, drawers, and dialogs for WAI-ARIA compliance.
  *
+ * Accepts either a ref or a state-held element (callback ref), so traps re-attach
+ * correctly when the target mounts asynchronously (e.g. inside a Portal).
+ *
  * @example
  * const ref = useRef<HTMLDivElement>(null);
  * useFocusTrap(ref, isOpen);
  * return <div ref={ref}>...</div>;
  */
 export function useFocusTrap<T extends HTMLElement = HTMLElement>(
-  ref: React.RefObject<T | null> | React.MutableRefObject<T | null> | { current: T | null },
+  target:
+    React.RefObject<T | null> | React.MutableRefObject<T | null> | { current: T | null } | T | null,
   isActive: boolean
 ) {
   React.useEffect(() => {
-    if (!isActive || !ref.current) return;
+    if (!isActive) return;
 
-    const element = ref.current;
-    
+    const element =
+      target !== null && typeof target === 'object' && 'current' in target
+        ? target.current
+        : (target as T | null);
+    if (!element) return;
+
     // Find all focusable elements
     const focusableSelectors = [
       'a[href]',
@@ -453,7 +468,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
       'select:not([disabled])',
       '[tabindex]:not([tabindex="-1"])',
     ].join(',');
-    
+
     const focusableElements = Array.from(element.querySelectorAll<HTMLElement>(focusableSelectors));
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
@@ -482,7 +497,11 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
     };
 
     // Auto-focus first element when trap activates, unless already focused inside
-    if (firstElement && document.activeElement && !element.contains(document.activeElement as Node)) {
+    if (
+      firstElement &&
+      document.activeElement &&
+      !element.contains(document.activeElement as Node)
+    ) {
       // Small timeout to ensure element is fully rendered and focusable
       setTimeout(() => firstElement.focus(), 10);
     }
@@ -491,7 +510,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
     return () => {
       element.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isActive, ref]);
+  }, [isActive, target]);
 }
 
 /**
@@ -582,7 +601,6 @@ export function useAnnounce() {
 
   return announce;
 }
-
 
 /**
  * useBreakpoint — Reactive responsive breakpoint hook.

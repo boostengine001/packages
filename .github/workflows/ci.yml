@@ -1,0 +1,43 @@
+name: boost-ui CI
+
+on:
+  push:
+    branches: [main]
+    paths: ['packages/boost-ui/**']
+  pull_request:
+    paths: ['packages/boost-ui/**']
+
+defaults:
+  run:
+    working-directory: packages/boost-ui
+
+jobs:
+  verify:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/boost-ui/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: Build
+        run: npm run build
+
+      - name: Smoke tests (build artifacts)
+        run: npm run test:smoke

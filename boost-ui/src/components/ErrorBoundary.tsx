@@ -43,7 +43,11 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
     this.props.onError?.(error, errorInfo);
     // Dev warning in non-production
     if (process.env.NODE_ENV !== 'production') {
-      console.warn('[BoostEngine ErrorBoundary] Caught an error:', error.message, errorInfo.componentStack);
+      console.warn(
+        '[BoostEngine ErrorBoundary] Caught an error:',
+        error.message,
+        errorInfo.componentStack
+      );
     }
   }
 
@@ -78,9 +82,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
           }}
           role="alert"
         >
-          <p style={{ fontWeight: 600, margin: '0 0 8px' }}>
-            ⚠️ Something went wrong
-          </p>
+          <p style={{ fontWeight: 600, margin: '0 0 8px' }}>⚠️ Something went wrong</p>
           <p style={{ margin: '0 0 12px', opacity: 0.8, fontSize: '13px' }}>
             {this.state.error.message || 'An unexpected error occurred'}
           </p>

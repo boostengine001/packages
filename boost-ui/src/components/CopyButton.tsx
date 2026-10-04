@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * CopyButtonProps — Properties for the copy-to-clipboard button.
  */
@@ -128,6 +127,5 @@ export const CopyButton: React.FC<CopyButtonProps> = ({
     </button>
   );
 };
-
 
 CopyButton.displayName = 'CopyButton';

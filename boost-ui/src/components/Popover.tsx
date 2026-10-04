@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * PopoverProps — Properties for the popover overlay component.
  */
@@ -237,10 +236,18 @@ export const Popover: React.FC<PopoverProps> = ({
                 height: '8px',
                 transform: 'rotate(45deg)',
                 backgroundColor: 'inherit',
-                borderLeft: placement.startsWith('bottom') ? '1px solid var(--boost-border, #e2e8f0)' : 'none',
-                borderTop: placement.startsWith('bottom') ? '1px solid var(--boost-border, #e2e8f0)' : 'none',
-                borderRight: placement.startsWith('top') ? '1px solid var(--boost-border, #e2e8f0)' : 'none',
-                borderBottom: placement.startsWith('top') ? '1px solid var(--boost-border, #e2e8f0)' : 'none',
+                borderLeft: placement.startsWith('bottom')
+                  ? '1px solid var(--boost-border, #e2e8f0)'
+                  : 'none',
+                borderTop: placement.startsWith('bottom')
+                  ? '1px solid var(--boost-border, #e2e8f0)'
+                  : 'none',
+                borderRight: placement.startsWith('top')
+                  ? '1px solid var(--boost-border, #e2e8f0)'
+                  : 'none',
+                borderBottom: placement.startsWith('top')
+                  ? '1px solid var(--boost-border, #e2e8f0)'
+                  : 'none',
                 ...(placement === 'bottom-left' ? { top: '-5px', left: '16px' } : {}),
                 ...(placement === 'bottom-right' ? { top: '-5px', right: '16px' } : {}),
                 ...(placement === 'bottom' ? { top: '-5px', left: 'calc(50% - 4px)' } : {}),

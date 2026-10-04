@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * TimePickerProps — Properties for the time picker component.
  */
@@ -38,7 +37,14 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       }}
     >
       {label && (
-        <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', letterSpacing: '-0.01em' }}>
+        <label
+          style={{
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--boost-text, #334155)',
+            letterSpacing: '-0.01em',
+          }}
+        >
           {label}
         </label>
       )}

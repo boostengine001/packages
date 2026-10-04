@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useTheme, ThemeMode } from './BoostProvider';
 
-
 /**
  * ThemeToggleProps — Properties for the light/dark mode toggle switch.
  */
@@ -63,9 +62,12 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
     } else {
       setStandaloneMode(newMode);
       if (typeof document !== 'undefined') {
-        const nextResolved = newMode === 'system'
-          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-          : newMode;
+        const nextResolved =
+          newMode === 'system'
+            ? window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+            : newMode;
         document.documentElement.setAttribute('data-theme', nextResolved);
         if (nextResolved === 'dark') document.documentElement.classList.add('dark');
         else document.documentElement.classList.remove('dark');
@@ -77,14 +79,41 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 
   // Dimension helpers based on size
   const sizeMap = {
-    sm: { buttonPadding: '6px 10px', iconSize: 14, fontSize: '12px', height: '28px', pillPadding: '2px' },
-    md: { buttonPadding: '8px 14px', iconSize: 16, fontSize: '13px', height: '36px', pillPadding: '3px' },
-    lg: { buttonPadding: '10px 18px', iconSize: 18, fontSize: '14px', height: '44px', pillPadding: '4px' },
+    sm: {
+      buttonPadding: '6px 10px',
+      iconSize: 14,
+      fontSize: '12px',
+      height: '28px',
+      pillPadding: '2px',
+    },
+    md: {
+      buttonPadding: '8px 14px',
+      iconSize: 16,
+      fontSize: '13px',
+      height: '36px',
+      pillPadding: '3px',
+    },
+    lg: {
+      buttonPadding: '10px 18px',
+      iconSize: 18,
+      fontSize: '14px',
+      height: '44px',
+      pillPadding: '4px',
+    },
   }[size];
 
   // SVG Icons
   const SunIcon = ({ size: s }: { size: number }) => (
-    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={s}
+      height={s}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="12" cy="12" r="5" />
       <line x1="12" y1="1" x2="12" y2="3" />
       <line x1="12" y1="21" x2="12" y2="23" />
@@ -98,13 +127,31 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   );
 
   const MoonIcon = ({ size: s }: { size: number }) => (
-    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={s}
+      height={s}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
 
   const MonitorIcon = ({ size: s }: { size: number }) => (
-    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={s}
+      height={s}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
       <line x1="8" y1="21" x2="16" y2="21" />
       <line x1="12" y1="17" x2="12" y2="21" />
@@ -148,12 +195,16 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
                 padding: sizeMap.buttonPadding,
                 fontSize: sizeMap.fontSize,
                 fontWeight: isSelected ? 600 : 500,
-                color: isSelected ? 'var(--boost-text, #0f172a)' : 'var(--boost-text-muted, #64748b)',
+                color: isSelected
+                  ? 'var(--boost-text, #0f172a)'
+                  : 'var(--boost-text-muted, #64748b)',
                 backgroundColor: isSelected ? 'var(--boost-bg, #ffffff)' : 'transparent',
                 borderRadius: '999px',
                 border: 'none',
                 cursor: 'pointer',
-                boxShadow: isSelected ? 'var(--boost-shadow-sm, 0 2px 6px rgba(0,0,0,0.08))' : 'none',
+                boxShadow: isSelected
+                  ? 'var(--boost-shadow-sm, 0 2px 6px rgba(0,0,0,0.08))'
+                  : 'none',
                 transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
             >
@@ -180,7 +231,9 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
           width: size === 'sm' ? '44px' : size === 'lg' ? '60px' : '52px',
           height: size === 'sm' ? '24px' : size === 'lg' ? '32px' : '28px',
           borderRadius: '999px',
-          backgroundColor: isDark ? 'var(--boost-primary, #3b82f6)' : 'var(--boost-surface, #e2e8f0)',
+          backgroundColor: isDark
+            ? 'var(--boost-primary, #3b82f6)'
+            : 'var(--boost-surface, #e2e8f0)',
           border: '1px solid var(--boost-border, rgba(0,0,0,0.1))',
           padding: '2px',
           display: 'inline-flex',
@@ -209,7 +262,11 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
             color: isDark ? '#0f172a' : '#f59e0b',
           }}
         >
-          {isDark ? <MoonIcon size={sizeMap.iconSize - 2} /> : <SunIcon size={sizeMap.iconSize - 2} />}
+          {isDark ? (
+            <MoonIcon size={sizeMap.iconSize - 2} />
+          ) : (
+            <SunIcon size={sizeMap.iconSize - 2} />
+          )}
         </div>
       </button>
     );
@@ -287,7 +344,11 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
           transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
         }}
       >
-        {isDark ? <MoonIcon size={sizeMap.iconSize + 2} /> : <SunIcon size={sizeMap.iconSize + 2} />}
+        {isDark ? (
+          <MoonIcon size={sizeMap.iconSize + 2} />
+        ) : (
+          <SunIcon size={sizeMap.iconSize + 2} />
+        )}
       </span>
     </button>
   );

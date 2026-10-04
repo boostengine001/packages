@@ -12,7 +12,6 @@ export interface CommandItem {
   onSelect: () => void;
 }
 
-
 /**
  * CommandPaletteProps — Properties for the command palette / quick search overlay.
  */
@@ -67,9 +66,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setSelectedIndex((prev) => (prev + 1) % (filteredItems.length || 1));
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setSelectedIndex((prev) =>
-          prev === 0 ? Math.max(0, filteredItems.length - 1) : prev - 1
-        );
+        setSelectedIndex((prev) => (prev === 0 ? Math.max(0, filteredItems.length - 1) : prev - 1));
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (filteredItems[selectedIndex]) {
@@ -387,6 +384,5 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     </div>
   );
 };
-
 
 CommandPalette.displayName = 'CommandPalette';

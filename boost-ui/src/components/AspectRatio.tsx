@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * AspectRatioProps — Properties for the aspect-ratio constrained container.
  */

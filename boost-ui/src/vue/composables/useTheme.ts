@@ -22,19 +22,25 @@ export function useTheme(defaultMode: ThemeMode = 'system') {
   );
   const isDark = computed(() => resolvedMode.value === 'dark');
 
-  watch(resolvedMode, (val) => {
-    if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', val);
-      if (val === 'dark') document.documentElement.classList.add('dark');
-      else document.documentElement.classList.remove('dark');
-    }
-  }, { immediate: true });
+  watch(
+    resolvedMode,
+    (val) => {
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', val);
+        if (val === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      }
+    },
+    { immediate: true }
+  );
 
   function setMode(newMode: ThemeMode) {
     mode.value = newMode;
     if (typeof window !== 'undefined') localStorage.setItem(THEME_KEY, newMode);
   }
-  function toggle() { setMode(resolvedMode.value === 'dark' ? 'light' : 'dark'); }
+  function toggle() {
+    setMode(resolvedMode.value === 'dark' ? 'light' : 'dark');
+  }
 
   return { mode: mode as Ref<ThemeMode>, resolvedMode, isDark, setMode, toggle };
 }

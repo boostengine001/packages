@@ -6,7 +6,6 @@ export interface BreadcrumbItem {
   icon?: React.ReactNode;
 }
 
-
 /**
  * BreadcrumbProps — Properties for the breadcrumb navigation trail.
  */
@@ -26,7 +25,17 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   style,
 }) => {
   const defaultSeparator = (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.4, margin: '0 4px', flexShrink: 0 }}>
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ opacity: 0.4, margin: '0 4px', flexShrink: 0 }}
+    >
       <polyline points="9 18 15 12 9 6" />
     </svg>
   );
@@ -90,7 +99,8 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
                     (e.currentTarget as HTMLElement).style.color = 'var(--boost-primary, #2563eb)';
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = 'var(--boost-text-muted, #64748b)';
+                    (e.currentTarget as HTMLElement).style.color =
+                      'var(--boost-text-muted, #64748b)';
                   }}
                 >
                   {item.icon && <span style={{ display: 'inline-flex' }}>{item.icon}</span>}
@@ -99,7 +109,9 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               ) : (
                 <span
                   style={{
-                    color: isLast ? 'var(--boost-text, #0f172a)' : 'var(--boost-text-muted, #64748b)',
+                    color: isLast
+                      ? 'var(--boost-text, #0f172a)'
+                      : 'var(--boost-text-muted, #64748b)',
                     fontWeight: isLast ? 600 : 500,
                     display: 'inline-flex',
                     alignItems: 'center',

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * FeatureItem — A single feature card with icon, title, and description.
  */
@@ -12,7 +11,6 @@ export interface FeatureItem {
   actionText?: string;
   onAction?: () => void;
 }
-
 
 /**
  * FeatureGridProps — Properties for the feature grid display section.
@@ -60,7 +58,8 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
             flexDirection: 'column',
             alignItems: align === 'center' ? 'center' : 'flex-start',
             textAlign: align,
-            transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.25s ease',
+            transition:
+              'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.25s ease',
           }}
         >
           {feature.icon && (
@@ -69,7 +68,8 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                 width: '52px',
                 height: '52px',
                 borderRadius: '14px',
-                background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(59, 130, 246, 0.05))',
+                background:
+                  'linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(59, 130, 246, 0.05))',
                 border: '1px solid rgba(37, 99, 235, 0.18)',
                 color: 'var(--boost-primary, #2563eb)',
                 display: 'flex',
@@ -149,6 +149,5 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
     </div>
   );
 };
-
 
 FeatureGrid.displayName = 'FeatureGrid';

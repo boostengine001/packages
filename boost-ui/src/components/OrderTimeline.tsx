@@ -2,12 +2,10 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * OrderStage — A single stage in the order timeline.
  */
 export type OrderStage = 'placed' | 'confirmed' | 'shipped' | 'out_for_delivery' | 'delivered';
-
 
 /**
  * OrderTimelineProps — Properties for the order status timeline component.
@@ -61,7 +59,8 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
           ...base,
           borderRadius: '2px',
           border: '2px solid #000000',
-          backgroundColor: status === 'passed' ? '#10b981' : status === 'current' ? '#fbbf24' : '#ffffff',
+          backgroundColor:
+            status === 'passed' ? '#10b981' : status === 'current' ? '#fbbf24' : '#ffffff',
           color: '#000000',
           boxShadow: status === 'current' ? '3px 3px 0px #000000' : '2px 2px 0px #000000',
           fontWeight: 800,
@@ -71,7 +70,12 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
           ...base,
           borderRadius: '9999px',
           border: '1px solid rgba(255, 255, 255, 0.4)',
-          backgroundColor: status === 'passed' ? 'rgba(16, 185, 129, 0.85)' : status === 'current' ? 'rgba(99, 102, 241, 0.85)' : 'rgba(255, 255, 255, 0.4)',
+          backgroundColor:
+            status === 'passed'
+              ? 'rgba(16, 185, 129, 0.85)'
+              : status === 'current'
+                ? 'rgba(99, 102, 241, 0.85)'
+                : 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
           color: '#ffffff',
@@ -82,7 +86,8 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
           ...base,
           borderRadius: '9999px',
           border: 'none',
-          backgroundColor: status === 'passed' ? '#10b981' : status === 'current' ? '#2563eb' : '#e0e5ec',
+          backgroundColor:
+            status === 'passed' ? '#10b981' : status === 'current' ? '#2563eb' : '#e0e5ec',
           color: status === 'upcoming' ? 'var(--boost-text-muted, #94a3b8)' : '#ffffff',
           boxShadow: '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff',
         };
@@ -90,23 +95,39 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
         return {
           ...base,
           borderRadius: '9999px',
-          background: status === 'passed' ? 'linear-gradient(135deg, #10b981, #059669)' : status === 'current' ? 'linear-gradient(135deg, #4f46e5, #8b5cf6)' : 'var(--boost-surface, #ffffff)',
+          background:
+            status === 'passed'
+              ? 'linear-gradient(135deg, #10b981, #059669)'
+              : status === 'current'
+                ? 'linear-gradient(135deg, #4f46e5, #8b5cf6)'
+                : 'var(--boost-surface, #ffffff)',
           border: status === 'upcoming' ? '1px solid rgba(99, 102, 241, 0.2)' : 'none',
           color: status === 'upcoming' ? 'var(--boost-text-muted, #94a3b8)' : '#ffffff',
-          boxShadow: status === 'passed' ? '0 0 12px rgba(16, 185, 129, 0.5)' : status === 'current' ? '0 0 16px rgba(99, 102, 241, 0.7)' : 'none',
+          boxShadow:
+            status === 'passed'
+              ? '0 0 12px rgba(16, 185, 129, 0.5)'
+              : status === 'current'
+                ? '0 0 16px rgba(99, 102, 241, 0.7)'
+                : 'none',
         };
       case 'material-you':
         return {
           ...base,
           borderRadius: '9999px',
-          backgroundColor: status === 'passed' ? '#386a20' : status === 'current' ? 'var(--boost-primary, #6750a4)' : 'var(--boost-surface-secondary, #e8def8)',
+          backgroundColor:
+            status === 'passed'
+              ? '#386a20'
+              : status === 'current'
+                ? 'var(--boost-primary, #6750a4)'
+                : 'var(--boost-surface-secondary, #e8def8)',
           color: status === 'upcoming' ? '#49454f' : '#ffffff',
         };
       case 'dark-first':
         return {
           ...base,
           borderRadius: '9999px',
-          backgroundColor: status === 'passed' ? '#059669' : status === 'current' ? '#2563eb' : '#1e293b',
+          backgroundColor:
+            status === 'passed' ? '#059669' : status === 'current' ? '#2563eb' : '#1e293b',
           border: status === 'upcoming' ? '1px solid rgba(255, 255, 255, 0.12)' : 'none',
           color: status === 'upcoming' ? '#64748b' : '#ffffff',
         };
@@ -116,7 +137,10 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
   };
 
   return (
-    <div className={`boost-order-timeline ${className}`} style={{ padding: '16px 8px', width: '100%', boxSizing: 'border-box' }}>
+    <div
+      className={`boost-order-timeline ${className}`}
+      style={{ padding: '16px 8px', width: '100%', boxSizing: 'border-box' }}
+    >
       <style>{`
         .boost-timeline-container {
           display: flex;
@@ -251,11 +275,29 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
                 style={getNodeStyles(status)}
               >
                 {isPassed ? (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 ) : isCurrent ? (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
                   </svg>
                 ) : (
@@ -263,12 +305,16 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({
                 )}
               </div>
 
-              <div className={`boost-timeline-label ${status}`}>
-                {stage.label}
-              </div>
+              <div className={`boost-timeline-label ${status}`}>{stage.label}</div>
 
               {dates[stage.id] && (
-                <div style={{ fontSize: '10px', color: 'var(--boost-text-muted, #94a3b8)', marginTop: '3px' }}>
+                <div
+                  style={{
+                    fontSize: '10px',
+                    color: 'var(--boost-text-muted, #94a3b8)',
+                    marginTop: '3px',
+                  }}
+                >
                   {dates[stage.id]}
                 </div>
               )}

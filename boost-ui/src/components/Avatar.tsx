@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * AvatarProps — Properties for the user avatar with image fallback and initials.
  */
@@ -25,21 +24,30 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   const getSize = () => {
     switch (size) {
-      case 'sm': return { dim: 32, font: 12, dot: 8 };
-      case 'lg': return { dim: 52, font: 18, dot: 12 };
-      case 'xl': return { dim: 72, font: 24, dot: 16 };
+      case 'sm':
+        return { dim: 32, font: 12, dot: 8 };
+      case 'lg':
+        return { dim: 52, font: 18, dot: 12 };
+      case 'xl':
+        return { dim: 72, font: 24, dot: 16 };
       case 'md':
-      default: return { dim: 40, font: 14, dot: 10 };
+      default:
+        return { dim: 40, font: 14, dot: 10 };
     }
   };
 
   const getStatusColor = () => {
     switch (status) {
-      case 'online': return '#16a34a';
-      case 'offline': return '#94a3b8';
-      case 'busy': return '#dc2626';
-      case 'away': return '#eab308';
-      default: return undefined;
+      case 'online':
+        return '#16a34a';
+      case 'offline':
+        return '#94a3b8';
+      case 'busy':
+        return '#dc2626';
+      case 'away':
+        return '#eab308';
+      default:
+        return undefined;
     }
   };
 

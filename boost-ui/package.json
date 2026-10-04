@@ -193,9 +193,17 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "node test-suite.cjs",
+    "test": "npm run test:unit && npm run test:smoke",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:smoke": "node test-suite.cjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test:unit && npm run build && npm run test:smoke"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -209,9 +217,20 @@
   "devDependencies": {
     "@angular/core": "^22.1.7",
     "@builder.io/qwik": "^1.20.0",
-    "@types/node": "^20.14.0",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.7",
+    "@types/node": "24.19.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
+    "@vitest/coverage-v8": "5.0.3",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "30.1.1",
+    "prettier": "^3.9.9",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-native": "^0.87.1",
@@ -220,6 +239,8 @@
     "svelte": "^5.57.1",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "5.0.3",
     "vue": "^3.5.43"
   }
 }

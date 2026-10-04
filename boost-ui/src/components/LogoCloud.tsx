@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * LogoItem — A single logo in the cloud display.
  */
@@ -10,7 +9,6 @@ export interface LogoItem {
   imageUrl?: string;
   href?: string;
 }
-
 
 /**
  * LogoCloudProps — Properties for the logo cloud showcase component.
@@ -132,10 +130,10 @@ export const LogoCloud: React.FC<LogoCloudProps> = ({
               }}
             >
               {item.imageUrl ? (
-                <img 
-                  src={item.imageUrl} 
-                  alt={item.name} 
-                  style={{ maxHeight: '36px', maxWidth: '160px', objectFit: 'contain' }} 
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  style={{ maxHeight: '36px', maxWidth: '160px', objectFit: 'contain' }}
                 />
               ) : (
                 item.logo
@@ -162,6 +160,5 @@ export const LogoCloud: React.FC<LogoCloudProps> = ({
     </div>
   );
 };
-
 
 LogoCloud.displayName = 'LogoCloud';

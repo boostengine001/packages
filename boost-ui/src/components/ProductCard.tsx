@@ -67,13 +67,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const effectiveOriginalPrice = compareAtPrice ?? originalPrice;
   const imageList =
-    images && images.length > 0
-      ? images
-      : imageUrl
-      ? [imageUrl]
-      : image
-      ? [image]
-      : [];
+    images && images.length > 0 ? images : imageUrl ? [imageUrl] : image ? [image] : [];
 
   const mainImage = imageList[0] || '';
   const secondaryImage = imageList[1] || mainImage;
@@ -91,7 +85,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           border: '3px solid var(--boost-border, #000000)',
           borderRadius: '2px',
           backgroundColor: 'var(--boost-surface, #ffffff)',
-          boxShadow: isHovered ? '6px 6px 0px var(--boost-border, #000000)' : '4px 4px 0px var(--boost-border, #000000)',
+          boxShadow: isHovered
+            ? '6px 6px 0px var(--boost-border, #000000)'
+            : '4px 4px 0px var(--boost-border, #000000)',
           transform: isHovered ? 'translate(-2px, -2px)' : 'none',
         };
       case 'glassmorphism':
@@ -101,7 +97,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           WebkitBackdropFilter: 'blur(16px)',
           border: '1px solid var(--boost-glass-border, rgba(255, 255, 255, 0.25))',
           borderRadius: '16px',
-          boxShadow: isHovered ? '0 14px 32px rgba(0, 0, 0, 0.15)' : '0 4px 20px rgba(0, 0, 0, 0.08)',
+          boxShadow: isHovered
+            ? '0 14px 32px rgba(0, 0, 0, 0.15)'
+            : '0 4px 20px rgba(0, 0, 0, 0.08)',
           transform: isHovered ? 'translateY(-4px)' : 'none',
         };
       case 'neumorphism':
@@ -260,7 +258,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
+        transition:
+          'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
         fontFamily: 'inherit',
         position: 'relative',
         width: '100%',
@@ -467,13 +466,35 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '4px', marginBottom: '8px' }}>
-            <span style={{ fontSize: 'clamp(15px, 1.4vw, 17px)', fontWeight: 800, color: 'var(--boost-text, #0f172a)' }}>
-              {currencySymbol}{price}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              gap: '6px',
+              marginTop: '4px',
+              marginBottom: '8px',
+            }}
+          >
+            <span
+              style={{
+                fontSize: 'clamp(15px, 1.4vw, 17px)',
+                fontWeight: 800,
+                color: 'var(--boost-text, #0f172a)',
+              }}
+            >
+              {currencySymbol}
+              {price}
             </span>
             {effectiveOriginalPrice && effectiveOriginalPrice > price && (
-              <span style={{ fontSize: '12px', color: 'var(--boost-text-muted, #94a3b8)', textDecoration: 'line-through' }}>
-                {currencySymbol}{effectiveOriginalPrice}
+              <span
+                style={{
+                  fontSize: '12px',
+                  color: 'var(--boost-text-muted, #94a3b8)',
+                  textDecoration: 'line-through',
+                }}
+              >
+                {currencySymbol}
+                {effectiveOriginalPrice}
               </span>
             )}
           </div>
@@ -505,6 +526,5 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     </div>
   );
 };
-
 
 ProductCard.displayName = 'ProductCard';

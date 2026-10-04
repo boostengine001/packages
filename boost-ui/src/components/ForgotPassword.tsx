@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * ForgotPasswordProps — Properties for the forgot password form.
  */
@@ -116,7 +115,9 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
           border: 'none',
           backgroundColor: 'var(--boost-surface, #e6ecf5)',
           borderRadius: '10px',
-          boxShadow: errorMessage ? 'inset 2px 2px 4px rgba(239, 68, 68, 0.4)' : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
+          boxShadow: errorMessage
+            ? 'inset 2px 2px 4px rgba(239, 68, 68, 0.4)'
+            : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
         };
       case 'material-you':
         return {
@@ -267,13 +268,39 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
             ...getIconPresetStyles(),
           }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
           </svg>
         </div>
-        <h2 style={{ fontSize: 'clamp(20px, 3vw, 22px)', fontWeight: 700, color: 'var(--boost-text, #0f172a)', margin: '0 0 6px', letterSpacing: '-0.02em' }}>Forgot password?</h2>
-        <p style={{ fontSize: '13px', color: 'var(--boost-muted, #64748b)', margin: 0, lineHeight: 1.5 }}>
+        <h2
+          style={{
+            fontSize: 'clamp(20px, 3vw, 22px)',
+            fontWeight: 700,
+            color: 'var(--boost-text, #0f172a)',
+            margin: '0 0 6px',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Forgot password?
+        </h2>
+        <p
+          style={{
+            fontSize: '13px',
+            color: 'var(--boost-muted, #64748b)',
+            margin: 0,
+            lineHeight: 1.5,
+          }}
+        >
           No worries, we will send you reset instructions.
         </p>
       </div>
@@ -294,7 +321,10 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
           {successMessage}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+        >
           {errorMessage && (
             <div
               style={{
@@ -309,7 +339,14 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
                 fontSize: '13px',
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="8" x2="12" y2="12" />
                 <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -319,7 +356,15 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
           )}
 
           <div>
-            <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '13px',
+                fontWeight: 600,
+                color: 'var(--boost-text, #334155)',
+                marginBottom: '6px',
+              }}
+            >
               Email Address
             </label>
             <input
@@ -376,7 +421,14 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="10" opacity="0.3" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  strokeDasharray="32"
+                  strokeDashoffset="10"
+                  opacity="0.3"
+                />
                 <path d="M12 2a10 10 0 0 1 10 10" />
               </svg>
             )}
@@ -403,7 +455,14 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
               padding: 0,
             }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="12 19 5 12 12 5" />
             </svg>
@@ -414,6 +473,5 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
     </div>
   );
 };
-
 
 ForgotPassword.displayName = 'ForgotPassword';

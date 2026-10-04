@@ -12,7 +12,6 @@ export type DataTableColumn<T = any> = Omit<TableColumn<T>, 'header'> & {
   sortable?: boolean;
 };
 
-
 /**
  * DataTableProps — Properties for the advanced data table with sorting, filtering, and pagination.
  */
@@ -70,7 +69,8 @@ export function DataTable<T extends Record<string, any>>({
   const [sortDirection, setSortDirection] = React.useState<'asc' | 'desc'>('asc');
 
   const currentPage = controlledPage !== undefined ? controlledPage : internalPage;
-  const selectedRows = controlledSelectedRows !== undefined ? controlledSelectedRows : internalSelectedRows;
+  const selectedRows =
+    controlledSelectedRows !== undefined ? controlledSelectedRows : internalSelectedRows;
 
   const handlePageChange = (newPage: number) => {
     if (onPageChange) {
@@ -100,9 +100,7 @@ export function DataTable<T extends Record<string, any>>({
       } else {
         const q = searchQuery.toLowerCase();
         list = list.filter((item) =>
-          Object.values(item).some(
-            (val) => val && String(val).toLowerCase().includes(q)
-          )
+          Object.values(item).some((val) => val && String(val).toLowerCase().includes(q))
         );
       }
     }
@@ -125,7 +123,8 @@ export function DataTable<T extends Record<string, any>>({
     return list;
   }, [data, searchQuery, searchFilter, searchable, sortColumn, sortDirection]);
 
-  const totalRecords = manualPagination && totalCount !== undefined ? totalCount : processedData.length;
+  const totalRecords =
+    manualPagination && totalCount !== undefined ? totalCount : processedData.length;
   const totalPages = Math.ceil(totalRecords / pageSize) || 1;
 
   const paginatedData = manualPagination
@@ -161,7 +160,8 @@ export function DataTable<T extends Record<string, any>>({
     if (!processedData.length) return;
     const headerRow = columns
       .map((c) => {
-        const colTitle = c.title || c.header || (typeof (c as any).key === 'string' ? (c as any).key : '');
+        const colTitle =
+          c.title || c.header || (typeof (c as any).key === 'string' ? (c as any).key : '');
         return `"${String(colTitle).replace(/"/g, '""')}"`;
       })
       .join(',');
@@ -280,17 +280,37 @@ export function DataTable<T extends Record<string, any>>({
       case 'neo-brutalism':
         return { ...base, backgroundColor: '#fef08a', borderBottom: '3px solid #000' };
       case 'glassmorphism':
-        return { ...base, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderBottom: '1px solid rgba(255, 255, 255, 0.3)' };
+        return {
+          ...base,
+          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
+        };
       case 'neumorphism':
         return { ...base, backgroundColor: '#e0e5ec', borderBottom: '1px solid #d1d9e6' };
       case 'gradient-glow':
-        return { ...base, backgroundColor: 'rgba(99, 102, 241, 0.05)', borderBottom: '1px solid rgba(99, 102, 241, 0.15)' };
+        return {
+          ...base,
+          backgroundColor: 'rgba(99, 102, 241, 0.05)',
+          borderBottom: '1px solid rgba(99, 102, 241, 0.15)',
+        };
       case 'material-you':
-        return { ...base, backgroundColor: 'var(--boost-surface-secondary, #f3edf7)', borderBottom: '1px solid var(--boost-border, #e2e8f0)' };
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-surface-secondary, #f3edf7)',
+          borderBottom: '1px solid var(--boost-border, #e2e8f0)',
+        };
       case 'dark-first':
-        return { ...base, backgroundColor: '#1e293b', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' };
+        return {
+          ...base,
+          backgroundColor: '#1e293b',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        };
       default:
-        return { ...base, backgroundColor: 'var(--boost-bg, #f8fafc)', borderBottom: '1px solid var(--boost-border, #e2e8f0)' };
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-bg, #f8fafc)',
+          borderBottom: '1px solid var(--boost-border, #e2e8f0)',
+        };
     }
   };
 
@@ -401,7 +421,15 @@ export function DataTable<T extends Record<string, any>>({
       </style>
 
       {/* Toolbar: Search, Selection count, Export */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '12px',
+        }}
+      >
         {searchable ? (
           <div style={{ maxWidth: '300px', width: '100%' }}>
             <SearchInput
@@ -414,9 +442,19 @@ export function DataTable<T extends Record<string, any>>({
               placeholder={searchPlaceholder}
             />
           </div>
-        ) : <div />}
+        ) : (
+          <div />
+        )}
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '13px', color: 'var(--boost-muted, #64748b)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontSize: '13px',
+            color: 'var(--boost-muted, #64748b)',
+          }}
+        >
           {selectable && selectedRows.length > 0 && (
             <span style={{ fontWeight: 600, color: 'var(--boost-primary, #2563eb)' }}>
               {selectedRows.length} selected
@@ -426,12 +464,15 @@ export function DataTable<T extends Record<string, any>>({
             Showing {paginatedData.length} of {totalRecords} records
           </span>
           {exportable && (
-            <button
-              type="button"
-              onClick={handleExportCSV}
-              style={getExportBtnStyles()}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <button type="button" onClick={handleExportCSV} style={getExportBtnStyles()}>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
@@ -443,15 +484,19 @@ export function DataTable<T extends Record<string, any>>({
       </div>
 
       {/* Table Container */}
-      <div
-        className="boost-data-table-card"
-        style={getTableCardStyles()}
-      >
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', textAlign: 'left', color: 'var(--boost-text, #334155)', minWidth: '480px' }}>
+      <div className="boost-data-table-card" style={getTableCardStyles()}>
+        <table
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            fontSize: '13px',
+            textAlign: 'left',
+            color: 'var(--boost-text, #334155)',
+            minWidth: '480px',
+          }}
+        >
           <thead>
-            <tr
-              style={getHeaderRowStyles()}
-            >
+            <tr style={getHeaderRowStyles()}>
               {selectable && (
                 <th style={{ width: '40px', padding: '13px 16px' }}>
                   <input
@@ -459,14 +504,22 @@ export function DataTable<T extends Record<string, any>>({
                     checked={isAllSelected}
                     onChange={toggleAll}
                     aria-label="Select all rows"
-                    style={{ cursor: 'pointer', width: '16px', height: '16px', accentColor: 'var(--boost-primary, #2563eb)' }}
+                    style={{
+                      cursor: 'pointer',
+                      width: '16px',
+                      height: '16px',
+                      accentColor: 'var(--boost-primary, #2563eb)',
+                    }}
                   />
                 </th>
               )}
               {columns.map((col, idx) => {
                 const colKey = String((col as any).key || col.accessor || idx);
                 const isSorted = sortColumn === colKey;
-                const colTitle = col.title || col.header || (typeof (col as any).key === 'string' ? (col as any).key : '');
+                const colTitle =
+                  col.title ||
+                  col.header ||
+                  (typeof (col as any).key === 'string' ? (col as any).key : '');
                 return (
                   <th
                     key={idx}
@@ -501,7 +554,14 @@ export function DataTable<T extends Record<string, any>>({
           <tbody>
             {paginatedData.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + (selectable ? 1 : 0)} style={{ padding: '36px', textAlign: 'center', color: 'var(--boost-text-muted, #94a3b8)' }}>
+                <td
+                  colSpan={columns.length + (selectable ? 1 : 0)}
+                  style={{
+                    padding: '36px',
+                    textAlign: 'center',
+                    color: 'var(--boost-text-muted, #94a3b8)',
+                  }}
+                >
                   No records matching your search
                 </td>
               </tr>
@@ -512,7 +572,10 @@ export function DataTable<T extends Record<string, any>>({
                   <tr
                     key={rIdx}
                     style={{
-                      borderBottom: rIdx === paginatedData.length - 1 ? 'none' : '1px solid var(--boost-border, #f1f5f9)',
+                      borderBottom:
+                        rIdx === paginatedData.length - 1
+                          ? 'none'
+                          : '1px solid var(--boost-border, #f1f5f9)',
                       backgroundColor: selected ? 'rgba(37, 99, 235, 0.05)' : undefined,
                       transition: 'background-color 0.1s ease',
                     }}
@@ -524,7 +587,12 @@ export function DataTable<T extends Record<string, any>>({
                           checked={selected}
                           onChange={() => toggleRow(row)}
                           aria-label={`Select row ${rIdx + 1}`}
-                          style={{ cursor: 'pointer', width: '16px', height: '16px', accentColor: 'var(--boost-primary, #2563eb)' }}
+                          style={{
+                            cursor: 'pointer',
+                            width: '16px',
+                            height: '16px',
+                            accentColor: 'var(--boost-primary, #2563eb)',
+                          }}
                         />
                       </td>
                     )}
@@ -536,14 +604,21 @@ export function DataTable<T extends Record<string, any>>({
                       if (typeof col.render === 'function') {
                         content = col.render(rawValue, row);
                       } else if (typeof accessor === 'function') {
-                        content = (accessor as Function)(row);
-                      } else if (accessor !== undefined && row && row[accessor as string] !== undefined) {
+                        content = (accessor as (row: Record<string, any>) => React.ReactNode)(row);
+                      } else if (
+                        accessor !== undefined &&
+                        row &&
+                        row[accessor as string] !== undefined
+                      ) {
                         content = row[accessor as string];
                       } else if (rawValue !== undefined) {
                         content = rawValue;
                       }
                       return (
-                        <td key={cIdx} style={{ padding: '13px 16px', textAlign: col.align || 'left' }}>
+                        <td
+                          key={cIdx}
+                          style={{ padding: '13px 16px', textAlign: col.align || 'left' }}
+                        >
                           {content}
                         </td>
                       );
@@ -557,7 +632,9 @@ export function DataTable<T extends Record<string, any>>({
       </div>
 
       {totalPages > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', marginTop: '4px' }}>
+        <div
+          style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', marginTop: '4px' }}
+        >
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

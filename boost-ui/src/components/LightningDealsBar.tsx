@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * LightningDealsBarProps — Properties for the lightning deal countdown bar.
  */
@@ -47,11 +46,12 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
     isExpired: false,
   });
 
-  const effectivePercent = claimedPercent !== undefined 
-    ? claimedPercent 
-    : (props as any).claimedPercent !== undefined 
-      ? (props as any).claimedPercent 
-      : percentageClaimed;
+  const effectivePercent =
+    claimedPercent !== undefined
+      ? claimedPercent
+      : (props as any).claimedPercent !== undefined
+        ? (props as any).claimedPercent
+        : percentageClaimed;
 
   const secondsProp = dealEndsInSeconds || (props as any).dealEndsInSeconds;
 
@@ -81,7 +81,7 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
         hours: isNaN(hours) ? 0 : hours,
         minutes: isNaN(minutes) ? 0 : minutes,
         seconds: isNaN(seconds) ? 0 : seconds,
-        isExpired: false
+        isExpired: false,
       });
     };
 
@@ -130,7 +130,8 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
         };
       case 'gradient-glow':
         return {
-          background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%), var(--boost-surface, #ffffff)',
+          background:
+            'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%), var(--boost-surface, #ffffff)',
           border: '1px solid rgba(245, 158, 11, 0.4)',
           boxShadow: '0 0 25px rgba(245, 158, 11, 0.25)',
           borderRadius: '16px',
@@ -152,7 +153,8 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
       case 'minimal':
       default:
         return {
-          background: 'linear-gradient(135deg, rgba(254, 243, 199, 0.45) 0%, rgba(254, 226, 226, 0.25) 100%), var(--boost-surface, #ffffff)',
+          background:
+            'linear-gradient(135deg, rgba(254, 243, 199, 0.45) 0%, rgba(254, 226, 226, 0.25) 100%), var(--boost-surface, #ffffff)',
           border: '1px solid var(--boost-border, rgba(245, 158, 11, 0.25))',
           boxShadow: '0 10px 25px -5px rgba(245, 158, 11, 0.1), 0 2px 6px rgba(0, 0, 0, 0.03)',
           borderRadius: '16px',
@@ -376,7 +378,13 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
               ...getBadgeStyles(),
             }}
           >
-            <svg className="boost-deal-badge-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <svg
+              className="boost-deal-badge-icon"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
             </svg>
             {dealTitle}
@@ -401,11 +409,19 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
             <span className="boost-timer-box" style={getTimerBoxStyles()}>
               {pad(timeLeft.hours)}h
             </span>
-            <span style={{ fontWeight: 800, color: 'var(--boost-text-muted, #94a3b8)', lineHeight: 1 }}>:</span>
+            <span
+              style={{ fontWeight: 800, color: 'var(--boost-text-muted, #94a3b8)', lineHeight: 1 }}
+            >
+              :
+            </span>
             <span className="boost-timer-box" style={getTimerBoxStyles()}>
               {pad(timeLeft.minutes)}m
             </span>
-            <span style={{ fontWeight: 800, color: 'var(--boost-text-muted, #94a3b8)', lineHeight: 1 }}>:</span>
+            <span
+              style={{ fontWeight: 800, color: 'var(--boost-text-muted, #94a3b8)', lineHeight: 1 }}
+            >
+              :
+            </span>
             <span className="boost-timer-box seconds" style={getTimerBoxStyles(true)}>
               {pad(timeLeft.seconds)}s
             </span>
@@ -437,7 +453,12 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
             🔥 <strong>{percent}%</strong> Claimed
           </span>
-          <span style={{ color: percent > 80 ? '#dc2626' : 'var(--boost-text-muted, #64748b)', fontWeight: 600 }}>
+          <span
+            style={{
+              color: percent > 80 ? '#dc2626' : 'var(--boost-text-muted, #64748b)',
+              fontWeight: 600,
+            }}
+          >
             {percent > 85 ? '⚡ Only a few left!' : 'Hurry, limited stock!'}
           </span>
         </div>

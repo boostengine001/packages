@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * NavLinkProps — Properties for a single navigation link with active state and badge support.
  */
@@ -84,8 +83,12 @@ export const NavLink: React.FC<NavLinkProps> = ({
               fontSize: '11px',
               padding: '2px 7px',
               borderRadius: '9999px',
-              backgroundColor: activeState ? 'rgba(37, 99, 235, 0.12)' : 'var(--boost-bg-subtle, #f1f5f9)',
-              color: activeState ? 'var(--boost-primary, #1d4ed8)' : 'var(--boost-text-muted, #64748b)',
+              backgroundColor: activeState
+                ? 'rgba(37, 99, 235, 0.12)'
+                : 'var(--boost-bg-subtle, #f1f5f9)',
+              color: activeState
+                ? 'var(--boost-primary, #1d4ed8)'
+                : 'var(--boost-text-muted, #64748b)',
               fontWeight: 600,
             }}
           >
@@ -97,6 +100,5 @@ export const NavLink: React.FC<NavLinkProps> = ({
     </>
   );
 };
-
 
 NavLink.displayName = 'NavLink';

@@ -1,12 +1,16 @@
 export class BoostButton extends HTMLElement {
-  static get observedAttributes() { return ['variant', 'size', 'disabled']; }
+  static get observedAttributes() {
+    return ['variant', 'size', 'disabled'];
+  }
 
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
     this.render();
   }
 
-  attributeChangedCallback() { this.render(); }
+  attributeChangedCallback() {
+    this.render();
+  }
 
   private get variantStyle(): string {
     const v = this.getAttribute('variant') || 'primary';
@@ -21,9 +25,11 @@ export class BoostButton extends HTMLElement {
 
   private get sizeStyle(): string {
     const s = this.getAttribute('size') || 'md';
-    return s === 'sm' ? 'padding:6px 14px;font-size:12px;'
-      : s === 'lg' ? 'padding:13px 26px;font-size:15px;'
-      : 'padding:9px 18px;font-size:14px;';
+    return s === 'sm'
+      ? 'padding:6px 14px;font-size:12px;'
+      : s === 'lg'
+        ? 'padding:13px 26px;font-size:15px;'
+        : 'padding:9px 18px;font-size:14px;';
   }
 
   render() {
@@ -45,4 +51,3 @@ export class BoostButton extends HTMLElement {
 if (typeof customElements !== 'undefined' && !customElements.get('boost-button')) {
   customElements.define('boost-button', BoostButton);
 }
-

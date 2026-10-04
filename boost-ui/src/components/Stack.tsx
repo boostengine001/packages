@@ -4,7 +4,8 @@ export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
   direction?: 'row' | 'column';
   gap?: number | string;
   align?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
-  justify?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
+  justify?:
+    'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
   wrap?: boolean | 'wrap' | 'nowrap' | 'wrap-reverse';
   fullWidth?: boolean;
 }
@@ -51,9 +52,7 @@ export const HStack: React.FC<HStackProps> = (props) => (
   <Stack direction="row" align="center" {...props} />
 );
 
-export const VStack: React.FC<VStackProps> = (props) => (
-  <Stack direction="column" {...props} />
-);
+export const VStack: React.FC<VStackProps> = (props) => <Stack direction="column" {...props} />;
 
 Stack.displayName = 'Stack';
 HStack.displayName = 'HStack';

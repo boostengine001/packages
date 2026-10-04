@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * FileDropzoneProps — Properties for the drag-and-drop file area.
  */
@@ -86,14 +85,10 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
         onClick={() => !disabled && inputRef.current?.click()}
         style={{
           border: `2px dashed ${
-            isDragOver
-              ? 'var(--boost-primary, #2563eb)'
-              : 'var(--boost-border, #cbd5e1)'
+            isDragOver ? 'var(--boost-primary, #2563eb)' : 'var(--boost-border, #cbd5e1)'
           }`,
           borderRadius: 'var(--boost-radius, 12px)',
-          backgroundColor: isDragOver
-            ? 'rgba(37, 99, 235, 0.04)'
-            : 'var(--boost-surface, #f8fafc)',
+          backgroundColor: isDragOver ? 'rgba(37, 99, 235, 0.04)' : 'var(--boost-surface, #f8fafc)',
           padding: '36px 20px',
           textAlign: 'center',
           cursor: disabled ? 'not-allowed' : 'pointer',
@@ -231,6 +226,5 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
     </div>
   );
 };
-
 
 FileDropzone.displayName = 'FileDropzone';

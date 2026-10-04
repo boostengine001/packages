@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 
-
 /**
  * MotionProps — Properties for the motion/animation wrapper component.
  */
@@ -111,7 +110,8 @@ export const Motion: React.FC<MotionProps> = ({
     }
     if (animation === 'shimmer') {
       return {
-        backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)',
+        backgroundImage:
+          'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%)',
         backgroundSize: '200% 100%',
         animation: `boost-shimmer ${duration * 3}ms infinite`,
       };
@@ -124,7 +124,12 @@ export const Motion: React.FC<MotionProps> = ({
       'ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
       linear: 'linear',
     };
-    const chosenEasing = (ease && easingMap[ease]) ? easingMap[ease] : (animation === 'spring-pop' ? easingMap.spring : easingMap.smooth);
+    const chosenEasing =
+      ease && easingMap[ease]
+        ? easingMap[ease]
+        : animation === 'spring-pop'
+          ? easingMap.spring
+          : easingMap.smooth;
 
     // Entrance animations
     const transition = `opacity ${duration}ms ${chosenEasing} ${delay}ms, transform ${duration}ms ${chosenEasing} ${delay}ms`;

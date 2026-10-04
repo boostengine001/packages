@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * PageWrapperProps — Properties for the page-level layout wrapper.
  */
@@ -47,15 +46,12 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
 
       <div style={{ display: 'flex', flex: 1 }}>
         {sidebar}
-        <main style={{ flex: 1, minWidth: 0 }}>
-          {children}
-        </main>
+        <main style={{ flex: 1, minWidth: 0 }}>{children}</main>
       </div>
 
       {footer}
     </div>
   );
 };
-
 
 PageWrapper.displayName = 'PageWrapper';

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * DividerProps — Properties for the horizontal/vertical divider line.
  */

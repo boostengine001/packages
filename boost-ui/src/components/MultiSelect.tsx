@@ -5,7 +5,6 @@ export interface MultiSelectOption {
   value: string;
 }
 
-
 /**
  * MultiSelectProps — Properties for the multi-select dropdown with tags.
  */
@@ -134,7 +133,9 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         }}
       >
         {safeValue.length === 0 ? (
-          <span style={{ fontSize: '14px', color: 'var(--boost-text-muted, #94a3b8)' }}>{placeholder}</span>
+          <span style={{ fontSize: '14px', color: 'var(--boost-text-muted, #94a3b8)' }}>
+            {placeholder}
+          </span>
         ) : (
           safeValue.map((val) => {
             const opt = options.find((o) => o.value === val);
@@ -176,7 +177,13 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
           })
         )}
 
-        <span style={{ marginLeft: 'auto', display: 'inline-flex', color: 'var(--boost-text-muted, #64748b)' }}>
+        <span
+          style={{
+            marginLeft: 'auto',
+            display: 'inline-flex',
+            color: 'var(--boost-text-muted, #64748b)',
+          }}
+        >
           <svg
             width="16"
             height="16"
@@ -229,7 +236,14 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
               >
                 <span>{opt.label}</span>
                 {isSelected && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--boost-primary, #2563eb)" strokeWidth="2.5">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--boost-primary, #2563eb)"
+                    strokeWidth="2.5"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 )}
@@ -240,9 +254,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       )}
 
       {error && (
-        <span style={{ fontSize: '12px', color: '#ef4444', fontWeight: 500 }}>
-          {error}
-        </span>
+        <span style={{ fontSize: '12px', color: '#ef4444', fontWeight: 500 }}>{error}</span>
       )}
     </div>
   );

@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * TableColumn — Defines a single column in the Table component.
  */
@@ -14,7 +13,6 @@ export interface TableColumn<T = any> {
   width?: string;
   sortable?: boolean;
 }
-
 
 /**
  * TableProps — Properties for the data table component.
@@ -117,17 +115,29 @@ export function Table<T extends Record<string, any>>({
       case 'neo-brutalism':
         return { backgroundColor: '#fef08a', borderBottom: '3px solid #000' };
       case 'glassmorphism':
-        return { backgroundColor: 'rgba(255, 255, 255, 0.3)', borderBottom: '1px solid rgba(255, 255, 255, 0.3)' };
+        return {
+          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
+        };
       case 'neumorphism':
         return { backgroundColor: '#e0e5ec', borderBottom: '1px solid #d1d9e6' };
       case 'gradient-glow':
-        return { backgroundColor: 'rgba(99, 102, 241, 0.05)', borderBottom: '1px solid rgba(99, 102, 241, 0.15)' };
+        return {
+          backgroundColor: 'rgba(99, 102, 241, 0.05)',
+          borderBottom: '1px solid rgba(99, 102, 241, 0.15)',
+        };
       case 'material-you':
-        return { backgroundColor: 'var(--boost-surface-secondary, #f3edf7)', borderBottom: '1px solid var(--boost-border, #e2e8f0)' };
+        return {
+          backgroundColor: 'var(--boost-surface-secondary, #f3edf7)',
+          borderBottom: '1px solid var(--boost-border, #e2e8f0)',
+        };
       case 'dark-first':
         return { backgroundColor: '#1e293b', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' };
       default:
-        return { backgroundColor: 'var(--boost-bg-subtle, #f8fafc)', borderBottom: '1px solid var(--boost-border, #e2e8f0)' };
+        return {
+          backgroundColor: 'var(--boost-bg-subtle, #f8fafc)',
+          borderBottom: '1px solid var(--boost-border, #e2e8f0)',
+        };
     }
   };
 
@@ -221,7 +231,8 @@ export function Table<T extends Record<string, any>>({
                   className={`boost-table-row ${isStriped ? 'boost-table-striped' : ''}`}
                   style={{
                     backgroundColor: isStriped ? '#f8fafc' : 'transparent',
-                    borderBottom: rIdx === data.length - 1 ? 'none' : '1px solid var(--boost-border, #f1f5f9)',
+                    borderBottom:
+                      rIdx === data.length - 1 ? 'none' : '1px solid var(--boost-border, #f1f5f9)',
                     transition: hoverable ? 'background-color 0.15s ease' : 'none',
                   }}
                 >
@@ -231,8 +242,8 @@ export function Table<T extends Record<string, any>>({
                       typeof col.accessor === 'function'
                         ? col.accessor(row)
                         : colKey
-                        ? (row as any)[colKey]
-                        : null;
+                          ? (row as any)[colKey]
+                          : null;
 
                     return (
                       <td
@@ -256,6 +267,5 @@ export function Table<T extends Record<string, any>>({
     </div>
   );
 }
-
 
 Table.displayName = 'Table';

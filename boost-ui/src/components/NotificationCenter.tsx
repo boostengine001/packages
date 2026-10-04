@@ -13,7 +13,6 @@ export interface NotificationItem {
   icon?: React.ReactNode;
 }
 
-
 /**
  * NotificationCenterProps — Properties for the notification center dropdown/list.
  */
@@ -231,7 +230,10 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           <div
             style={{
               position: 'fixed',
-              top: 0, left: 0, right: 0, bottom: 0,
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
               backgroundColor: 'rgba(0,0,0,0.3)',
               zIndex: 99998,
               display: 'var(--boost-backdrop-display, none)', // We can show this on mobile via CSS if needed, or just let handleClickOutside handle it.
@@ -248,233 +250,253 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               }
             `}
           </style>
-          <div
-            className="boost-notification-popover"
-            style={getPopoverStyles()}
-          >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '14px 18px',
-              borderBottom: '1px solid var(--boost-border, #e2e8f0)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontWeight: 700, fontSize: '15px', color: 'var(--boost-text, #0f172a)' }}>
-                {title}
-              </span>
-              {unreadCount > 0 && (
+          <div className="boost-notification-popover" style={getPopoverStyles()}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '14px 18px',
+                borderBottom: '1px solid var(--boost-border, #e2e8f0)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span
+                  style={{ fontWeight: 700, fontSize: '15px', color: 'var(--boost-text, #0f172a)' }}
+                >
+                  {title}
+                </span>
+                {unreadCount > 0 && (
+                  <span
+                    style={{
+                      backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                      color: 'var(--boost-primary, #2563eb)',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      padding: '2px 6px',
+                      borderRadius: '9999px',
+                    }}
+                  >
+                    {unreadCount} new
+                  </span>
+                )}
+              </div>
+
+              {onMarkAllAsRead && unreadCount > 0 && (
+                <button
+                  type="button"
+                  onClick={onMarkAllAsRead}
                   style={{
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    background: 'none',
+                    border: 'none',
                     color: 'var(--boost-primary, #2563eb)',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    padding: '2px 6px',
-                    borderRadius: '9999px',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    padding: 0,
                   }}
                 >
-                  {unreadCount} new
-                </span>
+                  Mark all read
+                </button>
               )}
             </div>
 
-            {onMarkAllAsRead && unreadCount > 0 && (
-              <button
-                type="button"
-                onClick={onMarkAllAsRead}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--boost-primary, #2563eb)',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  padding: 0,
-                }}
-              >
-                Mark all read
-              </button>
-            )}
-          </div>
-
-          <div style={{ display: 'flex', gap: '16px', padding: '0 18px', borderBottom: '1px solid var(--boost-border, #e2e8f0)' }}>
-            <button
-              type="button"
-              onClick={() => setFilter('all')}
-              style={{
-                background: 'none',
-                border: 'none',
-                borderBottom: filter === 'all' ? '2px solid var(--boost-primary, #2563eb)' : '2px solid transparent',
-                color: filter === 'all' ? 'var(--boost-primary, #2563eb)' : 'var(--boost-text-muted, #64748b)',
-                padding: '10px 0',
-                fontSize: '13px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              All
-            </button>
-            <button
-              type="button"
-              onClick={() => setFilter('unread')}
-              style={{
-                background: 'none',
-                border: 'none',
-                borderBottom: filter === 'unread' ? '2px solid var(--boost-primary, #2563eb)' : '2px solid transparent',
-                color: filter === 'unread' ? 'var(--boost-primary, #2563eb)' : 'var(--boost-text-muted, #64748b)',
-                padding: '10px 0',
-                fontSize: '13px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              Unread
-            </button>
-          </div>
-
-          <div className="boost-notification-list" style={{ maxHeight: '340px', overflowY: 'auto' }}>
-            {filteredNotifications.length === 0 ? (
-              <div
-                style={{
-                  padding: '36px 20px',
-                  textAlign: 'center',
-                  color: 'var(--boost-text-muted, #64748b)',
-                  fontSize: '13px',
-                }}
-              >
-                {emptyText}
-              </div>
-            ) : (
-              filteredNotifications.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => onItemClick && onItemClick(item)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px 18px',
-                    borderBottom: '1px solid var(--boost-border, #f1f5f9)',
-                    backgroundColor: item.read ? 'transparent' : 'rgba(37, 99, 235, 0.03)',
-                    cursor: onItemClick ? 'pointer' : 'default',
-                    transition: 'background-color 0.15s ease',
-                  }}
-                >
-                  {item.avatar ? (
-                    <img
-                      src={item.avatar}
-                      alt=""
-                      style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                        flexShrink: 0,
-                      }}
-                    />
-                  ) : item.icon ? (
-                    <div
-                      style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '50%',
-                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                        color: 'var(--boost-primary, #2563eb)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                      }}
-                    >
-                      {item.icon}
-                    </div>
-                  ) : (
-                    <div
-                      style={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        backgroundColor: item.read ? 'transparent' : '#2563eb',
-                        marginTop: '6px',
-                        flexShrink: 0,
-                      }}
-                    />
-                  )}
-
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div
-                      style={{
-                        fontSize: '13px',
-                        fontWeight: item.read ? 500 : 700,
-                        color: 'var(--boost-text, #0f172a)',
-                        marginBottom: '2px',
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {item.title}
-                    </div>
-                    {item.description && (
-                      <div
-                        style={{
-                          fontSize: '12px',
-                          color: 'var(--boost-text-muted, #64748b)',
-                          lineHeight: 1.4,
-                          marginBottom: '4px',
-                        }}
-                      >
-                        {item.description}
-                      </div>
-                    )}
-                    <div
-                      style={{
-                        fontSize: '11px',
-                        color: 'var(--boost-text-muted, #94a3b8)',
-                      }}
-                    >
-                      {item.timestamp}
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-
-          {onClearAll && notifications.length > 0 && (
             <div
               style={{
-                padding: '10px',
-                textAlign: 'center',
-                borderTop: '1px solid var(--boost-border, #e2e8f0)',
-                backgroundColor: 'var(--boost-surface, #f8fafc)',
+                display: 'flex',
+                gap: '16px',
+                padding: '0 18px',
+                borderBottom: '1px solid var(--boost-border, #e2e8f0)',
               }}
             >
               <button
                 type="button"
-                onClick={onClearAll}
+                onClick={() => setFilter('all')}
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--boost-text-muted, #64748b)',
-                  fontSize: '12px',
+                  borderBottom:
+                    filter === 'all'
+                      ? '2px solid var(--boost-primary, #2563eb)'
+                      : '2px solid transparent',
+                  color:
+                    filter === 'all'
+                      ? 'var(--boost-primary, #2563eb)'
+                      : 'var(--boost-text-muted, #64748b)',
+                  padding: '10px 0',
+                  fontSize: '13px',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  transition: 'all 0.2s ease',
                 }}
               >
-                Clear all notifications
+                All
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter('unread')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  borderBottom:
+                    filter === 'unread'
+                      ? '2px solid var(--boost-primary, #2563eb)'
+                      : '2px solid transparent',
+                  color:
+                    filter === 'unread'
+                      ? 'var(--boost-primary, #2563eb)'
+                      : 'var(--boost-text-muted, #64748b)',
+                  padding: '10px 0',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                Unread
               </button>
             </div>
-          )}
-        </div>
+
+            <div
+              className="boost-notification-list"
+              style={{ maxHeight: '340px', overflowY: 'auto' }}
+            >
+              {filteredNotifications.length === 0 ? (
+                <div
+                  style={{
+                    padding: '36px 20px',
+                    textAlign: 'center',
+                    color: 'var(--boost-text-muted, #64748b)',
+                    fontSize: '13px',
+                  }}
+                >
+                  {emptyText}
+                </div>
+              ) : (
+                filteredNotifications.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => onItemClick && onItemClick(item)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '12px 18px',
+                      borderBottom: '1px solid var(--boost-border, #f1f5f9)',
+                      backgroundColor: item.read ? 'transparent' : 'rgba(37, 99, 235, 0.03)',
+                      cursor: onItemClick ? 'pointer' : 'default',
+                      transition: 'background-color 0.15s ease',
+                    }}
+                  >
+                    {item.avatar ? (
+                      <img
+                        src={item.avatar}
+                        alt=""
+                        style={{
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '50%',
+                          objectFit: 'cover',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ) : item.icon ? (
+                      <div
+                        style={{
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '50%',
+                          backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                          color: 'var(--boost-primary, #2563eb)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {item.icon}
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          backgroundColor: item.read ? 'transparent' : '#2563eb',
+                          marginTop: '6px',
+                          flexShrink: 0,
+                        }}
+                      />
+                    )}
+
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontSize: '13px',
+                          fontWeight: item.read ? 500 : 700,
+                          color: 'var(--boost-text, #0f172a)',
+                          marginBottom: '2px',
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {item.title}
+                      </div>
+                      {item.description && (
+                        <div
+                          style={{
+                            fontSize: '12px',
+                            color: 'var(--boost-text-muted, #64748b)',
+                            lineHeight: 1.4,
+                            marginBottom: '4px',
+                          }}
+                        >
+                          {item.description}
+                        </div>
+                      )}
+                      <div
+                        style={{
+                          fontSize: '11px',
+                          color: 'var(--boost-text-muted, #94a3b8)',
+                        }}
+                      >
+                        {item.timestamp}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {onClearAll && notifications.length > 0 && (
+              <div
+                style={{
+                  padding: '10px',
+                  textAlign: 'center',
+                  borderTop: '1px solid var(--boost-border, #e2e8f0)',
+                  backgroundColor: 'var(--boost-surface, #f8fafc)',
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={onClearAll}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--boost-text-muted, #64748b)',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Clear all notifications
+                </button>
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
   );
 };
-
 
 NotificationCenter.displayName = 'NotificationCenter';

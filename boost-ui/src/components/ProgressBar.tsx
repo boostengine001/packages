@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * ProgressBarProps — Properties for the progress bar component.
  */

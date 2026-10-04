@@ -63,17 +63,41 @@ export function getSurfacePresetStyles(preset: UIStylePreset): CSSProperties {
 export function getBackdropPresetStyles(preset: UIStylePreset): CSSProperties {
   switch (preset) {
     case 'neo-brutalism':
-      return { backgroundColor: 'rgba(0, 0, 0, 0.88)', backdropFilter: 'none', WebkitBackdropFilter: 'none' };
+      return {
+        backgroundColor: 'rgba(0, 0, 0, 0.88)',
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
+      };
     case 'glassmorphism':
-      return { backgroundColor: 'rgba(255, 255, 255, 0.14)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' };
+      return {
+        backgroundColor: 'rgba(255, 255, 255, 0.14)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+      };
     case 'neumorphism':
-      return { backgroundColor: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' };
+      return {
+        backgroundColor: 'rgba(15, 23, 42, 0.5)',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
+      };
     case 'gradient-glow':
-      return { backgroundColor: 'rgba(24, 24, 46, 0.65)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' };
+      return {
+        backgroundColor: 'rgba(24, 24, 46, 0.65)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+      };
     case 'material-you':
-      return { backgroundColor: 'rgba(10, 15, 30, 0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)' };
+      return {
+        backgroundColor: 'rgba(10, 15, 30, 0.55)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+      };
     case 'dark-first':
-      return { backgroundColor: 'rgba(0, 0, 0, 0.82)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' };
+      return {
+        backgroundColor: 'rgba(0, 0, 0, 0.82)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+      };
     case 'minimal':
     default:
       return {};

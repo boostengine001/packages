@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * VariantOption — A single selectable variant option.
  */
@@ -16,7 +15,6 @@ export interface VariantOption {
   inStock?: boolean;
 }
 
-
 /**
  * VariantGroup — A group of related variant options (e.g., all sizes).
  */
@@ -27,7 +25,6 @@ export interface VariantGroup {
 }
 
 export type SelectedVariants = Record<string, string>;
-
 
 /**
  * VariantSelectorProps — Properties for the product variant picker (size, color, etc.).
@@ -83,7 +80,9 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
         return {
           ...base,
           borderRadius: '12px',
-          border: isSelected ? '1px solid rgba(99, 102, 241, 0.6)' : '1px solid rgba(255, 255, 255, 0.4)',
+          border: isSelected
+            ? '1px solid rgba(99, 102, 241, 0.6)'
+            : '1px solid rgba(255, 255, 255, 0.4)',
           backgroundColor: isSelected ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255, 255, 255, 0.6)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
@@ -97,7 +96,9 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
           border: 'none',
           backgroundColor: '#e0e5ec',
           color: isSelected ? 'var(--boost-primary, #2563eb)' : '#334155',
-          boxShadow: isSelected ? 'inset 3px 3px 6px #c8cdd5, inset -3px -3px 6px #f8fdff' : '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff',
+          boxShadow: isSelected
+            ? 'inset 3px 3px 6px #c8cdd5, inset -3px -3px 6px #f8fdff'
+            : '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff',
           fontWeight: isSelected ? 700 : 600,
         };
       case 'gradient-glow':
@@ -105,7 +106,9 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
           ...base,
           borderRadius: '10px',
           border: isSelected ? '1px solid #6366f1' : '1px solid rgba(99, 102, 241, 0.2)',
-          background: isSelected ? 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)' : 'var(--boost-surface, #ffffff)',
+          background: isSelected
+            ? 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)'
+            : 'var(--boost-surface, #ffffff)',
           color: isSelected ? '#ffffff' : 'var(--boost-text-primary, #0f172a)',
           boxShadow: isSelected ? '0 0 16px rgba(99, 102, 241, 0.5)' : 'none',
         };
@@ -115,7 +118,9 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
           borderRadius: '9999px',
           border: isSelected ? 'none' : '1px solid var(--boost-border, #e2e8f0)',
           backgroundColor: isSelected ? 'var(--boost-surface-secondary, #e8def8)' : 'transparent',
-          color: isSelected ? 'var(--boost-primary, #6750a4)' : 'var(--boost-text-primary, #49454f)',
+          color: isSelected
+            ? 'var(--boost-primary, #6750a4)'
+            : 'var(--boost-text-primary, #49454f)',
           fontWeight: isSelected ? 700 : 600,
         };
       case 'dark-first':
@@ -132,7 +137,9 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
           ...base,
           borderRadius: '10px',
           border: isSelected ? '1px solid #4f46e5' : '1px solid var(--boost-border, #e2e8f0)',
-          background: isSelected ? 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)' : 'var(--boost-surface, #ffffff)',
+          background: isSelected
+            ? 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)'
+            : 'var(--boost-surface, #ffffff)',
           color: isSelected ? '#ffffff' : 'var(--boost-text-primary, #0f172a)',
           boxShadow: isSelected ? '0 4px 14px rgba(79, 70, 229, 0.3)' : 'none',
         };
@@ -140,7 +147,10 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
   };
 
   return (
-    <div className={`boost-variant-selector ${className}`} style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: '100%' }}>
+    <div
+      className={`boost-variant-selector ${className}`}
+      style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: '100%' }}
+    >
       <style>{`
         .boost-variant-label {
           font-size: 12px;
@@ -237,9 +247,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span className="boost-variant-label">
                 {group.name}:
-                <span className="boost-variant-selected-val">
-                  {selected || 'Select option'}
-                </span>
+                <span className="boost-variant-selected-val">{selected || 'Select option'}</span>
               </span>
             </div>
 
@@ -294,7 +302,8 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
                     <span>{optDisplay}</span>
                     {opt.priceDelta && opt.priceDelta > 0 && (
                       <span style={{ fontSize: '11px', marginLeft: '5px', opacity: 0.85 }}>
-                        (+{currencySymbol}{opt.priceDelta})
+                        (+{currencySymbol}
+                        {opt.priceDelta})
                       </span>
                     )}
                   </button>

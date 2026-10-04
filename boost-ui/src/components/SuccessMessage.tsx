@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * SuccessMessageProps — Properties for the success message component.
  */
@@ -45,7 +44,14 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
           flexShrink: 0,
         }}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+        >
           <circle cx="12" cy="12" r="10" />
           <polyline points="9 12 11 14 15 10" />
         </svg>

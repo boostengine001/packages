@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * StickyAddToCartProps — Properties for the sticky add-to-cart bar.
  */
@@ -266,17 +265,44 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
             <img
               src={image}
               alt={title}
-              style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '8px', border: '1px solid var(--boost-border, rgba(0,0,0,0.1))' }}
+              style={{
+                width: '48px',
+                height: '48px',
+                objectFit: 'cover',
+                borderRadius: '8px',
+                border: '1px solid var(--boost-border, rgba(0,0,0,0.1))',
+              }}
             />
           )}
           <div style={{ minWidth: 0, flex: 1 }}>
-            <div className="boost-sticky-product-title" style={{ fontSize: '14px', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <div
+              className="boost-sticky-product-title"
+              style={{
+                fontSize: '14px',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
               {title}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px' }}>
-              <span style={{ fontSize: '16px', fontWeight: 700 }}>{currencySymbol}{price}</span>
+              <span style={{ fontSize: '16px', fontWeight: 700 }}>
+                {currencySymbol}
+                {price}
+              </span>
               {finalComparePrice && finalComparePrice > price && (
-                <span style={{ fontSize: '13px', color: 'var(--boost-text-muted, #94a3b8)', textDecoration: 'line-through' }}>{currencySymbol}{finalComparePrice}</span>
+                <span
+                  style={{
+                    fontSize: '13px',
+                    color: 'var(--boost-text-muted, #94a3b8)',
+                    textDecoration: 'line-through',
+                  }}
+                >
+                  {currencySymbol}
+                  {finalComparePrice}
+                </span>
               )}
             </div>
           </div>
@@ -289,18 +315,42 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
               aria-label="Decrease quantity"
               disabled={isAdding || isBuying}
-              style={{ padding: '8px 14px', border: 'none', background: 'transparent', cursor: 'pointer', fontSize: '16px', fontWeight: 500, color: 'inherit' }}
+              style={{
+                padding: '8px 14px',
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: 500,
+                color: 'inherit',
+              }}
             >
               -
             </button>
-            <span style={{ padding: '8px', fontSize: '14px', fontWeight: 600, minWidth: '32px', textAlign: 'center' }}>
+            <span
+              style={{
+                padding: '8px',
+                fontSize: '14px',
+                fontWeight: 600,
+                minWidth: '32px',
+                textAlign: 'center',
+              }}
+            >
               {quantity}
             </span>
             <button
               onClick={() => setQuantity(quantity + 1)}
               aria-label="Increase quantity"
               disabled={isAdding || isBuying}
-              style={{ padding: '8px 14px', border: 'none', background: 'transparent', cursor: 'pointer', fontSize: '16px', fontWeight: 500, color: 'inherit' }}
+              style={{
+                padding: '8px 14px',
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: 500,
+                color: 'inherit',
+              }}
             >
               +
             </button>
@@ -312,12 +362,22 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
             disabled={!inStock || isAdding || isBuying}
             className="boost-sticky-btn-primary"
             style={{
-              backgroundColor: !inStock ? 'var(--boost-bg-muted, #9ca3af)' : addedFeedback ? '#10b981' : undefined,
+              backgroundColor: !inStock
+                ? 'var(--boost-bg-muted, #9ca3af)'
+                : addedFeedback
+                  ? '#10b981'
+                  : undefined,
               opacity: (!inStock || isAdding || isBuying) && !addedFeedback ? 0.7 : 1,
-              cursor: (!inStock || isAdding || isBuying) ? 'not-allowed' : 'pointer'
+              cursor: !inStock || isAdding || isBuying ? 'not-allowed' : 'pointer',
             }}
           >
-            {!inStock ? 'Sold Out' : isAdding ? 'Adding...' : addedFeedback ? 'Added! ✓' : 'Add to Cart'}
+            {!inStock
+              ? 'Sold Out'
+              : isAdding
+                ? 'Adding...'
+                : addedFeedback
+                  ? 'Added! ✓'
+                  : 'Add to Cart'}
           </button>
 
           {onBuyNow && inStock && (
@@ -326,8 +386,8 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
               disabled={isAdding || isBuying}
               className="boost-sticky-btn-secondary"
               style={{
-                opacity: (isAdding || isBuying) ? 0.7 : 1,
-                cursor: (isAdding || isBuying) ? 'not-allowed' : 'pointer'
+                opacity: isAdding || isBuying ? 0.7 : 1,
+                cursor: isAdding || isBuying ? 'not-allowed' : 'pointer',
               }}
             >
               {isBuying ? 'Processing...' : 'Buy Now'}
@@ -338,6 +398,5 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
     </div>
   );
 };
-
 
 StickyAddToCart.displayName = 'StickyAddToCart';

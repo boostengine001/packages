@@ -7,7 +7,7 @@
  * Lightweight alternative to clsx/classnames with no dependencies.
  *
  * @example
- * cn('base-class', isActive && 'active', undefined, 'another') 
+ * cn('base-class', isActive && 'active', undefined, 'another')
  * // => 'base-class active another'
  */
 export function cn(...classes: (string | undefined | null | false | 0)[]): string {
@@ -68,7 +68,6 @@ export function formatDate(
   return new Intl.DateTimeFormat(locale, options).format(d);
 }
 
-
 /**
  * formatRelativeTime — Returns a human-friendly relative time string.
  *
@@ -80,14 +79,18 @@ export function formatRelativeTime(date: Date | string | number): string {
   const d = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
   const seconds = Math.round((d.getTime() - Date.now()) / 1000);
   const absSeconds = Math.abs(seconds);
-  const suffix = seconds < 0 ? ' ago' : ' from now';
+  const suffix = seconds < 0 ? ' ago' : '';
   const prefix = seconds < 0 ? '' : 'in ';
 
   if (absSeconds < 60) return seconds < 0 ? 'just now' : 'in a few seconds';
-  if (absSeconds < 3600) return `${prefix}${Math.floor(absSeconds / 60)} minute${Math.floor(absSeconds / 60) !== 1 ? 's' : ''}${suffix}`;
-  if (absSeconds < 86400) return `${prefix}${Math.floor(absSeconds / 3600)} hour${Math.floor(absSeconds / 3600) !== 1 ? 's' : ''}${suffix}`;
-  if (absSeconds < 2592000) return `${prefix}${Math.floor(absSeconds / 86400)} day${Math.floor(absSeconds / 86400) !== 1 ? 's' : ''}${suffix}`;
-  if (absSeconds < 31536000) return `${prefix}${Math.floor(absSeconds / 2592000)} month${Math.floor(absSeconds / 2592000) !== 1 ? 's' : ''}${suffix}`;
+  if (absSeconds < 3600)
+    return `${prefix}${Math.floor(absSeconds / 60)} minute${Math.floor(absSeconds / 60) !== 1 ? 's' : ''}${suffix}`;
+  if (absSeconds < 86400)
+    return `${prefix}${Math.floor(absSeconds / 3600)} hour${Math.floor(absSeconds / 3600) !== 1 ? 's' : ''}${suffix}`;
+  if (absSeconds < 2592000)
+    return `${prefix}${Math.floor(absSeconds / 86400)} day${Math.floor(absSeconds / 86400) !== 1 ? 's' : ''}${suffix}`;
+  if (absSeconds < 31536000)
+    return `${prefix}${Math.floor(absSeconds / 2592000)} month${Math.floor(absSeconds / 2592000) !== 1 ? 's' : ''}${suffix}`;
   return `${prefix}${Math.floor(absSeconds / 31536000)} year${Math.floor(absSeconds / 31536000) !== 1 ? 's' : ''}${suffix}`;
 }
 
@@ -174,10 +177,7 @@ export function groupBy<T extends Record<string, unknown>>(
  * deepMerge({ a: 1, b: { c: 2 } }, { b: { d: 3 } })
  * // => { a: 1, b: { c: 2, d: 3 } }
  */
-export function deepMerge<T extends Record<string, unknown>>(
-  target: T,
-  source: Partial<T>
-): T {
+export function deepMerge<T extends Record<string, unknown>>(target: T, source: Partial<T>): T {
   const result = { ...target };
   for (const key in source) {
     const sourceVal = source[key];
@@ -290,10 +290,19 @@ export function isValidIndianPincode(pincode: string): boolean {
 
 /**
  * isValidIndianMobile — Validates a 10-digit Indian mobile number.
+ * Accepts an optional +91 / 0 / 91 country or trunk prefix.
  *
  * @example
- * isValidIndianMobile('9876543210') // => true
+ * isValidIndianMobile('9876543210')      // => true
+ * isValidIndianMobile('+91 98765 43210') // => true
  */
 export function isValidIndianMobile(mobile: string): boolean {
-  return /^[6-9]\d{9}$/.test(mobile.replace(/[\s\-+]/g, ''));
+  const digits = mobile.replace(/\D/g, '');
+  const normalized =
+    digits.length === 12 && digits.startsWith('91')
+      ? digits.slice(2)
+      : digits.length === 11 && digits.startsWith('0')
+        ? digits.slice(1)
+        : digits;
+  return /^[6-9]\d{9}$/.test(normalized);
 }

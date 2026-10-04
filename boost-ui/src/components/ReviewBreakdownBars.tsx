@@ -3,7 +3,6 @@ import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 import { StarRating } from './StarRating';
 
-
 /**
  * ReviewBreakdownItem — A single rating level in the breakdown.
  */
@@ -11,7 +10,6 @@ export interface ReviewBreakdownItem {
   star: number;
   count: number;
 }
-
 
 /**
  * ReviewBreakdownBarsProps — Properties for the review rating breakdown chart.
@@ -44,8 +42,8 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
   const rows: ReviewBreakdownItem[] = [5, 4, 3, 2, 1].map((star) => {
     let count = 0;
     if (Array.isArray(breakdown)) {
-      const item = (breakdown as any[]).find((b) => (b.star === star || b.stars === star));
-      count = item ? (item.count || item.percentage || 0) : 0;
+      const item = (breakdown as any[]).find((b) => b.star === star || b.stars === star);
+      count = item ? item.count || item.percentage || 0 : 0;
     } else if (breakdown && typeof breakdown === 'object') {
       count = (breakdown as Record<number, number>)[star] || 0;
     }
@@ -53,7 +51,7 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
   });
 
   const computedTotal = rows.reduce((sum, r) => sum + r.count, 0);
-  const safeTotal = typeof totalReviews === 'number' ? totalReviews : (computedTotal || 100);
+  const safeTotal = typeof totalReviews === 'number' ? totalReviews : computedTotal || 100;
   const safeRating = typeof averageRating === 'number' ? averageRating : 4.7;
 
   const getContainerStyles = (): React.CSSProperties => {
@@ -241,15 +239,11 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
 
       {/* Left rating summary */}
       <div className="boost-review-left">
-        <span className="boost-review-score">
-          {safeRating.toFixed(1)}
-        </span>
+        <span className="boost-review-score">{safeRating.toFixed(1)}</span>
         <div className="boost-review-stars">
           <StarRating rating={safeRating} size={24} />
         </div>
-        <span className="boost-review-total">
-          Based on {safeTotal.toLocaleString()} reviews
-        </span>
+        <span className="boost-review-total">Based on {safeTotal.toLocaleString()} reviews</span>
       </div>
 
       {/* Right progress bars */}
@@ -257,13 +251,14 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
         {rows.map(({ star, count }) => {
           const percent = safeTotal > 0 ? Math.round((count / safeTotal) * 100) : 0;
           const isSelected = selectedStar === star;
-          
+
           // Use theme variables if available, otherwise fallback to premium colors
-          const fillColor = star >= 4 
-            ? 'var(--boost-success, #10b981)' 
-            : star === 3 
-              ? 'var(--boost-warning, #f59e0b)' 
-              : 'var(--boost-danger, #ef4444)';
+          const fillColor =
+            star >= 4
+              ? 'var(--boost-success, #10b981)'
+              : star === 3
+                ? 'var(--boost-warning, #f59e0b)'
+                : 'var(--boost-danger, #ef4444)';
 
           return (
             <div
@@ -279,7 +274,13 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
             >
               <div className="boost-review-star-label">
                 <span>{star}</span>
-                <svg width="14" height="14" viewBox="0 0 20 20" fill="var(--boost-warning, #f59e0b)" style={{ filter: 'drop-shadow(0 1px 2px rgba(245, 158, 11, 0.2))' }}>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 20 20"
+                  fill="var(--boost-warning, #f59e0b)"
+                  style={{ filter: 'drop-shadow(0 1px 2px rgba(245, 158, 11, 0.2))' }}
+                >
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
@@ -296,9 +297,7 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
               </div>
 
               {/* Percentage */}
-              <span className="boost-review-percent">
-                {percent}%
-              </span>
+              <span className="boost-review-percent">{percent}%</span>
             </div>
           );
         })}

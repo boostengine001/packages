@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+coverage/
+
+# Logs and temp files
+*.log
+build_log.txt
+out.txt
+err.txt
+
+# Editor/OS
+.DS_Store
+Thumbs.db

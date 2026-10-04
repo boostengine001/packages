@@ -44,7 +44,8 @@ export const Textarea = /* @__PURE__ */ React.forwardRef<HTMLTextAreaElement, Te
   ) => {
     const { stylePreset: inheritedPreset } = useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
-    const textareaId = id || (label ? `textarea-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
+    const textareaId =
+      id || (label ? `textarea-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
     const limit = maxLength || maxChars;
     const charCount = typeof value === 'string' ? value.length : 0;
     const shouldShowCount = showCount || Boolean(maxChars);
@@ -142,7 +143,12 @@ export const Textarea = /* @__PURE__ */ React.forwardRef<HTMLTextAreaElement, Te
           )}
 
           {shouldShowCount && limit && (
-            <span style={{ fontSize: '11px', color: charCount > limit ? '#ef4444' : 'var(--boost-text-muted, #64748b)' }}>
+            <span
+              style={{
+                fontSize: '11px',
+                color: charCount > limit ? '#ef4444' : 'var(--boost-text-muted, #64748b)',
+              }}
+            >
               {charCount}/{limit}
             </span>
           )}
@@ -160,8 +166,8 @@ export const Textarea = /* @__PURE__ */ React.forwardRef<HTMLTextAreaElement, Te
             error && textareaId
               ? `${textareaId}-error`
               : helperText && textareaId
-              ? `${textareaId}-helper`
-              : undefined
+                ? `${textareaId}-helper`
+                : undefined
           }
           className={`boost-textarea boost-textarea-preset-${preset}`}
           style={{
@@ -169,18 +175,22 @@ export const Textarea = /* @__PURE__ */ React.forwardRef<HTMLTextAreaElement, Te
             width: '100%',
             padding: '10px 14px',
             fontSize: '14px',
-            borderRadius: (presetStyle.borderRadius as string | undefined) ?? 'var(--boost-radius, 8px)',
+            borderRadius:
+              (presetStyle.borderRadius as string | undefined) ?? 'var(--boost-radius, 8px)',
             outline: 'none',
             minHeight: '90px',
             resize: 'vertical',
             boxSizing: 'border-box',
             fontFamily: 'inherit',
             lineHeight: 1.5,
-            border: (presetStyle.border as string | undefined) ?? '1px solid var(--boost-border, #cbd5e1)',
+            border:
+              (presetStyle.border as string | undefined) ??
+              '1px solid var(--boost-border, #cbd5e1)',
             borderColor: error ? '#ef4444' : undefined,
             backgroundColor: disabled
               ? 'rgba(0, 0, 0, 0.04)'
-              : ((presetStyle.backgroundColor as string | undefined) ?? 'var(--boost-surface, #ffffff)'),
+              : ((presetStyle.backgroundColor as string | undefined) ??
+                'var(--boost-surface, #ffffff)'),
             ...style,
           }}
           {...props}

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * SkeletonProps — Properties for the loading skeleton placeholder component.
  */
@@ -26,19 +25,25 @@ export const Skeleton: React.FC<SkeletonProps> = ({
       return typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius;
     }
     switch (variant) {
-      case 'circular': return '50%';
-      case 'rectangular': return '8px';
+      case 'circular':
+        return '50%';
+      case 'rectangular':
+        return '8px';
       case 'text':
-      default: return '4px';
+      default:
+        return '4px';
     }
   };
 
   const getDefaultHeight = () => {
     switch (variant) {
-      case 'circular': return width || 40;
-      case 'rectangular': return 120;
+      case 'circular':
+        return width || 40;
+      case 'rectangular':
+        return 120;
       case 'text':
-      default: return 16;
+      default:
+        return 16;
     }
   };
 
@@ -63,7 +68,11 @@ export const Skeleton: React.FC<SkeletonProps> = ({
         className={`boost-skeleton ${className}`}
         style={{
           width: width ? (typeof width === 'number' ? `${width}px` : width) : '100%',
-          height: height ? (typeof height === 'number' ? `${height}px` : height) : `${getDefaultHeight()}px`,
+          height: height
+            ? typeof height === 'number'
+              ? `${height}px`
+              : height
+            : `${getDefaultHeight()}px`,
           borderRadius: getRadius(),
           ...style,
         }}

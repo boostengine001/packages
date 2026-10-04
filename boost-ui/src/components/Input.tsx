@@ -149,8 +149,8 @@ export const Input = /* @__PURE__ */ React.forwardRef<HTMLInputElement, InputPro
               error && inputId
                 ? `${inputId}-error`
                 : helperText && inputId
-                ? `${inputId}-helper`
-                : undefined
+                  ? `${inputId}-helper`
+                  : undefined
             }
             style={{
               ...presetStyle,
@@ -161,14 +161,18 @@ export const Input = /* @__PURE__ */ React.forwardRef<HTMLInputElement, InputPro
               paddingRight: rightIcon ? '38px' : '14px',
               fontSize: '14px',
               color: 'var(--boost-text, #0f172a)',
-              border: (presetStyle.border as string | undefined) ?? (error ? '1px solid #ef4444' : '1px solid var(--boost-border, #cbd5e1)'),
-              borderRadius: (presetStyle.borderRadius as string | undefined) ?? 'var(--boost-radius, 10px)',
+              border:
+                (presetStyle.border as string | undefined) ??
+                (error ? '1px solid #ef4444' : '1px solid var(--boost-border, #cbd5e1)'),
+              borderRadius:
+                (presetStyle.borderRadius as string | undefined) ?? 'var(--boost-radius, 10px)',
               outline: 'none',
               transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
               boxSizing: 'border-box',
               backgroundColor: disabled
                 ? 'rgba(0, 0, 0, 0.04)'
-                : ((presetStyle.backgroundColor as string | undefined) ?? 'var(--boost-surface, #ffffff)'),
+                : ((presetStyle.backgroundColor as string | undefined) ??
+                  'var(--boost-surface, #ffffff)'),
               borderColor: error ? '#ef4444' : undefined,
               ...style,
             }}

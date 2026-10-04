@@ -6,7 +6,6 @@ export interface DonutDataPoint {
   color?: string;
 }
 
-
 /**
  * DonutChartProps — Properties for the donut chart component.
  */
@@ -149,7 +148,15 @@ export const DonutChart: React.FC<DonutChartProps> = ({
       {(title || subtitle) && (
         <div style={{ marginBottom: '16px' }}>
           {title && (
-            <h4 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: 'var(--boost-text, #0f172a)', letterSpacing: '-0.01em' }}>
+            <h4
+              style={{
+                margin: '0 0 4px',
+                fontSize: '16px',
+                fontWeight: 700,
+                color: 'var(--boost-text, #0f172a)',
+                letterSpacing: '-0.01em',
+              }}
+            >
               {title}
             </h4>
           )}
@@ -171,7 +178,9 @@ export const DonutChart: React.FC<DonutChartProps> = ({
         }}
       >
         {/* SVG Donut / Pie */}
-        <div style={{ position: 'relative', width: `${size}px`, height: `${size}px`, flexShrink: 0 }}>
+        <div
+          style={{ position: 'relative', width: `${size}px`, height: `${size}px`, flexShrink: 0 }}
+        >
           <svg
             viewBox={`0 0 ${size} ${size}`}
             style={{ width: '100%', height: '100%', overflow: 'visible' }}
@@ -183,7 +192,11 @@ export const DonutChart: React.FC<DonutChartProps> = ({
                 d={slice.pathD}
                 fill={slice.color}
                 opacity={hoverIndex === null || hoverIndex === i ? 1 : 0.45}
-                transform={slice.isHovered ? `scale(1.04) translate(-${center * 0.04}, -${center * 0.04})` : undefined}
+                transform={
+                  slice.isHovered
+                    ? `scale(1.04) translate(-${center * 0.04}, -${center * 0.04})`
+                    : undefined
+                }
                 style={{
                   cursor: 'pointer',
                   transition: 'transform 0.2s ease, opacity 0.2s ease',
@@ -206,10 +219,25 @@ export const DonutChart: React.FC<DonutChartProps> = ({
                 maxWidth: `${innerRadius * 1.6}px`,
               }}
             >
-              <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--boost-text-muted, #94a3b8)', textTransform: 'uppercase' }}>
+              <div
+                style={{
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  color: 'var(--boost-text-muted, #94a3b8)',
+                  textTransform: 'uppercase',
+                }}
+              >
                 {activeSlice ? activeSlice.label : centerLabel || 'Total'}
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--boost-text, #0f172a)', letterSpacing: '-0.02em', marginTop: '2px' }}>
+              <div
+                style={{
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  color: 'var(--boost-text, #0f172a)',
+                  letterSpacing: '-0.02em',
+                  marginTop: '2px',
+                }}
+              >
                 {activeSlice
                   ? `${valuePrefix}${activeSlice.value.toLocaleString()}${valueSuffix}`
                   : centerValue || `${valuePrefix}${total.toLocaleString()}${valueSuffix}`}
@@ -255,13 +283,23 @@ export const DonutChart: React.FC<DonutChartProps> = ({
                         flexShrink: 0,
                       }}
                     />
-                    <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--boost-text, #0f172a)' }}>
+                    <span
+                      style={{
+                        fontSize: '13px',
+                        fontWeight: 500,
+                        color: 'var(--boost-text, #0f172a)',
+                      }}
+                    >
                       {slice.label}
                     </span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px' }}>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px' }}
+                  >
                     <span style={{ fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}>
-                      {valuePrefix}{slice.value.toLocaleString()}{valueSuffix}
+                      {valuePrefix}
+                      {slice.value.toLocaleString()}
+                      {valueSuffix}
                     </span>
                     <span style={{ color: 'var(--boost-text-muted, #94a3b8)', fontSize: '11px' }}>
                       ({slice.percentage}%)

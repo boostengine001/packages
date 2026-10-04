@@ -1,11 +1,19 @@
 import { writable } from 'svelte/store';
 
-export type PresetName = 'minimal' | 'glassmorphism' | 'neumorphism' | 'neo-brutalism' | 'dark-first' | 'gradient-glow' | 'material-you';
+export type PresetName =
+  | 'minimal'
+  | 'glassmorphism'
+  | 'neumorphism'
+  | 'neo-brutalism'
+  | 'dark-first'
+  | 'gradient-glow'
+  | 'material-you';
 
 function createPresetStore(defaultPreset: PresetName = 'minimal') {
-  const stored = typeof localStorage !== 'undefined'
-    ? (localStorage.getItem('boost-preset') as PresetName) || defaultPreset
-    : defaultPreset;
+  const stored =
+    typeof localStorage !== 'undefined'
+      ? (localStorage.getItem('boost-preset') as PresetName) || defaultPreset
+      : defaultPreset;
 
   const { subscribe, set } = writable<PresetName>(stored);
 

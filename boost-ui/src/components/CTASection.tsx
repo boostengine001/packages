@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * CTASectionProps — Properties for the call-to-action banner section.
  */
@@ -98,7 +97,14 @@ export const CTASection: React.FC<CTASectionProps> = ({
       maxWidth: isCard ? '1100px' : '100%',
       margin: '0 auto',
       background: getCardBackground(),
-      color: preset === 'neo-brutalism' ? '#000000' : preset === 'neumorphism' ? '#0f172a' : preset === 'material-you' ? '#1c1b1f' : '#ffffff',
+      color:
+        preset === 'neo-brutalism'
+          ? '#000000'
+          : preset === 'neumorphism'
+            ? '#0f172a'
+            : preset === 'material-you'
+              ? '#1c1b1f'
+              : '#ffffff',
       padding: 'clamp(36px, 6vw, 60px) clamp(20px, 4vw, 48px)',
       textAlign: 'center',
       boxSizing: 'border-box',
@@ -422,7 +428,9 @@ export const CTASection: React.FC<CTASectionProps> = ({
       data-boost-preset={preset}
       style={{
         width: '100%',
-        padding: isCard ? 'clamp(24px, 4vw, 48px) clamp(14px, 3vw, 24px)' : 'clamp(48px, 8vw, 84px) clamp(16px, 4vw, 32px)',
+        padding: isCard
+          ? 'clamp(24px, 4vw, 48px) clamp(14px, 3vw, 24px)'
+          : 'clamp(48px, 8vw, 84px) clamp(16px, 4vw, 32px)',
         boxSizing: 'border-box',
         ...style,
       }}
@@ -448,11 +456,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         `}
       </style>
       <div style={getContainerStyles()}>
-        {badge && (
-          <div style={getBadgeStyles()}>
-            {badge}
-          </div>
-        )}
+        {badge && <div style={getBadgeStyles()}>{badge}</div>}
 
         <h2
           style={{
@@ -460,7 +464,14 @@ export const CTASection: React.FC<CTASectionProps> = ({
             fontWeight: 800,
             lineHeight: 1.2,
             margin: '0 0 16px 0',
-            color: preset === 'neo-brutalism' ? '#000000' : preset === 'neumorphism' ? '#0f172a' : preset === 'material-you' ? '#1c1b1f' : '#ffffff',
+            color:
+              preset === 'neo-brutalism'
+                ? '#000000'
+                : preset === 'neumorphism'
+                  ? '#0f172a'
+                  : preset === 'material-you'
+                    ? '#1c1b1f'
+                    : '#ffffff',
             letterSpacing: '-0.02em',
           }}
         >
@@ -472,7 +483,14 @@ export const CTASection: React.FC<CTASectionProps> = ({
             style={{
               fontSize: 'clamp(15px, 1.8vw, 18px)',
               lineHeight: 1.6,
-              color: preset === 'neo-brutalism' ? '#27272a' : preset === 'neumorphism' ? '#475569' : preset === 'material-you' ? '#49454f' : 'rgba(255, 255, 255, 0.85)',
+              color:
+                preset === 'neo-brutalism'
+                  ? '#27272a'
+                  : preset === 'neumorphism'
+                    ? '#475569'
+                    : preset === 'material-you'
+                      ? '#49454f'
+                      : 'rgba(255, 255, 255, 0.85)',
               margin: '0 auto 36px auto',
               maxWidth: '650px',
             }}
@@ -490,7 +508,8 @@ export const CTASection: React.FC<CTASectionProps> = ({
                 gap: '8px',
                 padding: '12px 24px',
                 borderRadius: '8px',
-                backgroundColor: preset === 'neo-brutalism' ? '#22c55e' : 'rgba(255, 255, 255, 0.2)',
+                backgroundColor:
+                  preset === 'neo-brutalism' ? '#22c55e' : 'rgba(255, 255, 255, 0.2)',
                 color: '#ffffff',
                 fontWeight: 600,
                 border: preset === 'neo-brutalism' ? '2px solid #000' : 'none',
@@ -518,10 +537,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
                 placeholder={newsletterPlaceholder}
                 style={getInputStyles()}
               />
-              <button
-                type="submit"
-                style={getPrimaryButtonStyles()}
-              >
+              <button type="submit" style={getPrimaryButtonStyles()}>
                 {newsletterButtonText}
               </button>
             </form>

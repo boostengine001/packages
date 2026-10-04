@@ -3,7 +3,6 @@ import { ButtonVariant, ButtonSize } from './Button';
 
 export type IconButtonShape = 'square' | 'rounded' | 'circle';
 
-
 /**
  * IconButtonProps — Properties for an icon-only button.
  */
@@ -40,30 +39,49 @@ export const IconButton = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Ic
 
     const getSize = () => {
       switch (size) {
-        case 'sm': return { width: '30px', height: '30px', padding: '6px' };
-        case 'lg': return { width: '44px', height: '44px', padding: '10px' };
+        case 'sm':
+          return { width: '30px', height: '30px', padding: '6px' };
+        case 'lg':
+          return { width: '44px', height: '44px', padding: '10px' };
         case 'md':
-        default: return { width: '36px', height: '36px', padding: '8px' };
+        default:
+          return { width: '36px', height: '36px', padding: '8px' };
       }
     };
 
     const getShapeRadius = () => {
       switch (shape) {
-        case 'circle': return '9999px';
-        case 'square': return '4px';
+        case 'circle':
+          return '9999px';
+        case 'square':
+          return '4px';
         case 'rounded':
-        default: return '8px';
+        default:
+          return '8px';
       }
     };
 
     const getBgColor = () => {
       switch (variant) {
-        case 'primary': return { bg: 'var(--boost-primary, #2563eb)', color: '#ffffff', border: 'none' };
-        case 'outline': return { bg: 'transparent', color: 'var(--boost-text, #0f172a)', border: '1px solid var(--boost-border, #cbd5e1)' };
-        case 'ghost': return { bg: 'transparent', color: 'var(--boost-text, #0f172a)', border: 'none' };
-        case 'destructive': return { bg: 'var(--boost-danger, #dc2626)', color: '#ffffff', border: 'none' };
+        case 'primary':
+          return { bg: 'var(--boost-primary, #2563eb)', color: '#ffffff', border: 'none' };
+        case 'outline':
+          return {
+            bg: 'transparent',
+            color: 'var(--boost-text, #0f172a)',
+            border: '1px solid var(--boost-border, #cbd5e1)',
+          };
+        case 'ghost':
+          return { bg: 'transparent', color: 'var(--boost-text, #0f172a)', border: 'none' };
+        case 'destructive':
+          return { bg: 'var(--boost-danger, #dc2626)', color: '#ffffff', border: 'none' };
         case 'secondary':
-        default: return { bg: 'var(--boost-surface-secondary, #f1f5f9)', color: 'var(--boost-text, #0f172a)', border: '1px solid var(--boost-border, #e2e8f0)' };
+        default:
+          return {
+            bg: 'var(--boost-surface-secondary, #f1f5f9)',
+            color: 'var(--boost-text, #0f172a)',
+            border: '1px solid var(--boost-border, #e2e8f0)',
+          };
       }
     };
 
@@ -104,4 +122,3 @@ export const IconButton = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Ic
 );
 
 IconButton.displayName = 'IconButton';
-

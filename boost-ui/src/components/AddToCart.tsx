@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 /**
  * AddToCartProps — Properties for the add-to-cart button with quantity.
  */
@@ -142,7 +141,16 @@ export const AddToCart: React.FC<AddToCartProps> = ({
             aria-label="Decrease quantity"
           >
             {quantity === 1 ? (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="3 6 5 6 21 6" />
                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
               </svg>
@@ -151,9 +159,7 @@ export const AddToCart: React.FC<AddToCartProps> = ({
             )}
           </button>
 
-          <span className="boost-stepper-qty">
-            {quantity}
-          </span>
+          <span className="boost-stepper-qty">{quantity}</span>
 
           <button
             type="button"
@@ -161,7 +167,10 @@ export const AddToCart: React.FC<AddToCartProps> = ({
             disabled={quantity >= maxQuantity}
             className="boost-stepper-btn"
             aria-label="Increase quantity"
-            style={{ opacity: quantity >= maxQuantity ? 0.35 : 1, cursor: quantity >= maxQuantity ? 'not-allowed' : 'pointer' }}
+            style={{
+              opacity: quantity >= maxQuantity ? 0.35 : 1,
+              cursor: quantity >= maxQuantity ? 'not-allowed' : 'pointer',
+            }}
           >
             +
           </button>
@@ -186,11 +195,27 @@ export const AddToCart: React.FC<AddToCartProps> = ({
               stroke="currentColor"
               strokeWidth="2.5"
             >
-              <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="10" opacity="0.3" />
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                strokeDasharray="32"
+                strokeDashoffset="10"
+                opacity="0.3"
+              />
               <path d="M12 2a10 10 0 0 1 10 10" />
             </svg>
           ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
@@ -204,4 +229,3 @@ export const AddToCart: React.FC<AddToCartProps> = ({
 };
 
 AddToCart.displayName = 'AddToCart';
-

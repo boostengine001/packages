@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ButtonVariant, ButtonSize } from './Button';
 
-
 /**
  * LinkButtonProps — Properties for a button styled as a link.
  */
@@ -73,10 +72,17 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   const getSizeStyles = (): React.CSSProperties => {
     if (variant === 'link') return {};
     switch (size) {
-      case 'sm': return { padding: '6px 14px', fontSize: '12px', borderRadius: 'var(--boost-radius, 8px)' };
-      case 'lg': return { padding: '13px 26px', fontSize: '15px', borderRadius: 'var(--boost-radius, 12px)' };
+      case 'sm':
+        return { padding: '6px 14px', fontSize: '12px', borderRadius: 'var(--boost-radius, 8px)' };
+      case 'lg':
+        return {
+          padding: '13px 26px',
+          fontSize: '15px',
+          borderRadius: 'var(--boost-radius, 12px)',
+        };
       case 'md':
-      default: return { padding: '9px 18px', fontSize: '14px', borderRadius: 'var(--boost-radius, 10px)' };
+      default:
+        return { padding: '9px 18px', fontSize: '14px', borderRadius: 'var(--boost-radius, 10px)' };
     }
   };
 
@@ -109,4 +115,3 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
 };
 
 LinkButton.displayName = 'LinkButton';
-

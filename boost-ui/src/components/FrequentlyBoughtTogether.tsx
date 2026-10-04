@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * BundleItem — A single product in a FBT bundle.
  */
@@ -13,7 +12,6 @@ export interface BundleItem {
   imageUrl?: string;
   originalPrice?: number;
 }
-
 
 /**
  * FrequentlyBoughtTogetherProps — Properties for the FBT bundle component.
@@ -52,9 +50,7 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
     return list;
   }, [mainProduct, suggestedItems]);
 
-  const [selectedIds, setSelectedIds] = React.useState<string[]>(() =>
-    allItems.map((i) => i.id)
-  );
+  const [selectedIds, setSelectedIds] = React.useState<string[]>(() => allItems.map((i) => i.id));
 
   React.useEffect(() => {
     setSelectedIds(allItems.map((i) => i.id));
@@ -82,9 +78,7 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
     0
   );
   const discountAmount =
-    selectedItems.length > 1
-      ? Math.round((subtotal * bundleDiscountPercentage) / 100)
-      : 0;
+    selectedItems.length > 1 ? Math.round((subtotal * bundleDiscountPercentage) / 100) : 0;
   const finalPrice = subtotal - discountAmount;
   const totalSavings = originalSubtotal - finalPrice;
 
@@ -373,13 +367,28 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
       </style>
 
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
-        <h3 className="boost-fbt-title">
-          Frequently Bought Together
-        </h3>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '8px',
+        }}
+      >
+        <h3 className="boost-fbt-title">Frequently Bought Together</h3>
         {selectedItems.length > 1 && (
           <span className="boost-combo-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
             </svg>
             Save {bundleDiscountPercentage}% on Combo
@@ -403,9 +412,7 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
 
           return (
             <React.Fragment key={item.id}>
-              {index > 0 && (
-                <div className="boost-bundle-plus-chip">+</div>
-              )}
+              {index > 0 && <div className="boost-bundle-plus-chip">+</div>}
               <div
                 onClick={() => toggleItem(item.id)}
                 className={`boost-bundle-card ${isSelected ? 'selected' : 'unselected'}`}
@@ -413,7 +420,16 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
               >
                 {isSelected && (
                   <div className="boost-bundle-check-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -442,12 +458,30 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
                       textAlign: 'center',
                     }}
                   >
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                      <line x1="3" y1="6" x2="21" y2="6"/>
-                      <path d="M16 10a4 4 0 0 1-8 0"/>
+                    <svg
+                      width="26"
+                      height="26"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 0 1-8 0" />
                     </svg>
-                    <span style={{ fontSize: '9px', fontWeight: 600, maxWidth: '80px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <span
+                      style={{
+                        fontSize: '9px',
+                        fontWeight: 600,
+                        maxWidth: '80px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
                       {item.title}
                     </span>
                   </div>
@@ -497,9 +531,7 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
                   opacity: isSelected ? 1 : 0.5,
                 }}
               >
-                <span style={{ fontWeight: 600 }}>
-                  {idx === 0 ? 'This item: ' : ''}
-                </span>
+                <span style={{ fontWeight: 600 }}>{idx === 0 ? 'This item: ' : ''}</span>
                 {item.title}
                 <span
                   className="boost-fbt-price"
@@ -544,7 +576,13 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-            <span style={{ fontSize: '13px', color: 'var(--boost-text-secondary, #64748b)', fontWeight: 500 }}>
+            <span
+              style={{
+                fontSize: '13px',
+                color: 'var(--boost-text-secondary, #64748b)',
+                fontWeight: 500,
+              }}
+            >
               Total price:
             </span>
             <span
@@ -582,20 +620,28 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
               }}
             >
               🎉 You save {currencySymbol}
-              {totalSavings > 0 ? totalSavings.toLocaleString(locale) : discountAmount.toLocaleString(locale)} ({bundleDiscountPercentage}% combo discount)
+              {totalSavings > 0
+                ? totalSavings.toLocaleString(locale)
+                : discountAmount.toLocaleString(locale)}{' '}
+              ({bundleDiscountPercentage}% combo discount)
             </div>
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className="boost-bundle-btn"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 0 1-8 0"/>
+        <button type="button" onClick={handleAddToCart} className="boost-bundle-btn">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
           </svg>
           <span>Add {selectedItems.length} items to Cart</span>
         </button>

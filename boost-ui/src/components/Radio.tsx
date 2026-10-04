@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * RadioProps — Properties for a single radio button.
  */
@@ -13,7 +12,10 @@ export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Radio = /* @__PURE__ */ React.forwardRef<HTMLInputElement, RadioProps>(
-  ({ label, description, className = '', style, disabled, stylePreset: stylePresetProp, ...props }, ref) => {
+  (
+    { label, description, className = '', style, disabled, stylePreset: stylePresetProp, ...props },
+    ref
+  ) => {
     const { stylePreset: inheritedPreset } = useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
 
@@ -46,7 +48,9 @@ export const Radio = /* @__PURE__ */ React.forwardRef<HTMLInputElement, RadioPro
         {(label || description) && (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {label && (
-              <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--boost-text, #0f172a)' }}>
+              <span
+                style={{ fontSize: '14px', fontWeight: 500, color: 'var(--boost-text, #0f172a)' }}
+              >
                 {label}
               </span>
             )}
@@ -63,7 +67,6 @@ export const Radio = /* @__PURE__ */ React.forwardRef<HTMLInputElement, RadioPro
 );
 
 Radio.displayName = 'Radio';
-
 
 /**
  * RadioOption — A single option within a RadioGroup.

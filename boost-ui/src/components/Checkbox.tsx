@@ -19,7 +19,20 @@ export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputE
 }
 
 export const Checkbox = /* @__PURE__ */ React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, description, indeterminate, checked, disabled, className = '', style, stylePreset: stylePresetProp, ...props }, ref) => {
+  (
+    {
+      label,
+      description,
+      indeterminate,
+      checked,
+      disabled,
+      className = '',
+      style,
+      stylePreset: stylePresetProp,
+      ...props
+    },
+    ref
+  ) => {
     const { stylePreset: inheritedPreset } = useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -46,7 +59,9 @@ export const Checkbox = /* @__PURE__ */ React.forwardRef<HTMLInputElement, Check
           ...style,
         }}
       >
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', marginTop: '2px' }}>
+        <div
+          style={{ position: 'relative', display: 'flex', alignItems: 'center', marginTop: '2px' }}
+        >
           <input
             ref={inputRef}
             type="checkbox"
@@ -64,7 +79,9 @@ export const Checkbox = /* @__PURE__ */ React.forwardRef<HTMLInputElement, Check
         {(label || description) && (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {label && (
-              <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--boost-text, #1e293b)' }}>
+              <span
+                style={{ fontSize: '14px', fontWeight: 500, color: 'var(--boost-text, #1e293b)' }}
+              >
                 {label}
               </span>
             )}

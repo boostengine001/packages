@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * PricingFeature — A single feature row in the pricing comparison.
  */
@@ -10,7 +9,6 @@ export interface PricingFeature {
   text: string;
   included: boolean;
 }
-
 
 /**
  * PricingTier — A single pricing plan/tier.
@@ -32,7 +30,6 @@ export interface PricingTier {
   onSelect?: () => void;
   disabled?: boolean;
 }
-
 
 /**
  * PricingTableProps — Properties for the pricing table/plans component.
@@ -292,7 +289,9 @@ export const PricingTable: React.FC<PricingTableProps> = ({
         return {
           ...base,
           borderRadius: '28px',
-          backgroundColor: isPop ? 'var(--boost-surface, #e8def8)' : 'var(--boost-surface, #f3edf7)',
+          backgroundColor: isPop
+            ? 'var(--boost-surface, #e8def8)'
+            : 'var(--boost-surface, #f3edf7)',
           border: 'none',
           boxShadow: isPop ? '0 4px 16px rgba(0, 0, 0, 0.08)' : 'none',
         };
@@ -586,13 +585,13 @@ export const PricingTable: React.FC<PricingTableProps> = ({
               style={getTierCardStyles(isPop)}
             >
               {isPop && (
-                <div style={getPopularBadgeStyles()}>
-                  {tier.popularLabel || 'Most Popular'}
-                </div>
+                <div style={getPopularBadgeStyles()}>{tier.popularLabel || 'Most Popular'}</div>
               )}
 
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
+                >
                   <h3
                     style={{
                       fontSize: '20px',
@@ -612,7 +611,10 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                         color: '#16a34a',
                         padding: '2px 8px',
                         borderRadius: preset === 'neo-brutalism' ? '2px' : '9999px',
-                        border: preset === 'neo-brutalism' ? '1.5px solid #000' : '1px solid rgba(34, 197, 94, 0.2)',
+                        border:
+                          preset === 'neo-brutalism'
+                            ? '1.5px solid #000'
+                            : '1px solid rgba(34, 197, 94, 0.2)',
                       }}
                     >
                       {tier.badge}
@@ -671,7 +673,9 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                           fontWeight: 500,
                         }}
                       >
-                        {typeof rawOriginalPrice === 'number' ? `${currency}${rawOriginalPrice}` : rawOriginalPrice}
+                        {typeof rawOriginalPrice === 'number'
+                          ? `${currency}${rawOriginalPrice}`
+                          : rawOriginalPrice}
                       </span>
                     </div>
                   )}
@@ -679,7 +683,10 @@ export const PricingTable: React.FC<PricingTableProps> = ({
 
                 <div
                   style={{
-                    borderTop: preset === 'neo-brutalism' ? '2px solid #000' : '1px solid var(--boost-border, #e2e8f0)',
+                    borderTop:
+                      preset === 'neo-brutalism'
+                        ? '2px solid #000'
+                        : '1px solid var(--boost-border, #e2e8f0)',
                     paddingTop: '24px',
                     marginBottom: '32px',
                   }}
@@ -720,9 +727,14 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                               width: '20px',
                               height: '20px',
                               borderRadius: preset === 'neo-brutalism' ? '2px' : '9999px',
-                              backgroundColor: preset === 'neo-brutalism'
-                                ? (included ? '#fbbf24' : '#f1f5f9')
-                                : (included ? 'rgba(37, 99, 235, 0.1)' : 'rgba(148, 163, 184, 0.1)'),
+                              backgroundColor:
+                                preset === 'neo-brutalism'
+                                  ? included
+                                    ? '#fbbf24'
+                                    : '#f1f5f9'
+                                  : included
+                                    ? 'rgba(37, 99, 235, 0.1)'
+                                    : 'rgba(148, 163, 184, 0.1)',
                               border: preset === 'neo-brutalism' ? '1.5px solid #000' : 'none',
                               flexShrink: 0,
                             }}
@@ -732,7 +744,13 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                               height="12"
                               viewBox="0 0 24 24"
                               fill="none"
-                              stroke={included ? (preset === 'neo-brutalism' ? '#000000' : 'var(--boost-primary, #2563eb)') : '#94a3b8'}
+                              stroke={
+                                included
+                                  ? preset === 'neo-brutalism'
+                                    ? '#000000'
+                                    : 'var(--boost-primary, #2563eb)'
+                                  : '#94a3b8'
+                              }
                               strokeWidth={preset === 'neo-brutalism' ? '3' : '2.5'}
                               strokeLinecap="round"
                               strokeLinejoin="round"

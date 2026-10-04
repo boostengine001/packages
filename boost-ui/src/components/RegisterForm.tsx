@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * RegisterFormData — Shape of registration form data.
  */
@@ -13,7 +12,6 @@ export interface RegisterFormData {
   password: string;
   acceptTerms: boolean;
 }
-
 
 /**
  * RegisterFormProps — Properties for the registration form.
@@ -103,7 +101,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
     const errs = validate();
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
-    onSubmit?.({ fullName: fullName.trim(), email: email.trim(), phone: phone.trim() || undefined, password, acceptTerms });
+    onSubmit?.({
+      fullName: fullName.trim(),
+      email: email.trim(),
+      phone: phone.trim() || undefined,
+      password,
+      acceptTerms,
+    });
   };
 
   const getCardPresetStyles = (): React.CSSProperties => {
@@ -185,7 +189,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           border: 'none',
           backgroundColor: 'var(--boost-surface, #e6ecf5)',
           borderRadius: '10px',
-          boxShadow: hasError ? 'inset 2px 2px 4px rgba(239, 68, 68, 0.4)' : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
+          boxShadow: hasError
+            ? 'inset 2px 2px 4px rgba(239, 68, 68, 0.4)'
+            : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
         };
       case 'material-you':
         return {
@@ -292,8 +298,27 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         `}
       </style>
       <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-        <h2 style={{ fontSize: 'clamp(20px, 3vw, 24px)', fontWeight: 700, color: 'var(--boost-text, #0f172a)', margin: '0 0 8px', letterSpacing: '-0.02em' }}>{title}</h2>
-        <p style={{ fontSize: '14px', color: 'var(--boost-muted, #64748b)', margin: 0, lineHeight: 1.5 }}>{subtitle}</p>
+        <h2
+          style={{
+            fontSize: 'clamp(20px, 3vw, 24px)',
+            fontWeight: 700,
+            color: 'var(--boost-text, #0f172a)',
+            margin: '0 0 8px',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          {title}
+        </h2>
+        <p
+          style={{
+            fontSize: '14px',
+            color: 'var(--boost-muted, #64748b)',
+            margin: 0,
+            lineHeight: 1.5,
+          }}
+        >
+          {subtitle}
+        </p>
       </div>
 
       {errorMessage && (
@@ -312,7 +337,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             fontWeight: 500,
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ flexShrink: 0 }}>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            style={{ flexShrink: 0 }}
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -321,9 +354,21 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         </div>
       )}
 
-      <form noValidate onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <form
+        noValidate
+        onSubmit={handleSubmit}
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+      >
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--boost-text, #334155)',
+              marginBottom: '6px',
+            }}
+          >
             Full Name
           </label>
           <input
@@ -331,7 +376,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             value={fullName}
             onChange={(e) => {
               setFullName(e.target.value);
-              if (errors.fullName) setErrors(prev => ({ ...prev, fullName: undefined }));
+              if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: undefined }));
             }}
             placeholder="John Doe"
             className="boost-auth-input"
@@ -350,15 +395,44 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             }}
           />
           {errors.fullName && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#ef4444', marginTop: '4px', fontWeight: 500 }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '12px',
+                color: '#ef4444',
+                marginTop: '4px',
+                fontWeight: 500,
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               {errors.fullName}
             </span>
           )}
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--boost-text, #334155)',
+              marginBottom: '6px',
+            }}
+          >
             Email Address
           </label>
           <input
@@ -366,7 +440,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              if (errors.email) setErrors(prev => ({ ...prev, email: undefined }));
+              if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
             }}
             placeholder="you@example.com"
             className="boost-auth-input"
@@ -385,15 +459,44 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             }}
           />
           {errors.email && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#ef4444', marginTop: '4px', fontWeight: 500 }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '12px',
+                color: '#ef4444',
+                marginTop: '4px',
+                fontWeight: 500,
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               {errors.email}
             </span>
           )}
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--boost-text, #334155)',
+              marginBottom: '6px',
+            }}
+          >
             Phone Number (Optional)
           </label>
           <input
@@ -401,7 +504,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value);
-              if (errors.phone) setErrors(prev => ({ ...prev, phone: undefined }));
+              if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
             }}
             placeholder="+91 98765 43210"
             className="boost-auth-input"
@@ -420,15 +523,44 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             }}
           />
           {errors.phone && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#ef4444', marginTop: '4px', fontWeight: 500 }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '12px',
+                color: '#ef4444',
+                marginTop: '4px',
+                fontWeight: 500,
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               {errors.phone}
             </span>
           )}
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--boost-text, #334155)',
+              marginBottom: '6px',
+            }}
+          >
             Password
           </label>
           <div style={{ position: 'relative' }}>
@@ -437,7 +569,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                if (errors.password) setErrors(prev => ({ ...prev, password: undefined }));
+                if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
               }}
               placeholder="Create a strong password"
               className="boost-auth-input"
@@ -475,12 +607,26 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               }}
             >
               {showPassword ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
@@ -488,8 +634,29 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             </button>
           </div>
           {errors.password && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#ef4444', marginTop: '4px', fontWeight: 500 }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '12px',
+                color: '#ef4444',
+                marginTop: '4px',
+                fontWeight: 500,
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               {errors.password}
             </span>
           )}
@@ -503,7 +670,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               checked={acceptTerms}
               onChange={(e) => {
                 setAcceptTerms(e.target.checked);
-                if (errors.acceptTerms) setErrors(prev => ({ ...prev, acceptTerms: undefined }));
+                if (errors.acceptTerms) setErrors((prev) => ({ ...prev, acceptTerms: undefined }));
               }}
               style={{
                 marginTop: '3px',
@@ -514,13 +681,44 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 flexShrink: 0,
               }}
             />
-            <label htmlFor="register-terms" style={{ fontSize: '13px', color: 'var(--boost-text, #475569)', cursor: 'pointer', lineHeight: 1.4, userSelect: 'none' }}>
+            <label
+              htmlFor="register-terms"
+              style={{
+                fontSize: '13px',
+                color: 'var(--boost-text, #475569)',
+                cursor: 'pointer',
+                lineHeight: 1.4,
+                userSelect: 'none',
+              }}
+            >
               I agree to the Terms of Service and Privacy Policy.
             </label>
           </div>
           {errors.acceptTerms && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#ef4444', marginTop: '6px', fontWeight: 500, paddingLeft: '26px' }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '12px',
+                color: '#ef4444',
+                marginTop: '6px',
+                fontWeight: 500,
+                paddingLeft: '26px',
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               {errors.acceptTerms}
             </span>
           )}
@@ -558,7 +756,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               stroke="currentColor"
               strokeWidth="2"
             >
-              <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="10" opacity="0.3" />
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                strokeDasharray="32"
+                strokeDashoffset="10"
+                opacity="0.3"
+              />
               <path d="M12 2a10 10 0 0 1 10 10" />
             </svg>
           )}
@@ -567,7 +772,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       </form>
 
       {onLoginClick && (
-        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '13px', color: 'var(--boost-muted, #64748b)' }}>
+        <div
+          style={{
+            textAlign: 'center',
+            marginTop: '24px',
+            fontSize: '13px',
+            color: 'var(--boost-muted, #64748b)',
+          }}
+        >
           Already have an account?{' '}
           <button
             type="button"
@@ -589,6 +801,5 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
     </div>
   );
 };
-
 
 RegisterForm.displayName = 'RegisterForm';

@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * SnackbarProps — Properties for the snackbar notification component.
  */
@@ -37,7 +36,9 @@ export const Snackbar: React.FC<SnackbarProps> = ({
 
   React.useEffect(() => {
     if (!isOpen || !onClose) return;
-    const timer = setTimeout(() => { onClose(); }, duration);
+    const timer = setTimeout(() => {
+      onClose();
+    }, duration);
     return () => clearTimeout(timer);
   }, [isOpen, onClose, duration]);
 
@@ -45,31 +46,92 @@ export const Snackbar: React.FC<SnackbarProps> = ({
 
   const getContainerStyles = (): React.CSSProperties => {
     const base: React.CSSProperties = {
-      position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
-      display: 'inline-flex', alignItems: 'center', gap: '16px',
-      fontSize: '13.5px', fontWeight: 500, zIndex: 1000,
-      fontFamily: 'inherit', maxWidth: 'calc(100vw - 32px)', boxSizing: 'border-box',
+      position: 'fixed',
+      bottom: '24px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '16px',
+      fontSize: '13.5px',
+      fontWeight: 500,
+      zIndex: 1000,
+      fontFamily: 'inherit',
+      maxWidth: 'calc(100vw - 32px)',
+      boxSizing: 'border-box',
       padding: '10px 18px',
     };
     switch (preset) {
       case 'neo-brutalism':
-        return { ...base, backgroundColor: '#fbbf24', color: '#000', border: '3px solid #000', borderRadius: '2px', boxShadow: '4px 4px 0px #000' };
+        return {
+          ...base,
+          backgroundColor: '#fbbf24',
+          color: '#000',
+          border: '3px solid #000',
+          borderRadius: '2px',
+          boxShadow: '4px 4px 0px #000',
+        };
       case 'glassmorphism':
-        return { ...base, backgroundColor: 'rgba(15,23,42,0.75)', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '14px', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' };
+        return {
+          ...base,
+          backgroundColor: 'rgba(15,23,42,0.75)',
+          color: '#f8fafc',
+          border: '1px solid rgba(255,255,255,0.15)',
+          borderRadius: '14px',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+        };
       case 'neumorphism':
-        return { ...base, backgroundColor: 'var(--boost-surface, #e0e5ec)', color: 'var(--boost-text, #0f172a)', border: 'none', borderRadius: '9999px', boxShadow: 'var(--card-shadow, 6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff)' };
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-surface, #e0e5ec)',
+          color: 'var(--boost-text, #0f172a)',
+          border: 'none',
+          borderRadius: '9999px',
+          boxShadow: 'var(--card-shadow, 6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff)',
+        };
       case 'gradient-glow':
-        return { ...base, background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: '#fff', border: 'none', borderRadius: '12px', boxShadow: '0 0 24px rgba(99,102,241,0.5)' };
+        return {
+          ...base,
+          background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '12px',
+          boxShadow: '0 0 24px rgba(99,102,241,0.5)',
+        };
       case 'material-you':
-        return { ...base, backgroundColor: '#1c1b1f', color: '#e6e1e5', border: 'none', borderRadius: '24px', boxShadow: '0 4px 12px rgba(0,0,0,0.25)' };
+        return {
+          ...base,
+          backgroundColor: '#1c1b1f',
+          color: '#e6e1e5',
+          border: 'none',
+          borderRadius: '24px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+        };
       case 'dark-first':
-        return { ...base, backgroundColor: 'var(--boost-surface, #0f172a)', color: '#f8fafc', border: '1px solid var(--boost-border, #1e293b)', borderRadius: '10px', boxShadow: '0 0 20px rgba(59,130,246,0.2)' };
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-surface, #0f172a)',
+          color: '#f8fafc',
+          border: '1px solid var(--boost-border, #1e293b)',
+          borderRadius: '10px',
+          boxShadow: '0 0 20px rgba(59,130,246,0.2)',
+        };
       default:
-        return { ...base, backgroundColor: 'var(--boost-surface, #1e293b)', color: 'var(--boost-text, #f8fafc)', border: '1px solid var(--boost-border, rgba(255,255,255,0.12))', borderRadius: '8px', boxShadow: 'var(--boost-shadow-lg, 0 10px 25px -5px rgba(0,0,0,0.4))' };
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-surface, #1e293b)',
+          color: 'var(--boost-text, #f8fafc)',
+          border: '1px solid var(--boost-border, rgba(255,255,255,0.12))',
+          borderRadius: '8px',
+          boxShadow: 'var(--boost-shadow-lg, 0 10px 25px -5px rgba(0,0,0,0.4))',
+        };
     }
   };
 
-  const actionColor = preset === 'neo-brutalism' ? '#1d4ed8' : preset === 'neumorphism' ? '#2563eb' : '#60a5fa';
+  const actionColor =
+    preset === 'neo-brutalism' ? '#1d4ed8' : preset === 'neumorphism' ? '#2563eb' : '#60a5fa';
 
   return (
     <div
@@ -82,7 +144,17 @@ export const Snackbar: React.FC<SnackbarProps> = ({
         <button
           type="button"
           onClick={onAction}
-          style={{ background: 'none', border: 'none', color: actionColor, fontWeight: 700, fontSize: '13px', cursor: 'pointer', padding: 0, transition: 'opacity 0.15s ease', fontFamily: 'inherit' }}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: actionColor,
+            fontWeight: 700,
+            fontSize: '13px',
+            cursor: 'pointer',
+            padding: 0,
+            transition: 'opacity 0.15s ease',
+            fontFamily: 'inherit',
+          }}
           onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = '0.7')}
           onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = '1')}
         >

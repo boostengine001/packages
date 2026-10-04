@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * ResetPasswordProps — Properties for the reset password form.
  */
@@ -130,7 +129,9 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
           border: 'none',
           backgroundColor: 'var(--boost-surface, #e6ecf5)',
           borderRadius: '10px',
-          boxShadow: activeError ? 'inset 2px 2px 4px rgba(239, 68, 68, 0.4)' : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
+          boxShadow: activeError
+            ? 'inset 2px 2px 4px rgba(239, 68, 68, 0.4)'
+            : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
         };
       case 'material-you':
         return {
@@ -281,14 +282,40 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
             ...getIconPresetStyles(),
           }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M21 2l-2 2m-1-1l2 2" />
             <path d="M15 7l2 2" />
             <path d="M19 11l-9 9-4-1 1-4 9-9" />
           </svg>
         </div>
-        <h2 style={{ fontSize: 'clamp(20px, 3vw, 22px)', fontWeight: 700, color: 'var(--boost-text, #0f172a)', margin: '0 0 6px', letterSpacing: '-0.02em' }}>Set new password</h2>
-        <p style={{ fontSize: '13px', color: 'var(--boost-muted, #64748b)', margin: 0, lineHeight: 1.5 }}>
+        <h2
+          style={{
+            fontSize: 'clamp(20px, 3vw, 22px)',
+            fontWeight: 700,
+            color: 'var(--boost-text, #0f172a)',
+            margin: '0 0 6px',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Set new password
+        </h2>
+        <p
+          style={{
+            fontSize: '13px',
+            color: 'var(--boost-muted, #64748b)',
+            margin: 0,
+            lineHeight: 1.5,
+          }}
+        >
           Must be at least 8 characters long.
         </p>
       </div>
@@ -308,7 +335,14 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
             fontSize: '13px',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -317,9 +351,20 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
         </div>
       )}
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+      >
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--boost-text, #334155)',
+              marginBottom: '6px',
+            }}
+          >
             New Password
           </label>
           <input
@@ -346,7 +391,15 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', marginBottom: '6px' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--boost-text, #334155)',
+              marginBottom: '6px',
+            }}
+          >
             Confirm Password
           </label>
           <input
@@ -403,7 +456,14 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
               stroke="currentColor"
               strokeWidth="2"
             >
-              <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="10" opacity="0.3" />
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                strokeDasharray="32"
+                strokeDashoffset="10"
+                opacity="0.3"
+              />
               <path d="M12 2a10 10 0 0 1 10 10" />
             </svg>
           )}
@@ -433,6 +493,5 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
     </div>
   );
 };
-
 
 ResetPassword.displayName = 'ResetPassword';

@@ -1,11 +1,16 @@
 import { createSignal, createEffect } from 'solid-js';
 
-export type PresetName = 'minimal' | 'glassmorphism' | 'neumorphism' | 'neo-brutalism' | 'dark-first' | 'gradient-glow' | 'material-you';
+export type PresetName =
+  | 'minimal'
+  | 'glassmorphism'
+  | 'neumorphism'
+  | 'neo-brutalism'
+  | 'dark-first'
+  | 'gradient-glow'
+  | 'material-you';
 
 export function usePreset(defaultPreset: PresetName = 'minimal') {
-  const stored = typeof localStorage !== 'undefined'
-    ? localStorage.getItem('boost-preset')
-    : null;
+  const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('boost-preset') : null;
   const [preset, setPresetState] = createSignal<PresetName>(
     (stored as PresetName) || defaultPreset
   );

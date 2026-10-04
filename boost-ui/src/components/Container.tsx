@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * ContainerProps — Properties for the centered container layout component.
  */
@@ -17,12 +16,18 @@ export const Container: React.FC<ContainerProps> = ({
 }) => {
   const getMaxWidth = () => {
     switch (maxWidth) {
-      case 'sm': return '640px';
-      case 'md': return '768px';
-      case 'lg': return '1024px';
-      case 'xl': return '1280px';
-      case '2xl': return '1536px';
-      case 'full': return '100%';
+      case 'sm':
+        return '640px';
+      case 'md':
+        return '768px';
+      case 'lg':
+        return '1024px';
+      case 'xl':
+        return '1280px';
+      case '2xl':
+        return '1536px';
+      case 'full':
+        return '100%';
     }
   };
 
@@ -45,6 +50,5 @@ export const Container: React.FC<ContainerProps> = ({
     </div>
   );
 };
-
 
 Container.displayName = 'Container';

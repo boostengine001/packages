@@ -5,7 +5,6 @@ export interface DateRange {
   endDate: string;
 }
 
-
 /**
  * DateRangePickerProps — Properties for the date range picker.
  */
@@ -104,7 +103,9 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
           }}
         />
 
-        <span style={{ color: 'var(--boost-muted, #94a3b8)', fontSize: '12px', fontWeight: 500 }}>to</span>
+        <span style={{ color: 'var(--boost-muted, #94a3b8)', fontSize: '12px', fontWeight: 500 }}>
+          to
+        </span>
 
         <input
           type="date"
@@ -124,6 +125,5 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     </div>
   );
 };
-
 
 DateRangePicker.displayName = 'DateRangePicker';

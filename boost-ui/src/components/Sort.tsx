@@ -7,7 +7,6 @@ export interface SortOption {
 
 export type SortDirection = 'asc' | 'desc';
 
-
 /**
  * SortProps — Properties for the sort dropdown/controls component.
  */
@@ -47,7 +46,16 @@ export const Sort: React.FC<SortProps> = ({
   const currentOption = (options || []).find((o) => o.value === currentValue);
 
   return (
-    <div className={`boost-sort-wrapper ${className || ''}`} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', fontFamily: 'inherit', ...style }}>
+    <div
+      className={`boost-sort-wrapper ${className || ''}`}
+      style={{
+        position: 'relative',
+        display: 'inline-flex',
+        alignItems: 'center',
+        fontFamily: 'inherit',
+        ...style,
+      }}
+    >
       <style>
         {`
           :root[data-theme="dark"] .boost-sort-box,
@@ -114,7 +122,16 @@ export const Sort: React.FC<SortProps> = ({
             cursor: 'pointer',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <line x1="18" y1="20" x2="18" y2="10" />
             <polyline points="15 13 18 10 21 13" />
             <line x1="6" y1="4" x2="6" y2="14" />
@@ -122,7 +139,14 @@ export const Sort: React.FC<SortProps> = ({
           </svg>
           <span style={{ color: 'var(--boost-muted, #64748b)' }}>{label}:</span>
           <span style={{ fontWeight: 600 }}>{currentOption?.label || currentValue}</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </button>
@@ -146,12 +170,30 @@ export const Sort: React.FC<SortProps> = ({
           }}
         >
           {currentDirection === 'asc' ? (
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <line x1="12" y1="19" x2="12" y2="5" />
               <polyline points="5 12 12 5 19 12" />
             </svg>
           ) : (
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <line x1="12" y1="5" x2="12" y2="19" />
               <polyline points="19 12 12 19 5 12" />
             </svg>
@@ -189,7 +231,9 @@ export const Sort: React.FC<SortProps> = ({
                   justifyContent: 'space-between',
                   padding: '8px 12px',
                   fontSize: '13px',
-                  color: isSelected ? 'var(--boost-primary, #2563eb)' : 'var(--boost-text, #334155)',
+                  color: isSelected
+                    ? 'var(--boost-primary, #2563eb)'
+                    : 'var(--boost-text, #334155)',
                   fontWeight: isSelected ? 600 : 400,
                   backgroundColor: isSelected ? 'rgba(37, 99, 235, 0.08)' : 'transparent',
                   border: 'none',
@@ -201,7 +245,14 @@ export const Sort: React.FC<SortProps> = ({
               >
                 <span>{opt.label}</span>
                 {isSelected && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 )}
@@ -213,6 +264,5 @@ export const Sort: React.FC<SortProps> = ({
     </div>
   );
 };
-
 
 Sort.displayName = 'Sort';

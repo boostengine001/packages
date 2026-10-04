@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * FileUploadProps — Properties for the file upload component.
  */
@@ -66,7 +65,14 @@ export const FileUpload: React.FC<FileUploadProps> = ({
       }}
     >
       {label && (
-        <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', letterSpacing: '-0.01em' }}>
+        <label
+          style={{
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--boost-text, #334155)',
+            letterSpacing: '-0.01em',
+          }}
+        >
           {label}
         </label>
       )}
@@ -87,8 +93,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           backgroundColor: isDragOver
             ? 'rgba(37, 99, 235, 0.08)'
             : disabled
-            ? 'rgba(0, 0, 0, 0.03)'
-            : 'var(--boost-surface, #ffffff)',
+              ? 'rgba(0, 0, 0, 0.03)'
+              : 'var(--boost-surface, #ffffff)',
           cursor: disabled ? 'not-allowed' : 'pointer',
           transition: 'all 0.15s ease',
         }}
@@ -116,7 +122,14 @@ export const FileUpload: React.FC<FileUploadProps> = ({
               color: 'var(--boost-text-muted, #64748b)',
             }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
               <line x1="12" y1="3" x2="12" y2="15" />
@@ -148,7 +161,15 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                 color: 'var(--boost-text, #334155)',
               }}
             >
-              <span style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '75%' }}>
+              <span
+                style={{
+                  fontWeight: 500,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  maxWidth: '75%',
+                }}
+              >
                 {f.name}
               </span>
               <span style={{ color: 'var(--boost-text-muted, #64748b)', fontSize: '12px' }}>
@@ -173,4 +194,3 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 };
 
 FileUpload.displayName = 'FileUpload';
-

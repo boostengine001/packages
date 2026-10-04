@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 /**
  * PriceProps — Properties for the price display with currency formatting and discount.
  */
@@ -107,8 +106,27 @@ export const Price: React.FC<PriceProps> = ({
       )}
 
       {hasDiscount && showSavings && (
-        <span style={{ width: '100%', fontSize: '12px', color: 'var(--boost-success, #16a34a)', fontWeight: 600, marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'currentColor' }} />
+        <span
+          style={{
+            width: '100%',
+            fontSize: '12px',
+            color: 'var(--boost-success, #16a34a)',
+            fontWeight: 600,
+            marginTop: '4px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+          }}
+        >
+          <span
+            style={{
+              display: 'inline-block',
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              backgroundColor: 'currentColor',
+            }}
+          />
           You save {currencySymbol}
           {formatNumber(savingsAmount)}
         </span>
@@ -116,6 +134,5 @@ export const Price: React.FC<PriceProps> = ({
     </div>
   );
 };
-
 
 Price.displayName = 'Price';

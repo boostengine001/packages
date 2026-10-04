@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * FloatingActionButtonProps — Properties for the floating action button (FAB).
  */
@@ -21,16 +20,29 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 }) => {
   const getPositionStyles = (): React.CSSProperties => {
     switch (position) {
-      case 'bottom-left': return { bottom: '24px', left: '24px' };
-      case 'top-right': return { top: '24px', right: '24px' };
-      case 'top-left': return { top: '24px', left: '24px' };
+      case 'bottom-left':
+        return { bottom: '24px', left: '24px' };
+      case 'top-right':
+        return { top: '24px', right: '24px' };
+      case 'top-left':
+        return { top: '24px', left: '24px' };
       case 'bottom-right':
-      default: return { bottom: '24px', right: '24px' };
+      default:
+        return { bottom: '24px', right: '24px' };
     }
   };
 
   const defaultIcon = (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   );

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * TooltipProps — Properties for the tooltip popover component.
  */
@@ -21,7 +20,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
 }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const tooltipId = React.useId ? React.useId().replace(/:/g, '') : `tooltip-${Math.random().toString(36).substring(2, 7)}`;
+  const tooltipId = React.useId().replace(/:/g, '');
 
   // Close on Escape key
   React.useEffect(() => {

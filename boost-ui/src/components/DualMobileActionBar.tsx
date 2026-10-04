@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * DualMobileActionBarProps — Properties for dual-action mobile bottom bar.
  */
@@ -260,11 +259,20 @@ export const DualMobileActionBar: React.FC<DualMobileActionBarProps> = ({
         {price !== undefined && (
           <div style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
             <span className="boost-dual-price-val">
-              {currencySymbol}{Number(price).toLocaleString()}
+              {currencySymbol}
+              {Number(price).toLocaleString()}
             </span>
             {effectiveOriginalPrice && effectiveOriginalPrice > price && (
-              <span style={{ color: 'var(--boost-text-muted, #94a3b8)', fontSize: '11px', textDecoration: 'line-through', fontWeight: 500 }}>
-                {currencySymbol}{Number(effectiveOriginalPrice).toLocaleString()}
+              <span
+                style={{
+                  color: 'var(--boost-text-muted, #94a3b8)',
+                  fontSize: '11px',
+                  textDecoration: 'line-through',
+                  fontWeight: 500,
+                }}
+              >
+                {currencySymbol}
+                {Number(effectiveOriginalPrice).toLocaleString()}
               </span>
             )}
           </div>
@@ -295,12 +303,17 @@ export const DualMobileActionBar: React.FC<DualMobileActionBarProps> = ({
         )}
 
         {/* Button 1: Add to Cart (Secondary Modern Button) */}
-        <button
-          type="button"
-          onClick={onAddToCart}
-          className="boost-dual-btn-cart"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <button type="button" onClick={onAddToCart} className="boost-dual-btn-cart">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -309,11 +322,7 @@ export const DualMobileActionBar: React.FC<DualMobileActionBarProps> = ({
         </button>
 
         {/* Button 2: Buy Now (Primary Accent Button) */}
-        <button
-          type="button"
-          onClick={onBuyNow}
-          className="boost-dual-btn-buy"
-        >
+        <button type="button" onClick={onBuyNow} className="boost-dual-btn-buy">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
           </svg>

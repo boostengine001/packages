@@ -6,7 +6,6 @@ export interface FilterOption {
   count?: number;
 }
 
-
 /**
  * FilterProps — Properties for the filter controls component.
  */
@@ -53,7 +52,10 @@ export const Filter: React.FC<FilterProps> = ({
   };
 
   return (
-    <div className={`boost-filter-wrapper ${className || ''}`} style={{ position: 'relative', display: 'inline-block', fontFamily: 'inherit', ...style }}>
+    <div
+      className={`boost-filter-wrapper ${className || ''}`}
+      style={{ position: 'relative', display: 'inline-block', fontFamily: 'inherit', ...style }}
+    >
       <style>
         {`
           :root[data-theme="dark"] .boost-filter-btn,
@@ -102,15 +104,28 @@ export const Filter: React.FC<FilterProps> = ({
           padding: '8px 14px',
           fontSize: '13px',
           fontWeight: 500,
-          color: selectedValues.length > 0 ? 'var(--boost-primary, #2563eb)' : 'var(--boost-text, #334155)',
-          backgroundColor: selectedValues.length > 0 ? 'rgba(37, 99, 235, 0.08)' : 'var(--boost-surface, #ffffff)',
+          color:
+            selectedValues.length > 0
+              ? 'var(--boost-primary, #2563eb)'
+              : 'var(--boost-text, #334155)',
+          backgroundColor:
+            selectedValues.length > 0 ? 'rgba(37, 99, 235, 0.08)' : 'var(--boost-surface, #ffffff)',
           border: `1px solid ${selectedValues.length > 0 ? 'var(--boost-primary, #93c5fd)' : 'var(--boost-border, #cbd5e1)'}`,
           borderRadius: 'var(--boost-radius, 8px)',
           cursor: 'pointer',
           transition: 'all 0.15s ease',
         }}
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
         </svg>
         <span>{label}</span>
@@ -139,7 +154,10 @@ export const Filter: React.FC<FilterProps> = ({
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.15s ease' }}
+          style={{
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0)',
+            transition: 'transform 0.15s ease',
+          }}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -161,8 +179,21 @@ export const Filter: React.FC<FilterProps> = ({
             padding: '8px',
           }}
         >
-          <div className="filter-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 8px 8px', borderBottom: '1px solid var(--boost-border, #f1f5f9)' }}>
-            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--boost-muted, #64748b)' }}>Filter Options</span>
+          <div
+            className="filter-header"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '6px 8px 8px',
+              borderBottom: '1px solid var(--boost-border, #f1f5f9)',
+            }}
+          >
+            <span
+              style={{ fontSize: '12px', fontWeight: 600, color: 'var(--boost-muted, #64748b)' }}
+            >
+              Filter Options
+            </span>
             {clearable && selectedValues.length > 0 && (
               <button
                 onClick={handleClear}
@@ -209,7 +240,15 @@ export const Filter: React.FC<FilterProps> = ({
                   />
                   <span style={{ flex: 1 }}>{opt.label}</span>
                   {typeof opt.count === 'number' && (
-                    <span style={{ fontSize: '11px', color: 'var(--boost-muted, #94a3b8)', fontWeight: 500 }}>{opt.count}</span>
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        color: 'var(--boost-muted, #94a3b8)',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {opt.count}
+                    </span>
                   )}
                 </div>
               );
@@ -220,6 +259,5 @@ export const Filter: React.FC<FilterProps> = ({
     </div>
   );
 };
-
 
 Filter.displayName = 'Filter';

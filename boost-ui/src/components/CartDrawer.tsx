@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * CartDrawerItem — A single item in the cart drawer.
  */
@@ -14,7 +13,6 @@ export interface CartDrawerItem {
   quantity: number;
   image?: string;
 }
-
 
 /**
  * CartDrawerProps — Properties for the slide-out cart drawer component.
@@ -556,17 +554,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         onClick={(e: any) => e.stopPropagation()}
       >
         {/* Header */}
-        <div
-          className="boost-cart-header"
-          style={getHeaderStyles()}
-        >
+        <div className="boost-cart-header" style={getHeaderStyles()}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <h2 style={{ margin: 0, fontSize: '17px', fontWeight: 700, color: 'var(--boost-text, #0f172a)' }}>
+            <h2
+              style={{
+                margin: 0,
+                fontSize: '17px',
+                fontWeight: 700,
+                color: 'var(--boost-text, #0f172a)',
+              }}
+            >
               Your Cart
             </h2>
-            <span style={getCountBadgeStyles()}>
-              {items.reduce((s, i) => s + i.quantity, 0)}
-            </span>
+            <span style={getCountBadgeStyles()}>{items.reduce((s, i) => s + i.quantity, 0)}</span>
           </div>
           <button
             onClick={onClose}
@@ -597,8 +597,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           className="boost-shipping-banner"
           style={{
             padding: '12px 20px',
-            backgroundColor: preset === 'neumorphism' ? '#e0e5ec' : preset === 'material-you' ? 'var(--boost-surface, #f7f2fa)' : 'var(--boost-surface, #f8fafc)',
-            borderBottom: preset === 'neo-brutalism' ? '2px solid #000000' : '1px solid var(--boost-border, #e2e8f0)',
+            backgroundColor:
+              preset === 'neumorphism'
+                ? '#e0e5ec'
+                : preset === 'material-you'
+                  ? 'var(--boost-surface, #f7f2fa)'
+                  : 'var(--boost-surface, #f8fafc)',
+            borderBottom:
+              preset === 'neo-brutalism'
+                ? '2px solid #000000'
+                : '1px solid var(--boost-border, #e2e8f0)',
           }}
         >
           <div
@@ -613,16 +621,26 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             }}
           >
             {isFreeShippingUnlocked ? (
-              <span>🎉 You unlocked <strong>FREE Delivery</strong>!</span>
+              <span>
+                🎉 You unlocked <strong>FREE Delivery</strong>!
+              </span>
             ) : (
-              <span>Add <strong>{currencySymbol}{amountRemaining.toFixed(0)}</strong> more for FREE Delivery!</span>
+              <span>
+                Add{' '}
+                <strong>
+                  {currencySymbol}
+                  {amountRemaining.toFixed(0)}
+                </strong>{' '}
+                more for FREE Delivery!
+              </span>
             )}
           </div>
           <div
             style={{
               width: '100%',
               height: '6px',
-              backgroundColor: preset === 'neo-brutalism' ? '#e2e8f0' : 'var(--boost-border, #e2e8f0)',
+              backgroundColor:
+                preset === 'neo-brutalism' ? '#e2e8f0' : 'var(--boost-border, #e2e8f0)',
               borderRadius: preset === 'neo-brutalism' ? '0px' : '999px',
               border: preset === 'neo-brutalism' ? '1px solid #000' : 'none',
               overflow: 'hidden',
@@ -633,8 +651,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 width: `${progressPercent}%`,
                 height: '100%',
                 background: isFreeShippingUnlocked
-                  ? (preset === 'neo-brutalism' ? '#22c55e' : 'linear-gradient(90deg, #16a34a, #22c55e)')
-                  : (preset === 'neo-brutalism' ? '#fbbf24' : 'linear-gradient(90deg, #2563eb, #3b82f6)'),
+                  ? preset === 'neo-brutalism'
+                    ? '#22c55e'
+                    : 'linear-gradient(90deg, #16a34a, #22c55e)'
+                  : preset === 'neo-brutalism'
+                    ? '#fbbf24'
+                    : 'linear-gradient(90deg, #2563eb, #3b82f6)',
                 borderRadius: preset === 'neo-brutalism' ? '0px' : '999px',
                 transition: 'width 0.4s ease',
               }}
@@ -645,25 +667,58 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         {/* Items List */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '16px 20px' }}>
           {items.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '48px 0', color: 'var(--boost-text-muted, #64748b)' }}>
-              <div style={{ display: 'inline-flex', marginBottom: '14px', color: 'var(--boost-text-muted, #94a3b8)' }}>
-                <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '48px 0',
+                color: 'var(--boost-text-muted, #64748b)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'inline-flex',
+                  marginBottom: '14px',
+                  color: 'var(--boost-text-muted, #94a3b8)',
+                }}
+              >
+                <svg
+                  width="52"
+                  height="52"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                >
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
               </div>
-              <p style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 6px 0', color: 'var(--boost-text, #0f172a)' }}>
+              <p
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  margin: '0 0 6px 0',
+                  color: 'var(--boost-text, #0f172a)',
+                }}
+              >
                 Your cart is empty
               </p>
-              <p style={{ fontSize: '13px', margin: '0 0 20px 0' }}>Looks like you haven't added anything yet.</p>
+              <p style={{ fontSize: '13px', margin: '0 0 20px 0' }}>
+                Looks like you haven't added anything yet.
+              </p>
               <button
                 onClick={onClose}
                 style={{
-                  backgroundColor: preset === 'neo-brutalism' ? '#fbbf24' : 'var(--boost-primary, #2563eb)',
+                  backgroundColor:
+                    preset === 'neo-brutalism' ? '#fbbf24' : 'var(--boost-primary, #2563eb)',
                   color: preset === 'neo-brutalism' ? '#000000' : '#fff',
                   border: preset === 'neo-brutalism' ? '2px solid #000' : 'none',
-                  boxShadow: preset === 'neo-brutalism' ? '3px 3px 0px #000' : 'var(--boost-shadow-glow, 0 4px 12px rgba(37, 99, 235, 0.25))',
+                  boxShadow:
+                    preset === 'neo-brutalism'
+                      ? '3px 3px 0px #000'
+                      : 'var(--boost-shadow-glow, 0 4px 12px rgba(37, 99, 235, 0.25))',
                   padding: '10px 22px',
                   borderRadius: preset === 'neo-brutalism' ? '2px' : '10px',
                   cursor: 'pointer',
@@ -683,7 +738,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     display: 'flex',
                     gap: '12px',
                     alignItems: 'center',
-                    borderBottom: preset === 'neo-brutalism' ? '2px solid #000000' : '1px solid var(--boost-border, #e2e8f0)',
+                    borderBottom:
+                      preset === 'neo-brutalism'
+                        ? '2px solid #000000'
+                        : '1px solid var(--boost-border, #e2e8f0)',
                     paddingBottom: '14px',
                   }}
                 >
@@ -699,7 +757,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         }}
                       />
                     ) : (
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--boost-text-muted, #94a3b8)' }}>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ color: 'var(--boost-text-muted, #94a3b8)' }}
+                      >
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                         <circle cx="8.5" cy="8.5" r="1.5" />
                         <polyline points="21 15 16 10 5 21" />
@@ -720,20 +788,31 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       {item.title}
                     </div>
                     {item.variantTitle && (
-                      <div style={{ fontSize: '12px', color: 'var(--boost-text-muted, #64748b)', marginTop: '4px' }}>
+                      <div
+                        style={{
+                          fontSize: '12px',
+                          color: 'var(--boost-text-muted, #64748b)',
+                          marginTop: '4px',
+                        }}
+                      >
                         {item.variantTitle}
                       </div>
                     )}
-                    <div style={{ fontSize: '14px', fontWeight: 800, color: 'var(--boost-text, #0f172a)', marginTop: '6px' }}>
-                      {currencySymbol}{item.price}
+                    <div
+                      style={{
+                        fontSize: '14px',
+                        fontWeight: 800,
+                        color: 'var(--boost-text, #0f172a)',
+                        marginTop: '6px',
+                      }}
+                    >
+                      {currencySymbol}
+                      {item.price}
                     </div>
                   </div>
 
                   {/* Quantity controls */}
-                  <div
-                    className="boost-cart-qty"
-                    style={getQtyStepperStyles()}
-                  >
+                  <div className="boost-cart-qty" style={getQtyStepperStyles()}>
                     <button
                       type="button"
                       onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
@@ -796,7 +875,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       transition: 'color 0.15s ease',
                     }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <polyline points="3 6 5 6 21 6" />
                       <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                     </svg>
@@ -809,14 +897,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Footer Checkout */}
         {items.length > 0 && (
-          <div
-            className="boost-cart-footer"
-            style={getFooterStyles()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '14px' }}>
-              <span style={{ fontSize: '14px', color: 'var(--boost-text-muted, #64748b)' }}>Subtotal:</span>
-              <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--boost-text, #0f172a)' }}>
-                {currencySymbol}{subtotal.toFixed(2)}
+          <div className="boost-cart-footer" style={getFooterStyles()}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'baseline',
+                marginBottom: '14px',
+              }}
+            >
+              <span style={{ fontSize: '14px', color: 'var(--boost-text-muted, #64748b)' }}>
+                Subtotal:
+              </span>
+              <span
+                style={{ fontSize: '20px', fontWeight: 800, color: 'var(--boost-text, #0f172a)' }}
+              >
+                {currencySymbol}
+                {subtotal.toFixed(2)}
               </span>
             </div>
 

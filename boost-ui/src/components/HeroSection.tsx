@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * HeroAction — A CTA button definition within the hero section.
  */
@@ -12,7 +11,6 @@ export interface HeroAction {
   href?: string;
   variant?: 'primary' | 'secondary' | 'outline';
 }
-
 
 /**
  * HeroSectionProps — Properties for the hero/banner section.
@@ -62,8 +60,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     preset === 'gradient-glow'
       ? 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 70%)'
       : preset === 'neo-brutalism'
-      ? 'rgba(0, 0, 0, 0.05)'
-      : 'rgba(37, 99, 235, 0.15)';
+        ? 'rgba(0, 0, 0, 0.05)'
+        : 'rgba(37, 99, 235, 0.15)';
 
   const activeGlow = glowColor || defaultGlowColor;
 
@@ -464,20 +462,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           maxWidth: '1200px',
           margin: '0 auto',
           display: 'flex',
-          flexDirection: isCenter ? 'column' : (isRight ? 'row-reverse' : 'row'),
+          flexDirection: isCenter ? 'column' : isRight ? 'row-reverse' : 'row',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: isCenter ? 'center' : 'space-between',
           gap: 'clamp(32px, 5vw, 56px)',
-          textAlign: isCenter ? 'center' : (isRight ? 'right' : 'left'),
+          textAlign: isCenter ? 'center' : isRight ? 'right' : 'left',
         }}
       >
-        <div className="boost-hero-content" style={{ maxWidth: isCenter ? '820px' : '620px', width: '100%', flex: isCenter ? 'none' : '1 1 300px' }}>
-          {badge && (
-            <div style={getBadgeStyles()}>
-              {badge}
-            </div>
-          )}
+        <div
+          className="boost-hero-content"
+          style={{
+            maxWidth: isCenter ? '820px' : '620px',
+            width: '100%',
+            flex: isCenter ? 'none' : '1 1 300px',
+          }}
+        >
+          {badge && <div style={getBadgeStyles()}>{badge}</div>}
 
           <h1
             className="boost-hero-title"
@@ -502,8 +503,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 color: hasBg ? 'rgba(255, 255, 255, 0.85)' : 'var(--boost-text-muted, #64748b)',
                 margin: '0 0 32px 0',
                 maxWidth: isCenter ? '700px' : '100%',
-                marginLeft: isCenter ? 'auto' : (isRight ? 'auto' : 0),
-                marginRight: isCenter ? 'auto' : (isRight ? 0 : 'auto'),
+                marginLeft: isCenter ? 'auto' : isRight ? 'auto' : 0,
+                marginRight: isCenter ? 'auto' : isRight ? 0 : 'auto',
               }}
             >
               {description}
@@ -517,7 +518,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: '12px',
-                justifyContent: isCenter ? 'center' : (isRight ? 'flex-end' : 'flex-start'),
+                justifyContent: isCenter ? 'center' : isRight ? 'flex-end' : 'flex-start',
                 alignItems: 'center',
               }}
             >
@@ -544,11 +545,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           )}
         </div>
 
-        {media && (
-          <div style={getMediaContainerStyles()}>
-            {media}
-          </div>
-        )}
+        {media && <div style={getMediaContainerStyles()}>{media}</div>}
       </div>
     </section>
   );

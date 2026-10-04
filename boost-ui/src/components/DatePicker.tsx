@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * DatePickerProps — Properties for the date picker input component.
  */
@@ -35,8 +34,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   className = '',
   style,
 }) => {
-  const generatedId = React.useId ? React.useId().replace(/:/g, '') : `date-picker-${Math.random().toString(36).substring(2, 7)}`;
-  const inputId = explicitId || (label ? `datepicker-${label.toLowerCase().replace(/\s+/g, '-')}` : generatedId);
+  const generatedId = React.useId().replace(/:/g, '');
+  const inputId =
+    explicitId || (label ? `datepicker-${label.toLowerCase().replace(/\s+/g, '-')}` : generatedId);
   const helpId = `${inputId}-desc`;
 
   const effectiveMin = min || minDate;
@@ -59,7 +59,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       {label && (
         <label
           htmlFor={inputId}
-          style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', letterSpacing: '-0.01em' }}
+          style={{
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--boost-text, #334155)',
+            letterSpacing: '-0.01em',
+          }}
         >
           {label}
         </label>
@@ -94,7 +99,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       </div>
 
       {error ? (
-        <span id={helpId} role="alert" style={{ fontSize: '12px', color: 'var(--boost-danger, #ef4444)', fontWeight: 500 }}>
+        <span
+          id={helpId}
+          role="alert"
+          style={{ fontSize: '12px', color: 'var(--boost-danger, #ef4444)', fontWeight: 500 }}
+        >
           {error}
         </span>
       ) : helperText ? (

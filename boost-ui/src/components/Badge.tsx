@@ -2,7 +2,8 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-export type BadgeVariant = 'default' | 'primary' | 'secondary' | 'outline' | 'success' | 'destructive' | 'warning' | 'info';
+export type BadgeVariant =
+  'default' | 'primary' | 'secondary' | 'outline' | 'success' | 'destructive' | 'warning' | 'info';
 
 /**
  * BadgeProps — Properties for the Badge component.
@@ -44,19 +45,23 @@ export const Badge: React.FC<BadgeProps> = ({
         return {
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
-          ...(isNeutral ? {
-            backgroundColor: 'var(--boost-glass-bg, rgba(255, 255, 255, 0.85))',
-            border: '1px solid var(--boost-glass-border, rgba(226, 232, 240, 0.8))',
-          } : {}),
+          ...(isNeutral
+            ? {
+                backgroundColor: 'var(--boost-glass-bg, rgba(255, 255, 255, 0.85))',
+                border: '1px solid var(--boost-glass-border, rgba(226, 232, 240, 0.8))',
+              }
+            : {}),
         };
       case 'neumorphism':
         return {
           borderRadius: '12px',
           border: 'none',
           boxShadow: 'var(--card-shadow, 4px 4px 8px #c5cad3, -4px -4px 8px #ffffff)',
-          ...(isNeutral ? {
-            backgroundColor: 'var(--boost-surface, #e8ebf0)',
-          } : {}),
+          ...(isNeutral
+            ? {
+                backgroundColor: 'var(--boost-surface, #e8ebf0)',
+              }
+            : {}),
         };
       case 'gradient-glow':
         return {
@@ -69,10 +74,12 @@ export const Badge: React.FC<BadgeProps> = ({
         };
       case 'dark-first':
         return {
-          ...(isNeutral ? {
-            backgroundColor: 'var(--boost-surface, #0b0f17)',
-            border: '1px solid var(--boost-border, #232a37)',
-          } : {}),
+          ...(isNeutral
+            ? {
+                backgroundColor: 'var(--boost-surface, #0b0f17)',
+                border: '1px solid var(--boost-border, #232a37)',
+              }
+            : {}),
         };
       case 'minimal':
       default:
@@ -83,21 +90,49 @@ export const Badge: React.FC<BadgeProps> = ({
   const getTheme = () => {
     switch (variant) {
       case 'secondary':
-        return { bg: 'var(--boost-surface-secondary, #f1f5f9)', color: 'var(--boost-text, #334155)', border: '1px solid var(--boost-border, #e2e8f0)' };
+        return {
+          bg: 'var(--boost-surface-secondary, #f1f5f9)',
+          color: 'var(--boost-text, #334155)',
+          border: '1px solid var(--boost-border, #e2e8f0)',
+        };
       case 'outline':
-        return { bg: 'transparent', color: 'var(--boost-text, #0f172a)', border: '1px solid var(--boost-border, #cbd5e1)' };
+        return {
+          bg: 'transparent',
+          color: 'var(--boost-text, #0f172a)',
+          border: '1px solid var(--boost-border, #cbd5e1)',
+        };
       case 'success':
-        return { bg: 'rgba(34, 197, 94, 0.12)', color: '#16a34a', border: '1px solid rgba(34, 197, 94, 0.25)' };
+        return {
+          bg: 'rgba(34, 197, 94, 0.12)',
+          color: '#16a34a',
+          border: '1px solid rgba(34, 197, 94, 0.25)',
+        };
       case 'destructive':
-        return { bg: 'rgba(239, 68, 68, 0.12)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.25)' };
+        return {
+          bg: 'rgba(239, 68, 68, 0.12)',
+          color: '#ef4444',
+          border: '1px solid rgba(239, 68, 68, 0.25)',
+        };
       case 'warning':
-        return { bg: 'rgba(245, 158, 11, 0.12)', color: '#d97706', border: '1px solid rgba(245, 158, 11, 0.25)' };
+        return {
+          bg: 'rgba(245, 158, 11, 0.12)',
+          color: '#d97706',
+          border: '1px solid rgba(245, 158, 11, 0.25)',
+        };
       case 'info':
-        return { bg: 'rgba(14, 165, 233, 0.12)', color: '#0284c7', border: '1px solid rgba(14, 165, 233, 0.25)' };
+        return {
+          bg: 'rgba(14, 165, 233, 0.12)',
+          color: '#0284c7',
+          border: '1px solid rgba(14, 165, 233, 0.25)',
+        };
       case 'primary':
       case 'default':
       default:
-        return { bg: 'var(--boost-primary, #2563eb)', color: '#ffffff', border: '1px solid transparent' };
+        return {
+          bg: 'var(--boost-primary, #2563eb)',
+          color: '#ffffff',
+          border: '1px solid transparent',
+        };
     }
   };
 

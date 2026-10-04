@@ -4,6 +4,24 @@ All notable changes to `@boostengine/ui` are documented in this file.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **Real unit test suite (84 tests)** with Vitest + React Testing Library + jsdom (`npm run test:unit`), covering Modal (focus trap, Escape, scroll lock, ARIA), Tabs (keyboard nav, controlled/uncontrolled, compound API), Accordion, Toast, `useForm`, utility hooks, and all utility functions. Coverage reporting via `npm run test:coverage`.
+- **GitHub Actions CI** (`.github/workflows/ci.yml`): lint → typecheck → unit tests → build → smoke tests on every push/PR touching `boost-ui`.
+- **Manual release workflow** (`.github/workflows/release-boost-ui.yml`): verifies and publishes to npm with provenance via `workflow_dispatch`.
+- **ESLint 9 (flat config) + Prettier** with `typescript-eslint`, `react-hooks` (rules-of-hooks as error), and `jsx-a11y` plugins. `npm run lint` / `npm run format`. A11y and `no-explicit-any` findings are tracked as a warning baseline (0 errors) to be promoted per-rule as components get fixed.
+
+### Fixed
+- **Modal focus trap never attached**: the trap effect ran before the Portal mounted and never re-ran, so focus was never moved into the dialog and Tab was never trapped — in production, not just tests. `useFocusTrap` now accepts a state-held element (refs still supported) and Modal passes one, so the trap re-attaches when the Portal DOM exists.
+- **`rules-of-hooks` violations in 7 components**: conditional `React.useId()` calls (`AreaChart`, `DatePicker`, `Grid`, `Sparkline`, `StarRating`, `Tooltip`) and `useState`/`useEffect` after an early return (`ProductGallery`) could crash or misbehave when render branches changed. Hooks are now called unconditionally at the top of the component.
+- **`formatRelativeTime`** produced "in 2 days from now" for future dates; now returns "in 2 days" (matches the documented example).
+- **`isValidIndianMobile`** rejected `+91`-prefixed numbers; now normalizes `+91`/`91`/`0` prefixes before validating.
+
+### Changed
+- `prepublishOnly` now runs the full gate: lint → typecheck → unit tests → build → smoke tests.
+- Codebase formatted with Prettier (single config, normalized line endings); removed dead code (unused style helpers/constants) and junk files (`err.txt`, `out.txt`, `build_log.txt`).
+
 ## [2.0.0] — 2026-09-21
 
 ### Major Changes

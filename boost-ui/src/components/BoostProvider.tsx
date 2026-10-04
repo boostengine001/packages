@@ -305,7 +305,7 @@ export const BoostProvider: React.FC<BoostProviderProps> = ({
     }
   }, [storageKey]);
 
-const mode = controlledMode !== undefined ? controlledMode : internalMode;
+  const mode = controlledMode !== undefined ? controlledMode : internalMode;
   // ponytail: start false and let the effect below set the real value — reading
   // matchMedia during render makes dark-mode users' first client render differ
   // from SSR. The mount effect already assigns it, so the initializer is redundant.
@@ -352,14 +352,13 @@ const mode = controlledMode !== undefined ? controlledMode : internalMode;
     }
   };
 
-const toggleMode = () => {
+  const toggleMode = () => {
     const nextMode = resolvedMode === 'dark' ? 'light' : 'dark';
     setMode(nextMode);
   };
 
-  const [internalStylePreset, setInternalStylePreset] = React.useState<UIStylePreset>(
-    defaultStylePreset
-  );
+  const [internalStylePreset, setInternalStylePreset] =
+    React.useState<UIStylePreset>(defaultStylePreset);
 
   React.useEffect(() => {
     if (typeof window === 'undefined' || !storageKey) return;
@@ -446,7 +445,7 @@ const toggleMode = () => {
 
   return (
     <BoostThemeContext.Provider
-value={{
+      value={{
         mode,
         resolvedMode,
         setMode,
@@ -497,14 +496,14 @@ export const useTheme = (): BoostThemeContextType => {
       tokens: defaultLightTokens,
       currency: '$',
       locale: 'en-US',
-/**
- * useBoostPreset — Returns the current style preset and a setter function.
- * Convenience wrapper around useTheme().
- *
- * @example
- * const { stylePreset, setStylePreset } = useBoostPreset();
- * setStylePreset('glassmorphism');
- */
+      /**
+       * useBoostPreset — Returns the current style preset and a setter function.
+       * Convenience wrapper around useTheme().
+       *
+       * @example
+       * const { stylePreset, setStylePreset } = useBoostPreset();
+       * setStylePreset('glassmorphism');
+       */
       stylePreset: 'minimal',
       setStylePreset: () => {},
     };
@@ -553,7 +552,9 @@ export const useDesignTokens = () => {
   // Shadow tokens
   const shadowSm = isDark ? '0 1px 3px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.05)';
   const shadowMd = isDark ? '0 4px 16px -2px rgba(0,0,0,0.4)' : '0 4px 16px -2px rgba(0,0,0,0.08)';
-  const shadowLg = isDark ? '0 12px 32px -4px rgba(0,0,0,0.55)' : '0 12px 32px -4px rgba(0,0,0,0.12)';
+  const shadowLg = isDark
+    ? '0 12px 32px -4px rgba(0,0,0,0.55)'
+    : '0 12px 32px -4px rgba(0,0,0,0.12)';
 
   return {
     /** Current theme mode ('light' | 'dark') */
@@ -614,4 +615,3 @@ export const useCurrency = () => {
   };
 };
 BoostProvider.displayName = 'BoostProvider';
-

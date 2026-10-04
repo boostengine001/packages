@@ -85,9 +85,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {items.map((item, idx) => {
-            const badgeStyle = item.statusBadge
-              ? getBadgeColors(item.statusBadge.variant)
-              : null;
+            const badgeStyle = item.statusBadge ? getBadgeColors(item.statusBadge.variant) : null;
 
             return (
               <div
@@ -145,9 +143,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                     }}
                   >
                     <span style={{ fontWeight: 600 }}>{item.user.name}</span>{' '}
-                    <span style={{ color: 'var(--boost-text-muted, #64748b)' }}>
-                      {item.action}
-                    </span>{' '}
+                    <span style={{ color: 'var(--boost-text-muted, #64748b)' }}>{item.action}</span>{' '}
                     {item.target && (
                       <span style={{ fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}>
                         {item.target}
@@ -195,6 +191,5 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
     </div>
   );
 };
-
 
 ActivityFeed.displayName = 'ActivityFeed';

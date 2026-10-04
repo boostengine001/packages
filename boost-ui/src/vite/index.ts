@@ -30,12 +30,15 @@ export function boostVitePlugin(options: BoostViteOptions = {}): BoostVitePlugin
     name: '@boostengine/ui',
     enforce: 'pre',
     transformIndexHtml() {
-      const darkCss = options.includeDarkMode !== false ? `
+      const darkCss =
+        options.includeDarkMode !== false
+          ? `
       [data-theme="dark"], .dark {
         --boost-primary: #3b82f6; --boost-bg: #090d16; --boost-surface: #0f172a;
         --boost-text: #f8fafc; --boost-text-muted: #94a3b8; --boost-border: #1e293b;
         color-scheme: dark;
-      }` : '';
+      }`
+          : '';
       return [
         {
           tag: 'style',
@@ -52,4 +55,4 @@ export function boostVitePlugin(options: BoostViteOptions = {}): BoostVitePlugin
       server.ws.send({ type: 'full-reload' });
     },
   };
-}
+}

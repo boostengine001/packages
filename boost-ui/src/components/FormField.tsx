@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * FormFieldProps — Properties for the form field wrapper (label + input + error).
  */
@@ -35,9 +34,18 @@ export const FormField: React.FC<FormFieldProps> = ({
         ...style,
       }}
     >
-      <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)', letterSpacing: '-0.01em' }}>
+      <label
+        style={{
+          fontSize: '13px',
+          fontWeight: 600,
+          color: 'var(--boost-text, #334155)',
+          letterSpacing: '-0.01em',
+        }}
+      >
         {label}
-        {required && <span style={{ color: 'var(--boost-danger, #ef4444)', marginLeft: '4px' }}>*</span>}
+        {required && (
+          <span style={{ color: 'var(--boost-danger, #ef4444)', marginLeft: '4px' }}>*</span>
+        )}
       </label>
 
       {children}

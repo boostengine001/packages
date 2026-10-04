@@ -9,16 +9,22 @@ export interface BoostNativeProviderProps {
 }
 
 const NativeThemeContext = React.createContext<{
-  tokens: NativeTokens; isDark: boolean;
+  tokens: NativeTokens;
+  isDark: boolean;
 }>({ tokens: lightNativeTokens, isDark: false });
 
 export const useBoostNative = () => React.useContext(NativeThemeContext);
 
 export const BoostNativeProvider: React.FC<BoostNativeProviderProps> = ({
-  children, mode = 'system', tokens = {}, darkTokens: darkOverrides = {},
+  children,
+  mode = 'system',
+  tokens = {},
+  darkTokens: darkOverrides = {},
 }) => {
   const [systemDark, setSystemDark] = React.useState(
-    typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)').matches : false
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+      : false
   );
   React.useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -29,7 +35,9 @@ export const BoostNativeProvider: React.FC<BoostNativeProviderProps> = ({
 
   const resolvedMode = mode === 'system' ? (systemDark ? 'dark' : 'light') : mode;
   const isDark = resolvedMode === 'dark';
-  const mergedTokens = isDark ? { ...darkNativeTokens, ...darkOverrides } : { ...lightNativeTokens, ...tokens };
+  const mergedTokens = isDark
+    ? { ...darkNativeTokens, ...darkOverrides }
+    : { ...lightNativeTokens, ...tokens };
 
   return (
     <NativeThemeContext.Provider value={{ tokens: mergedTokens, isDark }}>

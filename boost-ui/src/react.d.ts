@@ -1,7 +1,7 @@
 declare namespace React {
   type ReactNode = any;
   type CSSProperties = Record<string, any>;
-  interface FC<P = {}> {
+  interface FC<P = Record<string, never>> {
     (props: P): any;
   }
 }
@@ -33,7 +33,7 @@ declare module 'svelte/store' {
   }
   export function writable<T>(value?: T): Writable<T>;
   export function readable<T>(value?: T, start?: any): any;
-  export function derived<T>(stores: any, fn: any): any;
+  export function derived(stores: any, fn: any): any;
 }
 
 declare module 'solid-js' {
@@ -83,5 +83,3 @@ declare module 'react-native' {
   export const Text: any;
   export const TouchableOpacity: any;
 }
-
-

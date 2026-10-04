@@ -31,26 +31,58 @@ test('Build artifacts exist (Root, Hooks, Utils CJS/ESM/DTS)', () => {
   assert.ok(fs.existsSync(path.join(__dirname, 'dist/index.cjs')), 'dist/index.cjs must exist');
   assert.ok(fs.existsSync(path.join(__dirname, 'dist/index.mjs')), 'dist/index.mjs must exist');
   assert.ok(fs.existsSync(path.join(__dirname, 'dist/index.d.ts')), 'dist/index.d.ts must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'dist/hooks/index.cjs')), 'dist/hooks/index.cjs must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'dist/hooks/index.mjs')), 'dist/hooks/index.mjs must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'dist/hooks/index.d.ts')), 'dist/hooks/index.d.ts must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'dist/utils/index.cjs')), 'dist/utils/index.cjs must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'dist/utils/index.mjs')), 'dist/utils/index.mjs must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'dist/utils/index.d.ts')), 'dist/utils/index.d.ts must exist');
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'dist/hooks/index.cjs')),
+    'dist/hooks/index.cjs must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'dist/hooks/index.mjs')),
+    'dist/hooks/index.mjs must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'dist/hooks/index.d.ts')),
+    'dist/hooks/index.d.ts must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'dist/utils/index.cjs')),
+    'dist/utils/index.cjs must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'dist/utils/index.mjs')),
+    'dist/utils/index.mjs must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'dist/utils/index.d.ts')),
+    'dist/utils/index.d.ts must exist'
+  );
 });
 
 // ─── TEST 2: Next.js Client Directive ─────────────────────────────────────
 test('"use client" directive present in all build outputs', () => {
   const cjs = fs.readFileSync(path.join(__dirname, 'dist/index.cjs'), 'utf-8');
   const mjs = fs.readFileSync(path.join(__dirname, 'dist/index.mjs'), 'utf-8');
-  assert.ok(cjs.includes("'use client'") || cjs.includes('"use client"'), 'CJS must have "use client"');
-  assert.ok(mjs.includes("'use client'") || mjs.includes('"use client"'), 'MJS must have "use client"');
+  assert.ok(
+    cjs.includes("'use client'") || cjs.includes('"use client"'),
+    'CJS must have "use client"'
+  );
+  assert.ok(
+    mjs.includes("'use client'") || mjs.includes('"use client"'),
+    'MJS must have "use client"'
+  );
 });
 
 // ─── TEST 3: DTS Declarations ─────────────────────────────────────────────
 test('TypeScript declarations contain core symbols', () => {
   const dts = fs.readFileSync(path.join(__dirname, 'dist/index.d.ts'), 'utf-8');
-  ['CartDrawer', 'ProductGallery', 'Navbar', 'Footer', 'BoostProvider', 'HeroSection', 'KPIWidget'].forEach((sym) => {
+  [
+    'CartDrawer',
+    'ProductGallery',
+    'Navbar',
+    'Footer',
+    'BoostProvider',
+    'HeroSection',
+    'KPIWidget',
+  ].forEach((sym) => {
     assert.ok(dts.includes(sym), `DTS must declare "${sym}"`);
   });
 });
@@ -74,7 +106,11 @@ test('Theming exports: BoostProvider, useTheme, ThemeToggle, useCurrency, inject
   assertExport('ThemeToggle');
   assertExport('useCurrency');
   assertExport('injectBoostGlobalStyles');
-  assert.strictEqual(typeof ui.BoostProvider, 'function', 'BoostProvider must be a function/component');
+  assert.strictEqual(
+    typeof ui.BoostProvider,
+    'function',
+    'BoostProvider must be a function/component'
+  );
   assert.strictEqual(typeof ui.useTheme, 'function', 'useTheme must be a function/hook');
   assert.strictEqual(typeof ui.useCurrency, 'function', 'useCurrency must be a function/hook');
   assert.strictEqual(typeof ui.ThemeToggle, 'function', 'ThemeToggle must be a function/component');
@@ -82,42 +118,151 @@ test('Theming exports: BoostProvider, useTheme, ThemeToggle, useCurrency, inject
 
 // ─── TEST 6: Layout Primitives ────────────────────────────────────────────
 test('Layout primitives: Box, Flex, Stack, VStack, HStack, Grid, GridItem, Section, AspectRatio, ScrollArea, Motion', () => {
-  ['Box', 'Flex', 'Stack', 'VStack', 'HStack', 'Grid', 'GridItem', 'Section', 'AspectRatio', 'ScrollArea', 'Container', 'PageWrapper', 'Motion'].forEach(assertExport);
+  [
+    'Box',
+    'Flex',
+    'Stack',
+    'VStack',
+    'HStack',
+    'Grid',
+    'GridItem',
+    'Section',
+    'AspectRatio',
+    'ScrollArea',
+    'Container',
+    'PageWrapper',
+    'Motion',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 7: Button Components ───────────────────────────────────────────
 test('Button components: Button, IconButton, ButtonGroup, FloatingActionButton, LinkButton, CopyButton', () => {
-  ['Button', 'IconButton', 'ButtonGroup', 'FloatingActionButton', 'LinkButton', 'CopyButton'].forEach(assertExport);
+  [
+    'Button',
+    'IconButton',
+    'ButtonGroup',
+    'FloatingActionButton',
+    'LinkButton',
+    'CopyButton',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 8: Form Components ─────────────────────────────────────────────
 test('Form components: Input, Textarea, Select, MultiSelect, Checkbox, Radio, Switch, DatePicker, OTPInput, FileDropzone', () => {
-  ['Input', 'Textarea', 'Select', 'MultiSelect', 'Checkbox', 'Radio', 'RadioGroup', 'Switch', 'DatePicker', 'TimePicker', 'FileUpload', 'FileDropzone', 'SearchInput', 'FormField', 'OTPInput'].forEach(assertExport);
+  [
+    'Input',
+    'Textarea',
+    'Select',
+    'MultiSelect',
+    'Checkbox',
+    'Radio',
+    'RadioGroup',
+    'Switch',
+    'DatePicker',
+    'TimePicker',
+    'FileUpload',
+    'FileDropzone',
+    'SearchInput',
+    'FormField',
+    'OTPInput',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 9: Feedback Components ─────────────────────────────────────────
 test('Feedback components: Toast, Alert, Skeleton, EmptyState, ErrorState, SuccessMessage', () => {
-  ['Toast', 'ToastProvider', 'useToast', 'Loader', 'Spinner', 'ProgressBar', 'Skeleton', 'Alert', 'Snackbar', 'EmptyState', 'ErrorState', 'SuccessMessage'].forEach(assertExport);
+  [
+    'Toast',
+    'ToastProvider',
+    'useToast',
+    'Loader',
+    'Spinner',
+    'ProgressBar',
+    'Skeleton',
+    'Alert',
+    'Snackbar',
+    'EmptyState',
+    'ErrorState',
+    'SuccessMessage',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 10: Content & Display ──────────────────────────────────────────
 test('Content & Display: Card, Avatar, Badge, Tooltip, Accordion, Carousel', () => {
-  ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardContent', 'CardFooter', 'Image', 'Avatar', 'AvatarGroup', 'Badge', 'Tag', 'Tooltip', 'Chip', 'Divider', 'Accordion', 'Carousel'].forEach(assertExport);
+  [
+    'Card',
+    'CardHeader',
+    'CardTitle',
+    'CardDescription',
+    'CardContent',
+    'CardFooter',
+    'Image',
+    'Avatar',
+    'AvatarGroup',
+    'Badge',
+    'Tag',
+    'Tooltip',
+    'Chip',
+    'Divider',
+    'Accordion',
+    'Carousel',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 11: Overlays & Dialogs ─────────────────────────────────────────
 test('Overlays: Modal, Dialog, Drawer, BottomSheet, Popover, ConfirmationDialog, CommandPalette, Portal', () => {
-  ['Modal', 'Dialog', 'Drawer', 'BottomSheet', 'Popover', 'ConfirmationDialog', 'CommandPalette', 'Portal'].forEach(assertExport);
+  [
+    'Modal',
+    'Dialog',
+    'Drawer',
+    'BottomSheet',
+    'Popover',
+    'ConfirmationDialog',
+    'CommandPalette',
+    'Portal',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 12: Navigation ─────────────────────────────────────────────────
 test('Navigation: Navbar, Sidebar, Footer, MobileBottomNav, Breadcrumb, MegaMenu, Tabs, TabsList, TabsTrigger, TabsContent, Stepper', () => {
-  ['Header', 'Navbar', 'Sidebar', 'Footer', 'MobileBottomBar', 'MobileBottomNav', 'Breadcrumb', 'NavLink', 'DropdownMenu', 'MegaMenu', 'Pagination', 'Tabs', 'TabsList', 'TabsTrigger', 'TabsContent', 'Stepper', 'BackButton'].forEach(assertExport);
+  [
+    'Header',
+    'Navbar',
+    'Sidebar',
+    'Footer',
+    'MobileBottomBar',
+    'MobileBottomNav',
+    'Breadcrumb',
+    'NavLink',
+    'DropdownMenu',
+    'MegaMenu',
+    'Pagination',
+    'Tabs',
+    'TabsList',
+    'TabsTrigger',
+    'TabsContent',
+    'Stepper',
+    'BackButton',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 13: Data & Analytics ───────────────────────────────────────────
 test('Data & Analytics: Table, DataTable, KPIWidget, AreaChart, BarChart, DonutChart, Sparkline', () => {
-  ['Table', 'DataTable', 'StatsCard', 'KPIWidget', 'AreaChart', 'BarChart', 'DonutChart', 'Sparkline', 'ActivityFeed', 'NotificationCenter', 'DateRangePicker', 'ExportButton', 'Filter', 'Sort'].forEach(assertExport);
+  [
+    'Table',
+    'DataTable',
+    'StatsCard',
+    'KPIWidget',
+    'AreaChart',
+    'BarChart',
+    'DonutChart',
+    'Sparkline',
+    'ActivityFeed',
+    'NotificationCenter',
+    'DateRangePicker',
+    'ExportButton',
+    'Filter',
+    'Sort',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 14: Authentication ─────────────────────────────────────────────
@@ -128,46 +273,130 @@ test('Auth: LoginForm, RegisterForm, ForgotPassword, ResetPassword', () => {
 // ─── TEST 15: E-Commerce Suite ───────────────────────────────────────────
 test('eCommerce Suite: CartDrawer, ProductCard, VariantSelector, PincodeChecker, LightningDealsBar', () => {
   [
-    'CartDrawer', 'StickyAddToCart', 'PincodeChecker', 'TrustBadges', 'OrderTimeline',
-    'StarRating', 'ProductGallery', 'VariantSelector', 'ProductCard', 'QuantitySelector',
-    'ReviewBreakdownBars', 'AnnouncementBar', 'LightningDealsBar', 'FrequentlyBoughtTogether',
-    'BankOffersAccordion', 'AssuredBadge', 'DualMobileActionBar', 'Price', 'AddToCart',
-    'CouponInput', 'AddressForm', 'OrderSummary'
+    'CartDrawer',
+    'StickyAddToCart',
+    'PincodeChecker',
+    'TrustBadges',
+    'OrderTimeline',
+    'StarRating',
+    'ProductGallery',
+    'VariantSelector',
+    'ProductCard',
+    'QuantitySelector',
+    'ReviewBreakdownBars',
+    'AnnouncementBar',
+    'LightningDealsBar',
+    'FrequentlyBoughtTogether',
+    'BankOffersAccordion',
+    'AssuredBadge',
+    'DualMobileActionBar',
+    'Price',
+    'AddToCart',
+    'CouponInput',
+    'AddressForm',
+    'OrderSummary',
   ].forEach(assertExport);
 });
 
 // ─── TEST 16: Marketing Blocks ───────────────────────────────────────────
 test('Marketing Blocks: HeroSection, FeatureGrid, PricingTable, TestimonialCard, FAQSection, CTASection', () => {
-  ['HeroSection', 'FeatureGrid', 'PricingTable', 'TestimonialCard', 'TestimonialGrid', 'FAQSection', 'LogoCloud', 'CTASection'].forEach(assertExport);
+  [
+    'HeroSection',
+    'FeatureGrid',
+    'PricingTable',
+    'TestimonialCard',
+    'TestimonialGrid',
+    'FAQSection',
+    'LogoCloud',
+    'CTASection',
+  ].forEach(assertExport);
 });
 
 // ─── TEST 17: Utility Hooks ──────────────────────────────────────────────
 test('Utility Hooks: useMediaQuery, useClickOutside, useDebounce, useLocalStorage, useCopyToClipboard, useToggle, useForm, useFocusTrap, useAnnounce', () => {
-  ['useMediaQuery', 'useClickOutside', 'useDebounce', 'useLocalStorage', 'useWindowSize', 'useScrollPosition', 'usePrevious', 'useCopyToClipboard', 'useToggle', 'useIntersectionObserver', 'useIsomorphicLayoutEffect', 'useForm', 'useFocusTrap', 'useAnnounce'].forEach(assertExport);
+  [
+    'useMediaQuery',
+    'useClickOutside',
+    'useDebounce',
+    'useLocalStorage',
+    'useWindowSize',
+    'useScrollPosition',
+    'usePrevious',
+    'useCopyToClipboard',
+    'useToggle',
+    'useIntersectionObserver',
+    'useIsomorphicLayoutEffect',
+    'useForm',
+    'useFocusTrap',
+    'useAnnounce',
+  ].forEach(assertExport);
   // Verify they are functions
-  ['useMediaQuery', 'useClickOutside', 'useDebounce', 'useLocalStorage', 'useForm', 'useFocusTrap', 'useAnnounce'].forEach((hook) => {
+  [
+    'useMediaQuery',
+    'useClickOutside',
+    'useDebounce',
+    'useLocalStorage',
+    'useForm',
+    'useFocusTrap',
+    'useAnnounce',
+  ].forEach((hook) => {
     assert.strictEqual(typeof ui[hook], 'function', `${hook} must be a function`);
   });
 });
 
 // ─── TEST 18: Utility Functions ──────────────────────────────────────────
 test('Utility Functions: cn, formatCurrency, formatDate, slugify, getInitials, validators', () => {
-  ['cn', 'formatCurrency', 'formatNumber', 'formatDate', 'formatRelativeTime', 'truncate', 'slugify', 'generateId', 'clamp', 'groupBy', 'deepMerge', 'omit', 'pick', 'debounce', 'getInitials', 'isValidEmail', 'isValidIndianPincode', 'isValidIndianMobile'].forEach(assertExport);
+  [
+    'cn',
+    'formatCurrency',
+    'formatNumber',
+    'formatDate',
+    'formatRelativeTime',
+    'truncate',
+    'slugify',
+    'generateId',
+    'clamp',
+    'groupBy',
+    'deepMerge',
+    'omit',
+    'pick',
+    'debounce',
+    'getInitials',
+    'isValidEmail',
+    'isValidIndianPincode',
+    'isValidIndianMobile',
+  ].forEach(assertExport);
   // Functional validation
   assert.strictEqual(ui.cn('a', false, 'b', null, 'c'), 'a b c', 'cn() should filter falsy values');
   assert.strictEqual(ui.clamp(150, 0, 100), 100, 'clamp(150, 0, 100) should return 100');
   assert.strictEqual(ui.clamp(-5, 0, 100), 0, 'clamp(-5, 0, 100) should return 0');
   assert.strictEqual(ui.clamp(50, 0, 100), 50, 'clamp(50, 0, 100) should return 50');
-  assert.strictEqual(ui.slugify('Hello World!'), 'hello-world', 'slugify should produce URL-safe slugs');
-  assert.strictEqual(ui.getInitials('Aarav Sharma'), 'AS', 'getInitials should return "AS" for "Aarav Sharma"');
+  assert.strictEqual(
+    ui.slugify('Hello World!'),
+    'hello-world',
+    'slugify should produce URL-safe slugs'
+  );
+  assert.strictEqual(
+    ui.getInitials('Aarav Sharma'),
+    'AS',
+    'getInitials should return "AS" for "Aarav Sharma"'
+  );
   assert.strictEqual(ui.getInitials('Priya'), 'P', 'getInitials should return "P" for single-name');
-  assert.strictEqual(ui.truncate('Hello World', 8), 'Hello...', 'truncate should trim and add ellipsis');
+  assert.strictEqual(
+    ui.truncate('Hello World', 8),
+    'Hello...',
+    'truncate should trim and add ellipsis'
+  );
   assert.strictEqual(ui.isValidEmail('user@example.com'), true, 'should validate correct email');
   assert.strictEqual(ui.isValidEmail('invalid'), false, 'should reject invalid email');
   assert.strictEqual(ui.isValidIndianPincode('110001'), true, 'should validate 6-digit pincode');
   assert.strictEqual(ui.isValidIndianPincode('1234'), false, 'should reject 4-digit pincode');
   assert.strictEqual(ui.isValidIndianMobile('9876543210'), true, 'should validate Indian mobile');
-  assert.strictEqual(ui.isValidIndianMobile('1234567890'), false, 'should reject invalid mobile (starts with 1)');
+  assert.strictEqual(
+    ui.isValidIndianMobile('1234567890'),
+    false,
+    'should reject invalid mobile (starts with 1)'
+  );
 });
 
 // ─── TEST 19: Export Count Sanity Check ──────────────────────────────────
@@ -191,7 +420,10 @@ test('package.json has required fields: name, version, description, keywords, ex
   assert.ok(pkg.exports?.['.']?.import, 'ESM export must be configured');
   assert.ok(pkg.exports?.['.']?.require, 'CJS export must be configured');
   assert.ok(pkg.bin?.['boost-ui'], 'bin.boost-ui CLI must be configured');
-  assert.ok(Array.isArray(pkg.files) && pkg.files.includes('llms.txt'), 'llms.txt must be in files array');
+  assert.ok(
+    Array.isArray(pkg.files) && pkg.files.includes('llms.txt'),
+    'llms.txt must be in files array'
+  );
 });
 
 // ─── TEST 21: Submodule Direct Require ───────────────────────────────────
@@ -208,20 +440,41 @@ test('Submodules @boostengine/ui/hooks and @boostengine/ui/utils load independen
 // ─── TEST 22: Design Tokens & Tailwind Preset (v1.8.2) ───────────────────
 test('Design tokens (tokens.json, boostTokens, createTailwindPreset) & docs', () => {
   assert.ok(fs.existsSync(path.join(__dirname, 'src/tokens.json')), 'src/tokens.json must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'docs/THEMING_AND_TOKENS.md')), 'docs/THEMING_AND_TOKENS.md must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'docs/COMPONENTS_REFERENCE.md')), 'docs/COMPONENTS_REFERENCE.md must exist');
-  assert.ok(fs.existsSync(path.join(__dirname, 'docs/A11Y_AUDIT.md')), 'docs/A11Y_AUDIT.md must exist');
-  
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'docs/THEMING_AND_TOKENS.md')),
+    'docs/THEMING_AND_TOKENS.md must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'docs/COMPONENTS_REFERENCE.md')),
+    'docs/COMPONENTS_REFERENCE.md must exist'
+  );
+  assert.ok(
+    fs.existsSync(path.join(__dirname, 'docs/A11Y_AUDIT.md')),
+    'docs/A11Y_AUDIT.md must exist'
+  );
+
   const tokensJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'src/tokens.json'), 'utf-8'));
-  assert.ok((tokensJson.colors || tokensJson.color) && tokensJson.spacing && (tokensJson.radii || tokensJson.borderRadius), 'tokens.json must have valid structure');
-  
+  assert.ok(
+    (tokensJson.colors || tokensJson.color) &&
+      tokensJson.spacing &&
+      (tokensJson.radii || tokensJson.borderRadius),
+    'tokens.json must have valid structure'
+  );
+
   assertExport('boostTokens');
   assertExport('createTailwindPreset');
-  assert.strictEqual(typeof ui.createTailwindPreset, 'function', 'createTailwindPreset must be a function');
-  
+  assert.strictEqual(
+    typeof ui.createTailwindPreset,
+    'function',
+    'createTailwindPreset must be a function'
+  );
+
   const preset = ui.createTailwindPreset();
   assert.ok(preset.theme && preset.theme.extend, 'Preset must return valid Tailwind config');
-  assert.ok(preset.theme.extend.colors && preset.theme.extend.colors.boost, 'Preset must expose boost colors');
+  assert.ok(
+    preset.theme.extend.colors && preset.theme.extend.colors.boost,
+    'Preset must expose boost colors'
+  );
 });
 
 // ─── RESULTS ────────────────────────────────────────────────────────────

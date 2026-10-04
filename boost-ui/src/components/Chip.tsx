@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * ChipProps — Properties for the chip/tag component.
  */
@@ -99,9 +98,7 @@ export const Chip: React.FC<ChipProps> = ({
           ? 'var(--boost-primary, #2563eb)'
           : 'var(--boost-surface-secondary, #f1f5f9)',
         color: selected ? '#ffffff' : 'var(--boost-text, #1e293b)',
-        border: selected
-          ? '1px solid transparent'
-          : '1px solid var(--boost-border, #e2e8f0)',
+        border: selected ? '1px solid transparent' : '1px solid var(--boost-border, #e2e8f0)',
         fontSize: '13px',
         fontWeight: 500,
         cursor: onClick ? 'pointer' : 'default',
@@ -152,7 +149,14 @@ export const Chip: React.FC<ChipProps> = ({
           onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = '1')}
           onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = '0.75')}
         >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * ScrollAreaProps — Properties for the custom scrollable area component.
  */

@@ -71,5 +71,3 @@ export default defineConfig({
     processDir(path.resolve(__dirname, 'dist'));
   },
 });
-
-

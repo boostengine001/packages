@@ -15,11 +15,11 @@ export class BoostThemeService {
     this.mode$,
     this.systemDarkSubject,
   ]).pipe(
-    map(([mode, systemDark]) => mode === 'system' ? (systemDark ? 'dark' : 'light') : mode),
+    map(([mode, systemDark]) => (mode === 'system' ? (systemDark ? 'dark' : 'light') : mode)),
     distinctUntilChanged()
   );
 
-  isDark$: Observable<boolean> = this.resolvedMode$.pipe(map(m => m === 'dark'));
+  isDark$: Observable<boolean> = this.resolvedMode$.pipe(map((m) => m === 'dark'));
 
   constructor() {
     const stored = localStorage.getItem('boost-theme') as ThemeMode | null;
@@ -36,8 +36,9 @@ export class BoostThemeService {
   }
 
   toggle() {
-    this.modeSubject.value === 'dark' || (this.modeSubject.value === 'system' && this.systemDarkSubject.value)
-      ? this.setMode('light')
-      : this.setMode('dark');
+    const isDark =
+      this.modeSubject.value === 'dark' ||
+      (this.modeSubject.value === 'system' && this.systemDarkSubject.value);
+    this.setMode(isDark ? 'light' : 'dark');
   }
 }

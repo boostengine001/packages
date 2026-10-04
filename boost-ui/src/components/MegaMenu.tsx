@@ -27,7 +27,6 @@ export interface MegaMenuCategory {
   sections?: MegaMenuSection[];
 }
 
-
 /**
  * MegaMenuProps — Properties for the mega-menu dropdown navigation.
  */
@@ -125,7 +124,15 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
       }}
     >
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        >
           <rect width="7" height="7" x="3" y="3" rx="1" />
           <rect width="7" height="7" x="14" y="3" rx="1" />
           <rect width="7" height="7" x="14" y="14" rx="1" />
@@ -255,194 +262,285 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
       `}</style>
 
       <div>
-        {typeof trigger === 'function'
-          ? trigger({ isOpen: open })
-          : trigger || defaultTrigger}
+        {typeof trigger === 'function' ? trigger({ isOpen: open }) : trigger || defaultTrigger}
       </div>
 
-      {open && (() => {
+      {open &&
+        (() => {
           const getPanelStyles = (): React.CSSProperties => {
-            const base: React.CSSProperties = { position: 'absolute', top: 'calc(100% + 8px)', left: 0, zIndex: 500, padding: '24px', display: 'flex', gap: '28px', minWidth: '640px', maxWidth: 'calc(100vw - 40px)', fontFamily: 'inherit', boxSizing: 'border-box', animation: 'boost-fadeIn 0.18s ease-out' };
+            const base: React.CSSProperties = {
+              position: 'absolute',
+              top: 'calc(100% + 8px)',
+              left: 0,
+              zIndex: 500,
+              padding: '24px',
+              display: 'flex',
+              gap: '28px',
+              minWidth: '640px',
+              maxWidth: 'calc(100vw - 40px)',
+              fontFamily: 'inherit',
+              boxSizing: 'border-box',
+              animation: 'boost-fadeIn 0.18s ease-out',
+            };
             switch (preset) {
-              case 'neo-brutalism': return { ...base, backgroundColor: '#ffffff', border: '3px solid #000', borderRadius: '2px', boxShadow: '6px 6px 0px #000' };
-              case 'glassmorphism': return { ...base, backgroundColor: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: '18px', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.15)' };
-              case 'neumorphism': return { ...base, backgroundColor: '#e0e5ec', border: 'none', borderRadius: '20px', boxShadow: '8px 8px 20px #c8cdd5, -8px -8px 20px #f8fdff' };
-              case 'gradient-glow': return { ...base, backgroundColor: 'var(--boost-surface,#ffffff)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '16px', boxShadow: '0 0 40px rgba(99,102,241,0.15), 0 20px 40px -10px rgba(0,0,0,0.12)' };
-              case 'material-you': return { ...base, backgroundColor: 'var(--boost-surface,#fffbfe)', border: '1px solid var(--boost-border,#e2e8f0)', borderRadius: '28px', boxShadow: '0 8px 24px rgba(0,0,0,0.1)' };
-              case 'dark-first': return { ...base, backgroundColor: 'var(--boost-surface, #0f172a)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7)' };
-              default: return { ...base, backgroundColor: 'var(--boost-surface,#ffffff)', border: '1px solid var(--boost-border,#e2e8f0)', borderRadius: '16px', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.18)' };
+              case 'neo-brutalism':
+                return {
+                  ...base,
+                  backgroundColor: '#ffffff',
+                  border: '3px solid #000',
+                  borderRadius: '2px',
+                  boxShadow: '6px 6px 0px #000',
+                };
+              case 'glassmorphism':
+                return {
+                  ...base,
+                  backgroundColor: 'rgba(255,255,255,0.8)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255,255,255,0.4)',
+                  borderRadius: '18px',
+                  boxShadow: '0 20px 40px -10px rgba(0,0,0,0.15)',
+                };
+              case 'neumorphism':
+                return {
+                  ...base,
+                  backgroundColor: '#e0e5ec',
+                  border: 'none',
+                  borderRadius: '20px',
+                  boxShadow: '8px 8px 20px #c8cdd5, -8px -8px 20px #f8fdff',
+                };
+              case 'gradient-glow':
+                return {
+                  ...base,
+                  backgroundColor: 'var(--boost-surface,#ffffff)',
+                  border: '1px solid rgba(99,102,241,0.2)',
+                  borderRadius: '16px',
+                  boxShadow: '0 0 40px rgba(99,102,241,0.15), 0 20px 40px -10px rgba(0,0,0,0.12)',
+                };
+              case 'material-you':
+                return {
+                  ...base,
+                  backgroundColor: 'var(--boost-surface,#fffbfe)',
+                  border: '1px solid var(--boost-border,#e2e8f0)',
+                  borderRadius: '28px',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+                };
+              case 'dark-first':
+                return {
+                  ...base,
+                  backgroundColor: 'var(--boost-surface, #0f172a)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: '16px',
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7)',
+                };
+              default:
+                return {
+                  ...base,
+                  backgroundColor: 'var(--boost-surface,#ffffff)',
+                  border: '1px solid var(--boost-border,#e2e8f0)',
+                  borderRadius: '16px',
+                  boxShadow: '0 20px 40px -10px rgba(0,0,0,0.18)',
+                };
             }
           };
           return (
-        <div
-          className="boost-megamenu-panel"
-          style={getPanelStyles()}
-        >
-          {/* Category Tabs (Sidebar on Desktop, Horizontal Bar on Mobile) */}
-          {categories && categories.length > 1 && (
-            <div
-              className="megamenu-divider boost-megamenu-categories-bar"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '4px',
-                borderRight: '1px solid var(--boost-border, #f1f5f9)',
-                paddingRight: '18px',
-                minWidth: '130px',
-              }}
-            >
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`megamenu-category-btn ${activeCategory === cat.id ? 'active' : ''}`}
+            <div className="boost-megamenu-panel" style={getPanelStyles()}>
+              {/* Category Tabs (Sidebar on Desktop, Horizontal Bar on Mobile) */}
+              {categories && categories.length > 1 && (
+                <div
+                  className="megamenu-divider boost-megamenu-categories-bar"
                   style={{
-                    textAlign: 'left',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    border: 'none',
-                    fontSize: '13px',
-                    fontWeight: activeCategory === cat.id ? 700 : 500,
-                    color: activeCategory === cat.id ? 'var(--boost-primary, #4f46e5)' : 'var(--boost-text-muted, #475569)',
-                    backgroundColor: activeCategory === cat.id ? 'rgba(79, 70, 229, 0.08)' : 'transparent',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease',
-                    whiteSpace: 'nowrap',
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
+                    flexDirection: 'column',
+                    gap: '4px',
+                    borderRight: '1px solid var(--boost-border, #f1f5f9)',
+                    paddingRight: '18px',
+                    minWidth: '130px',
                   }}
                 >
-                  {cat.icon}
-                  <span>{cat.label}</span>
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Center: Columns & Links Grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-              gap: '24px',
-              flex: 1,
-            }}
-          >
-            {effectiveSections.map((section, idx) => (
-              <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <span
-                  className="megamenu-section-title"
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
-                    color: 'var(--boost-text, #0f172a)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.06em',
-                  }}
-                >
-                  {section.title}
-                </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  {section.links.map((link, lIdx) => (
-                    <a
-                      key={lIdx}
-                      href={link.href}
-                      onClick={(e) => handleLinkSelect(link, e)}
-                      className="megamenu-link-row"
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => setActiveCategory(cat.id)}
+                      className={`megamenu-category-btn ${activeCategory === cat.id ? 'active' : ''}`}
                       style={{
-                        textDecoration: 'none',
+                        textAlign: 'left',
+                        padding: '8px 12px',
+                        borderRadius: '8px',
+                        border: 'none',
+                        fontSize: '13px',
+                        fontWeight: activeCategory === cat.id ? 700 : 500,
+                        color:
+                          activeCategory === cat.id
+                            ? 'var(--boost-primary, #4f46e5)'
+                            : 'var(--boost-text-muted, #475569)',
+                        backgroundColor:
+                          activeCategory === cat.id ? 'rgba(79, 70, 229, 0.08)' : 'transparent',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                        whiteSpace: 'nowrap',
                         display: 'flex',
-                        flexDirection: 'column',
-                        padding: '4px 6px',
-                        borderRadius: '6px',
-                        transition: 'background-color 0.15s ease',
+                        alignItems: 'center',
+                        gap: '8px',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span
-                          className="megamenu-link-label"
-                          style={{
-                            fontSize: '13px',
-                            fontWeight: 500,
-                            color: 'var(--boost-text, #334155)',
-                            transition: 'color 0.15s ease',
-                          }}
-                        >
-                          {link.label}
-                        </span>
-                        {link.badge && (
-                          <span
-                            style={{
-                              fontSize: '9px',
-                              fontWeight: 700,
-                              backgroundColor: 'rgba(239, 68, 68, 0.12)',
-                              color: '#ef4444',
-                              padding: '1px 5px',
-                              borderRadius: '4px',
-                            }}
-                          >
-                            {link.badge}
-                          </span>
-                        )}
-                      </div>
-                      {link.description && (
-                        <span style={{ fontSize: '11px', color: 'var(--boost-text-muted, #94a3b8)', marginTop: '2px' }}>
-                          {link.description}
-                        </span>
-                      )}
-                    </a>
+                      {cat.icon}
+                      <span>{cat.label}</span>
+                    </button>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
+              )}
 
-          {/* Right: Featured Banner Promo (if passed or default promo) */}
-          {featured !== undefined ? (
-            <div className="megamenu-divider" style={{ borderLeft: '1px solid var(--boost-border, #f1f5f9)', paddingLeft: '20px', minWidth: '180px' }}>
-              {featured}
-            </div>
-          ) : (
-            <div
-              className="megamenu-divider"
-              style={{
-                borderLeft: '1px solid var(--boost-border, #f1f5f9)',
-                paddingLeft: '20px',
-                minWidth: '170px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
+              {/* Center: Columns & Links Grid */}
               <div
                 style={{
-                  background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
-                  borderRadius: '12px',
-                  padding: '16px',
-                  border: '1px solid rgba(79, 70, 229, 0.2)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                  gap: '24px',
+                  flex: 1,
                 }}
               >
-                <span style={{ fontSize: '10px', fontWeight: 800, color: 'var(--boost-primary, #4f46e5)', letterSpacing: '0.04em' }}>
-                  ⚡ FESTIVE DROP
-                </span>
-                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--boost-text, #0f172a)', lineHeight: 1.3 }}>
-                  Up to 50% Off New Essentials
-                </span>
-                <span style={{ fontSize: '11px', color: 'var(--boost-text-muted, #64748b)' }}>
-                  Use code FESTIVE50 at checkout
-                </span>
+                {effectiveSections.map((section, idx) => (
+                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <span
+                      className="megamenu-section-title"
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        color: 'var(--boost-text, #0f172a)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                      }}
+                    >
+                      {section.title}
+                    </span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      {section.links.map((link, lIdx) => (
+                        <a
+                          key={lIdx}
+                          href={link.href}
+                          onClick={(e) => handleLinkSelect(link, e)}
+                          className="megamenu-link-row"
+                          style={{
+                            textDecoration: 'none',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            padding: '4px 6px',
+                            borderRadius: '6px',
+                            transition: 'background-color 0.15s ease',
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span
+                              className="megamenu-link-label"
+                              style={{
+                                fontSize: '13px',
+                                fontWeight: 500,
+                                color: 'var(--boost-text, #334155)',
+                                transition: 'color 0.15s ease',
+                              }}
+                            >
+                              {link.label}
+                            </span>
+                            {link.badge && (
+                              <span
+                                style={{
+                                  fontSize: '9px',
+                                  fontWeight: 700,
+                                  backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                                  color: '#ef4444',
+                                  padding: '1px 5px',
+                                  borderRadius: '4px',
+                                }}
+                              >
+                                {link.badge}
+                              </span>
+                            )}
+                          </div>
+                          {link.description && (
+                            <span
+                              style={{
+                                fontSize: '11px',
+                                color: 'var(--boost-text-muted, #94a3b8)',
+                                marginTop: '2px',
+                              }}
+                            >
+                              {link.description}
+                            </span>
+                          )}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
+
+              {/* Right: Featured Banner Promo (if passed or default promo) */}
+              {featured !== undefined ? (
+                <div
+                  className="megamenu-divider"
+                  style={{
+                    borderLeft: '1px solid var(--boost-border, #f1f5f9)',
+                    paddingLeft: '20px',
+                    minWidth: '180px',
+                  }}
+                >
+                  {featured}
+                </div>
+              ) : (
+                <div
+                  className="megamenu-divider"
+                  style={{
+                    borderLeft: '1px solid var(--boost-border, #f1f5f9)',
+                    paddingLeft: '20px',
+                    minWidth: '170px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div
+                    style={{
+                      background:
+                        'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
+                      borderRadius: '12px',
+                      padding: '16px',
+                      border: '1px solid rgba(79, 70, 229, 0.2)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: '10px',
+                        fontWeight: 800,
+                        color: 'var(--boost-primary, #4f46e5)',
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      ⚡ FESTIVE DROP
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        color: 'var(--boost-text, #0f172a)',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      Up to 50% Off New Essentials
+                    </span>
+                    <span style={{ fontSize: '11px', color: 'var(--boost-text-muted, #64748b)' }}>
+                      Use code FESTIVE50 at checkout
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
           );
         })()}
-
     </div>
   );
 };

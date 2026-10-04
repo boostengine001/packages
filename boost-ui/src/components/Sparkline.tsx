@@ -23,6 +23,9 @@ export const Sparkline: React.FC<SparklineProps> = ({
   className = '',
   style,
 }) => {
+  const rawId = React.useId();
+  const gradientId = `boost-spark-${rawId.replace(/:/g, '')}`;
+
   if (!data || data.length < 2) {
     return null;
   }
@@ -48,8 +51,6 @@ export const Sparkline: React.FC<SparklineProps> = ({
 
   const isUp = data[data.length - 1] >= data[0];
   const chartColor = color || (autoColor ? (isUp ? '#10b981' : '#ef4444') : '#3b82f6');
-  const rawId = React.useId();
-  const gradientId = `boost-spark-${rawId.replace(/:/g, '')}`;
 
   return (
     <div
@@ -89,12 +90,7 @@ export const Sparkline: React.FC<SparklineProps> = ({
           strokeLinejoin="round"
         />
         {/* End pulse dot */}
-        <circle
-          cx={lastPoint[0]}
-          cy={lastPoint[1]}
-          r={2.5}
-          fill={chartColor}
-        />
+        <circle cx={lastPoint[0]} cy={lastPoint[1]} r={2.5} fill={chartColor} />
       </svg>
     </div>
   );

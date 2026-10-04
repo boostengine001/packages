@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-
 /**
  * SearchInputProps — Properties for the search input with icon and clear button.
  */
-export interface SearchInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface SearchInputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'type'
+> {
   onClear?: () => void;
   onSearch?: (query: string) => void;
   fullWidth?: boolean;
@@ -53,7 +55,14 @@ export const SearchInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, Se
             pointerEvents: 'none',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
@@ -104,7 +113,14 @@ export const SearchInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, Se
               borderRadius: '4px',
             }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -116,4 +132,3 @@ export const SearchInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, Se
 );
 
 SearchInput.displayName = 'SearchInput';
-

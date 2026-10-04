@@ -3,19 +3,20 @@ import { signal, useVisibleTask$ } from '@builder.io/qwik';
 export type ThemeMode = 'light' | 'dark' | 'system';
 
 export function useTheme(defaultMode: ThemeMode = 'system') {
-  const stored = typeof localStorage !== 'undefined'
-    ? localStorage.getItem('boost-theme')
-    : null;
+  const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('boost-theme') : null;
   const mode = signal<ThemeMode>((stored as ThemeMode) || defaultMode);
   const systemDark = signal(false);
 
   useVisibleTask$(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     systemDark.value = mq.matches;
-    mq.addEventListener('change', (e) => { systemDark.value = e.matches; });
+    mq.addEventListener('change', (e) => {
+      systemDark.value = e.matches;
+    });
   });
 
-  const resolved = () => mode.value === 'system' ? (systemDark.value ? 'dark' : 'light') : mode.value;
+  const resolved = () =>
+    mode.value === 'system' ? (systemDark.value ? 'dark' : 'light') : mode.value;
   const isDark = () => resolved() === 'dark';
 
   const toggle = () => {

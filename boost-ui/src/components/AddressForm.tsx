@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 /**
  * AddressData — Shape of address form data.
  */
@@ -15,7 +14,6 @@ export interface AddressData {
   addressType: 'home' | 'work' | 'other';
   isDefault: boolean;
 }
-
 
 /**
  * AddressFormProps — Properties for the address input form.
@@ -131,8 +129,29 @@ export const AddressForm: React.FC<AddressFormProps> = ({
   const renderError = (msg?: string) => {
     if (!msg) return null;
     return (
-      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#ef4444', marginTop: '4px', fontWeight: 500 }}>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          fontSize: '11px',
+          color: '#ef4444',
+          marginTop: '4px',
+          fontWeight: 500,
+        }}
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
         {msg}
       </span>
     );
@@ -153,10 +172,29 @@ export const AddressForm: React.FC<AddressFormProps> = ({
         ...style,
       }}
     >
-      <h3 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--boost-text, #0f172a)', margin: '0 0 20px' }}>{title}</h3>
+      <h3
+        style={{
+          fontSize: '18px',
+          fontWeight: 700,
+          color: 'var(--boost-text, #0f172a)',
+          margin: '0 0 20px',
+        }}
+      >
+        {title}
+      </h3>
 
-      <form noValidate onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '12px' }}>
+      <form
+        noValidate
+        onSubmit={handleSubmit}
+        style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+            gap: '12px',
+          }}
+        >
           <div>
             <label style={labelStyle}>Full Name *</label>
             <input
@@ -182,7 +220,13 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '12px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
+            gap: '12px',
+          }}
+        >
           <div>
             <label style={labelStyle}>Postal / ZIP Code *</label>
             <input
@@ -221,7 +265,13 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           {renderError(errors.street)}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '12px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+            gap: '12px',
+          }}
+        >
           <div>
             <label style={labelStyle}>City / Town *</label>
             <input
@@ -262,8 +312,12 @@ export const AddressForm: React.FC<AddressFormProps> = ({
                   textTransform: 'capitalize',
                   borderRadius: 'var(--boost-radius, 8px)',
                   border: `1px solid ${formData.addressType === type ? 'var(--boost-primary, #2563eb)' : 'var(--boost-border, #cbd5e1)'}`,
-                  backgroundColor: formData.addressType === type ? 'var(--boost-primary, #2563eb)' : 'var(--boost-surface, #ffffff)',
-                  color: formData.addressType === type ? '#ffffff' : 'var(--boost-text-muted, #475569)',
+                  backgroundColor:
+                    formData.addressType === type
+                      ? 'var(--boost-primary, #2563eb)'
+                      : 'var(--boost-surface, #ffffff)',
+                  color:
+                    formData.addressType === type ? '#ffffff' : 'var(--boost-text-muted, #475569)',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                 }}
@@ -282,7 +336,14 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             onChange={(e) => handleChange('isDefault', e.target.checked)}
             style={{ cursor: 'pointer' }}
           />
-          <label htmlFor="default-address-checkbox" style={{ fontSize: '13px', color: 'var(--boost-text-muted, #475569)', cursor: 'pointer' }}>
+          <label
+            htmlFor="default-address-checkbox"
+            style={{
+              fontSize: '13px',
+              color: 'var(--boost-text-muted, #475569)',
+              cursor: 'pointer',
+            }}
+          >
             Make this my default shipping address
           </label>
         </div>
@@ -312,13 +373,24 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           >
             {loading && (
               <svg
-                style={{ animation: 'boost-spin 1s linear infinite', width: '16px', height: '16px' }}
+                style={{
+                  animation: 'boost-spin 1s linear infinite',
+                  width: '16px',
+                  height: '16px',
+                }}
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="10" opacity="0.3" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  strokeDasharray="32"
+                  strokeDashoffset="10"
+                  opacity="0.3"
+                />
                 <path d="M12 2a10 10 0 0 1 10 10" />
               </svg>
             )}
@@ -349,6 +421,5 @@ export const AddressForm: React.FC<AddressFormProps> = ({
     </div>
   );
 };
-
 
 AddressForm.displayName = 'AddressForm';

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * TrustBadgesProps — Properties for trust/payment badge displays.
  */
@@ -127,50 +126,110 @@ export const TrustBadges: React.FC<TrustBadgesProps> = ({
 
       {showGenuineBadge && (
         <div className="boost-badge-item">
-          <div className="boost-badge-icon-wrapper" style={{ color: 'var(--boost-success, #10b981)' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <div
+            className="boost-badge-icon-wrapper"
+            style={{ color: 'var(--boost-success, #10b981)' }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
-          <span>100%<br className="boost-layout-grid-only" /> Genuine</span>
+          <span>
+            100%
+            <br className="boost-layout-grid-only" /> Genuine
+          </span>
         </div>
       )}
 
       {showReturnsBadge && (
         <div className="boost-badge-item">
-          <div className="boost-badge-icon-wrapper" style={{ color: 'var(--boost-primary, #3b82f6)' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-              <path d="M21 3v5h-5"/>
-              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
-              <path d="M8 16H3v5"/>
+          <div
+            className="boost-badge-icon-wrapper"
+            style={{ color: 'var(--boost-primary, #3b82f6)' }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+              <path d="M21 3v5h-5" />
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+              <path d="M8 16H3v5" />
             </svg>
           </div>
-          <span>7-Day<br className="boost-layout-grid-only" /> Easy Returns</span>
+          <span>
+            7-Day
+            <br className="boost-layout-grid-only" /> Easy Returns
+          </span>
         </div>
       )}
 
       {showCodBadge && (
         <div className="boost-badge-item">
-          <div className="boost-badge-icon-wrapper" style={{ color: 'var(--boost-warning, #f59e0b)' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="5" width="20" height="14" rx="2"/>
-              <line x1="2" y1="10" x2="22" y2="10"/>
+          <div
+            className="boost-badge-icon-wrapper"
+            style={{ color: 'var(--boost-warning, #f59e0b)' }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <line x1="2" y1="10" x2="22" y2="10" />
             </svg>
           </div>
-          <span>COD<br className="boost-layout-grid-only" /> Available</span>
+          <span>
+            COD
+            <br className="boost-layout-grid-only" /> Available
+          </span>
         </div>
       )}
 
       {showSecureBadge && (
         <div className="boost-badge-item">
-          <div className="boost-badge-icon-wrapper" style={{ color: 'var(--boost-danger, #ef4444)' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <div
+            className="boost-badge-icon-wrapper"
+            style={{ color: 'var(--boost-danger, #ef4444)' }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
           </div>
-          <span>256-Bit SSL<br className="boost-layout-grid-only" /> Secure</span>
+          <span>
+            256-Bit SSL
+            <br className="boost-layout-grid-only" /> Secure
+          </span>
         </div>
       )}
     </div>

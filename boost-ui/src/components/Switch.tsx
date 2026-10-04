@@ -44,7 +44,10 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
     const getPresetStyles = (): { track: React.CSSProperties; thumb: React.CSSProperties } => {
       switch (preset) {
         case 'neo-brutalism':
-          return { track: { borderRadius: '6px', border: '2px solid var(--boost-border, #000000)' }, thumb: { borderRadius: '3px' } };
+          return {
+            track: { borderRadius: '6px', border: '2px solid var(--boost-border, #000000)' },
+            thumb: { borderRadius: '3px' },
+          };
         case 'glassmorphism':
           return {
             track: {
@@ -60,9 +63,13 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
             track: {
               backgroundColor: 'var(--boost-surface-secondary, #d7dce3)',
               border: 'none',
-              boxShadow: 'var(--canvas-shadow, inset 4px 4px 8px #c5cad3, inset -4px -4px 8px #ffffff)',
+              boxShadow:
+                'var(--canvas-shadow, inset 4px 4px 8px #c5cad3, inset -4px -4px 8px #ffffff)',
             },
-            thumb: { backgroundColor: 'var(--boost-surface, #eef0f4)', boxShadow: '3px 3px 6px rgba(0, 0, 0, 0.2)' },
+            thumb: {
+              backgroundColor: 'var(--boost-surface, #eef0f4)',
+              boxShadow: '3px 3px 6px rgba(0, 0, 0, 0.2)',
+            },
           };
         case 'gradient-glow':
           return { track: {}, thumb: { boxShadow: '0 0 8px rgba(99, 102, 241, 0.4)' } };
@@ -79,10 +86,13 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
     const presetStyle = getPresetStyles();
     const getSizes = () => {
       switch (size) {
-        case 'sm': return { width: 32, height: 18, circle: 14, translate: 14 };
-        case 'lg': return { width: 52, height: 28, circle: 22, translate: 24 };
+        case 'sm':
+          return { width: 32, height: 18, circle: 14, translate: 14 };
+        case 'lg':
+          return { width: 52, height: 28, circle: 22, translate: 24 };
         case 'md':
-        default: return { width: 44, height: 24, circle: 18, translate: 20 };
+        default:
+          return { width: 44, height: 24, circle: 18, translate: 20 };
       }
     };
 
@@ -157,7 +167,9 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
         {(label || description) && (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {label && (
-              <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--boost-text, #1e293b)' }}>
+              <span
+                style={{ fontSize: '14px', fontWeight: 500, color: 'var(--boost-text, #1e293b)' }}
+              >
                 {label}
               </span>
             )}

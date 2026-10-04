@@ -11,7 +11,6 @@ export interface DropdownMenuItem {
   onClick?: () => void;
 }
 
-
 /**
  * DropdownMenuProps — Properties for the dropdown menu component.
  */
@@ -33,14 +32,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
   const [isOpen, setIsOpen] = React.useState(false);
-  const [focusedIndex, setFocusedIndex] = React.useState<number>(-1);
+  const [, setFocusedIndex] = React.useState<number>(-1);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLDivElement>(null);
   const itemRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-
-  const enabledItems = React.useMemo(() => {
-    return items.map((item, idx) => ({ ...item, originalIndex: idx })).filter((item) => !item.disabled);
-  }, [items]);
 
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -184,7 +179,19 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         onKeyDown={handleTriggerKeyDown}
         style={{ cursor: 'pointer', outline: 'none' }}
       >
-        {trigger || <button type="button" style={{ padding: '6px 12px', borderRadius: '6px', border: '1px solid var(--boost-border, #cbd5e1)', background: 'transparent' }}>Options</button>}
+        {trigger || (
+          <button
+            type="button"
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid var(--boost-border, #cbd5e1)',
+              background: 'transparent',
+            }}
+          >
+            Options
+          </button>
+        )}
       </div>
 
       {isOpen && (

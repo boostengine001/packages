@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * PincodeCheckResult — Result of a pincode availability check.
  */
@@ -10,7 +9,6 @@ export interface PincodeCheckResult {
   isCodAvailable?: boolean;
   courier?: string;
 }
-
 
 /**
  * PincodeCheckerProps — Properties for the pincode availability checker.
@@ -65,7 +63,10 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
       if (onCheck) {
         // Network resilience: 10-second timeout guard against hung connections
         const timeoutPromise = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error('Postal code check timed out. Please try again.')), 10000)
+          setTimeout(
+            () => reject(new Error('Postal code check timed out. Please try again.')),
+            10000
+          )
         );
         const res = await Promise.race([Promise.resolve(onCheck(clean)), timeoutPromise]);
 
@@ -77,7 +78,11 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
         // Default realistic estimator
         const deliveryDate = new Date();
         deliveryDate.setDate(deliveryDate.getDate() + 3);
-        const options: Intl.DateTimeFormatOptions = { weekday: 'short', month: 'short', day: 'numeric' };
+        const options: Intl.DateTimeFormatOptions = {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+        };
         if (isMountedRef.current && currentReqId === activeRequestIdRef.current) {
           setResult({
             isServiceable: true,
@@ -99,9 +104,30 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
   };
 
   return (
-    <div style={{ margin: '14px 0', fontFamily: 'inherit' }} className={`boost-pincode-checker ${className}`}>
-      <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--boost-text-primary, inherit)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" opacity={0.8}>
+    <div
+      style={{ margin: '14px 0', fontFamily: 'inherit' }}
+      className={`boost-pincode-checker ${className}`}
+    >
+      <div
+        style={{
+          fontSize: '14px',
+          fontWeight: 600,
+          color: 'var(--boost-text-primary, inherit)',
+          marginBottom: '10px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity={0.8}
+        >
           <rect x="1" y="3" width="15" height="13" rx="1" />
           <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
           <circle cx="5.5" cy="18.5" r="2.5" />
@@ -151,8 +177,24 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
       </div>
 
       {error && (
-        <div style={{ color: '#ef4444', fontSize: '13px', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <div
+          style={{
+            color: '#ef4444',
+            fontSize: '13px',
+            marginTop: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -164,16 +206,57 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
       {result && (
         <div style={{ marginTop: '12px' }}>
           {result.isServiceable ? (
-            <div style={{ background: 'rgba(34, 197, 94, 0.08)', padding: '12px 16px', borderRadius: '8px', border: '1px dashed rgba(34, 197, 94, 0.3)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#22c55e', fontSize: '14px' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <div
+              style={{
+                background: 'rgba(34, 197, 94, 0.08)',
+                padding: '12px 16px',
+                borderRadius: '8px',
+                border: '1px dashed rgba(34, 197, 94, 0.3)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '6px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  color: '#22c55e',
+                  fontSize: '14px',
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
                 <strong>Delivery by {result.estimatedDeliveryDate}</strong>
               </div>
               {result.isCodAvailable && (
-                <div style={{ color: 'var(--boost-text-muted, #94a3b8)', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '2px' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div
+                  style={{
+                    color: 'var(--boost-text-muted, #94a3b8)',
+                    fontSize: '13px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginLeft: '2px',
+                  }}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <rect x="2" y="6" width="20" height="12" rx="2" />
                     <circle cx="12" cy="12" r="2" />
                   </svg>
@@ -182,8 +265,28 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
               )}
             </div>
           ) : (
-            <div style={{ background: 'rgba(239, 68, 68, 0.08)', padding: '12px 16px', borderRadius: '8px', border: '1px dashed rgba(239, 68, 68, 0.3)', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: 500 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <div
+              style={{
+                background: 'rgba(239, 68, 68, 0.08)',
+                padding: '12px 16px',
+                borderRadius: '8px',
+                border: '1px dashed rgba(239, 68, 68, 0.3)',
+                color: '#ef4444',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '14px',
+                fontWeight: 500,
+              }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
@@ -195,6 +298,5 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
     </div>
   );
 };
-
 
 PincodeChecker.displayName = 'PincodeChecker';

@@ -271,7 +271,8 @@ export const Header: React.FC<HeaderProps> = ({
                 letterSpacing: '0.06em',
                 padding: '2px 8px',
                 borderRadius: '9999px',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(59, 130, 246, 0.18))',
+                background:
+                  'linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(59, 130, 246, 0.18))',
                 color: 'var(--boost-primary, #6366f1)',
                 border: '1px solid rgba(99, 102, 241, 0.3)',
                 textTransform: 'uppercase',
@@ -294,9 +295,7 @@ export const Header: React.FC<HeaderProps> = ({
             maxWidth: '640px',
           }}
         >
-          {searchBar && (
-            <div style={{ width: '100%', maxWidth: '280px' }}>{searchBar}</div>
-          )}
+          {searchBar && <div style={{ width: '100%', maxWidth: '280px' }}>{searchBar}</div>}
 
           {effectiveLinks.length > 0 && (
             <nav style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -312,7 +311,9 @@ export const Header: React.FC<HeaderProps> = ({
                       textDecoration: 'none',
                       fontSize: '14px',
                       fontWeight: isActive ? 600 : 500,
-                      color: isActive ? 'var(--boost-primary, #4f46e5)' : 'var(--boost-text-muted, #475569)',
+                      color: isActive
+                        ? 'var(--boost-primary, #4f46e5)'
+                        : 'var(--boost-text-muted, #475569)',
                       padding: '6px 12px',
                       borderRadius: '8px',
                       transition: 'all 0.15s ease',
@@ -346,9 +347,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Right: Actions & Mobile Hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {actions && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              {actions}
-            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>{actions}</div>
           )}
 
           {/* Hamburger Toggle (Visible on Mobile) */}
@@ -371,12 +370,28 @@ export const Header: React.FC<HeaderProps> = ({
             }}
           >
             {mobileMenuOpen ? (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              >
                 <line x1="4" y1="7" x2="20" y2="7" />
                 <line x1="4" y1="12" x2="20" y2="12" />
                 <line x1="4" y1="17" x2="20" y2="17" />
@@ -412,9 +427,7 @@ export const Header: React.FC<HeaderProps> = ({
             })
           ) : (
             <>
-              {searchBar && (
-                <div style={{ marginBottom: '8px' }}>{searchBar}</div>
-              )}
+              {searchBar && <div style={{ marginBottom: '8px' }}>{searchBar}</div>}
               {effectiveLinks.map((link, idx) => {
                 const isActive = link.active || (activeHref ? activeHref === link.href : false);
                 return (
@@ -427,7 +440,9 @@ export const Header: React.FC<HeaderProps> = ({
                       textDecoration: 'none',
                       fontSize: '15px',
                       fontWeight: 600,
-                      color: isActive ? 'var(--boost-primary, #4f46e5)' : 'var(--boost-text, #1e293b)',
+                      color: isActive
+                        ? 'var(--boost-primary, #4f46e5)'
+                        : 'var(--boost-text, #1e293b)',
                       padding: '10px 14px',
                       borderRadius: '8px',
                       display: 'flex',
@@ -455,7 +470,16 @@ export const Header: React.FC<HeaderProps> = ({
                 );
               })}
               {actions && (
-                <div style={{ borderTop: '1px solid var(--boost-border, #e2e8f0)', paddingTop: '14px', marginTop: '6px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <div
+                  style={{
+                    borderTop: '1px solid var(--boost-border, #e2e8f0)',
+                    paddingTop: '14px',
+                    marginTop: '6px',
+                    display: 'flex',
+                    gap: '10px',
+                    flexWrap: 'wrap',
+                  }}
+                >
                   {actions}
                 </div>
               )}

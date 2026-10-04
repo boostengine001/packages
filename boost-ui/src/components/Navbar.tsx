@@ -63,12 +63,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'New Arrivals', href: '/collections/new' },
     { label: 'Sale', href: '/collections/sale', isHighlight: true },
   ],
-  activeHref,
   searchPlaceholder = 'Search for products, brands...',
   searchValue,
   onSearchChange,
   onSearchSubmit,
-  showSearch = true,
   cartCount = 0,
   wishlistCount = 0,
   onCartClick,
@@ -237,7 +235,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               padding: '4px',
             }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -350,12 +355,28 @@ export const Navbar: React.FC<NavbarProps> = ({
             }}
           >
             {mobileMenuOpen ? (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              >
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="18" x2="21" y2="18" />
@@ -547,7 +568,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                           transition: 'background-color 0.15s ease, color 0.15s ease',
                         }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--boost-bg, #f1f5f9)';
+                          (e.currentTarget as HTMLElement).style.backgroundColor =
+                            'var(--boost-bg, #f1f5f9)';
                         }}
                         onMouseLeave={(e) => {
                           (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
@@ -555,7 +577,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                       >
                         <span>{child.label}</span>
                         {child.badge && (
-                          <span style={{ fontSize: '10px', fontWeight: 600, padding: '1px 6px', borderRadius: '9999px', backgroundColor: 'var(--boost-primary, #2563eb)', color: '#ffffff' }}>
+                          <span
+                            style={{
+                              fontSize: '10px',
+                              fontWeight: 600,
+                              padding: '1px 6px',
+                              borderRadius: '9999px',
+                              backgroundColor: 'var(--boost-primary, #2563eb)',
+                              color: '#ffffff',
+                            }}
+                          >
                             {child.badge}
                           </span>
                         )}
@@ -589,7 +620,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               pointerEvents: 'none',
             }}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+            >
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
@@ -633,7 +672,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               borderRadius: '8px',
             }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+            >
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
@@ -657,7 +704,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               transition: 'transform 0.15s ease',
             }}
           >
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
             {wishlistCount > 0 && (
@@ -702,12 +757,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               borderRadius: '8px',
             }}
           >
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
             {isLoggedIn && userName && (
-              <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}>{userName}</span>
+              <span
+                style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}
+              >
+                {userName}
+              </span>
             )}
           </button>
 
@@ -733,7 +800,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               transition: 'transform 0.15s ease, box-shadow 0.15s ease',
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
@@ -756,9 +831,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {actions && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              {actions}
-            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>{actions}</div>
           )}
         </div>
       </div>
@@ -787,7 +860,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 pointerEvents: 'none',
               }}
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              >
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
@@ -915,7 +996,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 {hasChildren && isExpanded && (
-                  <div style={{ paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
+                  <div
+                    style={{
+                      paddingLeft: '20px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px',
+                      marginTop: '4px',
+                    }}
+                  >
                     {link.children!.map((child) => (
                       <a
                         key={child.href}
@@ -935,7 +1024,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                       >
                         <span>{child.label}</span>
                         {child.badge && (
-                          <span style={{ fontSize: '10px', fontWeight: 600, padding: '1px 6px', borderRadius: '9999px', backgroundColor: 'var(--boost-primary, #2563eb)', color: '#ffffff' }}>
+                          <span
+                            style={{
+                              fontSize: '10px',
+                              fontWeight: 600,
+                              padding: '1px 6px',
+                              borderRadius: '9999px',
+                              backgroundColor: 'var(--boost-primary, #2563eb)',
+                              color: '#ffffff',
+                            }}
+                          >
                             {child.badge}
                           </span>
                         )}
@@ -951,6 +1049,5 @@ export const Navbar: React.FC<NavbarProps> = ({
     </header>
   );
 };
-
 
 Navbar.displayName = 'Navbar';

@@ -1,12 +1,16 @@
 export class BoostBadge extends HTMLElement {
-  static get observedAttributes() { return ['variant']; }
+  static get observedAttributes() {
+    return ['variant'];
+  }
 
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
     this.render();
   }
 
-  attributeChangedCallback() { this.render(); }
+  attributeChangedCallback() {
+    this.render();
+  }
 
   private get variantStyle(): string {
     const v = this.getAttribute('variant') || 'default';
@@ -33,4 +37,4 @@ export class BoostBadge extends HTMLElement {
 
 if (typeof customElements !== 'undefined' && !customElements.get('boost-badge')) {
   customElements.define('boost-badge', BoostBadge);
-}
+}

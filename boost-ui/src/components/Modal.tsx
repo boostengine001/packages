@@ -46,8 +46,10 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
-  const modalRef = React.useRef<HTMLDivElement>(null);
-  useFocusTrap(modalRef, isOpen);
+  // State-held node (not a plain ref): the Portal mounts asynchronously, and the
+  // state update re-runs useFocusTrap so the trap attaches after the DOM exists.
+  const [modalNode, setModalNode] = React.useState<HTMLDivElement | null>(null);
+  useFocusTrap(modalNode, isOpen);
 
   React.useEffect(() => {
     if (!isOpen) return;
@@ -67,11 +69,15 @@ export const Modal: React.FC<ModalProps> = ({
 
   const getWidth = () => {
     switch (size) {
-      case 'sm': return '400px';
-      case 'lg': return '680px';
-      case 'xl': return '840px';
+      case 'sm':
+        return '400px';
+      case 'lg':
+        return '680px';
+      case 'xl':
+        return '840px';
       case 'md':
-      default: return '520px';
+      default:
+        return '520px';
     }
   };
 
@@ -98,7 +104,8 @@ export const Modal: React.FC<ModalProps> = ({
           backgroundColor: 'var(--boost-neuro-surface, var(--boost-surface, #e8ebf0))',
           border: 'none',
           borderRadius: '24px',
-          boxShadow: 'var(--boost-neuro-shadow, var(--card-shadow, 12px 12px 28px #cbd5e1, -12px -12px 28px #ffffff))',
+          boxShadow:
+            'var(--boost-neuro-shadow, var(--card-shadow, 12px 12px 28px #cbd5e1, -12px -12px 28px #ffffff))',
         };
       case 'gradient-glow':
         return {
@@ -135,7 +142,7 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <Portal>
       <div
-        ref={modalRef}
+        ref={setModalNode}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'boost-modal-title' : undefined}
@@ -246,12 +253,31 @@ export const Modal: React.FC<ModalProps> = ({
             >
               <div>
                 {title && (
-                  <h3 id="boost-modal-title" className="boost-modal-title" style={{ margin: 0, fontSize: 'clamp(17px, 2.5vw, 20px)', fontWeight: 700, color: 'var(--boost-text, #0f172a)', letterSpacing: '-0.01em' }}>
+                  <h3
+                    id="boost-modal-title"
+                    className="boost-modal-title"
+                    style={{
+                      margin: 0,
+                      fontSize: 'clamp(17px, 2.5vw, 20px)',
+                      fontWeight: 700,
+                      color: 'var(--boost-text, #0f172a)',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
                     {title}
                   </h3>
                 )}
                 {description && (
-                  <p id="boost-modal-desc" className="boost-modal-desc" style={{ margin: '4px 0 0 0', fontSize: '13px', color: 'var(--boost-muted, #64748b)', lineHeight: 1.4 }}>
+                  <p
+                    id="boost-modal-desc"
+                    className="boost-modal-desc"
+                    style={{
+                      margin: '4px 0 0 0',
+                      fontSize: '13px',
+                      color: 'var(--boost-muted, #64748b)',
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {description}
                   </p>
                 )}
@@ -276,7 +302,15 @@ export const Modal: React.FC<ModalProps> = ({
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
@@ -285,7 +319,17 @@ export const Modal: React.FC<ModalProps> = ({
             </div>
           )}
 
-          <div className="boost-modal-body" style={{ padding: 'clamp(18px, 3.5vw, 28px)', overflowY: 'auto', flex: 1, color: 'var(--boost-text, #334155)', fontSize: '14px', lineHeight: 1.6 }}>
+          <div
+            className="boost-modal-body"
+            style={{
+              padding: 'clamp(18px, 3.5vw, 28px)',
+              overflowY: 'auto',
+              flex: 1,
+              color: 'var(--boost-text, #334155)',
+              fontSize: '14px',
+              lineHeight: 1.6,
+            }}
+          >
             {children}
           </div>
 

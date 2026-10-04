@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * StarRatingProps — Properties for the star rating display/input component.
  */
@@ -22,7 +21,7 @@ export const StarRating: React.FC<StarRatingProps> = ({
   className = '',
 }) => {
   const clamped = Math.max(0, Math.min(5, rating));
-  const gradientId = React.useId ? React.useId().replace(/:/g, '') : `half-star-${Math.random().toString(36).substring(2, 7)}`;
+  const gradientId = React.useId().replace(/:/g, '');
 
   return (
     <div
@@ -59,16 +58,30 @@ export const StarRating: React.FC<StarRatingProps> = ({
       </div>
 
       {showText && (
-        <span style={{ fontSize: `${size * 0.85}px`, fontWeight: 600, color: 'var(--boost-text-primary, #374151)', marginLeft: '4px' }}>
+        <span
+          style={{
+            fontSize: `${size * 0.85}px`,
+            fontWeight: 600,
+            color: 'var(--boost-text-primary, #374151)',
+            marginLeft: '4px',
+          }}
+        >
           {clamped.toFixed(1)}
           {reviewCount !== undefined && (
-            <span style={{ color: 'var(--boost-text-muted, #9ca3af)', fontWeight: 400, marginLeft: '4px' }}>({reviewCount})</span>
+            <span
+              style={{
+                color: 'var(--boost-text-muted, #9ca3af)',
+                fontWeight: 400,
+                marginLeft: '4px',
+              }}
+            >
+              ({reviewCount})
+            </span>
           )}
         </span>
       )}
     </div>
   );
 };
-
 
 StarRating.displayName = 'StarRating';

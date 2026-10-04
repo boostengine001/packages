@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * AssuredBadgeProps — Properties for the assurance/guarantee badge.
  */
@@ -9,10 +8,7 @@ export interface AssuredBadgeProps {
   className?: string;
 }
 
-export const AssuredBadge: React.FC<AssuredBadgeProps> = ({
-  type = 'assured',
-  className = '',
-}) => {
+export const AssuredBadge: React.FC<AssuredBadgeProps> = ({ type = 'assured', className = '' }) => {
   if (type === 'prime') {
     return (
       <span
@@ -33,7 +29,14 @@ export const AssuredBadge: React.FC<AssuredBadgeProps> = ({
       >
         <span style={{ color: '#ffffff' }}>BOOST</span>
         <span style={{ color: '#00a8e1' }}>prime</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00a8e1" strokeWidth="3">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#00a8e1"
+          strokeWidth="3"
+        >
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       </span>
@@ -69,7 +72,14 @@ export const AssuredBadge: React.FC<AssuredBadgeProps> = ({
             color: '#ffffff',
           }}
         >
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+          >
             <circle cx="12" cy="12" r="9" />
           </svg>
         </span>
@@ -112,13 +122,19 @@ export const AssuredBadge: React.FC<AssuredBadgeProps> = ({
         }}
       >
         Assured
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3">
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="3"
+        >
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       </span>
     </span>
   );
 };
-
 
 AssuredBadge.displayName = 'AssuredBadge';

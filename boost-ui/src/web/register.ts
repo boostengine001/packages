@@ -19,4 +19,4 @@ export function registerAllComponents(): void {
   if (!customElements.get('boost-badge')) {
     customElements.define('boost-badge', BoostBadge);
   }
-}
+}

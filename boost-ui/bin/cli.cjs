@@ -27,16 +27,127 @@ if (command === 'list') {
 
   const categories = {
     '0. Theming': ['BoostProvider'],
-    '1. Primitives': ['Box', 'Flex', 'Stack', 'Grid', 'Section', 'AspectRatio', 'ScrollArea', 'Container', 'PageWrapper', 'Motion'],
-    '2. Marketing': ['HeroSection', 'FeatureGrid', 'PricingTable', 'TestimonialCard', 'FAQSection', 'LogoCloud', 'CTASection'],
-    '3. SaaS & Analytics': ['AreaChart', 'BarChart', 'DonutChart', 'Sparkline', 'KPIWidget', 'CommandPalette', 'ActivityFeed', 'CopyButton', 'FileDropzone', 'StatsCard', 'DataTable', 'Table', 'DateRangePicker', 'ExportButton', 'Filter', 'Sort', 'NotificationCenter'],
+    '1. Primitives': [
+      'Box',
+      'Flex',
+      'Stack',
+      'Grid',
+      'Section',
+      'AspectRatio',
+      'ScrollArea',
+      'Container',
+      'PageWrapper',
+      'Motion',
+    ],
+    '2. Marketing': [
+      'HeroSection',
+      'FeatureGrid',
+      'PricingTable',
+      'TestimonialCard',
+      'FAQSection',
+      'LogoCloud',
+      'CTASection',
+    ],
+    '3. SaaS & Analytics': [
+      'AreaChart',
+      'BarChart',
+      'DonutChart',
+      'Sparkline',
+      'KPIWidget',
+      'CommandPalette',
+      'ActivityFeed',
+      'CopyButton',
+      'FileDropzone',
+      'StatsCard',
+      'DataTable',
+      'Table',
+      'DateRangePicker',
+      'ExportButton',
+      'Filter',
+      'Sort',
+      'NotificationCenter',
+    ],
     '4. Buttons': ['Button', 'IconButton', 'ButtonGroup', 'FloatingActionButton', 'LinkButton'],
-    '5. Forms & Inputs': ['Input', 'Textarea', 'Select', 'MultiSelect', 'Checkbox', 'Radio', 'Switch', 'DatePicker', 'TimePicker', 'FileUpload', 'SearchInput', 'FormField', 'OTPInput'],
-    '6. Feedback': ['Toast', 'Alert', 'Snackbar', 'Loader', 'Spinner', 'ProgressBar', 'Skeleton', 'EmptyState', 'ErrorState', 'SuccessMessage'],
-    '7. Display': ['Card', 'Image', 'Avatar', 'Badge', 'Tag', 'Tooltip', 'Chip', 'Divider', 'Accordion', 'Carousel'],
+    '5. Forms & Inputs': [
+      'Input',
+      'Textarea',
+      'Select',
+      'MultiSelect',
+      'Checkbox',
+      'Radio',
+      'Switch',
+      'DatePicker',
+      'TimePicker',
+      'FileUpload',
+      'SearchInput',
+      'FormField',
+      'OTPInput',
+    ],
+    '6. Feedback': [
+      'Toast',
+      'Alert',
+      'Snackbar',
+      'Loader',
+      'Spinner',
+      'ProgressBar',
+      'Skeleton',
+      'EmptyState',
+      'ErrorState',
+      'SuccessMessage',
+    ],
+    '7. Display': [
+      'Card',
+      'Image',
+      'Avatar',
+      'Badge',
+      'Tag',
+      'Tooltip',
+      'Chip',
+      'Divider',
+      'Accordion',
+      'Carousel',
+    ],
     '8. Overlays': ['Modal', 'Drawer', 'BottomSheet', 'Popover', 'ConfirmationDialog', 'Portal'],
-    '9. Navigation': ['Header', 'Navbar', 'Sidebar', 'Footer', 'MobileBottomBar', 'MobileBottomNav', 'Breadcrumb', 'NavLink', 'DropdownMenu', 'MegaMenu', 'Pagination', 'Tabs', 'Stepper', 'BackButton'],
-    '10. eCommerce': ['CartDrawer', 'StickyAddToCart', 'PincodeChecker', 'TrustBadges', 'OrderTimeline', 'StarRating', 'ProductGallery', 'VariantSelector', 'ProductCard', 'QuantitySelector', 'ReviewBreakdownBars', 'AnnouncementBar', 'LightningDealsBar', 'FrequentlyBoughtTogether', 'BankOffersAccordion', 'AssuredBadge', 'DualMobileActionBar', 'Price', 'AddToCart', 'CouponInput', 'AddressForm', 'OrderSummary'],
+    '9. Navigation': [
+      'Header',
+      'Navbar',
+      'Sidebar',
+      'Footer',
+      'MobileBottomBar',
+      'MobileBottomNav',
+      'Breadcrumb',
+      'NavLink',
+      'DropdownMenu',
+      'MegaMenu',
+      'Pagination',
+      'Tabs',
+      'Stepper',
+      'BackButton',
+    ],
+    '10. eCommerce': [
+      'CartDrawer',
+      'StickyAddToCart',
+      'PincodeChecker',
+      'TrustBadges',
+      'OrderTimeline',
+      'StarRating',
+      'ProductGallery',
+      'VariantSelector',
+      'ProductCard',
+      'QuantitySelector',
+      'ReviewBreakdownBars',
+      'AnnouncementBar',
+      'LightningDealsBar',
+      'FrequentlyBoughtTogether',
+      'BankOffersAccordion',
+      'AssuredBadge',
+      'DualMobileActionBar',
+      'Price',
+      'AddToCart',
+      'CouponInput',
+      'AddressForm',
+      'OrderSummary',
+    ],
     '11. Authentication': ['LoginForm', 'RegisterForm', 'ForgotPassword', 'ResetPassword'],
   };
 
@@ -59,9 +170,7 @@ if (command === 'list') {
   const all = getAvailableComponents();
   const normalizedTarget = targetComponent.toLowerCase().replace(/[-_]/g, '');
 
-  const matched = all.find(
-    (c) => c.toLowerCase().replace(/[-_]/g, '') === normalizedTarget
-  );
+  const matched = all.find((c) => c.toLowerCase().replace(/[-_]/g, '') === normalizedTarget);
 
   if (!matched) {
     console.error(`❌ Component "${targetComponent}" not found.`);
@@ -114,7 +223,9 @@ export default function RootLayout({ children }) {
 } else {
   console.log('Usage:');
   console.log('  npx @boostengine/ui list                List all 80+ universal components');
-  console.log('  npx @boostengine/ui add <component>     Scaffold component directly into your project');
+  console.log(
+    '  npx @boostengine/ui add <component>     Scaffold component directly into your project'
+  );
   console.log('  npx @boostengine/ui init                Initialize boost-ui config in your app');
   console.log('  npx @boostengine/ui help                Show this help guide\n');
   console.log('Examples:');

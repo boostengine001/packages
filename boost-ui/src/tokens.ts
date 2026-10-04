@@ -5,4 +5,3 @@
 
 export * from './tokens/index';
 export * from './tokens/presets';
-

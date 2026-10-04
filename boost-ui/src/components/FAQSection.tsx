@@ -2,7 +2,6 @@ import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';
 
-
 /**
  * FAQItem — A single FAQ question-and-answer pair.
  */
@@ -11,7 +10,6 @@ export interface FAQItem {
   question: string;
   answer: React.ReactNode;
 }
-
 
 /**
  * FAQSectionProps — Properties for the FAQ accordion section.
@@ -44,9 +42,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const toggleItem = (idx: number) => {
-    setOpenIds((prev) =>
-      prev.includes(idx) ? prev.filter((id) => id !== idx) : [...prev, idx]
-    );
+    setOpenIds((prev) => (prev.includes(idx) ? prev.filter((id) => id !== idx) : [...prev, idx]));
   };
 
   const filteredItems = items.filter(
@@ -123,7 +119,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
           backgroundColor: 'rgba(255, 255, 255, 0.7)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: isOpen ? '1px solid rgba(255, 255, 255, 0.8)' : '1px solid rgba(255, 255, 255, 0.35)',
+          border: isOpen
+            ? '1px solid rgba(255, 255, 255, 0.8)'
+            : '1px solid rgba(255, 255, 255, 0.35)',
           borderRadius: '16px',
           boxShadow: isOpen ? '0 8px 32px 0 rgba(31, 38, 135, 0.12)' : 'none',
         };
@@ -132,7 +130,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
           border: 'none',
           backgroundColor: 'var(--boost-surface, #e6ecf5)',
           borderRadius: '16px',
-          boxShadow: isOpen ? 'inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff' : '5px 5px 12px #d1d9e6, -5px -5px 12px #ffffff',
+          boxShadow: isOpen
+            ? 'inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff'
+            : '5px 5px 12px #d1d9e6, -5px -5px 12px #ffffff',
         };
       case 'gradient-glow':
         return {
@@ -144,7 +144,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
       case 'material-you':
         return {
           borderRadius: '24px',
-          backgroundColor: isOpen ? 'var(--boost-surface-container-high, #ede7f6)' : 'var(--boost-surface-variant, #f3edf7)',
+          backgroundColor: isOpen
+            ? 'var(--boost-surface-container-high, #ede7f6)'
+            : 'var(--boost-surface-variant, #f3edf7)',
           border: 'none',
         };
       case 'dark-first':
@@ -157,7 +159,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
       default:
         return {
           backgroundColor: 'var(--boost-surface, #ffffff)',
-          border: isOpen ? '1px solid var(--boost-primary, #6366f1)' : '1px solid var(--boost-border, #e2e8f0)',
+          border: isOpen
+            ? '1px solid var(--boost-primary, #6366f1)'
+            : '1px solid var(--boost-border, #e2e8f0)',
           borderRadius: '14px',
           boxShadow: isOpen ? '0 4px 20px rgba(99, 102, 241, 0.12)' : 'none',
         };
@@ -323,7 +327,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
                       height: '28px',
                       borderRadius: '9999px',
                       backgroundColor: isOpen ? 'rgba(37, 99, 235, 0.1)' : 'transparent',
-                      color: isOpen ? 'var(--boost-primary, #2563eb)' : 'var(--boost-text-muted, #64748b)',
+                      color: isOpen
+                        ? 'var(--boost-primary, #2563eb)'
+                        : 'var(--boost-text-muted, #64748b)',
                       flexShrink: 0,
                       transition: 'all 0.2s ease',
                     }}
@@ -350,11 +356,15 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
                 {isOpen && (
                   <div
                     style={{
-                      padding: '0 clamp(16px, 3vw, 24px) clamp(14px, 2.5vw, 20px) clamp(16px, 3vw, 24px)',
+                      padding:
+                        '0 clamp(16px, 3vw, 24px) clamp(14px, 2.5vw, 20px) clamp(16px, 3vw, 24px)',
                       color: 'var(--boost-text-muted, #64748b)',
                       fontSize: '14px',
                       lineHeight: 1.65,
-                      borderTop: preset === 'neo-brutalism' ? '2px solid #000' : '1px solid var(--boost-border, #e2e8f0)',
+                      borderTop:
+                        preset === 'neo-brutalism'
+                          ? '2px solid #000'
+                          : '1px solid var(--boost-border, #e2e8f0)',
                       paddingTop: '14px',
                       animation: 'boost-fadeIn 0.2s ease',
                     }}
@@ -370,6 +380,5 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
     </div>
   );
 };
-
 
 FAQSection.displayName = 'FAQSection';

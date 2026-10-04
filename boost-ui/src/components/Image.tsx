@@ -23,15 +23,22 @@ export const Image: React.FC<ImageProps> = ({
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   const getAspect = () => {
-    if (typeof aspectRatio === 'string' && (aspectRatio.includes('/') || aspectRatio.includes(':'))) {
+    if (
+      typeof aspectRatio === 'string' &&
+      (aspectRatio.includes('/') || aspectRatio.includes(':'))
+    ) {
       return aspectRatio.replace(':', '/');
     }
     switch (aspectRatio) {
-      case 'square': return '1 / 1';
-      case 'video': return '16 / 9';
-      case 'portrait': return '3 / 4';
+      case 'square':
+        return '1 / 1';
+      case 'video':
+        return '16 / 9';
+      case 'portrait':
+        return '3 / 4';
       case 'auto':
-      default: return undefined;
+      default:
+        return undefined;
     }
   };
 

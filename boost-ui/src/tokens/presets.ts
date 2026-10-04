@@ -1,4 +1,4 @@
-import { UIStylePreset, PresetTokens } from '../types/presets';
+import { UIStylePreset } from '../types/presets';
 
 export const presetTokenCssVars = {
   minimal: {
@@ -63,10 +63,15 @@ export type PresetTokenCssVars = typeof presetTokenCssVars;
 
 export const presetHelperClasses: Record<UIStylePreset, string> = {
   minimal: '',
-  glassmorphism: '.boost-preset-glassmorphism { backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(226, 232, 240, 0.8); }',
-  neumorphism: '.boost-preset-neumorphism { box-shadow: 6px 6px 12px #c5cad3, -6px -6px 12px #ffffff; }',
-  'neo-brutalism': '.boost-preset-neo-brutalism { box-shadow: 4px 4px 0px #000; border: 2px solid #000; }',
+  glassmorphism:
+    '.boost-preset-glassmorphism { backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(226, 232, 240, 0.8); }',
+  neumorphism:
+    '.boost-preset-neumorphism { box-shadow: 6px 6px 12px #c5cad3, -6px -6px 12px #ffffff; }',
+  'neo-brutalism':
+    '.boost-preset-neo-brutalism { box-shadow: 4px 4px 0px #000; border: 2px solid #000; }',
   'gradient-glow': '.boost-preset-gradient-glow { box-shadow: 0 0 20px rgba(99, 102, 241, 0.35); }',
-  'dark-first': '.boost-preset-dark-first { background: #0f172a; border: 1px solid #334155; color: #f8fafc; }',
-  'material-you': '.boost-preset-material-you { border-radius: 24px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }',
+  'dark-first':
+    '.boost-preset-dark-first { background: #0f172a; border: 1px solid #334155; color: #f8fafc; }',
+  'material-you':
+    '.boost-preset-material-you { border-radius: 24px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }',
 };

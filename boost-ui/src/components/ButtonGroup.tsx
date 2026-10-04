@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * ButtonGroupProps — Properties for grouping multiple buttons together.
  */
@@ -37,7 +36,10 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
         if (!React.isValidElement(child)) return child;
         const total = React.Children.count(children);
         const isLast = idx === total - 1;
-        const typedChild = child as React.ReactElement<{ style?: React.CSSProperties; fullWidth?: boolean }>;
+        const typedChild = child as React.ReactElement<{
+          style?: React.CSSProperties;
+          fullWidth?: boolean;
+        }>;
 
         return React.cloneElement(typedChild, {
           style: {
@@ -45,8 +47,14 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
             borderRadius: 0,
             border: 'none',
             flex: fullWidth ? 1 : undefined,
-            borderRight: orientation === 'horizontal' && !isLast ? '1px solid var(--boost-border, #cbd5e1)' : 'none',
-            borderBottom: orientation === 'vertical' && !isLast ? '1px solid var(--boost-border, #cbd5e1)' : 'none',
+            borderRight:
+              orientation === 'horizontal' && !isLast
+                ? '1px solid var(--boost-border, #cbd5e1)'
+                : 'none',
+            borderBottom:
+              orientation === 'vertical' && !isLast
+                ? '1px solid var(--boost-border, #cbd5e1)'
+                : 'none',
           },
         });
       })}

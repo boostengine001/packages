@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 /**
  * OrderSummaryItem — A single item in the order summary.
  */
@@ -10,7 +9,6 @@ export interface OrderSummaryItem {
   isDiscount?: boolean;
   helpText?: string;
 }
-
 
 /**
  * OrderSummaryProps — Properties for the order summary with item list.
@@ -71,7 +69,14 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
         ...style,
       }}
     >
-      <h3 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--boost-text, #0f172a)', margin: '0 0 16px' }}>
+      <h3
+        style={{
+          fontSize: '17px',
+          fontWeight: 700,
+          color: 'var(--boost-text, #0f172a)',
+          margin: '0 0 16px',
+        }}
+      >
         Order Summary
       </h3>
 
@@ -79,18 +84,32 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
         <div
           style={{
             padding: '10px 14px',
-            backgroundColor: isFreeShipping || remainingForFreeShipping === 0 ? 'rgba(34, 197, 94, 0.1)' : 'rgba(37, 99, 235, 0.08)',
+            backgroundColor:
+              isFreeShipping || remainingForFreeShipping === 0
+                ? 'rgba(34, 197, 94, 0.1)'
+                : 'rgba(37, 99, 235, 0.08)',
             borderRadius: '8px',
             marginBottom: '16px',
             fontSize: '12px',
             fontWeight: 600,
-            color: isFreeShipping || remainingForFreeShipping === 0 ? '#16a34a' : 'var(--boost-primary, #2563eb)',
+            color:
+              isFreeShipping || remainingForFreeShipping === 0
+                ? '#16a34a'
+                : 'var(--boost-primary, #2563eb)',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          >
             <rect x="1" y="3" width="15" height="13" />
             <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
             <circle cx="5.5" cy="18.5" r="2.5" />
@@ -105,10 +124,17 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
       )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', fontSize: '13px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--boost-text-muted, #64748b)' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            color: 'var(--boost-text-muted, #64748b)',
+          }}
+        >
           <span>Subtotal</span>
           <span style={{ fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}>
-            {currencySymbol}{formatNumber(subtotal)}
+            {currencySymbol}
+            {formatNumber(subtotal)}
           </span>
         </div>
 
@@ -116,23 +142,42 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
           <div style={{ display: 'flex', justifyContent: 'space-between', color: '#16a34a' }}>
             <span>Discount</span>
             <span style={{ fontWeight: 700 }}>
-              -{currencySymbol}{formatNumber(discount)}
+              -{currencySymbol}
+              {formatNumber(discount)}
             </span>
           </div>
         )}
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--boost-text-muted, #64748b)' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            color: 'var(--boost-text-muted, #64748b)',
+          }}
+        >
           <span>Delivery Charges</span>
-          <span style={{ fontWeight: 600, color: isFreeShipping ? '#16a34a' : 'var(--boost-text, #0f172a)' }}>
+          <span
+            style={{
+              fontWeight: 600,
+              color: isFreeShipping ? '#16a34a' : 'var(--boost-text, #0f172a)',
+            }}
+          >
             {isFreeShipping ? 'FREE' : `${currencySymbol}${formatNumber(shippingFee)}`}
           </span>
         </div>
 
         {tax > 0 && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--boost-text-muted, #64748b)' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              color: 'var(--boost-text-muted, #64748b)',
+            }}
+          >
             <span>Estimated Taxes (GST)</span>
             <span style={{ fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}>
-              {currencySymbol}{formatNumber(tax)}
+              {currencySymbol}
+              {formatNumber(tax)}
             </span>
           </div>
         )}
@@ -162,9 +207,12 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
           alignItems: 'baseline',
         }}
       >
-        <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--boost-text, #0f172a)' }}>Total Amount</span>
+        <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--boost-text, #0f172a)' }}>
+          Total Amount
+        </span>
         <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--boost-text, #0f172a)' }}>
-          {currencySymbol}{formatNumber(total)}
+          {currencySymbol}
+          {formatNumber(total)}
         </span>
       </div>
 
@@ -201,7 +249,14 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
               stroke="currentColor"
               strokeWidth="2"
             >
-              <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="10" opacity="0.3" />
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                strokeDasharray="32"
+                strokeDashoffset="10"
+                opacity="0.3"
+              />
               <path d="M12 2a10 10 0 0 1 10 10" />
             </svg>
           )}
@@ -220,7 +275,14 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
           color: 'var(--boost-text-muted, #64748b)',
         }}
       >
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
@@ -229,6 +291,5 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
     </div>
   );
 };
-
 
 OrderSummary.displayName = 'OrderSummary';

@@ -10,7 +10,6 @@ export interface MobileBottomNavItem {
   href?: string;
 }
 
-
 /**
  * MobileBottomNavProps — Properties for mobile bottom navigation.
  */
@@ -41,7 +40,9 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 }) => {
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
-  const [internalActiveId, setInternalActiveId] = React.useState(activeId || defaultActiveId || items[0]?.id);
+  const [internalActiveId, setInternalActiveId] = React.useState(
+    activeId || defaultActiveId || items[0]?.id
+  );
 
   React.useEffect(() => {
     if (activeId !== undefined) {
@@ -60,32 +61,104 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
   const getPresetActiveColor = () => {
     switch (preset) {
-      case 'neo-brutalism': return '#000';
-      case 'glassmorphism': return '#6366f1';
-      case 'gradient-glow': return '#8b5cf6';
-      case 'material-you': return '#6750a4';
-      case 'dark-first': return '#60a5fa';
-      default: return activeColor;
+      case 'neo-brutalism':
+        return '#000';
+      case 'glassmorphism':
+        return '#6366f1';
+      case 'gradient-glow':
+        return '#8b5cf6';
+      case 'material-you':
+        return '#6750a4';
+      case 'dark-first':
+        return '#60a5fa';
+      default:
+        return activeColor;
     }
   };
 
   const getNavStyles = (): React.CSSProperties => {
     const base: React.CSSProperties = {
-      position: 'fixed', bottom: isFloating ? '12px' : 0, left: isFloating ? '16px' : 0,
-      right: isFloating ? '16px' : 0, margin: isFloating ? '0 auto' : undefined,
+      position: 'fixed',
+      bottom: isFloating ? '12px' : 0,
+      left: isFloating ? '16px' : 0,
+      right: isFloating ? '16px' : 0,
+      margin: isFloating ? '0 auto' : undefined,
       maxWidth: isFloating ? '440px' : undefined,
-      zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-around',
+      zIndex: 50,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-around',
       padding: isFloating ? '8px 10px' : '6px 4px calc(6px + env(safe-area-inset-bottom, 8px))',
-      fontFamily: 'inherit', boxSizing: 'border-box',
+      fontFamily: 'inherit',
+      boxSizing: 'border-box',
     };
     switch (preset) {
-      case 'neo-brutalism': return { ...base, backgroundColor: '#ffffff', borderRadius: isFloating ? '2px' : undefined, borderTop: '3px solid #000', boxShadow: isFloating ? '0 -4px 0px #000' : 'none' };
-      case 'glassmorphism': return { ...base, backgroundColor: 'rgba(255,255,255,0.82)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', borderRadius: isFloating ? '24px' : undefined, borderTop: isFloating ? 'none' : '1px solid rgba(255,255,255,0.4)', border: isFloating ? '1px solid rgba(255,255,255,0.4)' : undefined, boxShadow: '0 -4px 24px rgba(0,0,0,0.08)' };
-      case 'neumorphism': return { ...base, backgroundColor: '#e0e5ec', borderRadius: isFloating ? '9999px' : undefined, border: 'none', boxShadow: isFloating ? '6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff' : '0 -4px 12px #d1d9e6' };
-      case 'gradient-glow': return { ...base, backgroundColor: 'var(--boost-surface,#ffffff)', borderRadius: isFloating ? '24px' : undefined, borderTop: isFloating ? 'none' : '1px solid rgba(99,102,241,0.2)', boxShadow: '0 -4px 20px rgba(99,102,241,0.12)' };
-      case 'material-you': return { ...base, backgroundColor: 'var(--boost-surface,#fffbfe)', borderRadius: isFloating ? '28px' : '28px 28px 0 0', borderTop: isFloating ? 'none' : '1px solid var(--boost-border,#e2e8f0)' };
-      case 'dark-first': return { ...base, backgroundColor: 'rgba(15,23,42,0.97)', borderRadius: isFloating ? '24px' : undefined, backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderTop: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 -4px 20px rgba(0,0,0,0.5)' };
-      default: return { ...base, backgroundColor: variant === 'solid' ? 'var(--boost-surface,#ffffff)' : 'rgba(255,255,255,0.92)', borderRadius: isFloating ? '24px' : undefined, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderTop: isFloating ? 'none' : '1px solid rgba(226,232,240,0.8)', border: isFloating ? '1px solid rgba(226,232,240,0.8)' : undefined, boxShadow: isFloating ? '0 12px 30px rgba(0,0,0,0.15)' : '0 -4px 20px rgba(0,0,0,0.05)' };
+      case 'neo-brutalism':
+        return {
+          ...base,
+          backgroundColor: '#ffffff',
+          borderRadius: isFloating ? '2px' : undefined,
+          borderTop: '3px solid #000',
+          boxShadow: isFloating ? '0 -4px 0px #000' : 'none',
+        };
+      case 'glassmorphism':
+        return {
+          ...base,
+          backgroundColor: 'rgba(255,255,255,0.82)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderRadius: isFloating ? '24px' : undefined,
+          borderTop: isFloating ? 'none' : '1px solid rgba(255,255,255,0.4)',
+          border: isFloating ? '1px solid rgba(255,255,255,0.4)' : undefined,
+          boxShadow: '0 -4px 24px rgba(0,0,0,0.08)',
+        };
+      case 'neumorphism':
+        return {
+          ...base,
+          backgroundColor: '#e0e5ec',
+          borderRadius: isFloating ? '9999px' : undefined,
+          border: 'none',
+          boxShadow: isFloating
+            ? '6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff'
+            : '0 -4px 12px #d1d9e6',
+        };
+      case 'gradient-glow':
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-surface,#ffffff)',
+          borderRadius: isFloating ? '24px' : undefined,
+          borderTop: isFloating ? 'none' : '1px solid rgba(99,102,241,0.2)',
+          boxShadow: '0 -4px 20px rgba(99,102,241,0.12)',
+        };
+      case 'material-you':
+        return {
+          ...base,
+          backgroundColor: 'var(--boost-surface,#fffbfe)',
+          borderRadius: isFloating ? '28px' : '28px 28px 0 0',
+          borderTop: isFloating ? 'none' : '1px solid var(--boost-border,#e2e8f0)',
+        };
+      case 'dark-first':
+        return {
+          ...base,
+          backgroundColor: 'rgba(15,23,42,0.97)',
+          borderRadius: isFloating ? '24px' : undefined,
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          boxShadow: '0 -4px 20px rgba(0,0,0,0.5)',
+        };
+      default:
+        return {
+          ...base,
+          backgroundColor:
+            variant === 'solid' ? 'var(--boost-surface,#ffffff)' : 'rgba(255,255,255,0.92)',
+          borderRadius: isFloating ? '24px' : undefined,
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderTop: isFloating ? 'none' : '1px solid rgba(226,232,240,0.8)',
+          border: isFloating ? '1px solid rgba(226,232,240,0.8)' : undefined,
+          boxShadow: isFloating ? '0 12px 30px rgba(0,0,0,0.15)' : '0 -4px 20px rgba(0,0,0,0.05)',
+        };
     }
   };
 
@@ -142,7 +215,14 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                 }}
               >
                 {item.icon || (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={isActive ? 2.3 : 1.8}>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={isActive ? 2.3 : 1.8}
+                  >
                     <circle cx="12" cy="12" r="9" />
                   </svg>
                 )}

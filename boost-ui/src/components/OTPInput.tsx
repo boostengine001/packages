@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 /**
  * OTPInputProps — Properties for the one-time password input component.
  */
@@ -118,11 +117,21 @@ export const OTPInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, OTPIn
             }
           `}
         </style>
-        <div style={{ display: 'flex', gap: '8px', maxWidth: '100%', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            maxWidth: '100%',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           {Array.from({ length }).map((_, idx) => (
             <input
               key={idx}
-              ref={(el) => { inputsRef.current[idx] = el; }}
+              ref={(el) => {
+                inputsRef.current[idx] = el;
+              }}
               type="text"
               inputMode="numeric"
               maxLength={1}
@@ -133,7 +142,11 @@ export const OTPInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, OTPIn
               disabled={disabled}
               className="boost-otp-box"
               style={{
-                borderColor: error ? '#ef4444' : value[idx] ? 'var(--boost-primary, #6366f1)' : undefined,
+                borderColor: error
+                  ? '#ef4444'
+                  : value[idx]
+                    ? 'var(--boost-primary, #6366f1)'
+                    : undefined,
                 boxShadow: value[idx] ? '0 0 0 2px rgba(99, 102, 241, 0.2)' : undefined,
               }}
             />
@@ -141,9 +154,7 @@ export const OTPInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, OTPIn
         </div>
 
         {error && (
-          <span style={{ fontSize: '12px', color: '#dc2626', fontWeight: 500 }}>
-            {error}
-          </span>
+          <span style={{ fontSize: '12px', color: '#dc2626', fontWeight: 500 }}>{error}</span>
         )}
       </div>
     );

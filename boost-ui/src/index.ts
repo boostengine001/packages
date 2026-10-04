@@ -47,7 +47,14 @@ export {
 } from './utils';
 
 // 0. Theming & Design System
-export { BoostProvider, useTheme, useCurrency, useBoostPreset, useDesignTokens, injectBoostGlobalStyles } from './components/BoostProvider';
+export {
+  BoostProvider,
+  useTheme,
+  useCurrency,
+  useBoostPreset,
+  useDesignTokens,
+  injectBoostGlobalStyles,
+} from './components/BoostProvider';
 export { ThemeToggle } from './components/ThemeToggle';
 export { PresetSwitcher } from './components/PresetSwitcher';
 export { boostTokens, createTailwindPreset } from './tokens';
@@ -69,10 +76,7 @@ export type {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from './types/polymorphic';
-export type {
-  UIStylePreset,
-  PresetTokens,
-} from './types/presets';
+export type { UIStylePreset, PresetTokens } from './types/presets';
 
 // 1. Buttons & Actions
 export { Button } from './components/Button';
@@ -252,7 +256,13 @@ export type { NavLinkProps } from './components/NavLink';
 export type { DropdownMenuProps, DropdownMenuItem } from './components/DropdownMenu';
 export type { MegaMenuProps, MegaMenuCategory, MegaMenuColumn } from './components/MegaMenu';
 export type { PaginationProps } from './components/Pagination';
-export type { TabsProps, TabItem, TabsListProps, TabsTriggerProps, TabsContentProps } from './components/Tabs';
+export type {
+  TabsProps,
+  TabItem,
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
+} from './components/Tabs';
 export type { StepperProps, StepItem } from './components/Stepper';
 export type { BackButtonProps } from './components/BackButton';
 
@@ -343,7 +353,10 @@ export type {
 } from './components/ReviewBreakdownBars';
 export type { AnnouncementBarProps } from './components/AnnouncementBar';
 export type { LightningDealsBarProps } from './components/LightningDealsBar';
-export type { FrequentlyBoughtTogetherProps, BundleItem } from './components/FrequentlyBoughtTogether';
+export type {
+  FrequentlyBoughtTogetherProps,
+  BundleItem,
+} from './components/FrequentlyBoughtTogether';
 export type { BankOffersAccordionProps, BankOffer } from './components/BankOffersAccordion';
 export type { AssuredBadgeProps } from './components/AssuredBadge';
 export type { DualMobileActionBarProps } from './components/DualMobileActionBar';
@@ -365,10 +378,7 @@ export { CTASection } from './components/CTASection';
 export type { HeroSectionProps, HeroAction } from './components/HeroSection';
 export type { FeatureGridProps, FeatureItem } from './components/FeatureGrid';
 export type { PricingTableProps, PricingTier, PricingFeature } from './components/PricingTable';
-export type {
-  TestimonialProps,
-  TestimonialGridProps,
-} from './components/TestimonialCard';
+export type { TestimonialProps, TestimonialGridProps } from './components/TestimonialCard';
 export type { FAQSectionProps, FAQItem } from './components/FAQSection';
 export type { LogoCloudProps, LogoItem } from './components/LogoCloud';
 export type { CTASectionProps } from './components/CTASection';

@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 export type ToastVariant = 'info' | 'success' | 'warning' | 'error' | 'loading';
-export type ToastPosition = 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center';
+export type ToastPosition =
+  'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center';
 
 /**
  * ToastProps — Properties for an individual Toast notification.
@@ -35,12 +36,17 @@ export const Toast: React.FC<ToastProps> = ({
 
   const getTheme = () => {
     switch (activeVariant) {
-      case 'success': return { bg: '#f0fdf4', border: '#bbf7d0', text: '#166534', icon: '#16a34a' };
-      case 'warning': return { bg: '#fffbeb', border: '#fde68a', text: '#854d0e', icon: '#d97706' };
-      case 'error': return { bg: '#fef2f2', border: '#fecaca', text: '#991b1b', icon: '#dc2626' };
-      case 'loading': return { bg: '#f8fafc', border: '#e2e8f0', text: '#334155', icon: '#2563eb' };
+      case 'success':
+        return { bg: '#f0fdf4', border: '#bbf7d0', text: '#166534', icon: '#16a34a' };
+      case 'warning':
+        return { bg: '#fffbeb', border: '#fde68a', text: '#854d0e', icon: '#d97706' };
+      case 'error':
+        return { bg: '#fef2f2', border: '#fecaca', text: '#991b1b', icon: '#dc2626' };
+      case 'loading':
+        return { bg: '#f8fafc', border: '#e2e8f0', text: '#334155', icon: '#2563eb' };
       case 'info':
-      default: return { bg: '#eff6ff', border: '#bfdbfe', text: '#1e40af', icon: '#2563eb' };
+      default:
+        return { bg: '#eff6ff', border: '#bfdbfe', text: '#1e40af', icon: '#2563eb' };
     }
   };
 
@@ -106,26 +112,54 @@ export const Toast: React.FC<ToastProps> = ({
           </svg>
         )}
         {activeVariant === 'success' && (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <polyline points="20 6 9 17 4 12" />
           </svg>
         )}
         {activeVariant === 'error' && (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="15" y1="9" x2="9" y2="15" />
             <line x1="9" y1="9" x2="15" y2="15" />
           </svg>
         )}
         {activeVariant === 'warning' && (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
             <line x1="12" y1="9" x2="12" y2="13" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
         )}
         {activeVariant === 'info' && (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="16" x2="12" y2="12" />
             <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -135,11 +169,17 @@ export const Toast: React.FC<ToastProps> = ({
 
       <div style={{ flex: 1, minWidth: 0 }}>
         {title && (
-          <div className="boost-toast-title" style={{ fontSize: '14px', fontWeight: 600, color: theme.text, marginBottom: '2px' }}>
+          <div
+            className="boost-toast-title"
+            style={{ fontSize: '14px', fontWeight: 600, color: theme.text, marginBottom: '2px' }}
+          >
             {title}
           </div>
         )}
-        <div className="boost-toast-msg" style={{ fontSize: '13px', color: theme.text, lineHeight: 1.4 }}>
+        <div
+          className="boost-toast-msg"
+          style={{ fontSize: '13px', color: theme.text, lineHeight: 1.4 }}
+        >
           {message}
         </div>
       </div>
@@ -160,7 +200,14 @@ export const Toast: React.FC<ToastProps> = ({
             flexShrink: 0,
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
@@ -247,12 +294,10 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
     const fn = (options: ToastOptions) => addToast(options);
     fn.success = (message: string, title?: string) =>
       addToast({ message, title, variant: 'success' });
-    fn.error = (message: string, title?: string) =>
-      addToast({ message, title, variant: 'error' });
+    fn.error = (message: string, title?: string) => addToast({ message, title, variant: 'error' });
     fn.warning = (message: string, title?: string) =>
       addToast({ message, title, variant: 'warning' });
-    fn.info = (message: string, title?: string) =>
-      addToast({ message, title, variant: 'info' });
+    fn.info = (message: string, title?: string) => addToast({ message, title, variant: 'info' });
     fn.loading = (message: string, title?: string) =>
       addToast({ message, title, variant: 'loading', duration: 0 });
     fn.promise = async <T,>(promise: Promise<T>, options: ToastPromiseOptions<T>): Promise<T> => {
@@ -260,7 +305,8 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       try {
         const data = await promise;
         dismiss(id);
-        const successMsg = typeof options.success === 'function' ? options.success(data) : options.success;
+        const successMsg =
+          typeof options.success === 'function' ? options.success(data) : options.success;
         addToast({ message: successMsg, variant: 'success' });
         return data;
       } catch (err: any) {
@@ -294,11 +340,23 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       case 'top-left':
         return { ...base, top: 0, left: 0 };
       case 'top-center':
-        return { ...base, top: 0, left: '50%', transform: 'translateX(-50%)', alignItems: 'center' };
+        return {
+          ...base,
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          alignItems: 'center',
+        };
       case 'bottom-left':
         return { ...base, bottom: 0, left: 0 };
       case 'bottom-center':
-        return { ...base, bottom: 0, left: '50%', transform: 'translateX(-50%)', alignItems: 'center' };
+        return {
+          ...base,
+          bottom: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          alignItems: 'center',
+        };
       case 'bottom-right':
       default:
         return { ...base, bottom: 0, right: 0 };
@@ -366,6 +424,5 @@ export const useToast = (): ToastContextType => {
   }
   return context;
 };
-
 
 Toast.displayName = 'Toast';

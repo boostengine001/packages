@@ -6,7 +6,6 @@ export interface ChartDataPoint {
   secondaryValue?: number;
 }
 
-
 /**
  * AreaChartProps — Properties for the area chart component.
  */
@@ -44,6 +43,8 @@ export const AreaChart: React.FC<AreaChartProps> = ({
   style,
 }) => {
   const [hoverIndex, setHoverIndex] = React.useState<number | null>(null);
+  const rawId = React.useId();
+  const gradientId = `boost-area-${rawId.replace(/:/g, '')}`;
 
   if (!data || data.length === 0) {
     return (
@@ -63,7 +64,10 @@ export const AreaChart: React.FC<AreaChartProps> = ({
     );
   }
 
-  const allValues = data.flatMap((d) => [d.value, d.secondaryValue !== undefined ? d.secondaryValue : d.value]);
+  const allValues = data.flatMap((d) => [
+    d.value,
+    d.secondaryValue !== undefined ? d.secondaryValue : d.value,
+  ]);
   const rawMin = Math.min(...allValues);
   const rawMax = Math.max(...allValues);
   const min = rawMin > 0 ? 0 : rawMin;
@@ -93,9 +97,6 @@ export const AreaChart: React.FC<AreaChartProps> = ({
     ? data.map((d, i) => `${getX(i).toFixed(1)},${getY(d.secondaryValue || 0).toFixed(1)}`)
     : [];
   const secondaryPathD = hasSecondary ? `M ${secondaryPoints.join(' L ')}` : '';
-
-  const rawId = React.useId();
-  const gradientId = `boost-area-${rawId.replace(/:/g, '')}`;
 
   // Grid steps (4 horizontal lines)
   const gridSteps = [0, 0.33, 0.66, 1];
@@ -132,10 +133,27 @@ export const AreaChart: React.FC<AreaChartProps> = ({
         `}
       </style>
       {(title || subtitle) && (
-        <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px' }}>
+        <div
+          style={{
+            marginBottom: '16px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
+        >
           <div>
             {title && (
-              <h4 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: 'var(--boost-text, #0f172a)', letterSpacing: '-0.01em' }}>
+              <h4
+                style={{
+                  margin: '0 0 4px',
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  color: 'var(--boost-text, #0f172a)',
+                  letterSpacing: '-0.01em',
+                }}
+              >
                 {title}
               </h4>
             )}
@@ -146,14 +164,50 @@ export const AreaChart: React.FC<AreaChartProps> = ({
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '12px', fontWeight: 600 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--boost-text, #0f172a)' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: color }} />
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px',
+              fontSize: '12px',
+              fontWeight: 600,
+            }}
+          >
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: 'var(--boost-text, #0f172a)',
+              }}
+            >
+              <span
+                style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  backgroundColor: color,
+                }}
+              />
               {primaryLabel}
             </span>
             {hasSecondary && (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--boost-text-muted, #64748b)' }}>
-                <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: secondaryColor }} />
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: 'var(--boost-text-muted, #64748b)',
+                }}
+              >
+                <span
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    backgroundColor: secondaryColor,
+                  }}
+                />
                 {secondaryLabel}
               </span>
             )}
@@ -198,7 +252,8 @@ export const AreaChart: React.FC<AreaChartProps> = ({
                     fontSize="10"
                     fontWeight="500"
                   >
-                    {valuePrefix}{formatNumber(yVal)}
+                    {valuePrefix}
+                    {formatNumber(yVal)}
                   </text>
                 </g>
               );
@@ -267,7 +322,9 @@ export const AreaChart: React.FC<AreaChartProps> = ({
                   x={x}
                   y={height - 8}
                   textAnchor="middle"
-                  fill={isHovered ? 'var(--boost-primary, #3b82f6)' : 'var(--boost-text-muted, #64748b)'}
+                  fill={
+                    isHovered ? 'var(--boost-primary, #3b82f6)' : 'var(--boost-text-muted, #64748b)'
+                  }
                   fontSize="11"
                   fontWeight={isHovered ? '700' : '500'}
                 >
@@ -317,11 +374,15 @@ export const AreaChart: React.FC<AreaChartProps> = ({
               {data[hoverIndex].label}
             </span>
             <span style={{ fontSize: '13px', fontWeight: 700, color: '#60a5fa' }}>
-              {valuePrefix}{data[hoverIndex].value.toLocaleString()}{valueSuffix}
+              {valuePrefix}
+              {data[hoverIndex].value.toLocaleString()}
+              {valueSuffix}
             </span>
             {data[hoverIndex].secondaryValue !== undefined && (
               <span style={{ fontSize: '11px', opacity: 0.7 }}>
-                Prev: {valuePrefix}{data[hoverIndex].secondaryValue?.toLocaleString()}{valueSuffix}
+                Prev: {valuePrefix}
+                {data[hoverIndex].secondaryValue?.toLocaleString()}
+                {valueSuffix}
               </span>
             )}
           </div>

@@ -43,8 +43,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   stylePreset?: UIStylePreset;
 }
 
-const NEURO_LIGHT = '6px 6px 12px #c5cad3, -6px -6px 12px #ffffff';
-
 export const Button = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -151,10 +149,12 @@ export const Button = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Button
             borderRadius: '0px',
             boxShadow: '3px 3px 0 var(--boost-border, #000000)',
             fontWeight: 700,
-            ...(!isSolid ? {
-              backgroundColor: 'var(--boost-surface, #ffffff)',
-              color: 'var(--boost-text, #0f172a)',
-            } : {}),
+            ...(!isSolid
+              ? {
+                  backgroundColor: 'var(--boost-surface, #ffffff)',
+                  color: 'var(--boost-text, #0f172a)',
+                }
+              : {}),
           };
         case 'glassmorphism':
           return {
@@ -166,30 +166,34 @@ export const Button = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Button
             boxShadow: isPrimary
               ? '0 6px 20px rgba(37, 99, 235, 0.35)'
               : isDestructive
-              ? '0 6px 20px rgba(220, 38, 38, 0.35)'
-              : '0 6px 20px rgba(0, 0, 0, 0.1)',
-            ...(!isSolid ? {
-              backgroundColor: 'var(--boost-glass-bg, rgba(255, 255, 255, 0.85))',
-              color: 'var(--boost-text, #0f172a)',
-            } : {}),
+                ? '0 6px 20px rgba(220, 38, 38, 0.35)'
+                : '0 6px 20px rgba(0, 0, 0, 0.1)',
+            ...(!isSolid
+              ? {
+                  backgroundColor: 'var(--boost-glass-bg, rgba(255, 255, 255, 0.85))',
+                  color: 'var(--boost-text, #0f172a)',
+                }
+              : {}),
           };
         case 'neumorphism':
           return {
             borderRadius: presetTokens.neumorphism.radius,
             border: 'none',
             boxShadow: 'var(--card-shadow, 6px 6px 14px #c5cad3, -6px -6px 14px #ffffff)',
-            ...(!isSolid ? {
-              backgroundColor: 'var(--boost-neuro-surface, var(--boost-surface, #e8ebf0))',
-              color: 'var(--boost-text, #0f172a)',
-            } : {}),
+            ...(!isSolid
+              ? {
+                  backgroundColor: 'var(--boost-neuro-surface, var(--boost-surface, #e8ebf0))',
+                  color: 'var(--boost-text, #0f172a)',
+                }
+              : {}),
           };
         case 'gradient-glow':
           return {
             boxShadow: isPrimary
               ? '0 0 20px rgba(99, 102, 241, 0.45), 0 0 0 1px rgba(99, 102, 241, 0.45)'
               : isDestructive
-              ? '0 0 20px rgba(239, 68, 68, 0.45)'
-              : '0 0 14px rgba(99, 102, 241, 0.25)',
+                ? '0 0 20px rgba(239, 68, 68, 0.45)'
+                : '0 0 14px rgba(99, 102, 241, 0.25)',
           };
         case 'material-you':
           return {
@@ -199,17 +203,21 @@ export const Button = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Button
         case 'dark-first':
           return {
             border: '1px solid var(--boost-border, #232a37)',
-            ...(!isSolid ? {
-              backgroundColor: 'var(--boost-surface, #0b0f17)',
-              color: 'var(--boost-text, #f8fafc)',
-            } : {}),
+            ...(!isSolid
+              ? {
+                  backgroundColor: 'var(--boost-surface, #0b0f17)',
+                  color: 'var(--boost-text, #f8fafc)',
+                }
+              : {}),
           };
         case 'minimal':
         default:
           return {
-            ...(!isSolid ? {
-              border: '1px solid var(--boost-border, #e2e8f0)',
-            } : {}),
+            ...(!isSolid
+              ? {
+                  border: '1px solid var(--boost-border, #e2e8f0)',
+                }
+              : {}),
             boxShadow: '0 1px 3px rgba(0, 0, 0, 0.06)',
           };
       }
@@ -282,4 +290,3 @@ export const Button = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Button
 );
 
 Button.displayName = 'Button';
-

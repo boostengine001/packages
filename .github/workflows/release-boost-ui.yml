@@ -1,0 +1,39 @@
+name: boost-ui Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+defaults:
+  run:
+    working-directory: packages/boost-ui
+
+jobs:
+  publish:
+    name: Publish @boostengine/ui to npm
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/boost-ui/package-lock.json
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # prepublishOnly = lint + typecheck + unit tests + build + smoke tests
+      - name: Verify and build
+        run: npm run prepublishOnly
+
+      - name: Publish with provenance
+        run: npm publish --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

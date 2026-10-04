@@ -47,7 +47,6 @@ const PRESETS: { value: UIStylePreset; label: string; icon: string; description:
   },
 ];
 
-
 /**
  * PresetSwitcherProps — Properties for the design preset switcher UI.
  */
@@ -184,26 +183,39 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
     zIndex: 9999,
     minWidth: '240px',
     backgroundColor:
-      activePreset === 'dark-first' ? '#0f172a' :
-      activePreset === 'glassmorphism' ? 'rgba(255, 255, 255, 0.85)' :
-      activePreset === 'neumorphism' ? '#e0e5ec' :
-      'var(--boost-bg, #ffffff)',
+      activePreset === 'dark-first'
+        ? '#0f172a'
+        : activePreset === 'glassmorphism'
+          ? 'rgba(255, 255, 255, 0.85)'
+          : activePreset === 'neumorphism'
+            ? '#e0e5ec'
+            : 'var(--boost-bg, #ffffff)',
     backdropFilter: activePreset === 'glassmorphism' ? 'blur(16px)' : 'none',
     WebkitBackdropFilter: activePreset === 'glassmorphism' ? 'blur(16px)' : 'none',
     border:
-      activePreset === 'neo-brutalism' ? '2px solid #000000' :
-      activePreset === 'dark-first' ? '1px solid #1e293b' :
-      activePreset === 'glassmorphism' ? '1px solid rgba(255, 255, 255, 0.4)' :
-      '1px solid var(--boost-border, #e2e8f0)',
+      activePreset === 'neo-brutalism'
+        ? '2px solid #000000'
+        : activePreset === 'dark-first'
+          ? '1px solid #1e293b'
+          : activePreset === 'glassmorphism'
+            ? '1px solid rgba(255, 255, 255, 0.4)'
+            : '1px solid var(--boost-border, #e2e8f0)',
     borderRadius:
-      activePreset === 'neo-brutalism' ? '2px' :
-      activePreset === 'material-you' ? '20px' :
-      activePreset === 'neumorphism' ? '16px' : '12px',
+      activePreset === 'neo-brutalism'
+        ? '2px'
+        : activePreset === 'material-you'
+          ? '20px'
+          : activePreset === 'neumorphism'
+            ? '16px'
+            : '12px',
     boxShadow:
-      activePreset === 'neo-brutalism' ? '4px 4px 0px #000000' :
-      activePreset === 'neumorphism' ? '8px 8px 18px #bec3c9, -8px -8px 18px #ffffff' :
-      activePreset === 'dark-first' ? '0 8px 24px rgba(0, 0, 0, 0.5)' :
-      '0 8px 24px rgba(0, 0, 0, 0.08)',
+      activePreset === 'neo-brutalism'
+        ? '4px 4px 0px #000000'
+        : activePreset === 'neumorphism'
+          ? '8px 8px 18px #bec3c9, -8px -8px 18px #ffffff'
+          : activePreset === 'dark-first'
+            ? '0 8px 24px rgba(0, 0, 0, 0.5)'
+            : '0 8px 24px rgba(0, 0, 0, 0.08)',
     overflow: 'hidden',
     padding: '6px',
     display: 'flex',
@@ -247,7 +259,8 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
         case 'gradient-glow':
           return {
             ...base,
-            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.12))',
+            background:
+              'linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.12))',
             color: 'var(--boost-primary, #6366f1)',
             borderRadius: '8px',
             fontWeight: 600,
@@ -292,12 +305,13 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
       ...base,
       backgroundColor: 'transparent',
       color:
-        activePreset === 'dark-first' ? '#94a3b8' :
-        activePreset === 'neo-brutalism' ? '#3f3f46' :
-        'var(--boost-text-muted, #64748b)',
+        activePreset === 'dark-first'
+          ? '#94a3b8'
+          : activePreset === 'neo-brutalism'
+            ? '#3f3f46'
+            : 'var(--boost-text-muted, #64748b)',
       borderRadius:
-        activePreset === 'neo-brutalism' ? '2px' :
-        activePreset === 'material-you' ? '12px' : '6px',
+        activePreset === 'neo-brutalism' ? '2px' : activePreset === 'material-you' ? '12px' : '6px',
       fontWeight: 400,
     };
   };
@@ -320,19 +334,60 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
     if (isActive) {
       switch (activePreset) {
         case 'neo-brutalism':
-          return { ...base, backgroundColor: '#fbbf24', color: '#000', border: '2px solid #000', borderRadius: '2px', boxShadow: '2px 2px 0px #000' };
+          return {
+            ...base,
+            backgroundColor: '#fbbf24',
+            color: '#000',
+            border: '2px solid #000',
+            borderRadius: '2px',
+            boxShadow: '2px 2px 0px #000',
+          };
         case 'glassmorphism':
-          return { ...base, backgroundColor: 'rgba(99,102,241,0.15)', color: '#6366f1', border: '1px solid rgba(99,102,241,0.4)', borderRadius: '9999px' };
+          return {
+            ...base,
+            backgroundColor: 'rgba(99,102,241,0.15)',
+            color: '#6366f1',
+            border: '1px solid rgba(99,102,241,0.4)',
+            borderRadius: '9999px',
+          };
         case 'gradient-glow':
-          return { ...base, background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: '#fff', borderRadius: '9999px', boxShadow: '0 0 14px rgba(99,102,241,0.4)' };
+          return {
+            ...base,
+            background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+            color: '#fff',
+            borderRadius: '9999px',
+            boxShadow: '0 0 14px rgba(99,102,241,0.4)',
+          };
         case 'neumorphism':
-          return { ...base, backgroundColor: '#e0e5ec', color: '#2563eb', borderRadius: '9999px', boxShadow: '3px 3px 6px #bec3c9, -3px -3px 6px #fff' };
+          return {
+            ...base,
+            backgroundColor: '#e0e5ec',
+            color: '#2563eb',
+            borderRadius: '9999px',
+            boxShadow: '3px 3px 6px #bec3c9, -3px -3px 6px #fff',
+          };
         case 'material-you':
-          return { ...base, backgroundColor: 'var(--boost-primary, #6750a4)', color: '#fff', borderRadius: '20px' };
+          return {
+            ...base,
+            backgroundColor: 'var(--boost-primary, #6750a4)',
+            color: '#fff',
+            borderRadius: '20px',
+          };
         case 'dark-first':
-          return { ...base, backgroundColor: '#1e3a5f', color: '#60a5fa', border: '1px solid #334155', borderRadius: '9999px' };
+          return {
+            ...base,
+            backgroundColor: '#1e3a5f',
+            color: '#60a5fa',
+            border: '1px solid #334155',
+            borderRadius: '9999px',
+          };
         default:
-          return { ...base, backgroundColor: 'var(--boost-surface, #0f172a)', color: '#fff', borderRadius: '6px' };
+          return {
+            ...base,
+            backgroundColor: 'var(--boost-surface, #0f172a)',
+            color: '#fff',
+            borderRadius: '6px',
+          };
       }
     }
 
@@ -340,15 +395,14 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
       ...base,
       backgroundColor: 'transparent',
       color:
-        activePreset === 'dark-first' ? '#94a3b8' :
-        activePreset === 'neumorphism' ? '#64748b' :
-        'var(--boost-text-muted, #64748b)',
+        activePreset === 'dark-first'
+          ? '#94a3b8'
+          : activePreset === 'neumorphism'
+            ? '#64748b'
+            : 'var(--boost-text-muted, #64748b)',
       borderRadius:
-        activePreset === 'neo-brutalism' ? '2px' :
-        activePreset === 'material-you' ? '20px' : '6px',
-      border:
-        activePreset === 'neumorphism' ? 'none' :
-        '1px solid var(--boost-border, #e2e8f0)',
+        activePreset === 'neo-brutalism' ? '2px' : activePreset === 'material-you' ? '20px' : '6px',
+      border: activePreset === 'neumorphism' ? 'none' : '1px solid var(--boost-border, #e2e8f0)',
     };
   };
 
@@ -398,7 +452,9 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
         onClick={() => setIsOpen((v) => !v)}
         style={getTriggerStyles()}
       >
-        <span aria-hidden="true" style={{ fontSize: '15px' }}>{activeInfo.icon}</span>
+        <span aria-hidden="true" style={{ fontSize: '15px' }}>
+          {activeInfo.icon}
+        </span>
         <span>{activeInfo.label}</span>
         <svg
           width="12"
