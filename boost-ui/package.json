@@ -1,6 +1,6 @@
 {
   "name": "@boostengine/ui",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Universal, Zero-Config UI Component Suite for Next.js & React. Build High-Converting eCommerce, Modern SaaS, Enterprise Dashboards, and Landing Pages with AI Agent Native Support.",
   "author": "Rishabh Gehlot <boostengine001@gmail.com> (https://github.com/Rishabhgehlot7)",
   "license": "MIT",
@@ -204,6 +204,7 @@
     "dist",
     "docs",
     "src/components",
+    "!src/components/__tests__",
     "src/tokens.json",
     "README.md",
     "CHANGELOG.md",
@@ -231,7 +232,8 @@
     "build:showcase": "esbuild visual/showcase.tsx --bundle --outfile=visual/showcase.js --jsx=automatic --platform=browser --minify",
     "test:visual": "playwright test",
     "docs": "ladle serve",
-    "docs:build": "ladle build"
+    "docs:build": "ladle build",
+    "docs:build:pages": "PAGES_BASE=/packages/ ladle build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

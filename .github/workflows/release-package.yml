@@ -1,0 +1,82 @@
+name: package Release
+
+# Release any boost-* package (except boost-ui, which has its own pipeline)
+# with the same gates as boost-ui: typecheck -> build -> tests -> publish.
+#
+# Run: Actions -> "package Release" -> Run workflow ->
+#   package: boost-cart
+#   version: 1.4.0     (exact version to publish)
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package directory (e.g. boost-cart)'
+        required: true
+        type: string
+      version:
+        description: 'Version to publish (e.g. 1.4.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  release:
+    name: Publish ${{ inputs.package }}@${{ inputs.version }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ${{ inputs.package }}/package-lock.json
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Validate package
+        run: |
+          if [ ! -f "${{ inputs.package }}/package.json" ]; then
+            echo "::error::Package '${{ inputs.package }}' does not exist"
+            exit 1
+          fi
+          if [ "${{ inputs.package }}" = "boost-ui" ]; then
+            echo "::error::Use the 'boost-ui Release' workflow for boost-ui"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: ${{ inputs.package }}
+
+      - name: Set version
+        run: npm version ${{ inputs.version }} --no-git-tag-version
+        working-directory: ${{ inputs.package }}
+
+      - name: Typecheck (if configured)
+        run: npm run typecheck --if-present
+        working-directory: ${{ inputs.package }}
+
+      - name: Build
+        run: npm run build
+        working-directory: ${{ inputs.package }}
+
+      - name: Tests
+        run: npm test
+        working-directory: ${{ inputs.package }}
+
+      - name: Publish with provenance
+        run: npm publish --provenance
+        working-directory: ${{ inputs.package }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ${{ inputs.package }}/package.json ${{ inputs.package }}/package-lock.json
+          git commit -m "chore(${{ inputs.package }}): release ${{ inputs.version }} [skip ci]"
+          git push origin HEAD:main
