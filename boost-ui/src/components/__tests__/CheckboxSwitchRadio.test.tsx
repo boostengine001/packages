@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Checkbox } from '../Checkbox';
 import { Switch } from '../Switch';
-import { Radio, RadioGroup } from '../Radio';
+import { RadioGroup } from '../Radio';
 
 describe('Checkbox', () => {
   it('toggles via click and label association', () => {
