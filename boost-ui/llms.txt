@@ -1,12 +1,13 @@
 # @boostengine/ui
 
 > Universal, zero-config, industry-standard React & Next.js UI component kit.
+> Live component playground: https://boostengine001.github.io/packages/
 > Built for High-Converting eCommerce, Modern SaaS, Enterprise Admin Dashboards, and Marketing Landing Pages.
 > Zero external CSS dependencies. AI Coding Agent Native (Cursor, Claude, Windsurf, Copilot, Gemini).
 
 ## Overview
 - **Package**: `@boostengine/ui`
-- **Version**: `2.1.1`
+- **Version**: `2.1.6`
 - **Supported Frameworks**: Next.js (App Router & Pages Router), React 18 & 19, Vite, Remix
 - **CSS Dependencies**: Zero. All components use built-in inline styles and CSS variable hooks.
 - **Client Directives**: Pre-configured with `'use client'` for Next.js App Router.

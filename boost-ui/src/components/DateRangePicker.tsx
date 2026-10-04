@@ -27,15 +27,22 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
   label,
   className = '',
 }) => {
-  const currentStart = value?.startDate !== undefined ? value.startDate : propStart || '';
-  const currentEnd = value?.endDate !== undefined ? value.endDate : propEnd || '';
+  // Dual-mode: fully controlled when value/startDate is provided, otherwise
+  // self-managed state so the picker is usable out of the box.
+  const isControlled = value?.startDate !== undefined;
+  const [internalStart, setInternalStart] = React.useState(propStart || '');
+  const [internalEnd, setInternalEnd] = React.useState(propEnd || '');
+  const currentStart = isControlled ? value!.startDate : internalStart;
+  const currentEnd = value?.endDate !== undefined ? value.endDate : internalEnd;
 
   const handleStartChange = (newStart: string) => {
+    if (!isControlled) setInternalStart(newStart);
     if (onRangeChange) onRangeChange(newStart, currentEnd);
     if (onChange) onChange({ startDate: newStart, endDate: currentEnd });
   };
 
   const handleEndChange = (newEnd: string) => {
+    if (!isControlled) setInternalEnd(newEnd);
     if (onRangeChange) onRangeChange(currentStart, newEnd);
     if (onChange) onChange({ startDate: currentStart, endDate: newEnd });
   };

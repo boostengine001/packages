@@ -1,0 +1,13 @@
+{
+  "name": "@boostengine/monorepo",
+  "private": true,
+  "description": "Boost Engine monorepo root. Each boost-* package is versioned and published independently.",
+  "license": "MIT",
+  "scripts": {
+    "cs": "changeset",
+    "cs:version": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3"
+  }
+}

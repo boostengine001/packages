@@ -1,0 +1,265 @@
+# Dependabot: weekly dependency updates for every boost-* package.
+# Major bumps open separately for review; minor+patch are grouped per package.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/boost-analytics"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-auth"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-bundles"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-cart"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-collections"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-communications"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-core"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-coupons"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-currency"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-deals"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-gamification"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-importer"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-inventory"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-invoicing"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-loyalty"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-notifications"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-payments"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-recommendations"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-reels"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-referrals"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-returns"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-reviews"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-search"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-seo"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-server"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-shipping"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-subscriptions"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-ui"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: npm
+    directory: "/boost-wishlist"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
