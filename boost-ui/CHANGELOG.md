@@ -6,6 +6,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 
 ## [Unreleased]
 
+## [Unreleased]
+
+### Added
+- **SSR safety suite**: 115 components rendered with react-dom/server in a plain Node environment — proves the suite is genuinely server-render safe. Found and fixed an unguarded `item.user` access in `ActivityFeed`.
+- **Real-browser visual suite (Playwright + Chromium)**: 49 scenario screenshots across all 7 design presets × 7 key components, asserting zero console errors and zero uncaught exceptions. Runs in CI with screenshot artifacts.
+- **Coverage thresholds enforced in CI** (statements/branches/functions/lines gated — regressions fail the build). Statement coverage now ~49% (up from ~4.5% at adoption).
+
 ## [2.1.4] — 2026-10-04
 
 ### Added

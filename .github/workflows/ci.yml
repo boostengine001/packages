@@ -35,7 +35,7 @@ jobs:
         run: npm run typecheck
 
       - name: Unit tests
-        run: npm run test:unit
+        run: npm run test:unit -- --coverage
 
       - name: Build
         run: npm run build
@@ -48,3 +48,39 @@ jobs:
 
       - name: Size budget (size-limit)
         run: npm run size
+
+  visual:
+    name: Visual (Chromium, 7 presets)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: boost-ui/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: boost-ui
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: boost-ui
+
+      - name: Build showcase bundle
+        run: npm run build:showcase
+        working-directory: boost-ui
+
+      - name: Visual tests (real browser)
+        run: npm run test:visual
+        working-directory: boost-ui
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-screenshots
+          path: boost-ui/test-results/visual/
+          retention-days: 7

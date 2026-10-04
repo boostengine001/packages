@@ -24,6 +24,13 @@ export default defineConfig({
         'src/angular/**',
         'src/qwik/**',
       ],
+      // CI gate: coverage regressions fail the build. Current: ~49% stmts / ~50% lines.
+      thresholds: {
+        statements: 46,
+        branches: 38,
+        functions: 45,
+        lines: 48,
+      },
     },
   },
 });

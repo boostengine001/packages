@@ -101,10 +101,10 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                   transition: 'background-color 0.15s ease',
                 }}
               >
-                {item.user.avatar ? (
+                {item.user?.avatar ? (
                   <img
-                    src={item.user.avatar}
-                    alt={item.user.name}
+                    src={item.user?.avatar}
+                    alt={item.user?.name ?? "User"}
                     style={{
                       width: '36px',
                       height: '36px',
@@ -129,7 +129,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                       flexShrink: 0,
                     }}
                   >
-                    {item.user.name.charAt(0).toUpperCase()}
+                    {item.user?.name ?? "Unknown User".charAt(0).toUpperCase()}
                   </div>
                 )}
 
@@ -142,7 +142,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                       marginBottom: '4px',
                     }}
                   >
-                    <span style={{ fontWeight: 600 }}>{item.user.name}</span>{' '}
+                    <span style={{ fontWeight: 600 }}>{item.user?.name ?? "Unknown User"}</span>{' '}
                     <span style={{ color: 'var(--boost-text-muted, #64748b)' }}>{item.action}</span>{' '}
                     {item.target && (
                       <span style={{ fontWeight: 600, color: 'var(--boost-text, #0f172a)' }}>

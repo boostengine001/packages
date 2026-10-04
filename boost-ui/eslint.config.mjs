@@ -10,6 +10,8 @@ export default tseslint.config(
       'node_modules/**',
       'coverage/**',
       'bin/**',
+      'visual/showcase.js',
+      'test-results/**',
       '**/*.cjs',
       '**/*.md',
       'llms*.txt',

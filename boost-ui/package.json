@@ -227,7 +227,9 @@
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run lint && npm run typecheck && npm run test:unit && npm run build && npm run test:smoke",
     "size": "size-limit",
-    "publint": "publint"
+    "publint": "publint",
+    "build:showcase": "esbuild visual/showcase.tsx --bundle --outfile=visual/showcase.js --jsx=automatic --platform=browser --minify",
+    "test:visual": "playwright test"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -241,6 +243,7 @@
   "devDependencies": {
     "@angular/core": "^22.1.7",
     "@builder.io/qwik": "^1.20.0",
+    "@playwright/test": "^1.63.0",
     "@size-limit/preset-small-lib": "^14.1.0",
     "@testing-library/dom": "10.4.2",
     "@testing-library/jest-dom": "7.0.1",
