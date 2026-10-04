@@ -6,6 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![React 18 & 19](https://img.shields.io/badge/React-18%20%7C%2019-61dafb.svg?style=flat-square)](https://react.dev/)
 [![Next.js](https://img.shields.io/badge/Next.js-13%20%7C%2014%20%7C%2015-black.svg?style=flat-square)](https://nextjs.org/)
+[![Live Docs](https://img.shields.io/badge/Live_Docs-Playground-8a2be2.svg?style=flat-square)](https://boostengine001.github.io/packages/)
 
 > **Universal, industry-standard UI component kit for Next.js, React, and AI-driven development. Build high-converting eCommerce storefronts, modern B2B SaaS platforms, enterprise dashboards, and landing pages from A to Z with zero external CSS dependencies.**
 
@@ -478,9 +479,9 @@ export default function AdminDashboard() {
 
 ## 📚 Deep Dive Documentation
 
-- 🎨 **[Theming & Design Tokens Guide](file:///e:/boost%20engine%20mobile%20apps/04_Client_Projects/Ecom-app/packages/boost-ui/docs/THEMING_AND_TOKENS.md)** — Tokens Studio / Figma Tokens JSON, CSS variable tokens, and Tailwind CSS preset setup.
-- 📖 **[Components & Hooks Reference](file:///e:/boost%20engine%20mobile%20apps/04_Client_Projects/Ecom-app/packages/boost-ui/docs/COMPONENTS_REFERENCE.md)** — Complete API specifications, TypeScript interfaces, and usage examples for all 125+ components.
-- ♿ **[Accessibility (a11y) Conformance](file:///e:/boost%20engine%20mobile%20apps/04_Client_Projects/Ecom-app/packages/boost-ui/docs/A11Y_AUDIT.md)** — WAI-ARIA 1.2 compliance matrix, keyboard specs, focus trapping, and WCAG AA/AAA contrast ratios.
+- 🎨 **[Theming & Design Tokens Guide](./docs/THEMING_AND_TOKENS.md)** — Tokens Studio / Figma Tokens JSON, CSS variable tokens, and Tailwind CSS preset setup.
+- 📖 **[Components & Hooks Reference](./docs/COMPONENTS_REFERENCE.md)** — Complete API specifications, TypeScript interfaces, and usage examples for all 125+ components.
+- ♿ **[Accessibility (a11y) Conformance](./docs/A11Y_AUDIT.md)** — WAI-ARIA 1.2 compliance matrix, keyboard specs, focus trapping, and WCAG AA/AAA contrast ratios.
 
 ---
 
