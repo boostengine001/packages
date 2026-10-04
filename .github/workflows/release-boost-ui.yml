@@ -9,7 +9,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: packages/boost-ui
+    working-directory: boost-ui
 
 jobs:
   publish:
@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: packages/boost-ui/package-lock.json
+          cache-dependency-path: boost-ui/package-lock.json
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies

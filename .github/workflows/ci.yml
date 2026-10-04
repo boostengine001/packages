@@ -3,13 +3,14 @@ name: boost-ui CI
 on:
   push:
     branches: [main]
-    paths: ['packages/boost-ui/**']
+    paths: ['boost-ui/**', '.github/workflows/ci.yml']
   pull_request:
-    paths: ['packages/boost-ui/**']
+    paths: ['boost-ui/**', '.github/workflows/ci.yml']
+  workflow_dispatch:
 
 defaults:
   run:
-    working-directory: packages/boost-ui
+    working-directory: boost-ui
 
 jobs:
   verify:
@@ -22,7 +23,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: packages/boost-ui/package-lock.json
+          cache-dependency-path: boost-ui/package-lock.json
 
       - name: Install dependencies
         run: npm ci
