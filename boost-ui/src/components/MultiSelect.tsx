@@ -124,6 +124,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-disabled={disabled}
+        aria-label={label || placeholder || "Select options"}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
         onKeyDown={(e) => {
           if (!disabled && (e.key === 'Enter' || e.key === ' ')) {

@@ -63,14 +63,17 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
   const isControlled = controlledIsOpen !== undefined;
   const open = isControlled ? controlledIsOpen : internalIsOpen;
 
-  const setOpen = (newOpen: boolean) => {
-    if (!isControlled) {
-      setInternalIsOpen(newOpen);
-    }
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
-  };
+  const setOpen = React.useCallback(
+    (newOpen: boolean) => {
+      if (!isControlled) {
+        setInternalIsOpen(newOpen);
+      }
+      if (onOpenChange) {
+        onOpenChange(newOpen);
+      }
+    },
+    [isControlled, onOpenChange]
+  );
 
   const [activeCategory, setActiveCategory] = React.useState<string>(categories?.[0]?.id || '');
   const menuRef = React.useRef<HTMLDivElement>(null);

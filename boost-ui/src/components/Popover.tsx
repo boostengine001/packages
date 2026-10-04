@@ -38,12 +38,15 @@ export const Popover: React.FC<PopoverProps> = ({
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : internalOpen;
 
-  const setOpen = (nextOpen: boolean) => {
-    if (!isControlled) {
-      setInternalOpen(nextOpen);
-    }
-    onOpenChange?.(nextOpen);
-  };
+  const setOpen = React.useCallback(
+    (nextOpen: boolean) => {
+      if (!isControlled) {
+        setInternalOpen(nextOpen);
+      }
+      onOpenChange?.(nextOpen);
+    },
+    [isControlled, onOpenChange]
+  );
 
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
