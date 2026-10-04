@@ -35,19 +35,21 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
 
+  const trendObject =
+    typeof trend === 'object' && trend !== null
+      ? (trend as { value?: number | string; isPositive?: boolean })
+      : null;
   const computedChange =
     change !== undefined
       ? change
-      : typeof trend === 'object' && trend !== null
-        ? `${(trend as any).value > 0 && !String((trend as any).value).includes('+') ? '+' : ''}${(trend as any).value}%`
-        : trend !== undefined
+      : trendObject
+        ? `${Number(trendObject.value) > 0 && !String(trendObject.value).includes('+') ? '+' : ''}${trendObject.value}%`
+        : trend !== undefined && typeof trend !== 'object'
           ? trend
           : undefined;
 
   const computedIsPositive =
-    typeof trend === 'object' && trend !== null && (trend as any).isPositive !== undefined
-      ? (trend as any).isPositive
-      : isPositive;
+    trendObject && trendObject.isPositive !== undefined ? trendObject.isPositive : isPositive;
 
   const computedPeriod = description || period;
 

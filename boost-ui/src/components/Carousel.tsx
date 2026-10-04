@@ -25,10 +25,17 @@ export const Carousel: React.FC<CarouselProps> = ({
 }) => {
   const [currentIdx, setCurrentIdx] = React.useState(0);
 
+  const legacyProps = props as {
+    slides?: Array<React.ReactNode | { content?: React.ReactNode }>;
+  };
   const slidesList: React.ReactNode[] = Array.isArray(items)
     ? items
-    : Array.isArray((props as any).slides)
-      ? (props as any).slides.map((s: any) => s?.content || s)
+    : Array.isArray(legacyProps.slides)
+      ? legacyProps.slides.map((s) =>
+          s && typeof s === 'object' && 'content' in s
+            ? (s as { content?: React.ReactNode }).content
+            : (s as React.ReactNode)
+        )
       : [];
 
   const [touchStart, setTouchStart] = React.useState<number | null>(null);

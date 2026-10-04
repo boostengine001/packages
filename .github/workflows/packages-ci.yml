@@ -1,0 +1,61 @@
+name: packages CI
+
+# Verifies every boost-* package except boost-ui (which has its own pipeline).
+# Each package gets its own matrix leg: install -> build -> test -> typecheck.
+on:
+  push:
+    branches: [main]
+    paths: ['boost-*/**', '.github/workflows/packages-ci.yml']
+  pull_request:
+    paths: ['boost-*/**', '.github/workflows/packages-ci.yml']
+  workflow_dispatch:
+
+jobs:
+  discover:
+    name: Discover packages
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set
+        name: Build package matrix
+        run: |
+          PACKAGES=$(find . -maxdepth 1 -type d -name 'boost-*' \
+            -exec test -f '{}/package.json' ';' -print \
+            | sed 's|^\./||' | grep -v '^boost-ui$' | sort \
+            | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "matrix=$PACKAGES" >> "$GITHUB_OUTPUT"
+          echo "Discovered: $PACKAGES"
+
+  verify:
+    name: ${{ matrix.package }}
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.discover.outputs.matrix) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.package }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ${{ matrix.package }}/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Typecheck (if configured)
+        run: npm run typecheck --if-present
+
+      - name: Build
+        run: npm run build
+
+      - name: Tests
+        run: npm test

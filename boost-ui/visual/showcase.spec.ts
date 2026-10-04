@@ -49,10 +49,9 @@ for (const preset of PRESETS) {
         `console errors for ${preset}/${component}`
       ).toEqual([]);
 
-      await page.screenshot({
-        path: `test-results/visual/${preset}-${component}.png`,
-        fullPage: true,
-      });
+      // Pixel-diff against the committed baseline (generated on the CI runner).
+      // First CI run writes missing baselines; later runs compare.
+      await expect(page).toHaveScreenshot(`${preset}-${component}.png`, { fullPage: true });
     });
   }
 }

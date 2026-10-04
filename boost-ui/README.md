@@ -523,6 +523,9 @@ npm run build      # tsup (CJS + ESM + d.ts + sourcemaps)
 npm run test:smoke # build-artifact smoke tests
 npm run size       # size-limit budget checks
 npm run publint    # package exports validation
+npm run test:visual # Playwright real-browser visual suite (7 presets)
+npm run docs       # Ladle component playground (stories/)
+npm run docs:build # static playground build
 ```
 
 `prepublishOnly` runs the full verification gate (lint → typecheck → unit tests → build → smoke tests).

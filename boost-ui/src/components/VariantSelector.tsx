@@ -50,7 +50,10 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
 }) => {
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
-  const values = selectedValues || (props as any).selectedVariants || {};
+  const values =
+    selectedValues ||
+    (props as { selectedVariants?: Record<string, string> }).selectedVariants ||
+    {};
 
   const getChipStyles = (isSelected: boolean, isOutOfStock: boolean): React.CSSProperties => {
     const base: React.CSSProperties = {

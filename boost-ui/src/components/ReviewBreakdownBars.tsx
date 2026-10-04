@@ -17,7 +17,10 @@ export interface ReviewBreakdownItem {
 export interface ReviewBreakdownBarsProps {
   averageRating?: number;
   totalReviews?: number;
-  breakdown: Record<number, number> | ReviewBreakdownItem[] | any[];
+  breakdown:
+    | Record<number, number>
+    | ReviewBreakdownItem[]
+    | Array<{ star?: number; stars?: number; count?: number; percentage?: number }>;
   onFilterByStar?: (star: number) => void;
   selectedStar?: number | null;
   stylePreset?: UIStylePreset;
@@ -42,7 +45,9 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
   const rows: ReviewBreakdownItem[] = [5, 4, 3, 2, 1].map((star) => {
     let count = 0;
     if (Array.isArray(breakdown)) {
-      const item = (breakdown as any[]).find((b) => b.star === star || b.stars === star);
+      const item = (
+        breakdown as Array<{ star?: number; stars?: number; count?: number; percentage?: number }>
+      ).find((b) => b.star === star || b.stars === star);
       count = item ? item.count || item.percentage || 0 : 0;
     } else if (breakdown && typeof breakdown === 'object') {
       count = (breakdown as Record<number, number>)[star] || 0;

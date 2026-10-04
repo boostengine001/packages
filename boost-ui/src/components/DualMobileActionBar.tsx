@@ -43,8 +43,9 @@ export const DualMobileActionBar: React.FC<DualMobileActionBarProps> = ({
 }) => {
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
-  const isRelative = position === 'relative' || (props as any).position === 'relative';
-  const effectiveOriginalPrice = compareAtPrice ?? originalPrice ?? (props as any).originalPrice;
+  const legacyProps = props as { position?: string; originalPrice?: number };
+  const isRelative = position === 'relative' || legacyProps.position === 'relative';
+  const effectiveOriginalPrice = compareAtPrice ?? originalPrice ?? legacyProps.originalPrice;
 
   const getActionBarStyles = (): React.CSSProperties => {
     const base: React.CSSProperties = {

@@ -11,6 +11,7 @@ export default tseslint.config(
       'coverage/**',
       'bin/**',
       'visual/showcase.js',
+      'docs-playground/**',
       'test-results/**',
       '**/*.cjs',
       '**/*.md',
@@ -46,6 +47,13 @@ export default tseslint.config(
       ],
       'jsx-a11y/label-has-for': ['error', { required: { some: ['nesting', 'id'] } }],
     },
+  },
+  {
+    // Ambient fallback declarations for non-React framework types. `any` is the
+    // deliberate escape hatch here — these shims exist precisely to avoid hard
+    // dependencies on vue/svelte/solid/qwik type packages.
+    files: ['src/react.d.ts'],
+    rules: { '@typescript-eslint/no-explicit-any': 'off' },
   },
   prettier
 );

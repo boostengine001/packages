@@ -88,7 +88,7 @@ export const Box = /* @__PURE__ */ React.forwardRef<HTMLElement, BoxProps>(
     },
     ref
   ) => {
-    const Component = as as any;
+    const Component = as as React.ElementType;
 
     const computedStyle: React.CSSProperties = {
       ...(display && { display }),

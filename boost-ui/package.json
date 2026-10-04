@@ -229,7 +229,9 @@
     "size": "size-limit",
     "publint": "publint",
     "build:showcase": "esbuild visual/showcase.tsx --bundle --outfile=visual/showcase.js --jsx=automatic --platform=browser --minify",
-    "test:visual": "playwright test"
+    "test:visual": "playwright test",
+    "docs": "ladle serve",
+    "docs:build": "ladle build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -243,6 +245,7 @@
   "devDependencies": {
     "@angular/core": "^22.1.7",
     "@builder.io/qwik": "^1.20.0",
+    "@ladle/react": "^5.1.1",
     "@playwright/test": "^1.63.0",
     "@size-limit/preset-small-lib": "^14.1.0",
     "@testing-library/dom": "10.4.2",
