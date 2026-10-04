@@ -78,7 +78,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
     );
   }
 
-  const handleMouseMove = (e: any) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!enableZoom) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;

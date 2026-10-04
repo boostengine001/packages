@@ -40,4 +40,4 @@ const dark: SvelteTokens = {
   info: '#60a5fa',
 };
 
-export const tokenStore = derived(themeStore.isDark, ($isDark: any) => ($isDark ? dark : light));
+export const tokenStore = derived(themeStore.isDark, ($isDark: boolean) => ($isDark ? dark : light));

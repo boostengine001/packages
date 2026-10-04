@@ -49,7 +49,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({
 
   const [errors, setErrors] = useState<Partial<Record<keyof AddressData, string>>>({});
 
-  const handleChange = (field: keyof AddressData, value: any) => {
+  const handleChange = (field: keyof AddressData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));

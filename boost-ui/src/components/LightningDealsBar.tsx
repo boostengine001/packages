@@ -46,14 +46,15 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
     isExpired: false,
   });
 
+  const legacyProps = props as { claimedPercent?: number; dealEndsInSeconds?: number };
   const effectivePercent =
     claimedPercent !== undefined
       ? claimedPercent
-      : (props as any).claimedPercent !== undefined
-        ? (props as any).claimedPercent
+      : legacyProps.claimedPercent !== undefined
+        ? legacyProps.claimedPercent
         : percentageClaimed;
 
-  const secondsProp = dealEndsInSeconds || (props as any).dealEndsInSeconds;
+  const secondsProp = dealEndsInSeconds || legacyProps.dealEndsInSeconds;
 
   React.useEffect(() => {
     let end: number;

@@ -18,14 +18,14 @@ function createThemeStore(defaultMode: ThemeMode = 'system') {
     });
   }
 
-  const resolved = derived({ subscribe }, ($mode: any) => {
+  const resolved = derived({ subscribe }, ($mode: ThemeMode) => {
     if ($mode === 'system') return darkQuery?.matches ? 'dark' : 'light';
     return $mode as 'light' | 'dark';
   });
 
-  const isDark = derived(resolved, ($r: any) => $r === 'dark');
+  const isDark = derived(resolved, ($r: ThemeMode) => $r === 'dark');
 
-  resolved.subscribe(($r: any) => {
+  resolved.subscribe(($r: ThemeMode) => {
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-theme', $r);
       document.documentElement.classList.toggle('dark', $r === 'dark');

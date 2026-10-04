@@ -274,8 +274,11 @@ export function tokensToCssVars(tokens: BoostTokens): string {
   };
 
   const lines = Object.entries(map)
-    .filter(([key]) => (tokens as any)[key] !== undefined)
-    .map(([key, cssVar]) => `  ${cssVar}: ${(tokens as any)[key]};`);
+    .filter(([key]) => (tokens as unknown as Record<string, unknown>)[key] !== undefined)
+    .map(
+      ([key, cssVar]) =>
+        `  ${cssVar}: ${(tokens as unknown as Record<string, unknown>)[key]};`
+    );
 
   return `:root {\n${lines.join('\n')}\n}`;
 }

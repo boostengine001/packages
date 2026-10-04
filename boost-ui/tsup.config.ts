@@ -44,6 +44,9 @@ export default defineConfig({
     return { js: format === 'cjs' ? '.cjs' : '.mjs' };
   },
   async onSuccess() {
+    // esbuild drops the 'use client' directive from source modules when bundling with
+    // code splitting, so the dist files are marked post-build. The smoke suite asserts
+    // the directive survives every release build.
     // Copy static styles.css and tokens.json to dist
     const srcCss = path.resolve(__dirname, 'src/styles.css');
     const distCss = path.resolve(__dirname, 'dist/styles.css');

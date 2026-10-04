@@ -164,7 +164,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           }}
         >
           {React.isValidElement(child) && size
-            ? React.cloneElement(child as React.ReactElement<any>, { size })
+            ? React.cloneElement(child as React.ReactElement<{ size?: string }>, { size })
             : child}
         </div>
       ))}

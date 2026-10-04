@@ -77,10 +77,12 @@ jobs:
         run: npm run test:visual
         working-directory: boost-ui
 
-      - name: Upload screenshots
+      - name: Upload screenshots (visual diffs on failure)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: visual-screenshots
-          path: boost-ui/test-results/visual/
+          path: |
+            boost-ui/test-results/visual/
+            boost-ui/visual/showcase.spec.ts-snapshots/
           retention-days: 7

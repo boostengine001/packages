@@ -2,6 +2,9 @@
 
 import * as React from 'react';
 
+/* eslint-disable @typescript-eslint/no-explicit-any -- useForm generics: field values are
+   consumer-defined; a Record<string, unknown> constraint would reject plain interfaces. */
+
 // ==========================================
 // @boostengine/ui - Shared Utility Hooks
 // ==========================================

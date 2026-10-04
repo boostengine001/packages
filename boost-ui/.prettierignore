@@ -10,3 +10,6 @@ out.txt
 err.txt
 test-results
 visual/showcase.js
+docs-playground
+stories
+.ladle

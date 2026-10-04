@@ -8,11 +8,11 @@ export interface BoostVitePlugin {
   enforce?: 'pre' | 'post';
   transformIndexHtml?: () => Array<{
     tag: string;
-    attrs?: Record<string, any>;
+    attrs?: Record<string, unknown>;
     children?: string;
   }>;
-  handleHotUpdate?: (ctx: { server: { ws: { send: (msg: any) => void } } }) => void;
-  [key: string]: any;
+  handleHotUpdate?: (ctx: { server: { ws: { send: (msg: unknown) => void } } }) => void;
+  [key: string]: unknown;
 }
 
 /**
@@ -51,7 +51,7 @@ export function boostVitePlugin(options: BoostViteOptions = {}): BoostVitePlugin
         },
       ];
     },
-    handleHotUpdate({ server }: { server: { ws: { send: (msg: any) => void } } }) {
+    handleHotUpdate({ server }: { server: { ws: { send: (msg: unknown) => void } } }) {
       server.ws.send({ type: 'full-reload' });
     },
   };

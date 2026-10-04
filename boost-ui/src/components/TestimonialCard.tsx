@@ -32,6 +32,7 @@ export const TestimonialCard: React.FC<TestimonialProps> = ({
   authorCompany,
   company,
   authorAvatar,
+  avatar,
   rating = 5,
   verified = true,
   companyLogo,
@@ -42,9 +43,16 @@ export const TestimonialCard: React.FC<TestimonialProps> = ({
 }) => {
   const { stylePreset: inheritedPreset } = useBoostPreset();
   const preset = stylePresetProp ?? inheritedPreset;
-  const finalAuthor = authorName || author || (props as any).author || 'Verified Buyer';
-  const finalRole = authorRole || role || (props as any).role;
-  const finalCompany = authorCompany || company || (props as any).company;
+  const legacyProps = props as {
+    avatar?: string;
+    author?: string;
+    role?: string;
+    company?: string;
+  };
+  const finalAvatar = authorAvatar || avatar || legacyProps.avatar;
+  const finalAuthor = authorName || author || legacyProps.author || 'Verified Buyer';
+  const finalRole = authorRole || role || legacyProps.role;
+  const finalCompany = authorCompany || company || legacyProps.company;
   const getCardStyles = (): React.CSSProperties => {
     const base: React.CSSProperties = {
       padding: '24px',
@@ -172,9 +180,9 @@ export const TestimonialCard: React.FC<TestimonialProps> = ({
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        {authorAvatar ? (
+        {finalAvatar ? (
           <img
-            src={authorAvatar}
+            src={finalAvatar}
             alt={finalAuthor}
             style={{
               width: '42px',

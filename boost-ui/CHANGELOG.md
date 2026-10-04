@@ -12,6 +12,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 - **SSR safety suite**: 115 components rendered with react-dom/server in a plain Node environment — proves the suite is genuinely server-render safe. Found and fixed an unguarded `item.user` access in `ActivityFeed`.
 - **Real-browser visual suite (Playwright + Chromium)**: 49 scenario screenshots across all 7 design presets × 7 key components, asserting zero console errors and zero uncaught exceptions. Runs in CI with screenshot artifacts.
 - **Coverage thresholds enforced in CI** (statements/branches/functions/lines gated — regressions fail the build). Statement coverage now ~49% (up from ~4.5% at adoption).
+- **Pixel-diff baselines** for the visual suite: `toHaveScreenshot` comparisons with CI-generated baselines (runner-consistent fonts) and diff artifacts on failure.
+- **Component playground (Ladle)**: `npm run docs` serves 40+ interactive stories across buttons, forms, feedback, commerce, dashboard and marketing blocks.
+- **Monorepo CI for all 28 sibling packages** (`.github/workflows/packages-ci.yml`): per-package matrix running install -> typecheck -> build -> tests.
+- **Type-safety sweep**: all 98 `no-explicit-any` warnings resolved — lazy casts replaced with real types; data-grid and form-generic boundaries carry documented, justified exceptions. ESLint is now **0 errors / 0 warnings**.
+- Wired previously inert props: `AnnouncementBar.stylePreset` now applies preset styling; `TestimonialCard.avatar` alias renders; MultiSelect dropdown gained full arrow-key navigation and roving tabindex (invalid `aria-highlighted` replaced with `data-highlighted`).
+- Added CODEOWNERS; coverage now ~57% statements with 337 tests.
 
 ## [2.1.4] — 2026-10-04
 

@@ -92,9 +92,11 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
           });
         }
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       if (isMountedRef.current && currentReqId === activeRequestIdRef.current) {
-        setError(err.message || 'Failed to verify postal code');
+        setError(
+          err instanceof Error && err.message ? err.message : 'Failed to verify postal code'
+        );
       }
     } finally {
       if (isMountedRef.current && currentReqId === activeRequestIdRef.current) {
@@ -142,8 +144,8 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
           maxLength={10}
           placeholder={placeholder}
           value={pincode}
-          onChange={(e: any) => setPincode(e.target.value)}
-          onKeyDown={(e: any) => e.key === 'Enter' && handleCheck()}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPincode(e.target.value)}
+          onKeyDown={(e: React.KeyboardEvent) => e.key === 'Enter' && handleCheck()}
           style={{
             flex: 1,
             padding: '10px 14px',

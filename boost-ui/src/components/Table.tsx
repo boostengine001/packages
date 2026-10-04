@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- data-grid generics: row shapes are
+   consumer-defined. Narrowing these to unknown would break assignability for plain interfaces
+   (they lack implicit index signatures), which is why data grids across the ecosystem keep
+   loose generics at their boundary types. */
 import * as React from 'react';
 import type { UIStylePreset } from '../types/presets';
 import { useBoostPreset } from './BoostProvider';

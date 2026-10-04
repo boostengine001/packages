@@ -217,10 +217,10 @@ export const Toast: React.FC<ToastProps> = ({
   );
 };
 
-export interface ToastPromiseOptions<T = any> {
+export interface ToastPromiseOptions<T = unknown> {
   loading: string;
   success: string | ((data: T) => string);
-  error: string | ((err: any) => string);
+  error: string | ((err: unknown) => string);
 }
 
 export interface ToastOptions {
@@ -309,7 +309,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
           typeof options.success === 'function' ? options.success(data) : options.success;
         addToast({ message: successMsg, variant: 'success' });
         return data;
-      } catch (err: any) {
+      } catch (err: unknown) {
         dismiss(id);
         const errorMsg = typeof options.error === 'function' ? options.error(err) : options.error;
         addToast({ message: errorMsg, variant: 'error' });

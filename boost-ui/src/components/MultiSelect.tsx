@@ -33,6 +33,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 }) => {
   const triggerId = React.useId().replace(/:/g, '');
   const [isOpen, setIsOpen] = React.useState(false);
+  const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const safeValue = Array.isArray(value) ? value : [];
 
@@ -130,6 +131,10 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
           if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
             setIsOpen((prev) => !prev);
+          } else if (!disabled && e.key === 'ArrowDown') {
+            e.preventDefault();
+            setIsOpen(true);
+            setHighlightedIndex(0);
           }
         }}
         className="boost-multiselect-input"
@@ -224,6 +229,8 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 
       {isOpen && (
         <div
+          role="listbox"
+          aria-multiselectable="true"
           className="boost-multiselect-dropdown"
           style={{
             position: 'absolute',
@@ -237,19 +244,31 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
             padding: '4px',
           }}
         >
-          {options.map((opt) => {
+          {options.map((opt, idx) => {
             const isSelected = value.includes(opt.value);
             return (
               <div
                 key={opt.value}
                 role="option"
                 aria-selected={isSelected}
-                tabIndex={0}
-                onClick={() => toggleOption(opt.value)}
+                data-highlighted={idx === highlightedIndex || undefined}
+                tabIndex={idx === highlightedIndex || highlightedIndex === -1 ? 0 : -1}
+                onMouseEnter={() => setHighlightedIndex(idx)}
+                onClick={() => {
+                  setHighlightedIndex(idx);
+                  toggleOption(opt.value);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     toggleOption(opt.value);
+                  } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const dir = e.key === 'ArrowDown' ? 1 : -1;
+                    const next = (idx + dir + options.length) % options.length;
+                    setHighlightedIndex(next);
+                    const el = e.currentTarget.parentElement?.children[next] as HTMLElement | undefined;
+                    el?.focus();
                   }
                 }}
                 className="boost-multiselect-option"

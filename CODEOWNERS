@@ -1,0 +1,9 @@
+# Default owner: everything falls back to the org admin
+* @Rishabhgehlot7
+
+# boost-ui is the flagship package
+/packages/boost-ui/ @Rishabhgehlot7
+boost-ui/ @Rishabhgehlot7
+
+# CI/CD and repo governance
+/.github/ @Rishabhgehlot7
