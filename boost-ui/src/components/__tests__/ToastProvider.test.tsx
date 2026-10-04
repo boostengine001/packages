@@ -33,11 +33,12 @@ function ToastProbe(): React.ReactElement {
       </button>
       <button
         onClick={() => {
-          void toast.promise(Promise.reject(new Error('nope')), {
+          // toast.promise re-throws for the caller to handle
+          toast.promise(Promise.reject(new Error('nope')), {
             loading: 'Uploading',
             success: 'Uploaded!',
             error: 'Upload failed',
-          });
+          }).catch(() => {});
         }}
       >
         promise-fail
