@@ -162,6 +162,8 @@ export const Drawer: React.FC<DrawerProps> = ({
 
   return (
     <Portal>
+      {/* Backdrop click-catcher; Escape also closes via window listener */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
         ref={drawerRef}
         role="dialog"
@@ -170,6 +172,9 @@ export const Drawer: React.FC<DrawerProps> = ({
         className={`boost-drawer-backdrop ${className}`}
         onClick={(e) => {
           if (e.target === e.currentTarget && closeOnOverlayClick) onClose();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
         }}
         style={{
           position: 'fixed',
@@ -248,7 +253,6 @@ export const Drawer: React.FC<DrawerProps> = ({
         `}</style>
         <div
           className={`boost-drawer-panel boost-drawer-preset-${preset}`}
-          onClick={(e) => e.stopPropagation()}
           style={{
             position: 'absolute',
             display: 'flex',

@@ -469,6 +469,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
+    // Backdrop click-catcher; Escape closes via onKeyDown and the window listener
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       role="dialog"
       aria-modal="true"
@@ -488,7 +490,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         fontFamily: 'inherit',
         animation: 'boost-fadeIn 0.2s ease',
       }}
-      onClick={onClose}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') onClose();
+      }}
     >
       <style>{`
         @media (max-width: 640px) {
@@ -551,7 +558,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       <div
         className={`boost-cart-drawer-panel preset-${preset}`}
         style={getPanelStyles()}
-        onClick={(e: any) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="boost-cart-header" style={getHeaderStyles()}>

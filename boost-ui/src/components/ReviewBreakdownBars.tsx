@@ -264,9 +264,19 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
             <div
               key={star}
               className="boost-review-row"
-              onClick={() => onFilterByStar && onFilterByStar(star)}
-              role={onFilterByStar ? 'button' : undefined}
-              tabIndex={onFilterByStar ? 0 : undefined}
+              {...(onFilterByStar
+                ? {
+                    role: 'button' as const,
+                    tabIndex: 0 as const,
+                    onClick: () => onFilterByStar(star),
+                    onKeyDown: (e: React.KeyboardEvent) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onFilterByStar(star);
+                      }
+                    },
+                  }
+                : {})}
               style={{
                 cursor: onFilterByStar ? 'pointer' : 'default',
                 opacity: selectedStar !== null && !isSelected ? 0.35 : 1,

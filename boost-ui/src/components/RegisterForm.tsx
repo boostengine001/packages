@@ -361,6 +361,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       >
         <div>
           <label
+            htmlFor="boost-register-name"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -373,6 +374,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           </label>
           <input
             type="text"
+            id="boost-register-name"
             value={fullName}
             onChange={(e) => {
               setFullName(e.target.value);
@@ -425,6 +427,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
         <div>
           <label
+            htmlFor="boost-register-email"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -437,6 +440,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           </label>
           <input
             type="email"
+            id="boost-register-email"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -489,6 +493,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
         <div>
           <label
+            htmlFor="boost-register-phone"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -501,6 +506,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           </label>
           <input
             type="tel"
+            id="boost-register-phone"
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value);
@@ -553,6 +559,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
         <div>
           <label
+            htmlFor="boost-register-password"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -566,6 +573,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           <div style={{ position: 'relative' }}>
             <input
               type={showPassword ? 'text' : 'password'}
+              id="boost-register-password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);

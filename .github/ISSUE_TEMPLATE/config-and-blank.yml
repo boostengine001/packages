@@ -1,0 +1,10 @@
+name: Blank issue
+description: Anything else (questions, docs, tooling)
+labels: ['triage']
+body:
+  - type: textarea
+    id: body
+    attributes:
+      label: Description
+    validations:
+      required: true

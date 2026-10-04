@@ -357,6 +357,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
 
           <div>
             <label
+              htmlFor="boost-forgot-email"
               style={{
                 display: 'block',
                 fontSize: '13px',
@@ -370,6 +371,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
             <input
               type="email"
               required
+              id="boost-forgot-email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"

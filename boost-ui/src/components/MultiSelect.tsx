@@ -31,6 +31,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   disabled = false,
   style,
 }) => {
+  const triggerId = React.useId().replace(/:/g, '');
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const safeValue = Array.isArray(value) ? value : [];
@@ -111,13 +112,25 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         }
       `}</style>
       {label && (
-        <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)' }}>
+        <label htmlFor={triggerId} style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)' }}>
           {label}
         </label>
       )}
 
       <div
+        id={triggerId}
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-disabled={disabled}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
+        onKeyDown={(e) => {
+          if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            setIsOpen((prev) => !prev);
+          }
+        }}
         className="boost-multiselect-input"
         style={{
           display: 'flex',
@@ -159,7 +172,14 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                 <span
                   onClick={(e) => removeChip(e, val)}
                   role="button"
+                  tabIndex={0}
                   aria-label={`Remove ${opt ? opt.label : val}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      removeChip(e as unknown as React.MouseEvent, val);
+                    }
+                  }}
                   style={{
                     display: 'inline-flex',
                     cursor: 'pointer',
@@ -221,7 +241,16 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
             return (
               <div
                 key={opt.value}
+                role="option"
+                aria-selected={isSelected}
+                tabIndex={0}
                 onClick={() => toggleOption(opt.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleOption(opt.value);
+                  }
+                }}
                 className="boost-multiselect-option"
                 style={{
                   display: 'flex',

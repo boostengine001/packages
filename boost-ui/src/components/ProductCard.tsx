@@ -304,7 +304,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           overflow: 'hidden',
           cursor: onClick ? 'pointer' : 'default',
         }}
-        onClick={onClick ? () => onClick(id) : undefined}
+        {...(onClick
+          ? {
+              role: 'button' as const,
+              tabIndex: 0 as const,
+              'aria-label': title,
+              onClick: () => onClick(id),
+              onKeyDown: (e: React.KeyboardEvent) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onClick(id);
+                }
+              },
+            }
+          : {})}
       >
         <img
           src={currentImage}
@@ -441,13 +454,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           )}
 
           <h3
-            onClick={() => onClick?.(id)}
             style={{
               fontSize: 'clamp(13px, 1.2vw, 14px)',
               fontWeight: 600,
               color: 'var(--boost-text, #0f172a)',
               margin: '0 0 4px 0',
-              cursor: onClick ? 'pointer' : 'default',
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',

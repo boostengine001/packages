@@ -6,6 +6,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 
 ## [Unreleased]
 
+## [2.1.4] — 2026-10-04
+
 ### Added
 - **Real unit test suite (84 tests)** with Vitest + React Testing Library + jsdom (`npm run test:unit`), covering Modal (focus trap, Escape, scroll lock, ARIA), Tabs (keyboard nav, controlled/uncontrolled, compound API), Accordion, Toast, `useForm`, utility hooks, and all utility functions. Coverage reporting via `npm run test:coverage`.
 - **GitHub Actions CI** (`.github/workflows/ci.yml`): lint → typecheck → unit tests → build → smoke tests on every push/PR touching `boost-ui`.
@@ -21,6 +23,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 ### Changed
 - `prepublishOnly` now runs the full gate: lint → typecheck → unit tests → build → smoke tests.
 - Codebase formatted with Prettier (single config, normalized line endings); removed dead code (unused style helpers/constants) and junk files (`err.txt`, `out.txt`, `build_log.txt`).
+
+### Added (a11y & quality hardening)
+- **All 102 jsx-a11y findings fixed** — every interactive element now has keyboard support (Enter/Space handlers, roving focus), all form labels are programmatically associated, overlays close via Escape, and `ProgressBar` exposes proper `role="progressbar"` semantics. jsx-a11y rules are enforced as **errors** in lint (documented exceptions carry justifying comments).
+- **Test suite grown from 84 to 158 tests across 18 files**, covering forms (Input/Textarea/Select/Checkbox/Switch/Radio), display components (Alert/Badge/Avatar/ProgressBar/EmptyState), navigation (Breadcrumb/Pagination/Stepper/DropdownMenu), commerce widgets (Price/QuantitySelector/StarRating/PincodeChecker/CartDrawer), data display (DataTable/KPIWidget/charts), and system pieces (BoostProvider/ThemeToggle/Portal/Carousel/Tooltip). Statement coverage up from ~4.5% to ~25%.
+- **8 react-hooks/exhaustive-deps warnings resolved** (stable callbacks in Carousel, correct dependency arrays in Popover/MegaMenu/LightningDealsBar, module-level breakpoint table).
+- **Build & packaging hardening**: sourcemaps enabled, `publint` clean (types nested per import/require condition, `type: commonjs` declared), `size-limit` guards (full bundle < 100 kB brotli; tree-shaken utils 127 B, hooks 688 B).
+- Repository links updated to the boostengine001 org; `dist` untracked from git; SECURITY.md and GitHub issue templates added.
+- Fixed: PricingTable crashed when a tier omitted optional-looking features data; ThemeToggle segmented variant references verified.
 
 ## [2.0.0] — 2026-09-21
 

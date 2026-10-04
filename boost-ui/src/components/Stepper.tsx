@@ -191,7 +191,19 @@ export const Stepper: React.FC<StepperProps> = ({
         return (
           <div
             key={step.id}
-            onClick={() => isClickable && onStepClick(idx)}
+            {...(isClickable
+              ? {
+                  role: 'button' as const,
+                  tabIndex: 0 as const,
+                  onClick: () => onStepClick?.(idx),
+                  onKeyDown: (e: React.KeyboardEvent) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onStepClick?.(idx);
+                    }
+                  },
+                }
+              : {})}
             style={{
               display: 'flex',
               alignItems: 'center',

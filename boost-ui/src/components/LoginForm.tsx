@@ -321,6 +321,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       >
         <div>
           <label
+            htmlFor="boost-login-identifier"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -333,6 +334,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           </label>
           <input
             type="text"
+            id="boost-login-identifier"
             value={identifier}
             onChange={(e) => {
               setIdentifier(e.target.value);
@@ -393,6 +395,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             }}
           >
             <label
+              htmlFor="boost-login-password"
               style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)' }}
             >
               Password
@@ -419,6 +422,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <div style={{ position: 'relative' }}>
             <input
               type={showPassword ? 'text' : 'password'}
+              id="boost-login-password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);

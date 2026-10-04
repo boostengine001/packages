@@ -1,6 +1,6 @@
 {
   "name": "@boostengine/ui",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Universal, Zero-Config UI Component Suite for Next.js & React. Build High-Converting eCommerce, Modern SaaS, Enterprise Dashboards, and Landing Pages with AI Agent Native Support.",
   "author": "Rishabh Gehlot <boostengine001@gmail.com> (https://github.com/Rishabhgehlot7)",
   "license": "MIT",
@@ -48,14 +48,14 @@
     "svg-charts",
     "accessible-ui"
   ],
-  "homepage": "https://github.com/Rishabhgehlot7/packages/tree/main/boost-ui#readme",
+  "homepage": "https://github.com/boostengine001/packages/tree/main/boost-ui#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Rishabhgehlot7/packages.git",
+    "url": "git+https://github.com/boostengine001/packages.git",
     "directory": "boost-ui"
   },
   "bugs": {
-    "url": "https://github.com/Rishabhgehlot7/packages/issues"
+    "url": "https://github.com/boostengine001/packages/issues"
   },
   "bin": {
     "boost-ui": "./bin/cli.cjs",
@@ -66,116 +66,138 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./styles.css": "./dist/styles.css",
     "./tokens.json": "./dist/tokens.json",
     "./hooks": {
-      "types": "./dist/hooks/index.d.ts",
-      "import": "./dist/hooks/index.mjs",
-      "require": "./dist/hooks/index.cjs"
+      "import": {
+        "types": "./dist/hooks/index.d.mts",
+        "default": "./dist/hooks/index.mjs"
+      },
+      "require": {
+        "types": "./dist/hooks/index.d.ts",
+        "default": "./dist/hooks/index.cjs"
+      }
     },
     "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.mjs",
-      "require": "./dist/utils/index.cjs"
+      "import": {
+        "types": "./dist/utils/index.d.mts",
+        "default": "./dist/utils/index.mjs"
+      },
+      "require": {
+        "types": "./dist/utils/index.d.ts",
+        "default": "./dist/utils/index.cjs"
+      }
     },
     "./svelte": {
-      "types": "./dist/svelte/index.d.ts",
-      "import": "./dist/svelte/index.mjs",
-      "require": "./dist/svelte/index.cjs"
+      "import": {
+        "types": "./dist/svelte/index.d.mts",
+        "default": "./dist/svelte/index.mjs"
+      },
+      "require": {
+        "types": "./dist/svelte/index.d.ts",
+        "default": "./dist/svelte/index.cjs"
+      }
     },
     "./solid": {
-      "types": "./dist/solid/index.d.ts",
-      "import": "./dist/solid/index.mjs",
-      "require": "./dist/solid/index.cjs"
+      "import": {
+        "types": "./dist/solid/index.d.mts",
+        "default": "./dist/solid/index.mjs"
+      },
+      "require": {
+        "types": "./dist/solid/index.d.ts",
+        "default": "./dist/solid/index.cjs"
+      }
     },
     "./angular": {
-      "types": "./dist/angular/index.d.ts",
-      "import": "./dist/angular/index.mjs",
-      "require": "./dist/angular/index.cjs"
+      "import": {
+        "types": "./dist/angular/index.d.mts",
+        "default": "./dist/angular/index.mjs"
+      },
+      "require": {
+        "types": "./dist/angular/index.d.ts",
+        "default": "./dist/angular/index.cjs"
+      }
     },
     "./qwik": {
-      "types": "./dist/qwik/index.d.ts",
-      "import": "./dist/qwik/index.mjs",
-      "require": "./dist/qwik/index.cjs"
+      "import": {
+        "types": "./dist/qwik/index.d.mts",
+        "default": "./dist/qwik/index.mjs"
+      },
+      "require": {
+        "types": "./dist/qwik/index.d.ts",
+        "default": "./dist/qwik/index.cjs"
+      }
     },
     "./next": {
-      "types": "./dist/next/index.d.ts",
-      "import": "./dist/next/index.mjs",
-      "require": "./dist/next/index.cjs"
+      "import": {
+        "types": "./dist/next/index.d.mts",
+        "default": "./dist/next/index.mjs"
+      },
+      "require": {
+        "types": "./dist/next/index.d.ts",
+        "default": "./dist/next/index.cjs"
+      }
     },
     "./vue": {
-      "types": "./dist/vue/index.d.ts",
-      "import": "./dist/vue/index.mjs",
-      "require": "./dist/vue/index.cjs"
+      "import": {
+        "types": "./dist/vue/index.d.mts",
+        "default": "./dist/vue/index.mjs"
+      },
+      "require": {
+        "types": "./dist/vue/index.d.ts",
+        "default": "./dist/vue/index.cjs"
+      }
     },
     "./web": {
-      "types": "./dist/web/index.d.ts",
-      "import": "./dist/web/index.mjs",
-      "require": "./dist/web/index.cjs"
+      "import": {
+        "types": "./dist/web/index.d.mts",
+        "default": "./dist/web/index.mjs"
+      },
+      "require": {
+        "types": "./dist/web/index.d.ts",
+        "default": "./dist/web/index.cjs"
+      }
     },
     "./native": {
-      "types": "./dist/native/index.d.ts",
-      "import": "./dist/native/index.mjs",
-      "require": "./dist/native/index.cjs"
+      "import": {
+        "types": "./dist/native/index.d.mts",
+        "default": "./dist/native/index.mjs"
+      },
+      "require": {
+        "types": "./dist/native/index.d.ts",
+        "default": "./dist/native/index.cjs"
+      }
     },
     "./vite": {
-      "types": "./dist/vite/index.d.ts",
-      "import": "./dist/vite/index.mjs",
-      "require": "./dist/vite/index.cjs"
+      "import": {
+        "types": "./dist/vite/index.d.mts",
+        "default": "./dist/vite/index.mjs"
+      },
+      "require": {
+        "types": "./dist/vite/index.d.ts",
+        "default": "./dist/vite/index.cjs"
+      }
     },
     "./tokens": {
-      "types": "./dist/tokens/index.d.ts",
-      "import": "./dist/tokens/index.mjs",
-      "require": "./dist/tokens/index.cjs"
+      "import": {
+        "types": "./dist/tokens/index.d.mts",
+        "default": "./dist/tokens/index.mjs"
+      },
+      "require": {
+        "types": "./dist/tokens/index.d.ts",
+        "default": "./dist/tokens/index.cjs"
+      }
     },
     "./package.json": "./package.json"
-  },
-  "typesVersions": {
-    "*": {
-      "hooks": [
-        "./dist/hooks/index.d.ts"
-      ],
-      "utils": [
-        "./dist/utils/index.d.ts"
-      ],
-      "next": [
-        "./dist/next/index.d.ts"
-      ],
-      "vue": [
-        "./dist/vue/index.d.ts"
-      ],
-      "web": [
-        "./dist/web/index.d.ts"
-      ],
-      "svelte": [
-        "./dist/svelte/index.d.ts"
-      ],
-      "solid": [
-        "./dist/solid/index.d.ts"
-      ],
-      "angular": [
-        "./dist/angular/index.d.ts"
-      ],
-      "qwik": [
-        "./dist/qwik/index.d.ts"
-      ],
-      "native": [
-        "./dist/native/index.d.ts"
-      ],
-      "vite": [
-        "./dist/vite/index.d.ts"
-      ],
-      "tokens": [
-        "./dist/tokens/index.d.ts"
-      ],
-      "*": [
-        "./dist/index.d.ts"
-      ]
-    }
   },
   "files": [
     "bin",
@@ -203,7 +225,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run lint && npm run typecheck && npm run test:unit && npm run build && npm run test:smoke"
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test:unit && npm run build && npm run test:smoke",
+    "size": "size-limit",
+    "publint": "publint"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -217,6 +241,7 @@
   "devDependencies": {
     "@angular/core": "^22.1.7",
     "@builder.io/qwik": "^1.20.0",
+    "@size-limit/preset-small-lib": "^14.1.0",
     "@testing-library/dom": "10.4.2",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.3",
@@ -231,10 +256,12 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "30.1.1",
     "prettier": "^3.9.9",
+    "publint": "^0.3.25",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-native": "^0.87.1",
     "rxjs": "^7.8.2",
+    "size-limit": "^14.1.0",
     "solid-js": "^1.9.15",
     "svelte": "^5.57.1",
     "tsup": "^8.3.5",
@@ -242,5 +269,25 @@
     "typescript-eslint": "^8.71.0",
     "vitest": "5.0.3",
     "vue": "^3.5.43"
-  }
+  },
+  "size-limit": [
+    {
+      "name": "Full bundle (ESM)",
+      "path": "dist/index.mjs",
+      "limit": "100 kB"
+    },
+    {
+      "name": "Utils only (treeshaken)",
+      "path": "dist/index.mjs",
+      "import": "{ cn, formatCurrency }",
+      "limit": "10 kB"
+    },
+    {
+      "name": "Hooks (treeshaken)",
+      "path": "dist/index.mjs",
+      "import": "{ useForm, useMediaQuery }",
+      "limit": "15 kB"
+    }
+  ],
+  "type": "commonjs"
 }

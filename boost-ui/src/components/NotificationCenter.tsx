@@ -227,6 +227,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
       {isOpen && (
         <>
+          {/* Backdrop click-to-close; keyboard users close via Escape (onKeyDown) */}
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
             style={{
               position: 'fixed',
@@ -238,7 +240,12 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               zIndex: 99998,
               display: 'var(--boost-backdrop-display, none)', // We can show this on mobile via CSS if needed, or just let handleClickOutside handle it.
             }}
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsOpen(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') setIsOpen(false);
+            }}
             className="boost-notification-backdrop"
           />
           <style>
@@ -376,7 +383,15 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 filteredNotifications.map((item) => (
                   <div
                     key={item.id}
+                    role="button"
+                    tabIndex={0}
                     onClick={() => onItemClick && onItemClick(item)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (onItemClick) onItemClick(item);
+                      }
+                    }}
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',

@@ -55,7 +55,7 @@ export const Popover: React.FC<PopoverProps> = ({
       document.addEventListener('mousedown', handleClickOutside);
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [open]);
+  }, [open, setOpen]);
 
   // Handle escape key
   React.useEffect(() => {
@@ -66,7 +66,7 @@ export const Popover: React.FC<PopoverProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [open]);
+  }, [open, setOpen]);
 
   const getPositionStyles = (): React.CSSProperties => {
     switch (placement) {

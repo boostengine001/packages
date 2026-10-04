@@ -88,7 +88,7 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
     update();
     const timer = setInterval(update, 1000);
     return () => clearInterval(timer);
-  }, [endsAt, secondsProp]);
+  }, [endsAt, secondsProp, onExpire]);
 
   const pad = (n: number) => String(n).padStart(2, '0');
 

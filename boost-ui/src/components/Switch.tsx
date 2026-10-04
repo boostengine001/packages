@@ -40,6 +40,7 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
   ) => {
     const { stylePreset: inheritedPreset } = useBoostPreset();
     const preset = stylePresetProp ?? inheritedPreset;
+    const switchId = React.useId().replace(/:/g, '');
 
     const getPresetStyles = (): { track: React.CSSProperties; thumb: React.CSSProperties } => {
       switch (preset) {
@@ -100,6 +101,7 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
 
     return (
       <label
+        htmlFor={switchId}
         className={`boost-switch-wrapper ${className}`}
         style={{
           display: 'inline-flex',
@@ -127,6 +129,8 @@ export const Switch = /* @__PURE__ */ React.forwardRef<HTMLButtonElement, Switch
           ref={ref}
           type="button"
           role="switch"
+          id={switchId}
+          aria-label={label || description || 'Toggle'}
           aria-checked={checked}
           disabled={disabled}
           onClick={() => !disabled && onChange(!checked)}

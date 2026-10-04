@@ -43,7 +43,6 @@ export const Divider: React.FC<DividerProps> = ({
   if (!label) {
     return (
       <hr
-        role="separator"
         aria-orientation="horizontal"
         className={`boost-divider boost-divider-horizontal ${className}`}
         style={{

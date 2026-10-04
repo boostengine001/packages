@@ -141,6 +141,8 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <Portal>
+      {/* Backdrop click-catcher; keyboard users close via Escape (onKeyDown) */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
         ref={setModalNode}
         role="dialog"
@@ -150,6 +152,9 @@ export const Modal: React.FC<ModalProps> = ({
         className={`boost-modal-backdrop ${className}`}
         onClick={(e) => {
           if (e.target === e.currentTarget && closeOnOverlayClick) onClose();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
         }}
         style={{
           position: 'fixed',
@@ -226,7 +231,6 @@ export const Modal: React.FC<ModalProps> = ({
         `}</style>
         <div
           className={`boost-modal-card boost-modal-preset-${preset}`}
-          onClick={(e) => e.stopPropagation()}
           style={{
             width: '100%',
             maxWidth: `min(${getWidth()}, calc(100vw - 24px))`,

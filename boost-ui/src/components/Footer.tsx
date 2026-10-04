@@ -559,7 +559,19 @@ export const Footer: React.FC<FooterProps> = ({
             const isOpen = !!openMobileColumns[idx];
             return (
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div className="boost-footer-col-header" onClick={() => toggleMobileColumn(idx)}>
+                <div
+                  className="boost-footer-col-header"
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isOpen}
+                  onClick={() => toggleMobileColumn(idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleMobileColumn(idx);
+                    }
+                  }}
+                >
                   <h4
                     style={{
                       fontSize: '13px',

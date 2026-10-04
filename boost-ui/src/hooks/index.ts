@@ -597,7 +597,7 @@ export function useAnnounce() {
         container.textContent = message;
       }
     });
-  }, []);
+  }, [getOrCreateContainer]);
 
   return announce;
 }
@@ -622,21 +622,21 @@ export function useAnnounce() {
  * if (isMobile) return <MobileView />;
  * ```
  */
+type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+const BREAKPOINTS: Record<BreakpointName, string> = {
+  xs: '(max-width: 479px)',
+  sm: '(min-width: 480px) and (max-width: 767px)',
+  md: '(min-width: 768px) and (max-width: 1023px)',
+  lg: '(min-width: 1024px) and (max-width: 1279px)',
+  xl: '(min-width: 1280px) and (max-width: 1535px)',
+  '2xl': '(min-width: 1536px)',
+};
+
 export function useBreakpoint() {
-  type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-
-  const breakpoints: Record<BreakpointName, string> = {
-    xs: '(max-width: 479px)',
-    sm: '(min-width: 480px) and (max-width: 767px)',
-    md: '(min-width: 768px) and (max-width: 1023px)',
-    lg: '(min-width: 1024px) and (max-width: 1279px)',
-    xl: '(min-width: 1280px) and (max-width: 1535px)',
-    '2xl': '(min-width: 1536px)',
-  };
-
   const getBreakpoint = React.useCallback((): BreakpointName => {
     if (typeof window === 'undefined') return 'lg';
-    for (const [name, query] of Object.entries(breakpoints)) {
+    for (const [name, query] of Object.entries(BREAKPOINTS)) {
       if (window.matchMedia(query).matches) return name as BreakpointName;
     }
     return 'lg';
@@ -648,7 +648,7 @@ export function useBreakpoint() {
     setBreakpoint(getBreakpoint());
     const listeners: (() => void)[] = [];
 
-    for (const [name, query] of Object.entries(breakpoints)) {
+    for (const [name, query] of Object.entries(BREAKPOINTS)) {
       const mq = window.matchMedia(query);
       const handler = () => {
         if (mq.matches) setBreakpoint(name as BreakpointName);

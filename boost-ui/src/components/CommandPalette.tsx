@@ -212,6 +212,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   };
 
   return (
+    // Backdrop click-to-close; keyboard users close via Escape (onKeyDown)
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       style={{
         position: 'fixed',
@@ -231,12 +233,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         zIndex: 9999,
         boxSizing: 'border-box',
       }}
-      onClick={onClose}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') onClose();
+      }}
     >
       <div
         className={`boost-command-palette boost-command-palette-preset-${preset} ${className}`}
         style={getModalStyles()}
-        onClick={(e) => e.stopPropagation()}
       >
         <div
           style={{
@@ -309,9 +315,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               return (
                 <div
                   key={item.id}
+                  role="button"
+                  tabIndex={isSelected ? 0 : -1}
                   onClick={() => {
                     item.onSelect();
                     onClose();
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      item.onSelect();
+                      onClose();
+                    }
                   }}
                   onMouseEnter={() => setSelectedIndex(idx)}
                   style={getItemStyles(isSelected)}

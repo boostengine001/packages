@@ -66,6 +66,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     >
       {label && (
         <label
+          htmlFor="boost-file-upload-input"
           style={{
             fontSize: '13px',
             fontWeight: 600,
@@ -85,6 +86,16 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         onDragLeave={() => setIsDragOver(false)}
         onDrop={handleDrop}
         onClick={() => !disabled && inputRef.current?.click()}
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled}
+        aria-label={label || 'Upload file'}
+        onKeyDown={(e) => {
+          if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
         style={{
           border: `2px dashed ${error ? 'var(--boost-danger, #ef4444)' : isDragOver ? 'var(--boost-primary, #2563eb)' : 'var(--boost-border, #cbd5e1)'}`,
           borderRadius: '10px',
@@ -102,6 +113,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         <input
           ref={inputRef}
           type="file"
+          id="boost-file-upload-input"
           accept={accept}
           multiple={maxFiles > 1}
           onChange={handleChange}

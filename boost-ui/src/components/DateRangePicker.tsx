@@ -70,7 +70,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
         `}
       </style>
       {label && (
-        <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)' }}>
+        <label htmlFor="boost-daterange-start" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--boost-text, #334155)' }}>
           {label}
         </label>
       )}
@@ -91,6 +91,8 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
       >
         <input
           type="date"
+          id="boost-daterange-start"
+          aria-label={label ? `${label} — start date` : 'Start date'}
           value={currentStart}
           onChange={(e) => handleStartChange(e.target.value)}
           style={{
@@ -109,6 +111,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
         <input
           type="date"
+          aria-label={label ? `${label} — end date` : 'End date'}
           value={currentEnd}
           min={currentStart}
           onChange={(e) => handleEndChange(e.target.value)}

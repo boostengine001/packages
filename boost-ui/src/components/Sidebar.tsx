@@ -220,9 +220,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <div
                   key={item.id}
                   className={`sidebar-nav-item ${isActive ? 'active' : ''}`}
+                  role="button"
+                  tabIndex={0}
                   onClick={() => {
                     if (item.onClick) item.onClick();
                     if (onSelect) onSelect(item.id);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      if (item.onClick) item.onClick();
+                      if (onSelect) onSelect(item.id);
+                    }
                   }}
                   title={collapsed ? item.label : undefined}
                   style={getItemStyles(isActive)}

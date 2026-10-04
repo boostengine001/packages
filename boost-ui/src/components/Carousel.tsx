@@ -38,9 +38,9 @@ export const Carousel: React.FC<CarouselProps> = ({
     setCurrentIdx((prev) => (prev === 0 ? slidesList.length - 1 : prev - 1));
   };
 
-  const nextSlide = () => {
+  const nextSlide = React.useCallback(() => {
     setCurrentIdx((prev) => (prev === slidesList.length - 1 ? 0 : prev + 1));
-  };
+  }, [slidesList.length]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
@@ -67,7 +67,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     if (!autoPlay || slidesList.length <= 1) return;
     const timer = setInterval(nextSlide, interval);
     return () => clearInterval(timer);
-  }, [autoPlay, interval, slidesList.length]);
+  }, [autoPlay, interval, slidesList.length, nextSlide]);
 
   if (slidesList.length === 0) return null;
 

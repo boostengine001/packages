@@ -5,6 +5,7 @@ import * as React from 'react';
  */
 export interface TimePickerProps {
   label?: string;
+  id?: string;
   value?: string;
   onChange: (time: string) => void;
   error?: string;
@@ -16,6 +17,7 @@ export interface TimePickerProps {
 
 export const TimePicker: React.FC<TimePickerProps> = ({
   label,
+  id: explicitId,
   value,
   onChange,
   error,
@@ -24,6 +26,8 @@ export const TimePicker: React.FC<TimePickerProps> = ({
   className = '',
   style,
 }) => {
+  const autoId = React.useId().replace(/:/g, '');
+  const inputId = explicitId || autoId;
   return (
     <div
       className={`boost-timepicker-wrapper ${className}`}
@@ -38,6 +42,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
     >
       {label && (
         <label
+          htmlFor={inputId}
           style={{
             fontSize: '13px',
             fontWeight: 600,
@@ -51,6 +56,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
 
       <input
         type="time"
+        id={inputId}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}

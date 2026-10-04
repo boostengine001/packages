@@ -507,3 +507,24 @@ module.exports = {
 MIT License (c) 2026 **[Rishabh Gehlot](https://github.com/Rishabhgehlot7)**. Developed for modern global and Indian D2C & SaaS creators.  
 GitHub: **[github.com/Rishabhgehlot7/packages](https://github.com/Rishabhgehlot7/packages)**  
 See [LICENSE](./LICENSE) for full license text.
+
+---
+
+## Development
+
+```bash
+npm install        # install dependencies
+npm run dev        # tsup watch build
+npm run test:unit  # Vitest + React Testing Library suite (158 tests)
+npm run test:coverage
+npm run lint       # ESLint 9 (flat config) — 0 errors enforced
+npm run typecheck  # strict TypeScript
+npm run build      # tsup (CJS + ESM + d.ts + sourcemaps)
+npm run test:smoke # build-artifact smoke tests
+npm run size       # size-limit budget checks
+npm run publint    # package exports validation
+```
+
+`prepublishOnly` runs the full verification gate (lint → typecheck → unit tests → build → smoke tests).
+CI runs the same pipeline on every push/PR via GitHub Actions (`.github/workflows/ci.yml`).
+Releases publish to npm with provenance via `.github/workflows/release-boost-ui.yml`.

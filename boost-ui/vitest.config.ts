@@ -13,6 +13,10 @@ export default defineConfig({
       exclude: [
         'src/**/__tests__/**',
         'src/**/index.ts',
+        // Non-code assets and ambient type declarations
+        '**/*.d.ts',
+        '**/*.css',
+        '**/*.json',
         // Framework adapters and React Native entry are covered by their own ecosystems
         'src/native/**',
         'src/svelte/**',

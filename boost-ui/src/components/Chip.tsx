@@ -138,7 +138,15 @@ export const Chip: React.FC<ChipProps> = ({
             onDelete();
           }}
           role="button"
+          tabIndex={0}
           aria-label="Delete chip"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              onDelete();
+            }
+          }}
           style={{
             display: 'inline-flex',
             cursor: 'pointer',

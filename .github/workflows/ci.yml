@@ -42,3 +42,9 @@ jobs:
 
       - name: Smoke tests (build artifacts)
         run: npm run test:smoke
+
+      - name: Package exports (publint)
+        run: npm run publint
+
+      - name: Size budget (size-limit)
+        run: npm run size

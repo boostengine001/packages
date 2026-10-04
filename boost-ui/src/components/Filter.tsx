@@ -217,7 +217,16 @@ export const Filter: React.FC<FilterProps> = ({
               return (
                 <div
                   key={opt.value}
+                  role="checkbox"
+                  aria-checked={checked}
+                  tabIndex={0}
                   onClick={() => toggleOption(opt.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                      e.preventDefault();
+                      toggleOption(opt.value);
+                    }
+                  }}
                   className={`boost-filter-opt ${checked ? 'checked' : ''}`}
                   style={{
                     display: 'flex',

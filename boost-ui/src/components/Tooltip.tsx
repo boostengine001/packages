@@ -78,6 +78,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
   };
 
   return (
+    // Touch fallback only: keyboard users already get the tooltip via onFocus
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
       ref={containerRef}
       aria-describedby={content && isVisible ? tooltipId : undefined}

@@ -875,7 +875,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <input
               type="text"
-              autoFocus
               value={localSearch}
               onChange={handleSearchChange}
               onKeyDown={handleSearchKeyDown}
@@ -966,6 +965,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   {hasChildren && (
                     <button
                       type="button"
+                      aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${link.label} submenu`}
+                      aria-expanded={isExpanded}
                       onClick={() => setExpandedMobileItem(isExpanded ? null : link.label)}
                       style={{
                         background: 'none',

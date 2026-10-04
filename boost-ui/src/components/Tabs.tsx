@@ -255,6 +255,7 @@ export const Tabs: TabsComponent = (({
         <div
           role="tablist"
           aria-orientation="horizontal"
+          tabIndex={-1}
           className="boost-tab-header"
           onKeyDown={handleKeyDown}
           style={getHeaderStyles()}

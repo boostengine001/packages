@@ -196,9 +196,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           }}
         >
           <div>
-            <label style={labelStyle}>Full Name *</label>
+            <label style={labelStyle} htmlFor="boost-address-name">Full Name *</label>
             <input
               type="text"
+              id="boost-address-name"
               value={formData.fullName}
               onChange={(e) => handleChange('fullName', e.target.value)}
               placeholder="e.g. Rahul Sharma"
@@ -208,9 +209,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           </div>
 
           <div>
-            <label style={labelStyle}>Phone Number *</label>
+            <label style={labelStyle} htmlFor="boost-address-phone">Phone Number *</label>
             <input
               type="tel"
+              id="boost-address-phone"
               value={formData.phone}
               onChange={(e) => handleChange('phone', e.target.value)}
               placeholder="Phone number (e.g. +1 555-0199)"
@@ -228,10 +230,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           }}
         >
           <div>
-            <label style={labelStyle}>Postal / ZIP Code *</label>
+            <label style={labelStyle} htmlFor="boost-address-pincode">Postal / ZIP Code *</label>
             <input
               type="text"
               maxLength={10}
+              id="boost-address-pincode"
               value={formData.pincode}
               onChange={(e) => handleChange('pincode', e.target.value)}
               placeholder="e.g. 90210 or 110001"
@@ -241,9 +244,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           </div>
 
           <div style={{ gridColumn: 'span 1' }}>
-            <label style={labelStyle}>Apt / Suite / House No. *</label>
+            <label style={labelStyle} htmlFor="boost-address-house">Apt / Suite / House No. *</label>
             <input
               type="text"
+              id="boost-address-house"
               value={formData.houseNumber}
               onChange={(e) => handleChange('houseNumber', e.target.value)}
               placeholder="e.g. Apt 4B or Suite 200"
@@ -254,9 +258,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({
         </div>
 
         <div>
-          <label style={labelStyle}>Street Address *</label>
+          <label style={labelStyle} htmlFor="boost-address-street">Street Address *</label>
           <input
             type="text"
+            id="boost-address-street"
             value={formData.street}
             onChange={(e) => handleChange('street', e.target.value)}
             placeholder="e.g. 123 Main Street or Broadway"
@@ -273,9 +278,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           }}
         >
           <div>
-            <label style={labelStyle}>City / Town *</label>
+            <label style={labelStyle} htmlFor="boost-address-city">City / Town *</label>
             <input
               type="text"
+              id="boost-address-city"
               value={formData.city}
               onChange={(e) => handleChange('city', e.target.value)}
               placeholder="e.g. New York or London"
@@ -285,9 +291,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           </div>
 
           <div>
-            <label style={labelStyle}>State / Province / Region *</label>
+            <label style={labelStyle} htmlFor="boost-address-state">State / Province / Region *</label>
             <input
               type="text"
+              id="boost-address-state"
               value={formData.state}
               onChange={(e) => handleChange('state', e.target.value)}
               placeholder="e.g. California or Ontario"
@@ -298,8 +305,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({
         </div>
 
         <div>
-          <label style={labelStyle}>Address Type</label>
-          <div style={{ display: 'flex', gap: '10px', marginTop: '4px', flexWrap: 'wrap' }}>
+          <div style={labelStyle} id="boost-address-type-label">Address Type</div>
+          <div role="group" aria-labelledby="boost-address-type-label" style={{ display: 'flex', gap: '10px', marginTop: '4px', flexWrap: 'wrap' }}>
             {(['home', 'work', 'other'] as const).map((type) => (
               <button
                 key={type}

@@ -59,6 +59,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       )}
 
       <div
+        role="progressbar"
+        aria-valuenow={Math.round(clamped)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={label || 'Progress'}
         style={{
           width: '100%',
           height: `${height}px`,

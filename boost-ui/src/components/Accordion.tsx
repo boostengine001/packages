@@ -247,6 +247,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- delegates arrow-key navigation to the child header buttons
     <div
       className={`boost-accordion boost-accordion-${variant} boost-accordion-preset-${preset} ${className}`}
       onKeyDown={handleKeyDown}

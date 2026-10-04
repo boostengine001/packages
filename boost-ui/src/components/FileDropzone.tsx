@@ -83,6 +83,15 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
         onDragLeave={() => setIsDragOver(false)}
         onDrop={handleDrop}
         onClick={() => !disabled && inputRef.current?.click()}
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled}
+        onKeyDown={(e) => {
+          if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
         style={{
           border: `2px dashed ${
             isDragOver ? 'var(--boost-primary, #2563eb)' : 'var(--boost-border, #cbd5e1)'

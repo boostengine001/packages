@@ -357,6 +357,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
       >
         <div>
           <label
+            htmlFor="boost-reset-password"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -370,6 +371,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
           <input
             type="password"
             required
+            id="boost-reset-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter new password"
@@ -392,6 +394,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
 
         <div>
           <label
+            htmlFor="boost-reset-confirm"
             style={{
               display: 'block',
               fontSize: '13px',
@@ -405,6 +408,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
           <input
             type="password"
             required
+            id="boost-reset-confirm"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Re-enter new password"

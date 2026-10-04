@@ -701,7 +701,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                       gap: '13px',
                     }}
                   >
-                    {tier.features.map((feat, fIdx) => {
+                    {(tier.features ?? []).map((feat, fIdx) => {
                       const text = typeof feat === 'string' ? feat : feat.text;
                       const included = typeof feat === 'string' ? true : feat.included;
 

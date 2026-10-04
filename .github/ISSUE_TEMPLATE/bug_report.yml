@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a problem with @boostengine/ui
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug! Please fill in the details below.
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: Output of `npm ls @boostengine/ui`
+      placeholder: e.g. 2.1.4
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Next.js (App Router)
+        - Next.js (Pages Router)
+        - Vite + React
+        - React (other bundler)
+        - React Native
+        - Other framework adapter (Vue/Svelte/Solid/Angular/Qwik)
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Code snippet or repository link that shows the issue.
+      render: tsx
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual behaviour
+    validations:
+      required: true

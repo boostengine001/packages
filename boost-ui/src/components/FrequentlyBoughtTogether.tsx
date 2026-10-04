@@ -414,7 +414,16 @@ export const FrequentlyBoughtTogether: React.FC<FrequentlyBoughtTogetherProps> =
             <React.Fragment key={item.id}>
               {index > 0 && <div className="boost-bundle-plus-chip">+</div>}
               <div
+                role="button"
+                tabIndex={0}
+                aria-pressed={isSelected}
                 onClick={() => toggleItem(item.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleItem(item.id);
+                  }
+                }}
                 className={`boost-bundle-card ${isSelected ? 'selected' : 'unselected'}`}
                 title={item.title}
               >

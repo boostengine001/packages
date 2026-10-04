@@ -83,7 +83,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [setOpen]);
 
   const effectiveSections: MegaMenuSection[] = React.useMemo(() => {
     if (sections && sections.length > 0) return sections;

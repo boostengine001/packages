@@ -5,6 +5,8 @@ import * as React from 'react';
  */
 export interface FormFieldProps {
   label: string;
+  /** Associates the label with a control id rendered via children (a11y). */
+  htmlFor?: string;
   required?: boolean;
   error?: string;
   helperText?: string;
@@ -15,6 +17,7 @@ export interface FormFieldProps {
 
 export const FormField: React.FC<FormFieldProps> = ({
   label,
+  htmlFor,
   required = false,
   error,
   helperText,
@@ -35,6 +38,7 @@ export const FormField: React.FC<FormFieldProps> = ({
       }}
     >
       <label
+        htmlFor={htmlFor}
         style={{
           fontSize: '13px',
           fontWeight: 600,

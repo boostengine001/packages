@@ -129,12 +129,17 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
 
   return (
     <Portal>
+      {/* Backdrop click-catcher; keyboard users close via Escape (onKeyDown) */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
         role="dialog"
         aria-modal="true"
         className={`boost-bottom-sheet-backdrop ${className}`}
-        onClick={() => {
-          if (closeOnOverlayClick) onClose();
+        onClick={(e) => {
+          if (e.target === e.currentTarget && closeOnOverlayClick) onClose();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
         }}
         style={{
           position: 'fixed',
@@ -211,7 +216,6 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         `}</style>
         <div
           className={`boost-bottom-sheet-panel boost-bottom-sheet-preset-${preset}`}
-          onClick={(e) => e.stopPropagation()}
           style={{
             width: '100%',
             maxWidth: '640px',

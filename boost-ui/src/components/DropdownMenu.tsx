@@ -198,6 +198,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         <div
           role="menu"
           aria-orientation="vertical"
+          tabIndex={-1}
           onKeyDown={handleMenuKeyDown}
           className={`boost-dropdown-menu boost-dropdown-preset-${preset}`}
           style={{

@@ -33,11 +33,16 @@ export default tseslint.config(
       ],
       // Report-only for now; tightening happens incrementally
       '@typescript-eslint/no-explicit-any': 'warn',
-      // A11y baseline: ~70 real findings across legacy components. These stay visible as
-      // warnings; promote individual rules back to 'error' as components get fixed.
+      // A11y: full error enforcement. Labels associate via htmlFor OR nesting (standard,
+      // jsx-a11y preset's "all" requirement is over-strict for sibling-input layouts).
       ...Object.fromEntries(
-        Object.entries(jsxA11y.flatConfigs.recommended.rules).map(([rule]) => [rule, 'warn'])
+        Object.entries(jsxA11y.flatConfigs.recommended.rules).map(([rule]) => [rule, 'error'])
       ),
+      'jsx-a11y/label-has-associated-control': [
+        'error',
+        { required: { some: ['nesting', 'id'] } },
+      ],
+      'jsx-a11y/label-has-for': ['error', { required: { some: ['nesting', 'id'] } }],
     },
   },
   prettier
