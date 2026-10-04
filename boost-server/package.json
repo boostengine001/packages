@@ -93,6 +93,6 @@
     "@types/node": "^20.19.43",
     "express": "^5.2.1",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   }
 }
