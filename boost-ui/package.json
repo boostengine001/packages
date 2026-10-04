@@ -233,7 +233,7 @@
     "test:visual": "playwright test",
     "docs": "ladle serve",
     "docs:build": "ladle build",
-    "docs:build:pages": "PAGES_BASE=/packages/ ladle build"
+    "docs:build:pages": "ladle build --viteConfig ./vite.pages.config.mjs"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
