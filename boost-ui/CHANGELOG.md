@@ -6,6 +6,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 
 ## [2.1.5] — 2026-10-04
 
+## [2.1.6] — 2026-10-04
+
+### Fixed
+- **npm tarball slimmed**: the 21 unit-test files that shipped inside `src/components/` are now excluded from the published package (264 -> 243 files). The shadcn-style CLI still reads component sources as before.
+- CI runners pinned to `ubuntu-24.04` ahead of GitHub's Oct 19 Ubuntu 26 image migration, keeping visual pixel-diff baselines stable.
+
+### Changed
+- CI actions updated to latest majors (checkout@v7, setup-node@v7, upload-artifact@v7) — Node 20 deprecation warnings resolved.
+- Test suite grown to 358 tests; statement coverage ~61% (CI thresholds raised to 58/46/62/60).
+- Docs playground now deploys to GitHub Pages (`.github/workflows/docs.yml`) under `/packages/` with a subpath-aware Ladle build.
+- New `package Release` workflow: any of the 28 sibling packages can be released through GitHub Actions with typecheck + build + test gates and npm provenance.
+### Changed
+- CI actions updated where applicable; runner Node deprecation warnings addressed.
+
 ## [Unreleased]
 
 ### Added
