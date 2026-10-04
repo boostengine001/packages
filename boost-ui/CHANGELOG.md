@@ -4,7 +4,7 @@ All notable changes to `@boostengine/ui` are documented in this file.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [2.1.5] — 2026-10-04
 
 ## [Unreleased]
 
