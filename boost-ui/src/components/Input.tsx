@@ -197,7 +197,7 @@ export const Input = /* @__PURE__ */ React.forwardRef<HTMLInputElement, InputPro
           <span
             id={inputId ? `${inputId}-error` : undefined}
             role="alert"
-            style={{ fontSize: '12px', color: '#ef4444', fontWeight: 500 }}
+            style={{ fontSize: '12px', color: 'var(--boost-destructive, #ef4444)', fontWeight: 500 }}
           >
             {error}
           </span>

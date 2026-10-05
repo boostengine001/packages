@@ -102,7 +102,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
         return {
           display: 'inline-flex',
           alignItems: 'center',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           padding: '6px',
           borderRadius: '9999px',
           border: 'none',
@@ -137,7 +137,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
         return {
           display: 'inline-flex',
           alignItems: 'center',
-          backgroundColor: '#1e293b',
+          backgroundColor: 'var(--boost-text, #1e293b)',
           padding: '4px',
           borderRadius: '9999px',
           border: '1px solid #334155',
@@ -192,7 +192,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
           padding: '8px 20px',
           borderRadius: '9999px',
           border: 'none',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: isActive ? 'var(--boost-primary, #2563eb)' : '#64748b',
           fontWeight: 700,
           fontSize: '14px',
@@ -279,7 +279,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
         return {
           ...base,
           borderRadius: '24px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           boxShadow: isPop
             ? 'inset 2px 2px 5px #bec3c9, inset -2px -2px 5px #ffffff, 8px 8px 20px #bec3c9'
@@ -360,7 +360,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-primary, #2563eb)',
           borderRadius: '9999px',
           boxShadow: '3px 3px 6px #bec3c9, -3px -3px 6px #ffffff',
@@ -430,7 +430,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
         return {
           ...base,
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: isPop ? 'var(--boost-primary, #2563eb)' : 'var(--boost-text, #0f172a)',
           border: 'none',
           boxShadow: isPop
@@ -542,7 +542,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                   fontSize: '11px',
                   fontWeight: 700,
                   backgroundColor: 'rgba(34, 197, 94, 0.15)',
-                  color: '#16a34a',
+                  color: 'var(--boost-success, #16a34a)',
                   padding: '2px 8px',
                   borderRadius: '9999px',
                 }}
@@ -608,7 +608,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({
                         fontSize: '11px',
                         fontWeight: 700,
                         backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                        color: '#16a34a',
+                        color: 'var(--boost-success, #16a34a)',
                         padding: '2px 8px',
                         borderRadius: preset === 'neo-brutalism' ? '2px' : '9999px',
                         border:

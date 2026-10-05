@@ -97,7 +97,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
           ...base,
           borderRadius: '10px',
           border: 'none',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: isSelected ? 'var(--boost-primary, #2563eb)' : '#334155',
           boxShadow: isSelected
             ? 'inset 3px 3px 6px #c8cdd5, inset -3px -3px 6px #f8fdff'
@@ -284,7 +284,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
                             left: '0',
                             right: '0',
                             height: '2px',
-                            backgroundColor: '#ef4444',
+                            backgroundColor: 'var(--boost-destructive, #ef4444)',
                             transform: 'rotate(-45deg)',
                           }}
                         />

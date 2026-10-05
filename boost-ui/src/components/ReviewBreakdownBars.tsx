@@ -92,7 +92,7 @@ export const ReviewBreakdownBars: React.FC<ReviewBreakdownBarsProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           borderRadius: '24px',
           boxShadow: '8px 8px 20px #c8cdd5, -8px -8px 20px #ffffff',

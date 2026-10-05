@@ -123,7 +123,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
             position: 'absolute',
             zIndex: 1000,
             backgroundColor: 'var(--boost-surface, #0f172a)',
-            color: '#f8fafc',
+            color: 'var(--boost-surface, #f8fafc)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
             padding: '5px 10px',
             borderRadius: '6px',

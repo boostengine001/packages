@@ -84,7 +84,7 @@ export const TestimonialCard: React.FC<TestimonialProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           borderRadius: '20px',
           boxShadow: '8px 8px 18px #c8cdd5, -8px -8px 18px #f8fdff',
@@ -147,7 +147,7 @@ export const TestimonialCard: React.FC<TestimonialProps> = ({
           }}
         >
           {rating > 0 && (
-            <div style={{ display: 'flex', gap: '3px', color: '#f59e0b' }}>
+            <div style={{ display: 'flex', gap: '3px', color: 'var(--boost-warning, #f59e0b)' }}>
               {Array.from({ length: 5 }).map((_, i) => (
                 <svg
                   key={i}

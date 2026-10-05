@@ -104,19 +104,19 @@ export const Badge: React.FC<BadgeProps> = ({
       case 'success':
         return {
           bg: 'rgba(34, 197, 94, 0.12)',
-          color: '#16a34a',
+          color: 'var(--boost-success, #16a34a)',
           border: '1px solid rgba(34, 197, 94, 0.25)',
         };
       case 'destructive':
         return {
           bg: 'rgba(239, 68, 68, 0.12)',
-          color: '#ef4444',
+          color: 'var(--boost-destructive, #ef4444)',
           border: '1px solid rgba(239, 68, 68, 0.25)',
         };
       case 'warning':
         return {
           bg: 'rgba(245, 158, 11, 0.12)',
-          color: '#d97706',
+          color: 'var(--boost-warning, #d97706)',
           border: '1px solid rgba(245, 158, 11, 0.25)',
         };
       case 'info':

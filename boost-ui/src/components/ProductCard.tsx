@@ -232,7 +232,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         };
       case 'dark-first':
         return {
-          backgroundColor: '#2563eb',
+          backgroundColor: 'var(--boost-primary, #2563eb)',
           color: '#ffffff',
           border: '1px solid rgba(255, 255, 255, 0.1)',
           borderRadius: '10px',

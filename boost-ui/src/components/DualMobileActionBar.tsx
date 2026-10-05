@@ -86,7 +86,7 @@ export const DualMobileActionBar: React.FC<DualMobileActionBarProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           borderRadius: isRelative ? '18px' : '24px 24px 0 0',
           boxShadow: '0 -6px 16px #cbd5e1',

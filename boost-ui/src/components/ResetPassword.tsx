@@ -191,7 +191,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
       case 'dark-first':
         return {
           backgroundColor: '#38bdf8',
-          color: '#0f172a',
+          color: 'var(--boost-text, #0f172a)',
           fontWeight: 700,
           borderRadius: '10px',
         };
@@ -331,7 +331,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
             backgroundColor: 'rgba(239, 68, 68, 0.1)',
             border: '1px solid rgba(239, 68, 68, 0.2)',
             borderRadius: preset === 'neo-brutalism' ? '0px' : '8px',
-            color: '#ef4444',
+            color: 'var(--boost-destructive, #ef4444)',
             fontSize: '13px',
           }}
         >
@@ -483,7 +483,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
             style={{
               background: 'none',
               border: 'none',
-              color: '#64748b',
+              color: 'var(--boost-text-muted, #64748b)',
               fontSize: '13px',
               fontWeight: 500,
               cursor: 'pointer',

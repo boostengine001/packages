@@ -307,7 +307,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
               case 'neumorphism':
                 return {
                   ...base,
-                  backgroundColor: '#e0e5ec',
+                  backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
                   border: 'none',
                   borderRadius: '20px',
                   boxShadow: '8px 8px 20px #c8cdd5, -8px -8px 20px #f8fdff',
@@ -452,7 +452,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
                                   fontSize: '9px',
                                   fontWeight: 700,
                                   backgroundColor: 'rgba(239, 68, 68, 0.12)',
-                                  color: '#ef4444',
+                                  color: 'var(--boost-destructive, #ef4444)',
                                   padding: '1px 5px',
                                   borderRadius: '4px',
                                 }}

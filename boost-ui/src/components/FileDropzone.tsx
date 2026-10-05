@@ -171,7 +171,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
           style={{
             marginTop: '10px',
             fontSize: '13px',
-            color: '#dc2626',
+            color: 'var(--boost-destructive, #dc2626)',
             fontWeight: 500,
           }}
         >
@@ -220,7 +220,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#dc2626',
+                  color: 'var(--boost-destructive, #dc2626)',
                   cursor: 'pointer',
                   fontWeight: 700,
                   fontSize: '14px',

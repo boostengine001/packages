@@ -154,7 +154,7 @@ export const OTPInput = /* @__PURE__ */ React.forwardRef<HTMLInputElement, OTPIn
         </div>
 
         {error && (
-          <span style={{ fontSize: '12px', color: '#dc2626', fontWeight: 500 }}>{error}</span>
+          <span style={{ fontSize: '12px', color: 'var(--boost-destructive, #dc2626)', fontWeight: 500 }}>{error}</span>
         )}
       </div>
     );

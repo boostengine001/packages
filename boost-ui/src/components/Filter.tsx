@@ -200,7 +200,7 @@ export const Filter: React.FC<FilterProps> = ({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#ef4444',
+                  color: 'var(--boost-destructive, #ef4444)',
                   fontSize: '11px',
                   fontWeight: 600,
                   cursor: 'pointer',

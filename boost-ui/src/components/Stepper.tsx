@@ -79,7 +79,7 @@ export const Stepper: React.FC<StepperProps> = ({
           ...base,
           borderRadius: '50%',
           border: 'none',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: isCompleted ? '#10b981' : isCurrent ? 'var(--boost-primary, #2563eb)' : '#94a3b8',
           boxShadow: isCurrent
             ? 'inset 2px 2px 5px #c8cdd5, inset -2px -2px 5px #f8fdff'

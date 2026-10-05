@@ -211,7 +211,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       case 'dark-first':
         return {
           backgroundColor: '#38bdf8',
-          color: '#0f172a',
+          color: 'var(--boost-text, #0f172a)',
           fontWeight: 700,
           borderRadius: '10px',
         };
@@ -292,7 +292,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             backgroundColor: 'rgba(239, 68, 68, 0.08)',
             border: '1px solid rgba(239, 68, 68, 0.2)',
             borderRadius: preset === 'neo-brutalism' ? '0px' : 'var(--boost-radius, 10px)',
-            color: '#ef4444',
+            color: 'var(--boost-destructive, #ef4444)',
             fontSize: '13px',
             fontWeight: 500,
           }}
@@ -363,7 +363,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '6px',
                 fontWeight: 500,
               }}
@@ -497,7 +497,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '6px',
                 fontWeight: 500,
               }}

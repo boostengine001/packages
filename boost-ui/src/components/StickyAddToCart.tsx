@@ -75,7 +75,7 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           boxShadow: '0 -6px 16px #cbd5e1',
         };
@@ -99,7 +99,7 @@ export const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
           backgroundColor: 'rgba(15, 23, 42, 0.96)',
           borderTop: '1px solid rgba(255, 255, 255, 0.12)',
           boxShadow: '0 -10px 40px -10px rgba(0, 0, 0, 0.8)',
-          color: '#f8fafc',
+          color: 'var(--boost-surface, #f8fafc)',
         };
       default:
         return {

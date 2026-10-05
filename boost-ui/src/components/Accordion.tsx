@@ -117,7 +117,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           border: 'none',
           borderRadius: '18px',
           boxShadow: isSeparated ? 'none' : '6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
         };
       case 'gradient-glow':
         return {
@@ -179,7 +179,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           color: 'var(--boost-text, #0f172a)',
         };
       case 'neumorphism':
-        return { ...base, backgroundColor: '#e0e5ec', color: '#0f172a' };
+        return { ...base, backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)', color: 'var(--boost-text, #0f172a)' };
       case 'gradient-glow':
         return {
           ...base,
@@ -195,7 +195,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           color: 'var(--boost-text, #1c1b1f)',
         };
       case 'dark-first':
-        return { ...base, backgroundColor: isOpen ? '#1e293b' : '#0f172a', color: '#f8fafc' };
+        return { ...base, backgroundColor: isOpen ? '#1e293b' : '#0f172a', color: 'var(--boost-surface, #f8fafc)' };
       default:
         return {
           ...base,

@@ -139,7 +139,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
         </div>
 
         {discount > 0 && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: '#16a34a' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--boost-success, #16a34a)' }}>
             <span>Discount</span>
             <span style={{ fontWeight: 700 }}>
               -{currencySymbol}

@@ -290,7 +290,7 @@ export function DataTable<T extends Record<string, any>>({
           borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
         };
       case 'neumorphism':
-        return { ...base, backgroundColor: '#e0e5ec', borderBottom: '1px solid #d1d9e6' };
+        return { ...base, backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)', borderBottom: '1px solid #d1d9e6' };
       case 'gradient-glow':
         return {
           ...base,
@@ -306,7 +306,7 @@ export function DataTable<T extends Record<string, any>>({
       case 'dark-first':
         return {
           ...base,
-          backgroundColor: '#1e293b',
+          backgroundColor: 'var(--boost-text, #1e293b)',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
         };
       default:
@@ -353,7 +353,7 @@ export function DataTable<T extends Record<string, any>>({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-text, #0f172a)',
           border: 'none',
           borderRadius: '8px',

@@ -141,7 +141,7 @@ export const Tabs: TabsComponent = (({
         return {
           ...base,
           borderBottom: 'none',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           padding: '8px',
           borderRadius: '14px',
           gap: '8px',
@@ -361,7 +361,7 @@ export const TabsList: React.FC<TabsListProps> = ({
         return {
           ...base,
           borderBottom: 'none',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           padding: '8px',
           borderRadius: '14px',
           gap: '8px',
@@ -448,7 +448,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
         return {
           ...base,
           color: isActive ? 'var(--boost-primary,#2563eb)' : '#64748b',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           borderRadius: '10px',
           boxShadow: isActive ? 'inset 3px 3px 7px #c8cdd5, inset -3px -3px 7px #f8fdff' : 'none',
           border: 'none',

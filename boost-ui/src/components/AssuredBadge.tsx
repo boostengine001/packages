@@ -68,7 +68,7 @@ export const AssuredBadge: React.FC<AssuredBadgeProps> = ({ type = 'assured', cl
             width: '14px',
             height: '14px',
             borderRadius: '9999px',
-            backgroundColor: '#f59e0b',
+            backgroundColor: 'var(--boost-warning, #f59e0b)',
             color: '#ffffff',
           }}
         >

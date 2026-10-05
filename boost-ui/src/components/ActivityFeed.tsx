@@ -38,13 +38,13 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const getBadgeColors = (variant = 'info') => {
     switch (variant) {
       case 'success':
-        return { bg: 'rgba(34, 197, 94, 0.12)', color: '#16a34a' };
+        return { bg: 'rgba(34, 197, 94, 0.12)', color: 'var(--boost-success, #16a34a)' };
       case 'warning':
-        return { bg: 'rgba(245, 158, 11, 0.12)', color: '#d97706' };
+        return { bg: 'rgba(245, 158, 11, 0.12)', color: 'var(--boost-warning, #d97706)' };
       case 'error':
-        return { bg: 'rgba(239, 68, 68, 0.12)', color: '#dc2626' };
+        return { bg: 'rgba(239, 68, 68, 0.12)', color: 'var(--boost-destructive, #dc2626)' };
       default:
-        return { bg: 'rgba(37, 99, 235, 0.12)', color: '#2563eb' };
+        return { bg: 'rgba(37, 99, 235, 0.12)', color: 'var(--boost-primary, #2563eb)' };
     }
   };
 

@@ -142,8 +142,8 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
-          color: '#0f172a',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
+          color: 'var(--boost-text, #0f172a)',
           border: 'none',
           borderRadius: '12px',
           boxShadow: '4px 4px 8px #bec3c9, -4px -4px 8px #ffffff',
@@ -159,8 +159,8 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
       case 'dark-first':
         return {
           ...base,
-          backgroundColor: '#1e293b',
-          color: '#f8fafc',
+          backgroundColor: 'var(--boost-text, #1e293b)',
+          color: 'var(--boost-surface, #f8fafc)',
           border: '1px solid #334155',
           borderRadius: '10px',
           boxShadow: '0 0 16px rgba(59, 130, 246, 0.25)',
@@ -268,7 +268,7 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
         case 'neumorphism':
           return {
             ...base,
-            backgroundColor: '#e0e5ec',
+            backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
             color: 'var(--boost-primary, #2563eb)',
             borderRadius: '10px',
             boxShadow: 'inset 2px 2px 4px #bec3c9, inset -2px -2px 4px #ffffff',
@@ -361,8 +361,8 @@ export const PresetSwitcher: React.FC<PresetSwitcherProps> = ({
         case 'neumorphism':
           return {
             ...base,
-            backgroundColor: '#e0e5ec',
-            color: '#2563eb',
+            backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
+            color: 'var(--boost-primary, #2563eb)',
             borderRadius: '9999px',
             boxShadow: '3px 3px 6px #bec3c9, -3px -3px 6px #fff',
           };

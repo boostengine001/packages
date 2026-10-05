@@ -68,7 +68,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             isLoading={isLoading}
             style={
               isWarning
-                ? { backgroundColor: '#d97706', borderColor: '#d97706', color: '#ffffff' }
+                ? { backgroundColor: 'var(--boost-warning, #d97706)', borderColor: 'var(--boost-warning, #d97706)', color: '#ffffff' }
                 : undefined
             }
           >

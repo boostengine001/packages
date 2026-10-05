@@ -51,7 +51,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
           height: '48px',
           borderRadius: '50%',
           backgroundColor: 'rgba(239, 68, 68, 0.14)',
-          color: '#ef4444',
+          color: 'var(--boost-destructive, #ef4444)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -77,7 +77,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
           margin: '0 0 6px 0',
           fontSize: '16px',
           fontWeight: 700,
-          color: '#ef4444',
+          color: 'var(--boost-destructive, #ef4444)',
           letterSpacing: '-0.01em',
         }}
       >
@@ -101,7 +101,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
           type="button"
           onClick={onRetry}
           style={{
-            backgroundColor: '#dc2626',
+            backgroundColor: 'var(--boost-destructive, #dc2626)',
             color: '#ffffff',
             border: 'none',
             borderRadius: 'var(--boost-radius, 8px)',
