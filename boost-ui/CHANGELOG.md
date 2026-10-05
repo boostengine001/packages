@@ -20,6 +20,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 ### Changed
 - CI actions updated where applicable; runner Node deprecation warnings addressed.
 
+## [2.1.7] — 2026-10-04
+
+### Fixed
+- `DateRangePicker`: fully controlled with no internal state — without a `value` prop, typing updated nothing and end-date min enforcement never engaged. Now dual-mode (controlled or self-managed); `endDate` acts as the initial value.
+
+### Changed
+- README: fixed broken local `file:///` documentation links; added Live Docs badge and playground link.
+- `llms.txt` / `llms-full.txt`: version updated, live playground URL added for AI agents.
+
 ## [Unreleased]
 
 ### Added
