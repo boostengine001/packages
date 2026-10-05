@@ -17,7 +17,21 @@ const PRESETS = [
   'material-you',
 ] as const;
 
-const COMPONENTS = ['button', 'input', 'tabs', 'toast', 'table', 'product', 'modal'] as const;
+const COMPONENTS = [
+  'button',
+  'input',
+  'tabs',
+  'toast',
+  'table',
+  'product',
+  'modal',
+  'navbar',
+  'footer',
+  'cart',
+  'login-form',
+  'alert',
+  'coupon',
+] as const;
 
 const pageUrl = (preset: string, component: string, mode: 'light' | 'dark' = 'light') =>
   `file://${__dirname}/index.html?preset=${preset}&mode=${mode}&component=${component}`;
