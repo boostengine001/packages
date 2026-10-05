@@ -78,7 +78,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           ...base,
           border: 'none',
           borderRadius: '9999px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: isCurrent ? 'var(--boost-primary,#2563eb)' : '#64748b',
           fontWeight: isCurrent ? 700 : 500,
           boxShadow: isCurrent

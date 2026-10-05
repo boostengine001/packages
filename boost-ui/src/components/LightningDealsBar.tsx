@@ -146,7 +146,7 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
         };
       case 'dark-first':
         return {
-          background: '#0f172a',
+          background: 'var(--boost-text, #0f172a)',
           border: '1px solid #334155',
           boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
           borderRadius: '16px',
@@ -210,7 +210,7 @@ export const LightningDealsBar: React.FC<LightningDealsBarProps> = ({
           border: '2px solid #000000',
           borderRadius: '0px',
           boxShadow: '2px 2px 0px #000000',
-          background: '#ef4444',
+          background: 'var(--boost-destructive, #ef4444)',
           color: '#ffffff',
           fontWeight: 900,
         };

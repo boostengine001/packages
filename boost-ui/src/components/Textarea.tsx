@@ -200,7 +200,7 @@ export const Textarea = /* @__PURE__ */ React.forwardRef<HTMLTextAreaElement, Te
           <span
             id={textareaId ? `${textareaId}-error` : undefined}
             role="alert"
-            style={{ fontSize: '12px', color: '#ef4444', fontWeight: 500 }}
+            style={{ fontSize: '12px', color: 'var(--boost-destructive, #ef4444)', fontWeight: 500 }}
           >
             {error}
           </span>

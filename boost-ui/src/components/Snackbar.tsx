@@ -75,7 +75,7 @@ export const Snackbar: React.FC<SnackbarProps> = ({
         return {
           ...base,
           backgroundColor: 'rgba(15,23,42,0.75)',
-          color: '#f8fafc',
+          color: 'var(--boost-surface, #f8fafc)',
           border: '1px solid rgba(255,255,255,0.15)',
           borderRadius: '14px',
           backdropFilter: 'blur(16px)',
@@ -113,7 +113,7 @@ export const Snackbar: React.FC<SnackbarProps> = ({
         return {
           ...base,
           backgroundColor: 'var(--boost-surface, #0f172a)',
-          color: '#f8fafc',
+          color: 'var(--boost-surface, #f8fafc)',
           border: '1px solid var(--boost-border, #1e293b)',
           borderRadius: '10px',
           boxShadow: '0 0 20px rgba(59,130,246,0.2)',

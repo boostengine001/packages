@@ -83,7 +83,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           borderRadius: '20px',
           boxShadow: '8px 8px 18px #c8cdd5, -8px -8px 18px #f8fdff',

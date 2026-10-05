@@ -96,7 +96,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           borderRadius: '16px',
           boxShadow: '8px 8px 18px #c8cdd5, -8px -8px 18px #f8fdff',
@@ -206,7 +206,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               position: 'absolute',
               top: '4px',
               right: '4px',
-              backgroundColor: '#dc2626',
+              backgroundColor: 'var(--boost-destructive, #dc2626)',
               color: '#ffffff',
               fontSize: '10px',
               fontWeight: 700,

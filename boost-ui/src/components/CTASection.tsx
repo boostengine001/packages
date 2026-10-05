@@ -218,7 +218,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         return {
           ...base,
           borderRadius: '9999px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-primary, #2563eb)',
           boxShadow: 'inset 2px 2px 4px #bec3c9, inset -2px -2px 4px #ffffff',
         };
@@ -280,7 +280,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         return {
           ...base,
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-primary, #2563eb)',
           border: 'none',
           boxShadow: '4px 4px 10px #bec3c9, -4px -4px 10px #ffffff',
@@ -347,8 +347,8 @@ export const CTASection: React.FC<CTASectionProps> = ({
         return {
           ...base,
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
-          color: '#475569',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
+          color: 'var(--boost-text-muted, #475569)',
           border: 'none',
           boxShadow: 'inset 2px 2px 4px #bec3c9, inset -2px -2px 4px #ffffff',
         };
@@ -378,7 +378,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
       padding: '12px 18px',
       fontSize: '15px',
       outline: 'none',
-      color: '#0f172a',
+      color: 'var(--boost-text, #0f172a)',
     };
 
     switch (preset) {
@@ -402,7 +402,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         return {
           ...base,
           borderRadius: '14px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           boxShadow: 'inset 3px 3px 6px #bec3c9, inset -3px -3px 6px #ffffff',
         };

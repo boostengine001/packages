@@ -123,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         return {
           ...base,
           borderRadius: '9999px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-primary, #2563eb)',
           boxShadow: '3px 3px 6px #bec3c9, -3px -3px 6px #ffffff',
           fontWeight: 700,
@@ -199,7 +199,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         return {
           ...base,
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-primary, #2563eb)',
           border: 'none',
           boxShadow: '5px 5px 12px #bec3c9, -5px -5px 12px #ffffff',
@@ -228,7 +228,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           ...base,
           borderRadius: '6px',
           backgroundColor: 'var(--boost-text, #0f172a)',
-          color: '#ffffff',
+          // Inverted button: text follows the opposite theme's background so the
+          // label stays readable when --boost-text flips to near-white in dark mode.
+          color: 'var(--boost-bg, #ffffff)',
           border: 'none',
           boxShadow: 'none',
         };
@@ -289,8 +291,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         return {
           ...base,
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
-          color: '#475569',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
+          color: 'var(--boost-text-muted, #475569)',
           border: 'none',
           boxShadow: 'inset 2px 2px 5px #bec3c9, inset -2px -2px 5px #ffffff',
         };

@@ -243,7 +243,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                 style={{
                   width: '40px',
                   height: '4px',
-                  backgroundColor: '#cbd5e1',
+                  backgroundColor: 'var(--boost-border, #cbd5e1)',
                   borderRadius: '9999px',
                   transition: 'background-color 0.2s ease',
                 }}

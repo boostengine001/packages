@@ -40,7 +40,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
         style={{
           marginTop: '2px',
           display: 'flex',
-          color: '#16a34a',
+          color: 'var(--boost-success, #16a34a)',
           flexShrink: 0,
         }}
       >
@@ -64,7 +64,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
               margin: '0 0 4px 0',
               fontSize: '15px',
               fontWeight: 700,
-              color: '#16a34a',
+              color: 'var(--boost-success, #16a34a)',
               letterSpacing: '-0.01em',
             }}
           >

@@ -181,7 +181,7 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
       {error && (
         <div
           style={{
-            color: '#ef4444',
+            color: 'var(--boost-destructive, #ef4444)',
             fontSize: '13px',
             marginTop: '8px',
             display: 'flex',
@@ -224,7 +224,7 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  color: '#22c55e',
+                  color: 'var(--boost-success, #22c55e)',
                   fontSize: '14px',
                 }}
               >
@@ -273,7 +273,7 @@ export const PincodeChecker: React.FC<PincodeCheckerProps> = ({
                 padding: '12px 16px',
                 borderRadius: '8px',
                 border: '1px dashed rgba(239, 68, 68, 0.3)',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',

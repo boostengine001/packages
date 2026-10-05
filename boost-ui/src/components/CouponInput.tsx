@@ -83,7 +83,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({
               style={{
                 fontSize: '14px',
                 fontWeight: 700,
-                color: '#22c55e',
+                color: 'var(--boost-success, #22c55e)',
                 letterSpacing: '0.5px',
               }}
             >
@@ -109,7 +109,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({
           style={{
             background: 'transparent',
             border: 'none',
-            color: '#ef4444',
+            color: 'var(--boost-destructive, #ef4444)',
             fontSize: '13px',
             fontWeight: 600,
             cursor: 'pointer',
@@ -225,7 +225,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({
         <div
           style={{
             fontSize: '13px',
-            color: '#ef4444',
+            color: 'var(--boost-destructive, #ef4444)',
             marginTop: '8px',
             display: 'flex',
             alignItems: 'center',

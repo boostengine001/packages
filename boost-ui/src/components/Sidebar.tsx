@@ -71,7 +71,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           borderRight: 'none',
           boxShadow: '4px 0 14px #d1d9e6',
         };
@@ -136,7 +136,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: isActive ? 'var(--boost-primary,#2563eb)' : '#475569',
           borderRadius: '10px',
           boxShadow: isActive ? 'inset 3px 3px 7px #c8cdd5, inset -3px -3px 7px #f8fdff' : 'none',

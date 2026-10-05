@@ -28,31 +28,31 @@ export const Tag: React.FC<TagProps> = ({
 
   const getVariantStyles = (): { bg: string; color: string; border: string } => {
     if (color) {
-      return { bg: color, color: '#0f172a', border: 'transparent' };
+      return { bg: color, color: 'var(--boost-text, #0f172a)', border: 'transparent' };
     }
     switch (variant) {
       case 'primary':
         return {
           bg: 'rgba(59, 130, 246, 0.12)',
-          color: '#2563eb',
+          color: 'var(--boost-primary, #2563eb)',
           border: 'rgba(59, 130, 246, 0.25)',
         };
       case 'success':
         return {
           bg: 'rgba(34, 197, 94, 0.12)',
-          color: '#16a34a',
+          color: 'var(--boost-success, #16a34a)',
           border: 'rgba(34, 197, 94, 0.25)',
         };
       case 'warning':
         return {
           bg: 'rgba(245, 158, 11, 0.12)',
-          color: '#d97706',
+          color: 'var(--boost-warning, #d97706)',
           border: 'rgba(245, 158, 11, 0.25)',
         };
       case 'destructive':
         return {
           bg: 'rgba(239, 68, 68, 0.12)',
-          color: '#ef4444',
+          color: 'var(--boost-destructive, #ef4444)',
           border: 'rgba(239, 68, 68, 0.25)',
         };
       case 'purple':

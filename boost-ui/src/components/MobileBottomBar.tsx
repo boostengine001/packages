@@ -223,7 +223,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           border: 'none',
           boxShadow: isFloating
             ? '6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff'

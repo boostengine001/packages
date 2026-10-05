@@ -45,15 +45,15 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
       case 'neo-brutalism':
         return { background: '#fbbf24', color: '#000000', border: '2px solid #000000', borderRadius: '2px', boxShadow: '3px 3px 0px #000000' };
       case 'glassmorphism':
-        return { background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', color: '#0f172a', border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '14px' };
+        return { background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', color: 'var(--boost-text, #0f172a)', border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '14px' };
       case 'neumorphism':
-        return { background: '#e0e5ec', color: '#334155', border: 'none', borderRadius: '14px', boxShadow: '4px 4px 10px #d1d9e6, -4px -4px 10px #ffffff' };
+        return { background: 'var(--boost-neuro-surface, #e0e5ec)', color: 'var(--boost-text, #334155)', border: 'none', borderRadius: '14px', boxShadow: '4px 4px 10px #d1d9e6, -4px -4px 10px #ffffff' };
       case 'gradient-glow':
         return { background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%)', color: '#ffffff', boxShadow: '0 0 20px rgba(99, 102, 241, 0.35)' };
       case 'material-you':
         return { background: 'var(--boost-surface-secondary, #e8def8)', color: 'var(--boost-primary, #6750a4)', border: '1px solid var(--boost-border, #e2e8f0)', borderRadius: '24px', boxShadow: 'none' };
       case 'dark-first':
-        return { background: '#090d16', color: '#f8fafc', border: '1px solid rgba(255, 255, 255, 0.08)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' };
+        return { background: '#090d16', color: 'var(--boost-surface, #f8fafc)', border: '1px solid rgba(255, 255, 255, 0.08)', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' };
       case 'minimal':
       default:
         return { background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%)', color: '#ffffff', boxShadow: '0 4px 15px rgba(79, 70, 229, 0.25)' };

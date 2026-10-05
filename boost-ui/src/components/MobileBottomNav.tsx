@@ -115,7 +115,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           borderRadius: isFloating ? '9999px' : undefined,
           border: 'none',
           boxShadow: isFloating
@@ -235,7 +235,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                       minWidth: '16px',
                       height: '16px',
                       borderRadius: '8px',
-                      backgroundColor: '#ef4444',
+                      backgroundColor: 'var(--boost-destructive, #ef4444)',
                       color: '#ffffff',
                       fontSize: '10px',
                       fontWeight: 700,

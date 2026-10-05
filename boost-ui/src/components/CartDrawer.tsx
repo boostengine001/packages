@@ -137,7 +137,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           borderLeft: 'none',
           boxShadow: '-12px 0 30px #bec3c9',
         };
@@ -191,7 +191,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       case 'neumorphism':
         return {
           ...base,
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           borderBottom: '1px solid #d1d5db',
         };
       case 'material-you':
@@ -281,7 +281,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           ...base,
           borderRadius: '14px',
           border: 'none',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           boxShadow: 'inset 2px 2px 4px #bec3c9, inset -2px -2px 4px #ffffff',
         };
       case 'material-you':
@@ -330,7 +330,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           ...base,
           border: 'none',
           borderRadius: '12px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           boxShadow: '2px 2px 5px #bec3c9, -2px -2px 5px #ffffff',
         };
       case 'material-you':
@@ -372,7 +372,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         return {
           ...base,
           borderTop: '1px solid #d1d5db',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
         };
       case 'material-you':
         return {
@@ -433,7 +433,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         return {
           ...base,
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           color: 'var(--boost-primary, #2563eb)',
           border: 'none',
           boxShadow: '4px 4px 10px #bec3c9, -4px -4px 10px #ffffff',

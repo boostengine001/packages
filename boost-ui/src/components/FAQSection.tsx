@@ -152,7 +152,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
       case 'dark-first':
         return {
           border: isOpen ? '1px solid #38bdf8' : '1px solid #334155',
-          backgroundColor: '#1e293b',
+          backgroundColor: 'var(--boost-text, #1e293b)',
           borderRadius: '14px',
         };
       case 'minimal':
@@ -263,7 +263,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#94a3b8',
+                  color: 'var(--boost-text-muted, #94a3b8)',
                   cursor: 'pointer',
                   padding: 0,
                   fontSize: '14px',

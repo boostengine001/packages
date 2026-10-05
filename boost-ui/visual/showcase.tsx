@@ -23,6 +23,7 @@ import {
 // Read ?preset=X&component=Y from the URL and render one canned showcase.
 const params = new URLSearchParams(window.location.search);
 const preset = (params.get('preset') || 'minimal') as UIStylePreset;
+const mode = (params.get('mode') || 'light') as 'light' | 'dark';
 const component = params.get('component') || 'button';
 
 const SHOWCASE: Record<string, React.ReactElement> = {
@@ -125,7 +126,7 @@ const SHOWCASE: Record<string, React.ReactElement> = {
 function App() {
   const element = SHOWCASE[component] ?? SHOWCASE.button;
   return (
-    <BoostProvider defaultStylePreset={preset}>
+    <BoostProvider defaultStylePreset={preset} defaultMode={mode}>
       <div style={{ padding: '48px', fontFamily: 'system-ui, sans-serif' }}>
         <div data-testid="meta" data-preset={preset} data-component={component} />
         {element}

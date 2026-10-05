@@ -529,7 +529,7 @@ export const Footer: React.FC<FooterProps> = ({
                         alignItems: 'center',
                         gap: '4px',
                         fontSize: '11px',
-                        color: '#ef4444',
+                        color: 'var(--boost-destructive, #ef4444)',
                         marginTop: '6px',
                         fontWeight: 500,
                       }}

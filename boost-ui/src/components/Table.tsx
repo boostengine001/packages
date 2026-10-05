@@ -76,7 +76,7 @@ export function Table<T extends Record<string, any>>({
           ...base,
           border: 'none',
           borderRadius: '16px',
-          backgroundColor: '#e0e5ec',
+          backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)',
           boxShadow: '6px 6px 14px #d1d9e6, -6px -6px 14px #ffffff',
         };
       case 'gradient-glow':
@@ -124,7 +124,7 @@ export function Table<T extends Record<string, any>>({
           borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
         };
       case 'neumorphism':
-        return { backgroundColor: '#e0e5ec', borderBottom: '1px solid #d1d9e6' };
+        return { backgroundColor: 'var(--boost-neuro-surface, #e0e5ec)', borderBottom: '1px solid #d1d9e6' };
       case 'gradient-glow':
         return {
           backgroundColor: 'rgba(99, 102, 241, 0.05)',
@@ -136,7 +136,7 @@ export function Table<T extends Record<string, any>>({
           borderBottom: '1px solid var(--boost-border, #e2e8f0)',
         };
       case 'dark-first':
-        return { backgroundColor: '#1e293b', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' };
+        return { backgroundColor: 'var(--boost-text, #1e293b)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' };
       default:
         return {
           backgroundColor: 'var(--boost-bg-subtle, #f8fafc)',

@@ -251,7 +251,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       case 'dark-first':
         return {
           backgroundColor: '#38bdf8',
-          color: '#0f172a',
+          color: 'var(--boost-text, #0f172a)',
           fontWeight: 700,
           borderRadius: '10px',
         };
@@ -332,7 +332,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             backgroundColor: 'rgba(239, 68, 68, 0.08)',
             border: '1px solid rgba(239, 68, 68, 0.2)',
             borderRadius: preset === 'neo-brutalism' ? '0px' : 'var(--boost-radius, 10px)',
-            color: '#ef4444',
+            color: 'var(--boost-destructive, #ef4444)',
             fontSize: '13px',
             fontWeight: 500,
           }}
@@ -403,7 +403,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '4px',
                 fontWeight: 500,
               }}
@@ -469,7 +469,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '4px',
                 fontWeight: 500,
               }}
@@ -535,7 +535,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '4px',
                 fontWeight: 500,
               }}
@@ -648,7 +648,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '4px',
                 fontWeight: 500,
               }}
@@ -709,7 +709,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 alignItems: 'center',
                 gap: '4px',
                 fontSize: '12px',
-                color: '#ef4444',
+                color: 'var(--boost-destructive, #ef4444)',
                 marginTop: '6px',
                 fontWeight: 500,
                 paddingLeft: '26px',

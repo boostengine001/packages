@@ -303,7 +303,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       )}
 
       {error && (
-        <span style={{ fontSize: '12px', color: '#ef4444', fontWeight: 500 }}>{error}</span>
+        <span style={{ fontSize: '12px', color: 'var(--boost-destructive, #ef4444)', fontWeight: 500 }}>{error}</span>
       )}
     </div>
   );
