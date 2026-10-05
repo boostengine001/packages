@@ -29,6 +29,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 - README: fixed broken local `file:///` documentation links; added Live Docs badge and playground link.
 - `llms.txt` / `llms-full.txt`: version updated, live playground URL added for AI agents.
 
+## [2.1.8] — 2026-10-05
+
+### Fixed
+- **Dark mode hardening** (user-reported): 143 hardcoded inline-style colors converted to semantic CSS variables so components follow BoostProvider's dark tokens — text, muted text, surfaces, borders, primary and semantic colors now invert correctly in dark mode across PricingTable, RegisterForm, CartDrawer, CTASection, Tag, Accordion, LoginForm, Navbar, DataTable and ~40 more components. Light rendering is unchanged.
+- `HeroSection` (minimal preset): primary button was invisible in dark mode (white text on a near-white `--boost-text` background). Label now uses `var(--boost-bg)` and inverts with the theme.
+
+### Added
+- Visual suite now covers dark mode permanently: 99 scenarios (7 presets × 7 components × light+dark), pixel-diffed on both linux and win32 baselines.
+
 ## [Unreleased]
 
 ### Added
