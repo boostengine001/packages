@@ -1,6 +1,6 @@
 {
   "name": "@boostengine/ui",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "Universal, Zero-Config UI Component Suite for Next.js & React. Build High-Converting eCommerce, Modern SaaS, Enterprise Dashboards, and Landing Pages with AI Agent Native Support.",
   "author": "Rishabh Gehlot <boostengine001@gmail.com> (https://github.com/Rishabhgehlot7)",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "svg-charts",
     "accessible-ui"
   ],
-  "homepage": "https://github.com/boostengine001/packages/tree/main/boost-ui#readme",
+  "homepage": "https://boostengine001.github.io/packages/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boostengine001/packages.git",

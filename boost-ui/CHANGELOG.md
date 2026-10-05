@@ -38,6 +38,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and [Sem
 ### Added
 - Visual suite now covers dark mode permanently: 99 scenarios (7 presets × 7 components × light+dark), pixel-diffed on both linux and win32 baselines.
 
+## [2.1.9] — 2026-10-05
+
+### Changed
+- README now leads with the **[Live Component Playground](https://boostengine001.github.io/packages/)** in the header, the badges row and the Deep Dive section — the interactive Ladle playground (all components x 7 presets x light/dark) is finally discoverable from the npm page.
+- `homepage` now points to the live playground so it appears in the npm sidebar.
+- Fixed a stale license badge URL pointing at the pre-migration repository path.
+
 ## [Unreleased]
 
 ### Added

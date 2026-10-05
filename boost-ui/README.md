@@ -2,13 +2,15 @@
 
 [![npm version](https://img.shields.io/npm/v/@boostengine/ui.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@boostengine/ui)
 [![npm downloads](https://img.shields.io/npm/dm/@boostengine/ui.svg?style=flat-square&color=green)](https://www.npmjs.com/package/@boostengine/ui)
-[![license](https://img.shields.io/npm/l/@boostengine/ui.svg?style=flat-square)](https://github.com/Rishabhgehlot7/packages/blob/main/LICENSE)
+[![license](https://img.shields.io/npm/l/@boostengine/ui.svg?style=flat-square)](https://github.com/boostengine001/packages/blob/main/boost-ui/LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![React 18 & 19](https://img.shields.io/badge/React-18%20%7C%2019-61dafb.svg?style=flat-square)](https://react.dev/)
 [![Next.js](https://img.shields.io/badge/Next.js-13%20%7C%2014%20%7C%2015-black.svg?style=flat-square)](https://nextjs.org/)
 [![Live Docs](https://img.shields.io/badge/Live_Docs-Playground-8a2be2.svg?style=flat-square)](https://boostengine001.github.io/packages/)
 
 > **Universal, industry-standard UI component kit for Next.js, React, and AI-driven development. Build high-converting eCommerce storefronts, modern B2B SaaS platforms, enterprise dashboards, and landing pages from A to Z with zero external CSS dependencies.**
+>
+> 🖥️ **[Open the Live Component Playground →](https://boostengine001.github.io/packages/)** — every component, all 7 presets, light & dark, right in your browser.
 
 ---
 
@@ -479,6 +481,7 @@ export default function AdminDashboard() {
 
 ## 📚 Deep Dive Documentation
 
+- 🖥️ **[Live Component Playground →](https://boostengine001.github.io/packages/)** — interact with 40+ component stories in your browser, across all 7 design presets and light/dark mode.
 - 🎨 **[Theming & Design Tokens Guide](./docs/THEMING_AND_TOKENS.md)** — Tokens Studio / Figma Tokens JSON, CSS variable tokens, and Tailwind CSS preset setup.
 - 📖 **[Components & Hooks Reference](./docs/COMPONENTS_REFERENCE.md)** — Complete API specifications, TypeScript interfaces, and usage examples for all 125+ components.
 - ♿ **[Accessibility (a11y) Conformance](./docs/A11Y_AUDIT.md)** — WAI-ARIA 1.2 compliance matrix, keyboard specs, focus trapping, and WCAG AA/AAA contrast ratios.
@@ -506,7 +509,7 @@ module.exports = {
 ## License & Author
 
 MIT License (c) 2026 **[Rishabh Gehlot](https://github.com/Rishabhgehlot7)**. Developed for modern global and Indian D2C & SaaS creators.  
-GitHub: **[github.com/Rishabhgehlot7/packages](https://github.com/Rishabhgehlot7/packages)**  
+GitHub: **[github.com/boostengine001/packages](https://github.com/boostengine001/packages)**  
 See [LICENSE](./LICENSE) for full license text.
 
 ---
