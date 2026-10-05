@@ -18,6 +18,17 @@ import {
   Pagination,
   StarRating,
   Modal,
+  Navbar,
+  Footer,
+  CartDrawer,
+  LoginForm,
+  Alert as AlertBox,
+  Badge as BadgeChip,
+  CommandPalette,
+  OrderSummary,
+  Stepper,
+  CouponInput,
+  Drawer,
 } from '../src/index';
 
 // Read ?preset=X&component=Y from the URL and render one canned showcase.
@@ -120,6 +131,87 @@ const SHOWCASE: Record<string, React.ReactElement> = {
     <Modal isOpen onClose={() => {}} title="Delete item" description="This cannot be undone.">
       <p>Are you sure you want to delete this item?</p>
     </Modal>
+  ),
+  navbar: (
+    <Navbar
+      brandName="Boost Store"
+      navLinks={[
+        { label: 'Shop', href: '/shop' },
+        { label: 'Deals', href: '/deals', badge: 'HOT' },
+        { label: 'Support', href: '/support' },
+      ]}
+      cartCount={3}
+      wishlistCount={1}
+    />
+  ),
+  footer: (
+    <Footer
+      brandName="Boost Store"
+      description="The best gear for modern creators"
+      columns={[
+        { title: 'Shop', links: [{ label: 'All Products', href: '/products' }] },
+        { title: 'Support', links: [{ label: 'Contact Us', href: '/contact' }] },
+      ]}
+      copyrightYear={2026}
+    />
+  ),
+  cart: (
+    <CartDrawer
+      isOpen
+      onClose={() => {}}
+      items={[
+        { id: 'a', title: 'Wireless Earbuds', price: 2999, quantity: 1 },
+        { id: 'b', title: 'Case Cover', price: 499, quantity: 2 },
+      ]}
+      subtotal={3997}
+      freeShippingThreshold={5000}
+    />
+  ),
+  'login-form': <LoginForm title="Welcome back" />,
+  alert: (
+    <div style={{ display: 'grid', gap: '12px', maxWidth: '520px' }}>
+      <AlertBox variant="info" title="Heads up">Your trial ends in 3 days.</AlertBox>
+      <AlertBox variant="success" title="Payment received">Order #1042 is confirmed.</AlertBox>
+      <AlertBox variant="warning" title="Low stock">Only 2 items left.</AlertBox>
+      <AlertBox variant="error" title="Payment failed">Please retry with another card.</AlertBox>
+      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <BadgeChip variant="success">In stock</BadgeChip>
+        <BadgeChip variant="destructive">Sold out</BadgeChip>
+        <BadgeChip variant="warning">Low stock</BadgeChip>
+        <BadgeChip variant="outline">New</BadgeChip>
+      </div>
+    </div>
+  ),
+  command: <CommandPalette isOpen onClose={() => {}} />,
+  summary: (
+    <OrderSummary
+      subtotal={3997}
+      discount={200}
+      shippingFee={0}
+      tax={180}
+      freeShippingThreshold={5000}
+    />
+  ),
+  stepper: (
+    <Stepper
+      steps={[
+        { id: 'a', label: 'Cart' },
+        { id: 'b', label: 'Address' },
+        { id: 'c', label: 'Payment' },
+      ]}
+      activeStep={1}
+    />
+  ),
+  coupon: (
+    <div style={{ display: 'grid', gap: '16px', maxWidth: '420px' }}>
+      <CouponInput onApply={() => {}} />
+      <CouponInput appliedCode="BOOST10" discountText="10% off" onRemove={() => {}} />
+    </div>
+  ),
+  drawer: (
+    <Drawer isOpen onClose={() => {}} title="Filters" footer={<button>Apply</button>}>
+      <p>Filter controls go here.</p>
+    </Drawer>
   ),
 };
 
